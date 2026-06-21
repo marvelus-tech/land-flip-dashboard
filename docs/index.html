@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Land Flip Builder Discovery Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .state-card { transition: all 0.3s ease; }
+        .state-card:hover { transform: translateY(-2px); box-shadow: 0 10px 40px -10px rgba(0,0,0,0.1); }
+        .county-tag { transition: all 0.2s; }
+        .county-tag:hover { background-color: #0d9488; color: white; }
+        .builder-row { transition: all 0.2s; }
+        .builder-row:hover { background-color: #f0fdfa; }
+        .copy-btn { opacity: 0; transition: opacity 0.2s; }
+        .builder-row:hover .copy-btn { opacity: 1; }
+        .tab-active { border-bottom: 2px solid #0d9488; color: #0d9488; }
+        .search-highlight { background-color: #fef3c7; padding: 0 2px; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-teal-600 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-gray-900">Builder Discovery Dashboard</h1>
+                        <p class="text-xs text-gray-500">Land Flipping Intelligence • Updated Daily</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="text-right">
+                        <p class="text-sm font-medium text-gray-900" id="current-date"></p>
+                        <p class="text-xs text-teal-600 font-medium" id="next-market"></p>
+                    </div>
+                    <button onclick="refreshData()" class="p-2 rounded-lg hover:bg-gray-100 transition-colors" title="Refresh">
+                        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Stats Bar -->
+    <div class="bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-teal-50 rounded-xl p-4">
+                    <p class="text-xs text-teal-600 font-medium uppercase tracking-wider">Total Builders</p>
+                    <p class="text-2xl font-bold text-teal-900" id="stat-builders">0</p>
+                </div>
+                <div class="bg-blue-50 rounded-xl p-4">
+                    <p class="text-xs text-blue-600 font-medium uppercase tracking-wider">Markets Covered</p>
+                    <p class="text-2xl font-bold text-blue-900" id="stat-markets">8</p>
+                </div>
+                <div class="bg-amber-50 rounded-xl p-4">
+                    <p class="text-xs text-amber-600 font-medium uppercase tracking-wider">Counties</p>
+                    <p class="text-2xl font-bold text-amber-900" id="stat-counties">0</p>
+                </div>
+                <div class="bg-purple-50 rounded-xl p-4">
+                    <p class="text-xs text-purple-600 font-medium uppercase tracking-wider">Last Update</p>
+                    <p class="text-lg font-bold text-purple-900" id="stat-last-update">Today</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Search & Filter -->
+        <div class="mb-8 flex flex-col sm:flex-row gap-4">
+            <div class="flex-1 relative">
+                <input type="text" 
+                       id="search-input"
+                       placeholder="Search builders, counties, or states..." 
+                       class="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition-all"
+                       oninput="filterBuilders()">
+                <svg class="w-5 h-5 text-gray-400 absolute left-3 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                </svg>
+            </div>
+            <div class="flex gap-2">
+                <select id="filter-state" onchange="filterBuilders()" class="px-4 py-3 rounded-xl border border-gray-200 focus:border-teal-500 outline-none bg-white">
+                    <option value="">All States</option>
+                    <option value="texas">Texas</option>
+                    <option value="florida">Florida</option>
+                    <option value="north-carolina">North Carolina</option>
+                    <option value="arizona">Arizona</option>
+                    <option value="tennessee">Tennessee</option>
+                    <option value="georgia">Georgia</option>
+                    <option value="south-carolina">South Carolina</option>
+                    <option value="indiana">Indiana</option>
+                </select>
+                <button onclick="exportData()" class="px-4 py-3 bg-teal-600 text-white rounded-xl hover:bg-teal-700 transition-colors flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                    </svg>
+                    Export CSV
+                </button>
+            </div>
+        </div>
+
+        <!-- State Tabs -->
+        <div class="mb-6 border-b border-gray-200">
+            <nav class="flex space-x-8 overflow-x-auto" id="state-tabs">
+                <!-- Tabs generated by JS -->
+            </nav>
+        </div>
+
+        <!-- Builder List -->
+        <div id="builder-list" class="space-y-4">
+            <!-- Builder cards generated by JS -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="hidden text-center py-16">
+            <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                </svg>
+            </div>
+            <h3 class="text-lg font-medium text-gray-900 mb-2">No builders found</h3>
+            <p class="text-gray-500">Try adjusting your search or filter criteria.</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex items-center justify-between">
+                <p class="text-sm text-gray-500">Land Flip Builder Discovery • Auto-generated daily at 9:00 AM</p>
+                <p class="text-sm text-gray-400">Last updated: <span id="footer-date"></span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ── Data Store ──
+        let builderData = [];
+        let currentState = 'all';
+
+        // ── State Configuration ──
+        const states = {
+            texas: { name: 'Texas', color: 'bg-red-100 text-red-800', metro: 'Houston', counties: ['Waller', 'Montgomery', 'Brazoria', 'Fort Bend', 'Galveston'] },
+            florida: { name: 'Florida', color: 'bg-orange-100 text-orange-800', metro: 'Orlando', counties: ['Polk', 'Lake', 'Osceola', 'Orange', 'Seminole'] },
+            'north-carolina': { name: 'North Carolina', color: 'bg-blue-100 text-blue-800', metro: 'Charlotte', counties: ['Rowan', 'Cabarrus', 'Iredell', 'Union', 'Mecklenburg'] },
+            arizona: { name: 'Arizona', color: 'bg-yellow-100 text-yellow-800', metro: 'Phoenix', counties: ['Maricopa', 'Pinal', 'Yavapai'] },
+            tennessee: { name: 'Tennessee', color: 'bg-purple-100 text-purple-800', metro: 'Nashville', counties: ['Rutherford', 'Wilson', 'Sumner', 'Williamson'] },
+            georgia: { name: 'Georgia', color: 'bg-green-100 text-green-800', metro: 'Atlanta', counties: ['Forsyth', 'Hall', 'Jackson', 'Douglas', 'Gwinnett'] },
+            'south-carolina': { name: 'South Carolina', color: 'bg-indigo-100 text-indigo-800', metro: 'Charleston', counties: ['Berkeley', 'Dorchester', 'Charleston'] },
+            indiana: { name: 'Indiana', color: 'bg-pink-100 text-pink-800', metro: 'Indianapolis', counties: ['Boone', 'Hamilton', 'Hendricks'] }
+        };
+
+        // ── Initialize ──
+        function init() {
+            document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            document.getElementById('footer-date').textContent = new Date().toLocaleString();
+            
+            // Calculate next market
+            const dayMod = new Date().getDate() % 8;
+            const marketNames = ['Indiana', 'Texas', 'Florida', 'North Carolina', 'Arizona', 'Tennessee', 'Georgia', 'South Carolina'];
+            document.getElementById('next-market').textContent = `Next: ${marketNames[dayMod]}`;
+            
+            renderTabs();
+            loadData();
+        }
+
+        // ── Render State Tabs ──
+        function renderTabs() {
+            const tabsContainer = document.getElementById('state-tabs');
+            tabsContainer.innerHTML = `
+                <button onclick="setState('all')" class="tab-btn py-4 px-1 border-b-2 font-medium text-sm whitespace-nowrap ${currentState === 'all' ? 'tab-active' : 'border-transparent text-gray-500 hover:text-gray-700'}" data-state="all">
+                    All States
+                </button>
+            `;
+            
+            Object.entries(states).forEach(([key, state]) => {
+                tabsContainer.innerHTML += `
+                    <button onclick="setState('${key}')" class="tab-btn py-4 px-1 border-b-2 font-medium text-sm whitespace-nowrap ${currentState === key ? 'tab-active' : 'border-transparent text-gray-500 hover:text-gray-700'}" data-state="${key}">
+                        ${state.name}
+                        <span class="ml-2 px-2 py-0.5 rounded-full text-xs ${state.color}">${state.counties.length}</span>
+                    </button>
+                `;
+            });
+        }
+
+        // ── Set Active State ──
+        function setState(state) {
+            currentState = state;
+            renderTabs();
+            filterBuilders();
+        }
+
+        // ── Load Data (from localStorage or API) ──
+        function loadData() {
+            // Try to load from localStorage first
+            const stored = localStorage.getItem('builderData');
+            if (stored) {
+                builderData = JSON.parse(stored);
+                renderBuilders();
+                updateStats();
+            } else {
+                // Load sample data for demo
+                loadSampleData();
+            }
+        }
+
+        // ── Sample Data for Demo ──
+        function loadSampleData() {
+            builderData = [
+                {
+                    id: 1,
+                    name: 'Lennar Homes',
+                    state: 'texas',
+                    county: 'Waller County',
+                    metro: 'Houston',
+                    phone: '(713) 555-0100',
+                    email: 'land@lennar.com',
+                    website: 'https://www.lennar.com',
+                    buyBox: '0.15-0.25 acres, $30K-$60K/lot',
+                    volume: '50+ lots/year',
+                    status: 'active',
+                    dateAdded: '2026-06-21'
+                },
+                {
+                    id: 2,
+                    name: 'D.R. Horton',
+                    state: 'texas',
+                    county: 'Montgomery County',
+                    metro: 'Houston',
+                    phone: '(281) 555-0200',
+                    email: 'acquisitions@drhorton.com',
+                    website: 'https://www.drhorton.com',
+                    buyBox: '0.15-0.25 acres, $25K-$55K/lot',
+                    volume: '100+ lots/year',
+                    status: 'active',
+                    dateAdded: '2026-06-21'
+                },
+                {
+                    id: 3,
+                    name: 'Taylor Morrison',
+                    state: 'texas',
+                    county: 'Bastrop County',
+                    metro: 'Austin',
+                    phone: '(512) 555-0300',
+                    email: 'land@taylormorrison.com',
+                    website: 'https://www.taylormorrison.com',
+                    buyBox: '0.5-1 acre, $60K-$120K/lot',
+                    volume: '30+ lots/year',
+                    status: 'active',
+                    dateAdded: '2026-06-21'
+                },
+                {
+                    id: 4,
+                    name: 'Pulte Homes',
+                    state: 'florida',
+                    county: 'Polk County',
+                    metro: 'Orlando',
+                    phone: '(407) 555-0400',
+                    email: 'land@pulte.com',
+                    website: 'https://www.pulte.com',
+                    buyBox: '0.15-0.5 acres, $35K-$70K/lot',
+                    volume: '40+ lots/year',
+                    status: 'active',
+                    dateAdded: '2026-06-21'
+                },
+                {
+                    id: 5,
+                    name: 'KB Home',
+                    state: 'florida',
+                    county: 'Lake County',
+                    metro: 'Orlando',
+                    phone: '(352) 555-0500',
+                    email: 'acquisitions@kbhome.com',
+                    website: 'https://www.kbhome.com',
+                    buyBox: '0.15-0.25 acres, $30K-$50K/lot',
+                    volume: '60+ lots/year',
+                    status: 'active',
+                    dateAdded: '2026-06-21'
+                }
+            ];
+            
+            renderBuilders();
+            updateStats();
+        }
+
+        // ── Render Builders ──
+        function renderBuilders() {
+            const container = document.getElementById('builder-list');
+            const emptyState = document.getElementById('empty-state');
+            
+            let filtered = builderData;
+            
+            // Filter by state
+            if (currentState !== 'all') {
+                filtered = filtered.filter(b => b.state === currentState);
+            }
+            
+            // Filter by search
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            if (searchTerm) {
+                filtered = filtered.filter(b => 
+                    b.name.toLowerCase().includes(searchTerm) ||
+                    b.county.toLowerCase().includes(searchTerm) ||
+                    b.state.toLowerCase().includes(searchTerm) ||
+                    b.email.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            if (filtered.length === 0) {
+                container.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+            
+            emptyState.classList.add('hidden');
+            
+            // Group by state
+            const grouped = filtered.reduce((acc, builder) => {
+                if (!acc[builder.state]) acc[builder.state] = [];
+                acc[builder.state].push(builder);
+                return acc;
+            }, {});
+            
+            container.innerHTML = Object.entries(grouped).map(([stateKey, builders]) => {
+                const state = states[stateKey];
+                return `
+                    <div class="state-card bg-white rounded-2xl border border-gray-200 overflow-hidden">
+                        <div class="px-6 py-4 border-b border-gray-100 bg-gray-50 flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <span class="px-3 py-1 rounded-full text-xs font-semibold ${state.color}">${state.name}</span>
+                                <span class="text-sm text-gray-500">${state.metro} Metro</span>
+                            </div>
+                            <span class="text-sm text-gray-400">${builders.length} builders</span>
+                        </div>
+                        <div class="divide-y divide-gray-100">
+                            ${builders.map(builder => `
+                                <div class="builder-row px-6 py-4 flex items-center justify-between">
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-center gap-3 mb-1">
+                                            <h3 class="text-base font-semibold text-gray-900">${builder.name}</h3>
+                                            <span class="px-2 py-0.5 rounded-full text-xs bg-green-100 text-green-800">${builder.status}</span>
+                                        </div>
+                                        <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-gray-500">
+                                            <span class="flex items-center gap-1">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                                </svg>
+                                                ${builder.county}
+                                            </span>
+                                            <span class="flex items-center gap-1">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                                                </svg>
+                                                ${builder.phone}
+                                            </span>
+                                            <span class="flex items-center gap-1">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                                </svg>
+                                                ${builder.email}
+                                            </span>
+                                        </div>
+                                        <div class="mt-2 flex items-center gap-2">
+                                            <span class="text-xs bg-teal-50 text-teal-700 px-2 py-1 rounded">${builder.buyBox}</span>
+                                            <span class="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded">${builder.volume}</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-2 ml-4">
+                                        <button onclick="copyToClipboard('${builder.email}')" class="copy-btn p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-gray-600" title="Copy email">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                                            </svg>
+                                        </button>
+                                        <a href="${builder.website}" target="_blank" class="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-gray-600" title="Visit website">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // ── Filter Builders ──
+        function filterBuilders() {
+            renderBuilders();
+        }
+
+        // ── Update Stats ──
+        function updateStats() {
+            document.getElementById('stat-builders').textContent = builderData.length;
+            document.getElementById('stat-counties').textContent = [...new Set(builderData.map(b => b.county))].length;
+        }
+
+        // ── Copy to Clipboard ──
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                // Show toast
+                const toast = document.createElement('div');
+                toast.className = 'fixed bottom-4 right-4 bg-gray-900 text-white px-4 py-2 rounded-lg shadow-lg z-50 text-sm';
+                toast.textContent = 'Copied to clipboard!';
+                document.body.appendChild(toast);
+                setTimeout(() => toast.remove(), 2000);
+            });
+        }
+
+        // ── Export Data ──
+        function exportData() {
+            const csv = [
+                ['Name', 'State', 'County', 'Metro', 'Phone', 'Email', 'Website', 'Buy Box', 'Volume', 'Status', 'Date Added'],
+                ...builderData.map(b => [b.name, b.state, b.county, b.metro, b.phone, b.email, b.website, b.buyBox, b.volume, b.status, b.dateAdded])
+            ].map(row => row.map(cell => `"${cell}"`).join(',')).join('\n');
+            
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `builder-discovery-${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+        }
+
+        // ── Refresh Data ──
+        function refreshData() {
+            loadData();
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-4 right-4 bg-teal-600 text-white px-4 py-2 rounded-lg shadow-lg z-50 text-sm';
+            toast.textContent = 'Data refreshed!';
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2000);
+        }
+
+        // ── Initialize ──
+        init();
+    </script>
+</body>
+</html>
