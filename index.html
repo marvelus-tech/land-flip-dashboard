@@ -6,54 +6,54 @@
     <title>Land Flip — Builder Discovery & Land Recon</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
         /* ═══════════════════════════════════════════════════════════════
-           Design System — Dark Premium Dashboard
-           Linear-inspired • Near-black canvas • Warm copper accent
+           Design System — Mercury Finance Inspired
+           Clean white canvas • Purple accent • Card-based fintech aesthetic
            ═══════════════════════════════════════════════════════════════ */
 
         :root {
             /* ── Canvas & Surfaces ── */
-            --canvas: #09090b;
-            --canvas-soft: #0c0c0f;
-            --surface: #111114;
-            --surface-elevated: #18181c;
-            --surface-card: #1c1c22;
-            --surface-hover: #22222a;
+            --canvas: #ffffff;
+            --canvas-soft: #f8f9fb;
+            --surface: #ffffff;
+            --surface-elevated: #f4f5f7;
+            --surface-card: #ffffff;
+            --surface-hover: #f0f1f3;
 
             /* ── Text ── */
-            --text-primary: #f5f5f7;
-            --text-secondary: #a1a1aa;
-            --text-muted: #71717a;
-            --text-tertiary: #52525b;
+            --text-primary: #0d0d12;
+            --text-secondary: #6b6b80;
+            --text-muted: #9d9db0;
+            --text-tertiary: #b8b8cc;
 
-            /* ── Accents ── */
-            --accent: #d4a574;
-            --accent-hover: #e0b88a;
-            --accent-muted: rgba(212, 165, 116, 0.15);
-            --accent-subtle: rgba(212, 165, 116, 0.08);
+            /* ── Accents (Mercury Purple) ── */
+            --accent: #6c5ce7;
+            --accent-hover: #7d6ff0;
+            --accent-muted: rgba(108, 92, 231, 0.10);
+            --accent-subtle: rgba(108, 92, 231, 0.06);
 
             /* ── Semantic ── */
-            --success: #5bbaa9;
-            --success-bg: rgba(91, 186, 169, 0.12);
-            --danger: #c75d5d;
-            --danger-bg: rgba(199, 93, 93, 0.12);
-            --warning: #c9a96e;
-            --warning-bg: rgba(201, 169, 110, 0.12);
-            --info: #6b8fc9;
-            --info-bg: rgba(107, 143, 201, 0.12);
+            --success: #0fbd8c;
+            --success-bg: rgba(15, 189, 140, 0.08);
+            --danger: #e06060;
+            --danger-bg: rgba(224, 96, 96, 0.08);
+            --warning: #e6a840;
+            --warning-bg: rgba(230, 168, 64, 0.08);
+            --info: #5b7fc7;
+            --info-bg: rgba(91, 127, 199, 0.08);
 
             /* ── Borders ── */
-            --hairline: rgba(255, 255, 255, 0.06);
-            --hairline-strong: rgba(255, 255, 255, 0.10);
-            --hairline-focus: rgba(212, 165, 116, 0.4);
+            --hairline: rgba(0, 0, 0, 0.06);
+            --hairline-strong: rgba(0, 0, 0, 0.10);
+            --hairline-focus: rgba(108, 92, 231, 0.35);
 
-            /* ── Typography ── */
-            --font-display: 'Sora', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+            /* ── Typography (Inter — clean, neutral grotesk) ── */
+            --font-display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'SF Mono', 'JetBrains Mono', monospace;
 
             /* ── Spacing ── */
             --space-1: 4px;
@@ -74,11 +74,11 @@
             --radius-xl: 16px;
             --radius-full: 9999px;
 
-            /* ── Shadows ── */
-            --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
-            --shadow-md: 0 2px 8px rgba(0,0,0,0.35), 0 1px 2px rgba(0,0,0,0.2);
-            --shadow-lg: 0 8px 30px rgba(0,0,0,0.4), 0 2px 8px rgba(0,0,0,0.25);
-            --shadow-xl: 0 20px 60px rgba(0,0,0,0.5);
+            /* ── Shadows (Mercury-style subtle cards) ── */
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 2px 8px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.03);
+            --shadow-lg: 0 8px 30px rgba(0,0,0,0.05), 0 2px 8px rgba(0,0,0,0.04);
+            --shadow-xl: 0 20px 60px rgba(0,0,0,0.06);
 
             /* ── Transitions ── */
             --ease: cubic-bezier(0.16, 1, 0.3, 1);
@@ -90,7 +90,7 @@
 
         body {
             font-family: var(--font-body);
-            background: var(--canvas);
+            background: var(--canvas-soft);
             color: var(--text-primary);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
@@ -103,9 +103,7 @@
             content: '';
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background:
-                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(212, 165, 116, 0.03), transparent),
-                radial-gradient(ellipse 50% 40% at 80% 80%, rgba(212, 165, 116, 0.02), transparent);
+            background: var(--canvas-soft);
             pointer-events: none;
             z-index: 0;
         }
@@ -206,6 +204,7 @@
             border-radius: var(--radius-lg);
             padding: var(--space-5) var(--space-6);
             border: 1px solid var(--hairline);
+            box-shadow: var(--shadow-sm);
             transition: all var(--duration) var(--ease);
             position: relative;
             overflow: hidden;
@@ -216,17 +215,14 @@
             position: absolute;
             top: 0; left: 0; right: 0;
             height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            opacity: 0;
-            transition: opacity var(--duration) var(--ease);
+            background: var(--accent);
+            opacity: 0.4;
         }
 
         .metric-tile:hover {
             border-color: var(--hairline-strong);
-            background: var(--surface-elevated);
+            box-shadow: var(--shadow-md);
         }
-
-        .metric-tile:hover::before { opacity: 0.5; }
 
         .metric-tile .icon {
             width: 32px; height: 32px;
@@ -301,24 +297,25 @@
             border-radius: var(--radius-md);
             transition: all var(--duration) var(--ease);
             outline: none;
+            box-shadow: var(--shadow-sm);
         }
 
         .search-input::placeholder { color: var(--text-tertiary); }
         .search-input:focus {
             border-color: var(--accent);
             box-shadow: 0 0 0 3px var(--accent-subtle);
-            background: var(--surface-elevated);
         }
 
         /* ── State Tabs ── */
         .state-tabs {
             display: flex;
-            gap: var(--space-1);
+            gap: 0;
             overflow-x: auto;
             padding: 2px;
             background: var(--surface);
             border-radius: var(--radius-md);
             border: 1px solid var(--hairline);
+            box-shadow: var(--shadow-sm);
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
         }
@@ -345,8 +342,8 @@
         .state-tab:hover { color: var(--text-secondary); }
 
         .state-tab.active {
-            background: var(--accent-muted);
-            color: var(--accent);
+            background: var(--accent);
+            color: #ffffff;
         }
 
         .state-tab .count {
@@ -370,6 +367,7 @@
             width: 100%;
             max-height: 0;
             overflow: hidden;
+            box-shadow: var(--shadow-md);
             transition: max-height 0.3s var(--ease), padding 0.3s var(--ease), margin 0.3s var(--ease);
         }
 
@@ -407,11 +405,12 @@
         .county-guide-close:hover { background: rgba(255,255,255,0.06); color: var(--text-secondary); }
 
         .county-guide-card {
-            background: var(--surface-elevated);
+            background: var(--surface);
             border: 1px solid var(--hairline);
             border-radius: var(--radius-md);
             padding: var(--space-4);
             margin-bottom: var(--space-3);
+            box-shadow: var(--shadow-sm);
         }
 
         .county-guide-card h4 {
@@ -445,6 +444,7 @@
             padding: 2px;
             border-radius: var(--radius-md);
             border: 1px solid var(--hairline);
+            box-shadow: var(--shadow-sm);
             width: -moz-fit-content;
             width: fit-content;
         }
@@ -469,8 +469,8 @@
         .data-tab:hover { color: var(--text-secondary); }
 
         .data-tab.active {
-            background: var(--accent-muted);
-            color: var(--accent);
+            background: var(--accent);
+            color: #ffffff;
         }
 
         .data-tab .tab-icon { display: inline-flex; align-items: center; }
@@ -491,13 +491,14 @@
             background: var(--surface);
             border-radius: var(--radius-lg);
             border: 1px solid var(--hairline);
+            box-shadow: var(--shadow-sm);
             transition: all var(--duration) var(--ease);
             position: relative;
         }
 
         .builder-card:hover {
             border-color: var(--hairline-strong);
-            background: var(--surface-elevated);
+            box-shadow: var(--shadow-md);
         }
 
         .builder-main {
@@ -593,7 +594,7 @@
         .status-contacted { background: var(--info-bg); color: var(--info); }
         .status-contacted::before { background: var(--info); }
 
-        .status-pending { background: rgba(255,255,255,0.06); color: var(--text-muted); }
+        .status-pending { background: rgba(0,0,0,0.04); color: var(--text-muted); }
         .status-pending::before { background: var(--text-muted); }
 
         /* ── Builder Actions ── */
@@ -623,13 +624,13 @@
         .action-btn:hover { background: rgba(255,255,255,0.06); color: var(--text-secondary); }
 
         .action-btn.primary {
-            background: var(--accent-muted);
-            color: var(--accent);
+            background: var(--accent);
+            color: #ffffff;
         }
 
         .action-btn.primary:hover {
             background: var(--accent-hover);
-            color: var(--canvas);
+            color: #ffffff;
         }
 
         .action-btn.gold {
@@ -638,8 +639,8 @@
         }
 
         .action-btn.gold:hover {
-            background: var(--accent-hover);
-            color: var(--canvas);
+            background: var(--accent);
+            color: #ffffff;
         }
 
         .copy-btn {
@@ -656,7 +657,7 @@
             grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
             gap: var(--space-3);
             padding: var(--space-4) var(--space-5) var(--space-5);
-            background: var(--surface-elevated);
+            background: var(--canvas-soft);
             border-radius: 0 0 var(--radius-lg) var(--radius-lg);
             margin-top: -1px;
             border: 1px solid var(--hairline);
@@ -708,7 +709,6 @@
 
         .empty-state .empty-illustration svg {
             color: var(--accent);
-            opacity: 0.5;
             width: 28px; height: 28px;
         }
 
@@ -733,14 +733,13 @@
             position: fixed;
             bottom: 24px;
             right: 24px;
-            background: var(--surface-elevated);
-            color: var(--text-primary);
+            background: #0d0d12;
+            color: #ffffff;
             padding: 10px 18px;
             border-radius: var(--radius-md);
             font-size: 12px;
             font-weight: 600;
             z-index: 100;
-            border: 1px solid var(--hairline-strong);
             box-shadow: var(--shadow-lg);
             animation: toastIn 0.35s var(--ease);
         }
@@ -762,12 +761,13 @@
             background: var(--surface);
             border-radius: var(--radius-lg);
             border: 1px solid var(--hairline);
+            box-shadow: var(--shadow-sm);
             transition: all var(--duration) var(--ease);
         }
 
         .lot-card:hover {
             border-color: var(--hairline-strong);
-            background: var(--surface-elevated);
+            box-shadow: var(--shadow-md);
         }
 
         .lot-header {
@@ -853,10 +853,11 @@
             grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
             gap: var(--space-3);
             padding: var(--space-3) var(--space-4);
-            background: var(--surface-elevated);
+            background: var(--surface);
             border-radius: var(--radius-md);
             margin-top: var(--space-3);
             border: 1px solid var(--hairline);
+            box-shadow: var(--shadow-sm);
         }
 
         .lot-detail-item {}
@@ -989,7 +990,7 @@
             <span class="tab-icon"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8 -4v18"/><path d="M19 21V11l-6 -4"/><path d="M9 9v.01"/><path d="M9 12v.01"/><path d="M9 15v.01"/><path d="M9 18v.01"/></svg></span> Builders
         </button>
         <button class="data-tab" onclick="switchDataTab('lots')" id="data-tab-lots">
-            <span class="tab-icon"><svg class="icon-svg-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 11m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1 -2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z"/></svg></span> Lots <span id="lot-count-badge" style="margin-left:4px;font-size:11px;color:var(--gray-400);">(0)</span>
+            <span class="tab-icon"><svg class="icon-svg-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 11m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1 -2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z"/></svg></span> Lots <span id="lot-count-badge" style="margin-left:4px;font-size:11px;color:var(--text-tertiary);">(0)</span>
         </button>
     </div>
 
@@ -1012,7 +1013,7 @@
             </svg>
         </div>
         <h3 id="empty-title">No data found</h3>
-        <p id="empty-desc">Try adjusting your search or filter, or run <code style="background:var(--gray-100);padding:2px 8px;border-radius:4px;font-size:12px;">LandLot-recon</code> to discover land lots.</p>
+        <p id="empty-desc">Try adjusting your search or filter, or run <code style="background:var(--surface-elevated);padding:2px 8px;border-radius:4px;font-size:12px;">LandLot-recon</code> to discover land lots.</p>
     </div>
     </div><!-- /content-section -->
 </div>
@@ -1130,10 +1131,10 @@
                     '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>' +
                 '</button>' +
             '</div>' +
-            '<div style="font-size:13px;color:var(--ink-muted);margin-bottom:14px;">' +
+            '<div style="font-size:13px;color:var(--text-muted);margin-bottom:14px;">' +
                 'Data sources, contacts, and blockers for each county in ' + state.name + '.' +
-                (stateKey === 'tennessee' ? '<span style="color:var(--green-500);font-weight:500;margin-left:8px;">Highest priority &mdash; 30 builders, 8 lots</span>' : '') +
-                (stateKey === 'texas' ? '<span style="color:var(--green-500);font-weight:500;margin-left:8px;">35 builders, 20 lots</span>' : '') +
+                (stateKey === 'tennessee' ? '<span style="color:var(--success);font-weight:500;margin-left:8px;">Highest priority &mdash; 30 builders, 8 lots</span>' : '') +
+                (stateKey === 'texas' ? '<span style="color:var(--success);font-weight:500;margin-left:8px;">35 builders, 20 lots</span>' : '') +
             '</div>';
 
         state.counties.forEach(function(county) {
@@ -1143,15 +1144,15 @@
             html += '<div class="county-guide-card" style="padding:14px 16px;">';
             html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">' +
                 '<span style="font-size:14px;">' + status.icon + '</span>' +
-                '<strong style="font-size:14px;color:var(--ink);">' + county + ' County</strong>' +
-                '<span style="font-size:11px;color:var(--ink-muted);background:var(--gray-100);padding:2px 8px;border-radius:10px;">' + status.label + '</span>' +
-                (info && info.lastRecon ? '<span style="font-size:11px;color:var(--ink-muted);margin-left:auto;">Reconned ' + info.lastRecon + '</span>' : '') +
+                '<strong style="font-size:14px;color:var(--text-primary);">' + county + ' County</strong>' +
+                '<span style="font-size:11px;color:var(--text-muted);background:var(--surface-elevated);padding:2px 8px;border-radius:10px;">' + status.label + '</span>' +
+                (info && info.lastRecon ? '<span style="font-size:11px;color:var(--text-muted);margin-left:auto;">Reconned ' + info.lastRecon + '</span>' : '') +
             '</div>';
 
             if (info) {
-                if (info.accessNote) html += '<p style="font-size:13px;color:var(--ink-secondary);margin:0 0 8px;">' + info.accessNote + '</p>';
+                if (info.accessNote) html += '<p style="font-size:13px;color:var(--text-secondary);margin:0 0 8px;">' + info.accessNote + '</p>';
                 if (info.portalUrl) html += '<div style="margin-bottom:4px;"><a href="https://' + info.portalUrl + '" target="_blank" style="font-size:12px;">\ud83d\udd17 ' + info.portalUrl + '</a></div>';
-                if (info.paidSources) html += '<div style="font-size:12px;color:var(--ink-muted);margin-bottom:6px;">Paid: ' + info.paidSources + '</div>';
+                if (info.paidSources) html += '<div style="font-size:12px;color:var(--text-muted);margin-bottom:6px;">Paid: ' + info.paidSources + '</div>';
 
                 if (info.contacts && Object.keys(info.contacts).length > 0) {
                     Object.keys(info.contacts).forEach(function(k) {
@@ -1162,18 +1163,18 @@
 
                 if (info.tips && info.tips.length > 0) {
                     info.tips.forEach(function(t) {
-                        html += '<div style="display:flex;gap:6px;font-size:12px;color:var(--ink-secondary);margin-top:4px;"><span>\ud83d\udca1</span> ' + t + '</div>';
+                        html += '<div style="display:flex;gap:6px;font-size:12px;color:var(--text-secondary);margin-top:4px;"><span>\ud83d\udca1</span> ' + t + '</div>';
                     });
                 }
 
                 if (info.redemption) {
                     var r = info.redemption;
-                    html += '<div style="margin-top:8px;padding:8px 10px;background:var(--green-50);border-radius:6px;font-size:12px;">' +
+                    html += '<div style="margin-top:8px;padding:8px 10px;background:var(--success-bg);border-radius:6px;font-size:12px;">' +
                         '<strong>Redemption:</strong> ' + r.type + ' \u2022 ' + r.period + ' \u2022 ' + r.interest +
                     '</div>';
                 }
             } else {
-                html += '<p style="font-size:13px;color:var(--ink-muted);margin:0;">No recon data yet. Run LandLot-recon for this county.</p>';
+                html += '<p style="font-size:13px;color:var(--text-muted);margin:0;">No recon data yet. Run LandLot-recon for this county.</p>';
             }
             html += '</div>';
         });
