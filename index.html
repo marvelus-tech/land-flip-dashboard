@@ -12,10 +12,19 @@
            ═══════════════════════════════════════════════════════════════ */
 
         :root {
-            /* ── Brand Colors ── */
-            --green-900: #0a2e1a;
-            --green-800: #0f3d23;
-            --green-700: #14522e;
+            /* ── Brand (Stripe-inspired) ── */
+            --ink: #0d253d;
+            --ink-secondary: #273951;
+            --ink-muted: #64748b;
+            --primary: #533afd;
+            --primary-hover: #665efd;
+            --primary-press: #2e2b8c;
+            --canvas: #ffffff;
+            --canvas-soft: #f6f9fc;
+            --hairline: #e3e8ee;
+            --hairline-strong: #c2c7d0;
+
+            /* ── Real Estate Accents ── */
             --green-600: #1a6b3c;
             --green-500: #22874d;
             --green-400: #2da85f;
@@ -23,7 +32,6 @@
             --green-200: #a3dfb5;
             --green-100: #d9f5e3;
             --green-50: #edfaf2;
-
             --gold-600: #b8892e;
             --gold-500: #c99a3e;
             --gold-400: #daab50;
@@ -56,8 +64,9 @@
             --amber-100: #fff3d6;
 
             /* ── Typography ── */
-            --font: 'Inter', -apple-system, 'SF Pro Display', 'Helvetica Neue', sans-serif;
-            --mono: 'SF Mono', 'SFMono-Regular', 'JetBrains Mono', monospace;
+            --font: 'Cabinet Grotesk', -apple-system, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+            --font-body: 'Plus Jakarta Sans', -apple-system, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+            --font-mono: 'SF Mono', 'SFMono-Regular', 'JetBrains Mono', monospace;
 
             /* ── Spacing Scale ── */
             --space-1: 4px;
@@ -94,7 +103,7 @@
 
         body {
             font-family: var(--font);
-            background: #f8f9fb;
+            background: var(--canvas-soft);
             color: var(--gray-700);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
@@ -141,7 +150,7 @@
             font-size: 22px;
             font-weight: 700;
             letter-spacing: -0.03em;
-            color: var(--gray-800);
+            color: var(--white);
         }
 
         .app-title-sub {
@@ -209,7 +218,7 @@
 
         .data-tab.active {
             background: var(--white);
-            color: var(--gray-800);
+            color: var(--primary);
             box-shadow: var(--shadow-sm);
             font-weight: 600;
         }
@@ -349,8 +358,8 @@
 
         .search-input::placeholder { color: var(--gray-400); }
         .search-input:focus {
-            border-color: var(--green-400);
-            box-shadow: 0 0 0 3px rgba(26, 107, 60, 0.08);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(83, 58, 253, 0.1);
         }
 
         /* ── State Tabs (Chips) ── */
@@ -383,8 +392,8 @@
         .state-tab:hover { border-color: var(--gray-300); color: var(--gray-700); }
 
         .state-tab.active {
-            background: var(--green-600);
-            border-color: var(--green-600);
+            background: var(--primary);
+            border-color: var(--primary);
             color: var(--white);
             font-weight: 600;
         }
