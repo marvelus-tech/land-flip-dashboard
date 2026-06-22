@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Land Flip Builder Discovery Dashboard</title>
+    <title>Land Flip — Builder Discovery & Land Recon</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;650;700;800&display=swap" rel="stylesheet">
     <style>
         /* ═══════════════════════════════════════════════════════════════
@@ -152,6 +152,42 @@
             color: var(--gray-500);
             letter-spacing: -0.01em;
         }
+
+        /* ── Data Type Tabs (Builders / Lots) ── */
+        .data-tabs {
+            display: flex;
+            gap: var(--space-1);
+            margin-bottom: var(--space-5);
+            background: var(--gray-100);
+            padding: 3px;
+            border-radius: var(--radius-md);
+            width: -moz-fit-content;
+            width: fit-content;
+        }
+
+        .data-tab {
+            padding: 7px 18px;
+            border-radius: var(--radius-sm);
+            font-family: var(--font);
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--gray-500);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: all var(--duration) var(--ease);
+        }
+
+        .data-tab:hover { color: var(--gray-700); }
+
+        .data-tab.active {
+            background: var(--white);
+            color: var(--gray-800);
+            box-shadow: var(--shadow-sm);
+            font-weight: 600;
+        }
+
+        .data-tab .tab-icon { margin-right: 5px; }
 
         .header-meta {
             display: flex;
@@ -329,7 +365,7 @@
 
         .state-tab.active .count { opacity: 0.8; }
 
-        /* ── Builder List ── */
+        /* ── Builder List & Lot Cards (shared) ── */
         .builder-list {
             display: flex;
             flex-direction: column;
@@ -373,6 +409,127 @@
         }
 
         .builder-avatar.gold { background: linear-gradient(135deg, var(--gold-600), var(--gold-400)); }
+
+        /* ── Lot Cards ── */
+        .lot-section {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+        }
+
+        .lot-card {
+            padding: var(--space-4) var(--space-5);
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all var(--duration) var(--ease);
+        }
+
+        .lot-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: rgba(0,0,0,0.07);
+        }
+
+        .lot-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: var(--space-3);
+            margin-bottom: var(--space-2);
+        }
+
+        .lot-address {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray-800);
+            line-height: 1.3;
+        }
+
+        .lot-owner {
+            font-size: 12px;
+            color: var(--gray-500);
+            margin-top: 1px;
+        }
+
+        .lot-meta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+            margin-top: var(--space-2);
+        }
+
+        .lot-meta-item {
+            font-size: 11px;
+            color: var(--gray-500);
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .lot-badge {
+            padding: 2px 8px;
+            border-radius: var(--radius-full);
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .lot-badge.infill { background: var(--green-50); color: var(--green-700); }
+        .lot-badge.raw { background: var(--amber-100); color: #ad6200; }
+
+        .lot-uw-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: var(--space-2);
+            margin-top: var(--space-2);
+        }
+
+        .uw-pill {
+            padding: 2px 7px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            display: inline-block;
+        }
+
+        .uw-pass { background: var(--green-100); color: var(--green-700); }
+        .uw-fail { background: var(--red-100); color: var(--red-500); }
+        .uw-warn { background: var(--amber-100); color: #ad6200; }
+        .uw-unknown { background: var(--gray-100); color: var(--gray-500); }
+
+        .lot-fee {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--gold-600);
+            letter-spacing: -0.02em;
+        }
+
+        .lot-details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: var(--space-3);
+            padding: var(--space-4) var(--space-5);
+            background: var(--gray-50);
+            border-radius: var(--radius-lg);
+            margin-top: var(--space-3);
+            border: 1px solid var(--gray-100);
+        }
+
+        .lot-detail-item {}
+        .lot-detail-item .dt-label {
+            font-size: 10px;
+            font-weight: 500;
+            color: var(--gray-400);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .lot-detail-item .dt-value {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--gray-700);
+        }
 
         .builder-info { min-width: 0; }
 
@@ -648,22 +805,22 @@
         <div class="metric-tile">
             <div class="icon green">📋</div>
             <div class="value" id="total-builders">0</div>
-            <div class="label">Total Builders</div>
+            <div class="label" id="metric-label-total">Total</div>
         </div>
         <div class="metric-tile">
             <div class="icon gold">⚡</div>
             <div class="value gold-accent" id="active-builders">0</div>
-            <div class="label">Active</div>
+            <div class="label" id="metric-label-active">Active</div>
         </div>
         <div class="metric-tile">
             <div class="icon blue">🔍</div>
             <div class="value" id="research-builders">0</div>
-            <div class="label">In Research</div>
+            <div class="label" id="metric-label-research">In Research</div>
         </div>
         <div class="metric-tile">
             <div class="icon slate">📍</div>
             <div class="value green-accent" id="state-count">0</div>
-            <div class="label">States Covered</div>
+            <div class="label" id="metric-label-markets">States</div>
         </div>
     </div>
 
@@ -680,16 +837,31 @@
         </button>
     </div>
 
+    <!-- ════ Data Type Tabs ── Builders / Lots ════ -->
+    <div class="data-tabs" id="data-tabs">
+        <button class="data-tab active" onclick="switchDataTab('builders')" id="data-tab-builders">
+            <span class="tab-icon">🏗️</span> Builders
+        </button>
+        <button class="data-tab" onclick="switchDataTab('lots')" id="data-tab-lots">
+            <span class="tab-icon">📍</span> Lots <span id="lot-count-badge" style="margin-left:4px;font-size:11px;color:var(--gray-400);">(0)</span>
+        </button>
+    </div>
+
     <!-- ════ Builder List ════ -->
     <div class="builder-list" id="builder-list">
+        <!-- Rendered by JS -->
+    </div>
+
+    <!-- ════ Lots Section ════ -->
+    <div class="lot-section hidden" id="lot-section">
         <!-- Rendered by JS -->
     </div>
 
     <!-- ════ Empty State ════ -->
     <div class="empty-state hidden" id="empty-state">
         <div class="icon">🔎</div>
-        <h3>No builders found</h3>
-        <p>Try adjusting your search or filter to discover local builder contacts for your land flip pipeline.</p>
+        <h3 id="empty-title">No data found</h3>
+        <p id="empty-desc">Try adjusting your search or filter or run LandLot-recon to discover land lots.</p>
     </div>
 </div>
 
@@ -710,6 +882,8 @@
     };
 
     let builderData = [];
+    let lotData = [];
+    let currentTab = 'builders';
     let currentState = localStorage.getItem('landflip_currentState') || 'all';
 
     // ═══════════════════════════════════════════════════════════════════
@@ -784,6 +958,156 @@
     // Core Functions
     // ═══════════════════════════════════════════════════════════════════
 
+    // ═══════════════════════════════════════════════════════════════════
+    // Lot Data Model & Functions
+    // ═══════════════════════════════════════════════════════════════════
+
+    const DEFAULT_LOTS = [];
+
+    function loadLotData() {
+        const stored = localStorage.getItem('lotData');
+        if (stored) {
+            lotData = JSON.parse(stored);
+        } else {
+            lotData = JSON.parse(JSON.stringify(DEFAULT_LOTS));
+            localStorage.setItem('lotData', JSON.stringify(lotData));
+        }
+        updateLotBadge();
+    }
+
+    function saveLotData() {
+        localStorage.setItem('lotData', JSON.stringify(lotData));
+        updateLotBadge();
+    }
+
+    function updateLotBadge() {
+        const badge = document.getElementById('lot-count-badge');
+        if (badge) badge.textContent = `(${lotData.length})`;
+    }
+
+    /** Add a lot from LandLot-recon output */
+    function addLotFromRecon(lot) {
+        lot.id = Date.now() + Math.floor(Math.random() * 1000);
+        lot.dateAdded = new Date().toISOString().split('T')[0];
+        lot.status = lot.status || 'new';
+        lotData.push(lot);
+        saveLotData();
+        renderLots();
+        showToast('Lot added: ' + (lot.propertyAddress || 'Unknown'));
+    }
+
+    /** Add multiple lots at once from a recon batch */
+    function addLotsBatch(lots) {
+        lots.forEach(lot => {
+            lot.id = Date.now() + Math.floor(Math.random() * 10000);
+            lot.dateAdded = new Date().toISOString().split('T')[0];
+            lot.status = lot.status || 'new';
+        });
+        lotData = lotData.concat(lots);
+        saveLotData();
+        renderLots();
+        showToast('Added ' + lots.length + ' lots from recon');
+    }
+
+    function renderLots() {
+        const container = document.getElementById('lot-section');
+        const emptyState = document.getElementById('empty-state');
+
+        if (lotData.length === 0) {
+            container.innerHTML = '';
+            return;
+        }
+
+        emptyState.classList.add('hidden');
+
+        let html = '';
+        lotData.forEach(lot => {
+            const fee = lot.estimatedFee ? '$' + Number(lot.estimatedFee).toLocaleString() : '—';
+            const infillClass = lot.infillStatus ? 'infill' : 'raw';
+            const infillLabel = lot.infillStatus ? 'Infill' : 'Raw Land';
+
+            html += `<div class="lot-card">
+                <div class="lot-header">
+                    <div>
+                        <div class="lot-address">${lot.propertyAddress || 'Address TBD'}</div>
+                        <div class="lot-owner">${lot.ownerName || 'Owner TBD'}</div>
+                    </div>
+                    <div style="text-align:right">
+                        <div class="lot-fee">${fee}</div>
+                        <span class="status-badge status-${lot.status === 'new' ? 'research' : lot.status === 'contacted' ? 'active' : lot.status}">${lot.status}</span>
+                    </div>
+                </div>
+                <div class="lot-meta-row">
+                    ${lot.county ? `<span class="lot-meta-item">📍 ${lot.county}${lot.state ? ', ' + (states[lot.state]?.name||lot.state) : ''}</span>` : ''}
+                    ${lot.lotSize ? `<span class="lot-meta-item">📐 ${lot.lotSize}</span>` : ''}
+                    ${lot.taxDelinquentAmount ? `<span class="lot-meta-item">💰 ${lot.taxDelinquentAmount} delinquent</span>` : ''}
+                    <span class="lot-badge ${infillClass}">${infillLabel}</span>
+                    ${lot.floodZone ? `<span class="lot-badge ${lot.floodZone === '100yr' ? 'raw' : 'infill'}">${lot.floodZone === '100yr' ? 'Flood 100yr' : lot.floodZone === '500yr' ? 'Flood 500yr' : lot.floodZone}</span>` : ''}
+                </div>
+                <div class="lot-uw-grid">
+                    <div><span class="uw-pill ${lot.infillStatus ? 'uw-pass' : 'uw-warn'}">🏡 ${lot.infillStatus ? 'Infill' : 'Raw'}</span></div>
+                    <div><span class="uw-pill ${lot.utilities ? 'uw-pass' : lot.utilities === false ? 'uw-fail' : 'uw-unknown'}">⚡ ${lot.utilities === true ? 'Utils Yes' : lot.utilities === false ? 'No Util' : 'Util ?'}</span></div>
+                    <div><span class="uw-pill ${lot.roadAccess ? 'uw-pass' : lot.roadAccess === false ? 'uw-fail' : 'uw-unknown'}">🛣️ ${lot.roadAccess === true ? 'Road' : lot.roadAccess === false ? 'No Rd' : 'Road ?'}</span></div>
+                    <div><span class="uw-pill ${lot.floodZone && lot.floodZone !== '100yr' ? 'uw-pass' : lot.floodZone === '100yr' ? 'uw-fail' : 'uw-unknown'}">🌊 ${lot.floodZone === '100yr' ? 'Flood-100' : lot.floodZone === '500yr' ? 'Flood-500' : lot.floodZone || 'Flood ?'}</span></div>
+                    <div><span class="uw-pill ${lot.zoning && !lot.zoning.includes('residential') && !lot.zoning.includes('Residential') ? 'uw-warn' : 'uw-pass'}">📋 ${lot.zoning || 'Zone ?'}</span></div>
+                </div>
+                <div class="lot-details-grid">
+                    ${lot.phone ? `<div class="lot-detail-item"><div class="dt-label">Phone</div><div class="dt-value">${lot.phone}</div></div>` : ''}
+                    ${lot.buyBoxMatch ? `<div class="lot-detail-item"><div class="dt-label">Buy Box Match</div><div class="dt-value">${lot.buyBoxMatch}</div></div>` : ''}
+                    ${lot.buyerMax ? `<div class="lot-detail-item"><div class="dt-label">Buyer Max</div><div class="dt-value">$${Number(lot.buyerMax).toLocaleString()}</div></div>` : ''}
+                    ${lot.yourOffer ? `<div class="lot-detail-item"><div class="dt-label">Your Offer</div><div class="dt-value">$${Number(lot.yourOffer).toLocaleString()}</div></div>` : ''}
+                    ${lot.assessedValue ? `<div class="lot-detail-item"><div class="dt-label">Assessed</div><div class="dt-value">$${lot.assessedValue}</div></div>` : ''}
+                    ${lot.apn ? `<div class="lot-detail-item"><div class="dt-label">APN</div><div class="dt-value">${lot.apn}</div></div>` : ''}
+                    ${lot.notes ? `<div class="lot-detail-item"><div class="dt-label">Notes</div><div class="dt-value">${lot.notes}</div></div>` : ''}
+                </div>
+            </div>`;
+        });
+
+        container.innerHTML = html;
+    }
+
+    /** Switch between Builders and Lots tabs */
+    function switchDataTab(tab) {
+        currentTab = tab;
+        // Update tab buttons
+        document.querySelectorAll('.data-tab').forEach(el => el.classList.remove('active'));
+        document.getElementById('data-tab-' + tab).classList.add('active');
+        // Show/hide sections
+        const builderList = document.getElementById('builder-list');
+        const lotSection = document.getElementById('lot-section');
+        const emptyState = document.getElementById('empty-state');
+        const searchInput = document.getElementById('search-input');
+        const stateTabs = document.getElementById('state-tabs');
+
+        if (tab === 'builders') {
+            builderList.classList.remove('hidden');
+            lotSection.classList.add('hidden');
+            searchInput.placeholder = 'Search builders, counties, or states...';
+            stateTabs.style.display = 'flex';
+            document.getElementById('metric-label-total').textContent = 'Total';
+            document.getElementById('metric-label-active').textContent = 'Active';
+            document.getElementById('metric-label-research').textContent = 'In Research';
+            document.getElementById('metric-label-markets').textContent = 'States';
+            if (builderData.length === 0) emptyState.classList.remove('hidden');
+            else emptyState.classList.add('hidden');
+        } else {
+            builderList.classList.add('hidden');
+            lotSection.classList.remove('hidden');
+            searchInput.placeholder = 'Search lots by address, county, or owner...';
+            stateTabs.style.display = 'flex';
+            document.getElementById('empty-title').textContent = 'No lots found';
+            document.getElementById('empty-desc').textContent = 'Run LandLot-recon to discover tax-delinquent land owners in your target markets.';
+            document.getElementById('metric-label-total').textContent = 'Total Lots';
+            document.getElementById('metric-label-active').textContent = 'In Play';
+            document.getElementById('metric-label-research').textContent = 'New Leads';
+            document.getElementById('metric-label-markets').textContent = 'Counties';
+            if (lotData.length === 0) emptyState.classList.remove('hidden');
+            else emptyState.classList.add('hidden');
+            renderLots();
+        }
+        updateStats();
+    }
+
     function init() {
         document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
@@ -791,8 +1115,10 @@
         const marketNames = ['Indiana', 'Texas', 'Florida', 'North Carolina', 'Arizona', 'Tennessee', 'Georgia', 'South Carolina'];
         document.getElementById('next-market').textContent = `Next: ${marketNames[dayMod]}`;
 
+        loadLotData();
         renderTabs();
         loadData();
+        switchDataTab('builders');
     }
 
     function loadData() {
@@ -944,13 +1270,22 @@
     }
 
     function updateStats(filteredData) {
-        const data = filteredData || builderData;
-        document.getElementById('total-builders').textContent = data.length;
-        document.getElementById('active-builders').textContent = data.filter(b => b.status === 'active').length;
-        document.getElementById('research-builders').textContent = data.filter(b => b.status === 'research').length;
+        if (currentTab === 'lots') {
+            const data = lotData;
+            document.getElementById('total-builders').textContent = data.length;
+            document.getElementById('active-builders').textContent = data.filter(l => l.status === 'contacted' || l.status === 'under-contract').length;
+            document.getElementById('research-builders').textContent = data.filter(l => l.status === 'new').length;
+            const uniqueStates = new Set(data.map(l => l.state));
+            document.getElementById('state-count').textContent = uniqueStates.size;
+        } else {
+            const data = filteredData || builderData;
+            document.getElementById('total-builders').textContent = data.length;
+            document.getElementById('active-builders').textContent = data.filter(b => b.status === 'active').length;
+            document.getElementById('research-builders').textContent = data.filter(b => b.status === 'research').length;
 
-        const uniqueStates = new Set(data.map(b => b.state));
-        document.getElementById('state-count').textContent = uniqueStates.size;
+            const uniqueStates = new Set(data.map(b => b.state));
+            document.getElementById('state-count').textContent = uniqueStates.size;
+        }
     }
 
     function toggleDetails(id) {
