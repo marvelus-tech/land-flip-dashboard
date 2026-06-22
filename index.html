@@ -2171,5 +2171,182 @@ function seedRutherfordLots() {
 }
 </script>
 
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- Harris County, TX — Tax-Delinquent Vacant Land Lots     -->
+<!-- Source: Official Harris County Tax Office                -->
+<!-- Tax Sale Date: July 7, 2026                              -->
+<!-- https://www.hctax.net/Property/listings/taxsalelisting   -->
+<!-- ════════════════════════════════════════════════════════ -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var existing = JSON.parse(localStorage.getItem('lotData') || '[]');
+
+  var harrisCountyLots = [
+    // ════════════════════════════════════════════
+    // Tract: ABST 795 T TOBY — Houston (77089)
+    // ════════════════════════════════════════════
+    {
+      propertyAddress: '0 Algonquin Dr, Houston, TX 77089',
+      county: 'Harris County',
+      state: 'texas',
+      ownerName: 'Scarsdale Park LLC',
+      assessedValue: '123710',
+      taxDelinquentAmount: '4852.01',
+      apn: '045-099-000-0022',
+      lotSize: null,
+      buyBoxMatch: 'Urban land tract / custom builder lot',
+      buyerMax: null,
+      yourOffer: null,
+      estimatedFee: null,
+      status: 'new',
+      floodZone: null,
+      zoning: null,
+      infillStatus: true,
+      utilities: null,
+      roadAccess: true,
+      phone: '',
+      notes: 'July 7, 2026 Harris County Tax Sale. LLC-owned land tract TR 5E in ABST 795 T TOBY. Adj value $123,710, min bid $17,850. Owner: Scarsdale Park LLC (8901 Gaylord Dr, Houston 77024). Delinquent 2022-2024 ($4,852). Source: hctax.net — tax sale listing #0450990000022.'
+    },
+    // ════════════════════════════════════════════
+    // Lot 144, Continental Plaza Sec 1 — Humble (77346)
+    // ════════════════════════════════════════════
+    {
+      propertyAddress: '0 Pacific Dr, Humble, TX 77346',
+      county: 'Harris County',
+      state: 'texas',
+      ownerName: 'Rita Cuaycong Villacin',
+      assessedValue: '12500',
+      taxDelinquentAmount: '1407.36',
+      apn: '116-275-000-0150',
+      lotSize: null,
+      buyBoxMatch: 'Low-cost subdivision lot / first-time builder',
+      buyerMax: null,
+      yourOffer: null,
+      estimatedFee: null,
+      status: 'new',
+      floodZone: null,
+      zoning: null,
+      infillStatus: true,
+      utilities: null,
+      roadAccess: true,
+      phone: '',
+      notes: 'July 7, 2026 Harris County Tax Sale. Vacant lot LT 144 in Continental Plaza Sec 1 U/R. Extremely low adj value ($12,500) with min bid $8,375. 19 years delinquent (2006-2024) — total owed only $1,407. Owner: Rita C Villacin (5625 Antoine Dr Apt 506, Houston 77091). Classic heirs/abandoned lot play. Source: hctax.net — tax sale listing #1162750000150.'
+    },
+    // ════════════════════════════════════════════
+    // TRS 6V & 6Y, ABST 84 R WHITE — Crosby (77532)
+    // ════════════════════════════════════════════
+    {
+      propertyAddress: '0 FM 1942 Rd, Crosby, TX 77532',
+      county: 'Harris County',
+      state: 'texas',
+      ownerName: 'Mills Real Estate Invst Co % James Mills Jr',
+      assessedValue: '284909',
+      taxDelinquentAmount: '2795.87',
+      apn: '041-040-002-0011',
+      lotSize: null,
+      buyBoxMatch: 'Large land tract / rural residential developer',
+      buyerMax: null,
+      yourOffer: null,
+      estimatedFee: null,
+      status: 'new',
+      floodZone: null,
+      zoning: null,
+      infillStatus: false,
+      utilities: null,
+      roadAccess: true,
+      phone: '',
+      notes: 'July 7, 2026 Harris County Tax Sale. Land tracts 6V & 6Y in ABST 84 R WHITE. FM 1942 frontage in rural Crosby. Adj value $284,909, min bid $56,704. Owner: Mills Real Estate Invst Co (5600 Alvin A Klein Dr Unit 21, Spring 77379). Same cause #202277939 as 0 Wisdom St. Source: hctax.net — tax sale listing #0410400020011.'
+    },
+    // ════════════════════════════════════════════
+    // ABST 84 R WHITE — Crosby (77532)
+    // ════════════════════════════════════════════
+    {
+      propertyAddress: '0 Wisdom St, Crosby, TX 77532',
+      county: 'Harris County',
+      state: 'texas',
+      ownerName: 'Mills Real Estate Invst Co',
+      assessedValue: '237796',
+      taxDelinquentAmount: null,
+      apn: '041-040-002-0006',
+      lotSize: null,
+      buyBoxMatch: 'Land tract / rural lot developer',
+      buyerMax: null,
+      yourOffer: null,
+      estimatedFee: null,
+      status: 'new',
+      floodZone: null,
+      zoning: null,
+      infillStatus: false,
+      utilities: null,
+      roadAccess: true,
+      phone: '',
+      notes: 'July 7, 2026 Harris County Tax Sale. Land tract in ABST 84 R WHITE, same cause #202277939 as 0 FM 1942 Rd. Adj value $237,796, min bid $25,608. Owner: Mills Real Estate Invst Co. Crosby area — growing exurb east of Houston. Source: hctax.net — tax sale listing #0410400020006.'
+    },
+    // ════════════════════════════════════════════
+    // LT 4 BLK 3, Classic Pines Estates Sec 1 — Humble (77396)
+    // ════════════════════════════════════════════
+    {
+      propertyAddress: '0 Lexus Dr, Humble, TX 77396',
+      county: 'Harris County',
+      state: 'texas',
+      ownerName: 'Adolfo Martinez-Cardenas & Josefa Olvera-Garcia',
+      assessedValue: null,
+      taxDelinquentAmount: '1511.44',
+      apn: '121-130-003-0004',
+      lotSize: null,
+      buyBoxMatch: 'Subdivision lot / build-on-your-lot builder',
+      buyerMax: null,
+      yourOffer: null,
+      estimatedFee: null,
+      status: 'new',
+      floodZone: null,
+      zoning: null,
+      infillStatus: true,
+      utilities: null,
+      roadAccess: true,
+      phone: '',
+      notes: 'July 7, 2026 Harris County Tax Sale. Vacant lot LT 4 BLK 3 in Classic Pines Estates Sec 1, Humble. Delinquent 2022-2024 ($1,511). Same owners as 810 Lexus Dr (LT 3). Subdivision lot near Atascocita. Source: hctax.net — tax sale listing #1211300030004.'
+    },
+    // ════════════════════════════════════════════
+    // LT 411, North Belt Forest Sec 1 — Humble (77396)
+    // ════════════════════════════════════════════
+    {
+      propertyAddress: '9318 Gerber Ln, Humble, TX 77396',
+      county: 'Harris County',
+      state: 'texas',
+      ownerName: 'Paul A Theis & Sheryl E Theis',
+      assessedValue: '37216',
+      taxDelinquentAmount: '232.53',
+      apn: '115-465-000-0411',
+      lotSize: null,
+      buyBoxMatch: 'Low-delinquency lot / subdivision infill',
+      buyerMax: null,
+      yourOffer: null,
+      estimatedFee: null,
+      status: 'new',
+      floodZone: null,
+      zoning: null,
+      infillStatus: true,
+      utilities: null,
+      roadAccess: true,
+      phone: '',
+      notes: 'July 7, 2026 Harris County Tax Sale. Lot 411 in North Belt Forest Sec 1 U/R. Very low annual taxes (~$37-40/yr) strongly suggests vacant land, no improvements. Adjudged value $37,216, min bid $12,003. Delinquent 2020-2023 ($232 total). Source: hctax.net — tax sale listing #1154650000411.'
+    }
+  ];
+
+  // Filter out duplicates that may already exist in localStorage
+  var existingApns = {};
+  existing.forEach(function(l) { if (l.apn) existingApns[l.apn] = true; });
+  var newLots = harrisCountyLots.filter(function(l) { return !existingApns[l.apn]; });
+
+  if (newLots.length > 0) {
+    addLotsBatch(newLots);
+    console.log('Seeded ' + newLots.length + ' Harris County, TX tax-delinquent vacant land lots into dashboard.');
+  } else {
+    console.log('Harris County lots already loaded — skipping.');
+  }
+});
+</script>
+
 </body>
-</html>
+</html> 
