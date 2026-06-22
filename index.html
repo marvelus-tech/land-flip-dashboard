@@ -115,17 +115,38 @@
                 #080d14 100%);
             pointer-events: none;
             z-index: 0;
+            overflow: hidden;
+        }
+
+        /* Aerial photo background */
+        .hero-bg .aerial-photo {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center 30%;
+            opacity: 0.35;
+            transform: scale(1.05);
+            animation: hero-zoom 30s ease-in-out infinite alternate;
+        }
+
+        @keyframes hero-zoom {
+            from { transform: scale(1.05); }
+            to { transform: scale(1.12); }
         }
 
         .hero-bg::before {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(26, 107, 60, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(201, 154, 62, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 50% 80%, rgba(13, 31, 53, 0.3) 0%, transparent 50%);
+            background: linear-gradient(165deg, 
+                rgba(10, 22, 40, 0.75) 0%, 
+                rgba(15, 42, 30, 0.65) 30%, 
+                rgba(26, 61, 46, 0.6) 50%, 
+                rgba(13, 31, 53, 0.8) 70%, 
+                rgba(8, 13, 20, 0.9) 100%);
             pointer-events: none;
+            z-index: 1;
         }
 
         /* Subtle grid overlay */
@@ -138,10 +159,11 @@
                 linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
             background-size: 60px 60px;
             pointer-events: none;
+            z-index: 2;
         }
 
         /* ── Layout ── */
-        .app-container { max-width: 1440px; margin: 0 auto; padding: 0 var(--space-8); position: relative; z-index: 1; }
+        .app-container { max-width: 1280px; margin: 0 auto; padding: 0 var(--space-8); position: relative; z-index: 1; }
 
         /* ── Header ── */
         .app-header {
@@ -217,13 +239,13 @@
         /* ── Data Type Tabs (Builders / Lots) ── */
         .data-tabs {
             display: flex;
-            gap: var(--space-1);
+            gap: 2px;
             margin-bottom: var(--space-6);
             background: rgba(255,255,255,0.85);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             padding: 3px;
-            border-radius: var(--radius-md);
+            border-radius: 10px;
             width: -moz-fit-content;
             width: fit-content;
             box-shadow: 0 1px 3px rgba(0,0,0,0.04);
@@ -232,7 +254,7 @@
 
         .data-tab {
             padding: 8px 20px;
-            border-radius: var(--radius-sm);
+            border-radius: 8px;
             font-family: var(--font);
             font-size: 13px;
             font-weight: 500;
@@ -241,18 +263,19 @@
             border: none;
             cursor: pointer;
             transition: all var(--duration) var(--ease);
+            white-space: nowrap;
         }
 
         .data-tab:hover { color: var(--gray-700); background: rgba(0,0,0,0.02); }
 
         .data-tab.active {
             background: var(--white);
-            color: var(--gray-800);
+            color: var(--green-700);
             box-shadow: 0 1px 4px rgba(0,0,0,0.06);
             font-weight: 600;
         }
 
-        .data-tab .tab-icon { margin-right: 6px; display: inline-flex; align-items: center; }
+        .data-tab .tab-icon { margin-right: 6px; display: inline-flex; align-items: center; vertical-align: -1px; }
 
         .header-meta {
             display: flex;
@@ -319,9 +342,9 @@
         .metric-tile .icon.slate { background: linear-gradient(135deg, var(--gray-600), var(--gray-500)); }
 
         .metric-tile .value {
-            font-size: 30px;
+            font-size: 32px;
             font-weight: 700;
-            letter-spacing: -0.04em;
+            letter-spacing: -0.03em;
             color: var(--gray-800);
             line-height: 1.1;
         }
@@ -337,11 +360,11 @@
         }
 
         .metric-tile .label {
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
             color: var(--gray-400);
-            margin-top: var(--space-1);
-            letter-spacing: 0.04em;
+            margin-top: 6px;
+            letter-spacing: 0.06em;
             text-transform: uppercase;
         }
 
@@ -369,7 +392,7 @@
             position: relative;
             flex: 1;
             min-width: 220px;
-            max-width: 400px;
+            max-width: 420px;
         }
 
         .search-wrapper svg {
@@ -383,6 +406,7 @@
 
         .search-input {
             width: 100%;
+            height: 42px;
             padding: 11px 16px 11px 42px;
             font-family: var(--font);
             font-size: 14px;
@@ -392,7 +416,7 @@
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1.5px solid rgba(255,255,255,0.3);
-            border-radius: var(--radius-md);
+            border-radius: 10px;
             transition: all var(--duration) var(--ease);
             outline: none;
             box-shadow: 0 1px 3px rgba(0,0,0,0.04);
@@ -402,13 +426,13 @@
         .search-input:focus {
             border-color: var(--green-400);
             background: var(--white);
-            box-shadow: 0 0 0 3px rgba(26, 107, 60, 0.08), 0 1px 3px rgba(0,0,0,0.04);
+            box-shadow: 0 0 0 4px rgba(26, 107, 60, 0.1), 0 1px 3px rgba(0,0,0,0.04);
         }
 
         /* ── State Tabs (Chips) ── */
         .state-tabs {
             display: flex;
-            gap: var(--space-2);
+            gap: 6px;
             overflow-x: auto;
             padding-bottom: var(--space-1);
             -webkit-overflow-scrolling: touch;
@@ -418,11 +442,11 @@
         .state-tabs::-webkit-scrollbar { display: none; }
 
         .state-tab {
-            padding: 8px 18px;
+            padding: 7px 16px;
             border-radius: var(--radius-full);
             font-family: var(--font);
             font-size: 12px;
-            font-weight: 600;
+            font-weight: 500;
             color: var(--gray-500);
             background: transparent;
             border: 1.5px solid var(--gray-200);
@@ -430,21 +454,20 @@
             transition: all var(--duration) var(--ease);
             white-space: nowrap;
             flex-shrink: 0;
-            letter-spacing: 0.01em;
         }
 
         .state-tab:hover {
-            border-color: var(--gray-300);
-            color: var(--gray-700);
-            background: rgba(255,255,255,0.5);
+            border-color: var(--green-300);
+            color: var(--green-700);
+            background: rgba(26, 107, 60, 0.04);
         }
 
         .state-tab.active {
             background: var(--green-600);
             border-color: var(--green-600);
             color: var(--white);
-            font-weight: 700;
-            box-shadow: 0 2px 8px rgba(26, 107, 60, 0.2);
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(26, 107, 60, 0.25);
         }
 
         .state-tab .count {
@@ -475,12 +498,30 @@
             border-radius: var(--radius-lg);
             box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02);
             border: none;
+            border-left: 3px solid transparent;
             transition: all var(--duration) var(--ease);
+            position: relative;
+        }
+
+        .builder-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 16px;
+            bottom: 16px;
+            width: 3px;
+            border-radius: 1.5px;
+            background: var(--green-400);
+            opacity: 0;
+            transition: opacity var(--duration) var(--ease);
         }
 
         .builder-card:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06), 0 2px 6px rgba(0,0,0,0.03);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06), 0 2px 6px rgba(0,0,0,0.03);
+            transform: translateY(-1px);
         }
+
+        .builder-card:hover::before { opacity: 1; }
 
         .builder-main {
             display: flex;
@@ -618,9 +659,9 @@
             letter-spacing: 0.04em;
         }
         .lot-detail-item .dt-value {
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--gray-700);
+            font-size: 14px;
+            font-weight: 450;
+            color: var(--gray-800);
         }
 
         .builder-info { min-width: 0; }
@@ -668,11 +709,12 @@
 
         /* ── Status Badges ── */
         .status-badge {
-            padding: 3px 10px;
+            padding: 3px 12px;
             border-radius: var(--radius-full);
             font-size: 11px;
             font-weight: 600;
-            letter-spacing: 0.01em;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
             display: inline-flex;
             align-items: center;
             gap: 5px;
@@ -787,23 +829,38 @@
         /* ── Empty State ── */
         .empty-state {
             text-align: center;
-            padding: var(--space-16) var(--space-8);
+            padding: var(--space-12) var(--space-6);
         }
 
+        .empty-state .empty-illustration {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto var(--space-5);
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--green-50), var(--green-100));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
+        .empty-state .empty-illustration svg {
+            color: var(--green-400);
+            opacity: 0.6;
+        }
 
         .empty-state h3 {
             font-size: 18px;
             font-weight: 600;
-            color: var(--gray-600);
+            color: var(--gray-700);
             margin-bottom: var(--space-2);
         }
 
         .empty-state p {
             font-size: 14px;
             color: var(--gray-400);
-            max-width: 400px;
+            max-width: 380px;
             margin: 0 auto;
+            line-height: 1.5;
         }
 
         /* ── Toast ── */
@@ -840,7 +897,7 @@
         ::-webkit-scrollbar-thumb:hover { background: var(--gray-400); }
 
         /* ── App Container with elevation ── */
-        .app-container { max-width: 1440px; margin: 0 auto; padding: 0 var(--space-8); position: relative; z-index: 1; }
+        .app-container { max-width: 1280px; margin: 0 auto; padding: 0 var(--space-8); position: relative; z-index: 1; }
 
         /* ── Content section with glass lift ── */
         .content-section {
@@ -886,7 +943,9 @@
     </style>
 </head>
 <body>
-<div class="hero-bg"></div>
+<div class="hero-bg">
+  <div class="aerial-photo"></div>
+</div>
 
 <div class="app-container">
     <!-- ════ Header ════ -->
@@ -973,9 +1032,14 @@
 
     <!-- ════ Empty State ════ -->
     <div class="empty-state hidden" id="empty-state">
-        <div class="icon"><svg class="icon-svg-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/><path d="M21 21l-6 -6"/></svg></div>
+        <div class="empty-illustration">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+        </div>
         <h3 id="empty-title">No data found</h3>
-        <p id="empty-desc">Try adjusting your search or filter or run LandLot-recon to discover land lots.</p>
+        <p id="empty-desc">Try adjusting your search or filter, or run <code style="background:var(--gray-100);padding:2px 8px;border-radius:4px;font-size:12px;">LandLot-recon</code> to discover land lots.</p>
     </div>
     </div><!-- /content-section -->
 </div>
