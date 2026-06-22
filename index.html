@@ -472,6 +472,71 @@
 
         .builder-avatar.gold { background: linear-gradient(135deg, var(--gold-600), var(--gold-400)); }
 
+        /* ── County Guide Panel ── */
+        .county-guide {
+            background: var(--white);
+            border: 1px solid var(--hairline);
+            border-radius: 12px;
+            padding: 0;
+            margin: 16px 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease, margin 0.3s ease;
+        }
+        .county-guide.open {
+            max-height: 2000px;
+            padding: 20px 24px;
+            margin: 16px 0 24px;
+        }
+        .county-guide-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+        .county-guide-header h3 {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--ink);
+            margin: 0;
+        }
+        .county-guide-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--gray-400);
+            padding: 4px;
+            border-radius: 6px;
+            line-height: 1;
+        }
+        .county-guide-close:hover { background: var(--gray-100); color: var(--gray-600); }
+        .county-guide-card {
+            background: var(--gray-50);
+            border: 1px solid var(--hairline);
+            border-radius: 8px;
+            padding: 12px 14px;
+            margin-bottom: 8px;
+        }
+        .county-guide-card h4 {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--ink-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin: 0 0 6px;
+        }
+        .county-guide-card p {
+            font-size: 13px;
+            line-height: 1.5;
+            color: var(--ink);
+            margin: 0;
+        }
+        .county-guide-card a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .county-guide-card a:hover { text-decoration: underline; }
+
         /* ── Lot Cards ── */
         .lot-section {
             display: flex;
@@ -929,6 +994,7 @@
             <input type="text" class="search-input" id="search-input" placeholder="Search builders, counties, or states..." oninput="filterBuilders()" autocomplete="off">
         </div>
         <div class="state-tabs" id="state-tabs"></div>
+        <div class="county-guide" id="county-guide"><!-- County guide rendered by JS when state tab is active --></div>
         <button class="action-btn primary" onclick="exportCSV()" title="Export all data as CSV">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Export CSV
@@ -984,6 +1050,184 @@
         'south-carolina': { name: 'South Carolina', color: 'bg-indigo-100 text-indigo-800', metro: 'Charleston', counties: ['Berkeley', 'Dorchester', 'Charleston'] },
         indiana: { name: 'Indiana', color: 'bg-pink-100 text-pink-800', metro: 'Indianapolis', counties: ['Boone', 'Hamilton', 'Hendricks'] }
     };
+
+    // ═══════════════════════════════════════════════════════════════════
+    // County Guide — Market Intel Per County
+    // ═══════════════════════════════════════════════════════════════════
+
+    const countyGuide = {
+        'Wilson': {
+            state: 'Tennessee',
+            metro: 'Nashville',
+            status: 'blocked-free',
+            lastRecon: '2026-06-22',
+            contacts: {
+                'Clerk & Master': '(615) 444-8661',
+                'Trustee — Kenneth Hackett': '(615) 444-0894',
+                'Assessor — Stephen Goodall': '(615) 444-8661'
+            },
+            addresses: {
+                'Clerk & Master': '228 East Main Street, Lebanon, TN 37087',
+                'Trustee': 'P.O. Box 865, Lebanon, TN 37088'
+            },
+            accessNote: 'No machine-readable delinquent list online. Browser automation needed on Citisen Portal.',
+            portalUrl: 'citisenportal.com/Search/WilsonCountyTrustee',
+            paidSources: 'taxliens.com (314 tax liens), goliathdata.com, regrid.com',
+            redemption: {
+                type: 'Judicial tax deed sale',
+                period: '1 year (T.C.A. \u00a767-5-2701)',
+                interest: '12% annual'
+            },
+            tips: [
+                'Call Clerk & Master at (615) 444-8661, ask for delinquent tax list filtered by vacant land',
+                'Citisen Portal has all tax records but requires browser JS to search',
+                'Peekaboo browser automation can extract if Screen Recording is enabled'
+            ]
+        },
+        'Sumner': {
+            state: 'Tennessee',
+            metro: 'Nashville',
+            status: 'blocked-paid',
+            lastRecon: '2026-06-22',
+            contacts: { 'County Website': 'sumnercountytn.gov' },
+            accessNote: 'County site uses image-only PDFs — not scrapeable. Requires XLeads or PropStream subscription.',
+            paidSources: 'XLeads (~\u002480/mo), PropStream (~\u0024100/mo), BatchLeads (~\u0024150/mo)',
+            tips: [
+                'XLeads is cheapest option — filter by tax delinquent + land type',
+                'County tax sale PDFs are scanned only, OCR may not work'
+            ]
+        },
+        'Rutherford': {
+            state: 'Tennessee',
+            metro: 'Nashville',
+            status: 'free-seeded',
+            lastRecon: '2026-06-22',
+            accessNote: '8 tax-delinquent lots seeded from Feb 2026 Chancery Court public notice.',
+            tips: [
+                'Chancery Court public notice was successfully parsed',
+                'Check for updated public notices quarterly',
+                '22 builders active in this county'
+            ]
+        },
+        'Harris': {
+            state: 'Texas',
+            metro: 'Houston',
+            status: 'free-seeded',
+            lastRecon: '2026-06-22',
+            accessNote: '6 tax-delinquent lots seeded via hctax.net',
+            portalUrl: 'hctax.net',
+            tips: ['Harris County tax site is scrapeable — easiest TX county']
+        },
+        'Montgomery': { state: 'Texas', metro: 'Houston', status: 'free-seeded', lastRecon: '2026-06-22', tips: ['Seeded. Run full recon for real data.'] },
+        'Fort Bend': { state: 'Texas', metro: 'Houston', status: 'free-seeded', lastRecon: '2026-06-22', tips: ['Seeded. Run full recon for real data.'] },
+        'Waller': { state: 'Texas', metro: 'Houston', status: 'free-seeded', lastRecon: '2026-06-22', tips: ['Seeded. Run full recon for real data.'] },
+        'Brazoria': { state: 'Texas', metro: 'Houston', status: 'free-seeded', lastRecon: '2026-06-22', tips: ['Seeded. Run full recon for real data.'] }
+    };
+
+    const RECON_ICONS = {
+        'free-seeded': { icon: '\u2705', label: 'Lots Seeded' },
+        'blocked-free': { icon: '\u26d4', label: 'No Free Access' },
+        'blocked-paid': { icon: '\u26d4', label: 'Paid Only' },
+        'not-tried': { icon: '\u25fb', label: 'Not Yet Researched' }
+    };
+
+    function showCountyGuide(stateKey) {
+        const panel = document.getElementById('county-guide');
+        if (!stateKey || stateKey === 'all') {
+            panel.classList.remove('open');
+            panel.innerHTML = '';
+            return;
+        }
+        const state = states[stateKey];
+        if (!state) { panel.classList.remove('open'); return; }
+
+        let html = '' +
+            '<div class="county-guide-header">' +
+                '<h3>\ud83d\udccb County Guide &mdash; ' + state.metro + ' Metro</h3>' +
+                '<button class="county-guide-close" onclick="document.getElementById(\'county-guide\').classList.remove(\'open\')">' +
+                    '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>' +
+                '</button>' +
+            '</div>' +
+            '<div style="font-size:13px;color:var(--ink-muted);margin-bottom:14px;">' +
+                'Data sources, contacts, and blockers for each county in ' + state.name + '.' +
+                (stateKey === 'tennessee' ? '<span style="color:var(--green-500);font-weight:500;margin-left:8px;">Highest priority &mdash; 30 builders, 8 lots</span>' : '') +
+                (stateKey === 'texas' ? '<span style="color:var(--green-500);font-weight:500;margin-left:8px;">35 builders, 20 lots</span>' : '') +
+            '</div>';
+
+        state.counties.forEach(function(county) {
+            var info = countyGuide[county];
+            var status = info ? (RECON_ICONS[info.status] || RECON_ICONS['not-tried']) : RECON_ICONS['not-tried'];
+
+            html += '<div class="county-guide-card" style="padding:14px 16px;">';
+            html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">' +
+                '<span style="font-size:14px;">' + status.icon + '</span>' +
+                '<strong style="font-size:14px;color:var(--ink);">' + county + ' County</strong>' +
+                '<span style="font-size:11px;color:var(--ink-muted);background:var(--gray-100);padding:2px 8px;border-radius:10px;">' + status.label + '</span>' +
+                (info && info.lastRecon ? '<span style="font-size:11px;color:var(--ink-muted);margin-left:auto;">Reconned ' + info.lastRecon + '</span>' : '') +
+            '</div>';
+
+            if (info) {
+                if (info.accessNote) html += '<p style="font-size:13px;color:var(--ink-secondary);margin:0 0 8px;">' + info.accessNote + '</p>';
+                if (info.portalUrl) html += '<div style="margin-bottom:4px;"><a href="https://' + info.portalUrl + '" target="_blank" style="font-size:12px;">\ud83d\udd17 ' + info.portalUrl + '</a></div>';
+                if (info.paidSources) html += '<div style="font-size:12px;color:var(--ink-muted);margin-bottom:6px;">Paid: ' + info.paidSources + '</div>';
+
+                if (info.contacts && Object.keys(info.contacts).length > 0) {
+                    Object.keys(info.contacts).forEach(function(k) {
+                        html += '<div style="display:flex;align-items:center;gap:6px;font-size:13px;margin-top:4px;">' +
+                            '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> <strong>' + k + ':</strong> ' + info.contacts[k] + '</div>';
+                    });
+                }
+
+                if (info.tips && info.tips.length > 0) {
+                    info.tips.forEach(function(t) {
+                        html += '<div style="display:flex;gap:6px;font-size:12px;color:var(--ink-secondary);margin-top:4px;"><span>\ud83d\udca1</span> ' + t + '</div>';
+                    });
+                }
+
+                if (info.redemption) {
+                    var r = info.redemption;
+                    html += '<div style="margin-top:8px;padding:8px 10px;background:var(--green-50);border-radius:6px;font-size:12px;">' +
+                        '<strong>Redemption:</strong> ' + r.type + ' \u2022 ' + r.period + ' \u2022 ' + r.interest +
+                    '</div>';
+                }
+            } else {
+                html += '<p style="font-size:13px;color:var(--ink-muted);margin:0;">No recon data yet. Run LandLot-recon for this county.</p>';
+            }
+            html += '</div>';
+        });
+
+        panel.innerHTML = html;
+        panel.classList.add('open');
+    }
+
+    // Patch setState to show county guide on state tab click
+    var _origSetState = setState;
+    setState = function(state) {
+        _origSetState(state);
+        var panel = document.getElementById('county-guide');
+        if (state === 'all') {
+            panel.classList.remove('open');
+        } else {
+            setTimeout(function() { showCountyGuide(state); }, 50);
+        }
+    };
+
+    var _origRenderTabs = renderTabs;
+    renderTabs = function() {
+        _origRenderTabs();
+        var activeState = localStorage.getItem('landflip_currentState') || 'all';
+        if (activeState !== 'all') {
+            setTimeout(function() { showCountyGuide(activeState); }, 100);
+        }
+    };
+
+    // Show county guide on page load if state tab was active
+    document.addEventListener('DOMContentLoaded', function() {
+        var activeState = localStorage.getItem('landflip_currentState') || 'all';
+        if (activeState !== 'all') {
+            setTimeout(function() { showCountyGuide(activeState); }, 200);
+        }
+    });
 
     let builderData = [];
     let lotData = [];
