@@ -698,11 +698,7 @@
             padding: var(--space-16) var(--space-8);
         }
 
-        .empty-state .icon {
-            font-size: 48px;
-            margin-bottom: var(--space-4);
-            opacity: 0.3;
-        }
+
 
         .empty-state h3 {
             font-size: 18px;
@@ -781,7 +777,7 @@
     <!-- ════ Header ════ -->
     <header class="app-header">
         <div class="app-title-group">
-            <div class="app-icon">🏡</div>
+            <div class="app-icon"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
             <div>
                 <div class="app-title">Builder Discovery</div>
                 <div class="app-title-sub">Land Flip Pipeline</div>
@@ -803,22 +799,22 @@
     <!-- ════ Metrics ════ -->
     <div class="metrics-grid">
         <div class="metric-tile">
-            <div class="icon green">📋</div>
+            <div class="icon green"><svg class="icon-svg-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div>
             <div class="value" id="total-builders">0</div>
             <div class="label" id="metric-label-total">Total</div>
         </div>
         <div class="metric-tile">
-            <div class="icon gold">⚡</div>
+            <div class="icon gold"><svg class="icon-svg-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
             <div class="value gold-accent" id="active-builders">0</div>
             <div class="label" id="metric-label-active">Active</div>
         </div>
         <div class="metric-tile">
-            <div class="icon blue">🔍</div>
+            <div class="icon blue"><svg class="icon-svg-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
             <div class="value" id="research-builders">0</div>
             <div class="label" id="metric-label-research">In Research</div>
         </div>
         <div class="metric-tile">
-            <div class="icon slate">📍</div>
+            <div class="icon slate"><svg class="icon-svg-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
             <div class="value green-accent" id="state-count">0</div>
             <div class="label" id="metric-label-markets">States</div>
         </div>
@@ -840,10 +836,10 @@
     <!-- ════ Data Type Tabs ── Builders / Lots ════ -->
     <div class="data-tabs" id="data-tabs">
         <button class="data-tab active" onclick="switchDataTab('builders')" id="data-tab-builders">
-            <span class="tab-icon">🏗️</span> Builders
+            <span class="tab-icon"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg></span> Builders
         </button>
         <button class="data-tab" onclick="switchDataTab('lots')" id="data-tab-lots">
-            <span class="tab-icon">📍</span> Lots <span id="lot-count-badge" style="margin-left:4px;font-size:11px;color:var(--gray-400);">(0)</span>
+            <span class="tab-icon"><svg class="icon-svg-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span> Lots <span id="lot-count-badge" style="margin-left:4px;font-size:11px;color:var(--gray-400);">(0)</span>
         </button>
     </div>
 
@@ -859,7 +855,7 @@
 
     <!-- ════ Empty State ════ -->
     <div class="empty-state hidden" id="empty-state">
-        <div class="icon">🔎</div>
+        <div class="icon"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
         <h3 id="empty-title">No data found</h3>
         <p id="empty-desc">Try adjusting your search or filter or run LandLot-recon to discover land lots.</p>
     </div>
@@ -1038,18 +1034,18 @@
                     </div>
                 </div>
                 <div class="lot-meta-row">
-                    ${lot.county ? `<span class="lot-meta-item">📍 ${lot.county}${lot.state ? ', ' + (states[lot.state]?.name||lot.state) : ''}</span>` : ''}
-                    ${lot.lotSize ? `<span class="lot-meta-item">📐 ${lot.lotSize}</span>` : ''}
-                    ${lot.taxDelinquentAmount ? `<span class="lot-meta-item">💰 ${lot.taxDelinquentAmount} delinquent</span>` : ''}
+                    ${lot.county ? `<span class="lot-meta-item"><svg class="icon-svg-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> ${lot.county}${lot.state ? ', ' + (states[lot.state]?.name||lot.state) : ''}</span>` : ''}
+                    ${lot.lotSize ? `<span class="lot-meta-item"><svg class="icon-svg-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg> ${lot.lotSize}</span>` : ''}
+                    ${lot.taxDelinquentAmount ? `<span class="lot-meta-item"><svg class="icon-svg-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> ${lot.taxDelinquentAmount} delinquent</span>` : ''}
                     <span class="lot-badge ${infillClass}">${infillLabel}</span>
                     ${lot.floodZone ? `<span class="lot-badge ${lot.floodZone === '100yr' ? 'raw' : 'infill'}">${lot.floodZone === '100yr' ? 'Flood 100yr' : lot.floodZone === '500yr' ? 'Flood 500yr' : lot.floodZone}</span>` : ''}
                 </div>
                 <div class="lot-uw-grid">
-                    <div><span class="uw-pill ${lot.infillStatus ? 'uw-pass' : 'uw-warn'}">🏡 ${lot.infillStatus ? 'Infill' : 'Raw'}</span></div>
-                    <div><span class="uw-pill ${lot.utilities ? 'uw-pass' : lot.utilities === false ? 'uw-fail' : 'uw-unknown'}">⚡ ${lot.utilities === true ? 'Utils Yes' : lot.utilities === false ? 'No Util' : 'Util ?'}</span></div>
-                    <div><span class="uw-pill ${lot.roadAccess ? 'uw-pass' : lot.roadAccess === false ? 'uw-fail' : 'uw-unknown'}">🛣️ ${lot.roadAccess === true ? 'Road' : lot.roadAccess === false ? 'No Rd' : 'Road ?'}</span></div>
-                    <div><span class="uw-pill ${lot.floodZone && lot.floodZone !== '100yr' ? 'uw-pass' : lot.floodZone === '100yr' ? 'uw-fail' : 'uw-unknown'}">🌊 ${lot.floodZone === '100yr' ? 'Flood-100' : lot.floodZone === '500yr' ? 'Flood-500' : lot.floodZone || 'Flood ?'}</span></div>
-                    <div><span class="uw-pill ${lot.zoning && !lot.zoning.includes('residential') && !lot.zoning.includes('Residential') ? 'uw-warn' : 'uw-pass'}">📋 ${lot.zoning || 'Zone ?'}</span></div>
+                    <div><span class="uw-pill ${lot.infillStatus ? 'uw-pass' : 'uw-warn'}"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> ${lot.infillStatus ? 'Infill' : 'Raw'}</span></div>
+                    <div><span class="uw-pill ${lot.utilities ? 'uw-pass' : lot.utilities === false ? 'uw-fail' : 'uw-unknown'}"><svg class="icon-svg-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> ${lot.utilities === true ? 'Utils Yes' : lot.utilities === false ? 'No Util' : 'Util ?'}</span></div>
+                    <div><span class="uw-pill ${lot.roadAccess ? 'uw-pass' : lot.roadAccess === false ? 'uw-fail' : 'uw-unknown'}"><svg class="icon-svg-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> ${lot.roadAccess === true ? 'Road' : lot.roadAccess === false ? 'No Rd' : 'Road ?'}</span></div>
+                    <div><span class="uw-pill ${lot.floodZone && lot.floodZone !== '100yr' ? 'uw-pass' : lot.floodZone === '100yr' ? 'uw-fail' : 'uw-unknown'}"><svg class="icon-svg-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg> ${lot.floodZone === '100yr' ? 'Flood-100' : lot.floodZone === '500yr' ? 'Flood-500' : lot.floodZone || 'Flood ?'}</span></div>
+                    <div><span class="uw-pill ${lot.zoning && !lot.zoning.includes('residential') && !lot.zoning.includes('Residential') ? 'uw-warn' : 'uw-pass'}"><svg class="icon-svg-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg> ${lot.zoning || 'Zone ?'}</span></div>
                 </div>
                 <div class="lot-details-grid">
                     ${lot.phone ? `<div class="lot-detail-item"><div class="dt-label">Phone</div><div class="dt-value">${lot.phone}</div></div>` : ''}
@@ -1300,11 +1296,11 @@
         if (!builder) return;
 
         let text = `${builder.name}\n`;
-        if (builder.phone) text += `📞 ${builder.phone}\n`;
-        if (builder.email) text += `✉️ ${builder.email}\n`;
-        if (builder.website) text += `🌐 ${builder.website}\n`;
-        text += `📍 ${builder.county}, ${states[builder.state]?.name || builder.state}\n`;
-        if (builder.buyBox) text += `📦 ${builder.buyBox}`;
+        if (builder.phone) text += `Phone: ${builder.phone}\n`;
+        if (builder.email) text += `Email: ${builder.email}\n`;
+        if (builder.website) text += `Web: ${builder.website}\n`;
+        text += `Location: ${builder.county}, ${states[builder.state]?.name || builder.state}\n`;
+        if (builder.buyBox) text += `Buy Box: ${builder.buyBox}`;
 
         navigator.clipboard.writeText(text).then(() => {
             showToast(`Copied ${builder.name}`);
