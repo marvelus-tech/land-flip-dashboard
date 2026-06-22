@@ -416,6 +416,40 @@
             filterBuilders();
         }
 
+        // ── Default Builder Data (embedded — used when localStorage is empty) ──
+        const DEFAULT_BUILDERS = [
+            {id:1,name:'Rutherford Home Builders',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 410-7496',email:'INFO@RUTHERFORDHB.COM',website:'https://rutherfordhomebuilders.com',buyBox:'Lots 0.25-2 ac',volume:'Active local builder',status:'active',dateAdded:'2026-06-22',initials:'RH'},
+            {id:2,name:'Jensen Quality Homes LLC',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 525-1842',email:'',website:'https://www.jensenqualityhomes.com',buyBox:'Scattered lots',volume:'President, RCHBA',status:'active',dateAdded:'2026-06-22',initials:'JQ'},
+            {id:3,name:'Skill Construction Co., Inc.',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 904-8842',email:'',website:'https://www.skillconstructionco.com',buyBox:'Lots, remodels',volume:'Past President, RCHBA',status:'active',dateAdded:'2026-06-22',initials:'SC'},
+            {id:4,name:'A F Johns Residential, LLC',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 459-4572',email:'',website:'',buyBox:'Scattered lots',volume:'Residential builder',status:'research',dateAdded:'2026-06-22',initials:'AJ'},
+            {id:5,name:'Caywood Builders, LLC',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 394-0379',email:'',website:'https://www.caywoodbuilders.com',buyBox:'Custom homes',volume:'Director, CPB/R',status:'active',dateAdded:'2026-06-22',initials:'CB'},
+            {id:6,name:'Paran Homes, LLC',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(678) 726-9646',email:'',website:'https://www.paranhomes.com',buyBox:'Scattered lots',volume:'Multi-state builder',status:'active',dateAdded:'2026-06-22',initials:'PH'},
+            {id:7,name:'Ole South Properties',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 896-0019',email:'',website:'https://www.olesouth.com',buyBox:'Subdivision lots',volume:'Life Director, Past President',status:'active',dateAdded:'2026-06-22',initials:'OS'},
+            {id:8,name:'Laurel Brook Homes Inc.',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 412-9880',email:'',website:'https://www.LaurelBrookHomes.com',buyBox:'Custom homes',volume:'Local builder',status:'research',dateAdded:'2026-06-22',initials:'LB'},
+            {id:9,name:'Properties Unlimited of Tennessee',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 890-6565',email:'',website:'https://www.LindaDillon.com',buyBox:'Scattered lots',volume:'Past President, Life Director',status:'active',dateAdded:'2026-06-22',initials:'PU'},
+            {id:10,name:'Global Homes, LLC',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 715-9313',email:'',website:'',buyBox:'Scattered lots',volume:'Local builder',status:'research',dateAdded:'2026-06-22',initials:'GH'},
+            {id:11,name:'Steve Martin Construction',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 904-9639',email:'',website:'https://www.stevemartinconstruction.com',buyBox:'Custom homes',volume:'Life Director, Past President, CPB',status:'active',dateAdded:'2026-06-22',initials:'SM'},
+            {id:12,name:'Woodridge Homes LLC',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 974-5100',email:'',website:'https://mywoodridgehome.com',buyBox:'New home communities',volume:'Active builder',status:'research',dateAdded:'2026-06-22',initials:'WH'},
+            {id:13,name:'Slayton Homes, LLC',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 896-6959',email:'',website:'https://www.slaytonhomesllc.com',buyBox:'Custom/scattered lots',volume:'Past President',status:'active',dateAdded:'2026-06-22',initials:'SH'},
+            {id:14,name:'Jim Averwater Construction',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 351-9232',email:'',website:'https://www.averwaterconstruction.com',buyBox:'Scattered lots',volume:'Life Director, CPB, CGB, Past President',status:'active',dateAdded:'2026-06-22',initials:'JA'},
+            {id:15,name:'Southern Lifestyle Homes, LLC',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 369-6464',email:'',website:'https://slhtn.com',buyBox:'Custom homes',volume:'Local builder',status:'research',dateAdded:'2026-06-22',initials:'SL'},
+            {id:16,name:'Waldron Enterprises',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 793-7575',email:'',website:'https://www.waldronenterprises.com',buyBox:'Scattered lots',volume:'Local builder',status:'research',dateAdded:'2026-06-22',initials:'WE'},
+            {id:17,name:'Wright Construction of TN LLC',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 893-3911',email:'',website:'',buyBox:'Scattered lots',volume:'Local builder',status:'research',dateAdded:'2026-06-22',initials:'WC'},
+            {id:18,name:'Conner Homes',county:'Rutherford/Wilson',state:'tennessee',metro:'Nashville',phone:'(888) 302-1252',email:'land@connerhomes.com',website:'https://www.connerhomes.com/conner-homes-land-acquisition',buyBox:'We buy land — scattered lots',volume:'~65 yrs in TN',status:'active',dateAdded:'2026-06-22',initials:'CH'},
+            {id:19,name:'CLQ Land',county:'Rutherford/Williamson',state:'tennessee',metro:'Nashville',phone:'(615) 663-7345',email:'mark@clqland.com',website:'https://www.clqland.com',buyBox:'Lot banking, infill',volume:'Vertical developer',status:'active',dateAdded:'2026-06-22',initials:'CL'},
+            {id:20,name:'R&H Builders',county:'Wilson County',state:'tennessee',metro:'Nashville',phone:'(615) 709-2111',email:'',website:'https://buildwithrh.com',buyBox:'Custom, BOYL',volume:'Local builder',status:'active',dateAdded:'2026-06-22',initials:'RH'},
+            {id:21,name:'Hutton Homes LLC',county:'Wilson County',state:'tennessee',metro:'Nashville',phone:'(615) 838-6649',email:'',website:'https://www.huttonhomesllc.com',buyBox:'Custom homes',volume:'110+ homes built',status:'active',dateAdded:'2026-06-22',initials:'HH'},
+            {id:22,name:'Burge Builders, Inc.',county:'Wilson County',state:'tennessee',metro:'Nashville',phone:'(615) 485-8855',email:'',website:'https://www.burgebuilders.com',buyBox:'Custom estate homes',volume:'17+ yrs experience',status:'active',dateAdded:'2026-06-22',initials:'BB'},
+            {id:23,name:'Lotus Building Group',county:'Wilson/Davidson',state:'tennessee',metro:'Nashville',phone:'(615) 722-9947',email:'hello@lotusbuildingtn.com',website:'https://lotusbuildingtn.com',buyBox:'Custom, BOYL',volume:'Design + build',status:'active',dateAdded:'2026-06-22',initials:'LB'},
+            {id:24,name:'Randy Jones Construction',county:'Sumner County',state:'tennessee',metro:'Nashville',phone:'(615) 452-7731',email:'',website:'https://www.randyjonesconstruction.com',buyBox:'Custom, communities',volume:'50 yrs in Sumner',status:'active',dateAdded:'2026-06-22',initials:'RJ'},
+            {id:25,name:'JR Builders, LLC',county:'Sumner County',state:'tennessee',metro:'Nashville',phone:'(615) 504-1467',email:'info@jrbuildersllc.com',website:'https://www.jrbuildersllc.com',buyBox:'Custom homes',volume:'Builder of Year x5',status:'active',dateAdded:'2026-06-22',initials:'JR'},
+            {id:26,name:'Norfleet Builders',county:'Sumner/Robertson',state:'tennessee',metro:'Nashville',phone:'(615) 682-0148',email:'',website:'https://www.buildnorfleet.com',buyBox:'Fixed-price custom',volume:'Turn-key builder',status:'active',dateAdded:'2026-06-22',initials:'NB'},
+            {id:27,name:'Southern 7 Homes',county:'Sumner County',state:'tennessee',metro:'Nashville',phone:'(615) 456-9234',email:'',website:'https://southern7homes.com',buyBox:'Custom, renovations',volume:'Built with integrity',status:'research',dateAdded:'2026-06-22',initials:'S7'},
+            {id:28,name:'Pettis Builders',county:'Sumner County',state:'tennessee',metro:'Nashville',phone:'',email:'',website:'https://pettisbuilders.com',buyBox:'Luxury custom',volume:'Best of Sumner x13',status:'research',dateAdded:'2026-06-22',initials:'PB'},
+            {id:29,name:'Morgan and Sons Homes, Inc.',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 459-0098',email:'',website:'',buyBox:'Scattered lots',volume:'Local builder',status:'research',dateAdded:'2026-06-22',initials:'MS'},
+            {id:30,name:'Michael\'s Homes LLC',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 216-4589',email:'',website:'https://www.themitchellbowmanteam.com',buyBox:'Custom/scattered',volume:'Director, RCHBA',status:'active',dateAdded:'2026-06-22',initials:'MH'},
+        ];
+
         // ── Load Data ──
         function loadData() {
             const stored = localStorage.getItem('builderData');
@@ -424,13 +458,19 @@
                 // Filter out any demo data (555 phone numbers are fake)
                 builderData = parsed.filter(b => !b.phone.includes('555'));
                 if (builderData.length === 0) {
-                    showEmptyState();
+                    builderData = JSON.parse(JSON.stringify(DEFAULT_BUILDERS));
+                    localStorage.setItem('builderData', JSON.stringify(builderData));
+                    renderBuilders();
+                    updateStats();
                 } else {
                     renderBuilders();
                     updateStats();
                 }
             } else {
-                showEmptyState();
+                builderData = JSON.parse(JSON.stringify(DEFAULT_BUILDERS));
+                localStorage.setItem('builderData', JSON.stringify(builderData));
+                renderBuilders();
+                updateStats();
             }
         }
 
@@ -600,25 +640,5 @@
 </body>
 </html>
 
-<!-- Auto-generated market entry: 2026-06-21 -->
-<script>
-(function() {
-    var newBuilders =         {
-            id: Date.now(),
-            name: '[RESEARCH NEEDED]',
-            state: 'tennessee',
-            county: 'Rutherford County,Wilson County,Sumner County,Williamson County',
-            metro: 'Nashville',
-            phone: 'Search required',
-            email: 'Search required',
-            website: 'Search required',
-            buyBox: '45-60 min outside Nashville',
-            volume: 'Unknown',
-            status: 'research',
-            dateAdded: '2026-06-21'
-        };
-    var existing = JSON.parse(localStorage.getItem('builderData') || '[]');
-    existing.push(newBuilders);
-    localStorage.setItem('builderData', JSON.stringify(existing));
-})();
-</script>
+<!-- Dashboard now uses embedded DEFAULT_BUILDERS (30 real Tennessee contacts) -->
+<!-- Data loads from localStorage; if empty, defaults are seeded above -->
