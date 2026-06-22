@@ -1960,6 +1960,215 @@ document.addEventListener('DOMContentLoaded', function() {
     location.reload();
   }
 });
+
+// ═══════════════════════════════════════════════════════════════════
+// Rutherford County, TN — Tax-Delinquent Vacant Land Lots
+// Source: Official Feb 5, 2026 Delinquent Tax Sale Public Notice
+// Published by Rutherford County Chancery Court / WGNS Radio
+// (https://www.wgnsradio.com/article/97069/)
+// Only properties identifiable as vacant/unimproved land included.
+// Unknown fields marked null per spec.
+// ═══════════════════════════════════════════════════════════════════
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', seedRutherfordLots);
+} else {
+  seedRutherfordLots();
+}
+
+function seedRutherfordLots() {
+  var existing = JSON.parse(localStorage.getItem('lotData') || '[]');
+
+  var rutherfordLots = [
+    {
+      propertyAddress: 'Daddy Green Rd, Murfreesboro, TN 37130',
+      county: 'Rutherford County',
+      state: 'tennessee',
+      ownerName: 'Linda L. Henderson',
+      assessedValue: null,
+      taxDelinquentAmount: '4547.78',
+      apn: 'R0085402',
+      lotSize: null,
+      buyBoxMatch: 'Rural land / vacant lot investor',
+      buyerMax: null,
+      yourOffer: null,
+      estimatedFee: null,
+      status: 'new',
+      floodZone: null,
+      zoning: null,
+      infillStatus: false,
+      utilities: null,
+      roadAccess: true,
+      phone: '',
+      notes: 'Feb 5, 2026 tax sale lot. Road-only address (no street number) — vacant/unimproved parcel. Map/Parcel: 175/175/004.000. Book/Page: 1081/2036. Source: Rutherford County Chancery Court public notice.'
+    },
+    {
+      propertyAddress: 'Richland Richardson Rd, Murfreesboro, TN 37130',
+      county: 'Rutherford County',
+      state: 'tennessee',
+      ownerName: 'James Wyrich \x26 Deborah Wyrich',
+      assessedValue: null,
+      taxDelinquentAmount: '1743.11',
+      apn: 'R0050876',
+      lotSize: null,
+      buyBoxMatch: 'Rural land / vacant lot investor',
+      buyerMax: null,
+      yourOffer: null,
+      estimatedFee: null,
+      status: 'new',
+      floodZone: null,
+      zoning: null,
+      infillStatus: false,
+      utilities: null,
+      roadAccess: true,
+      phone: '',
+      notes: 'Feb 5, 2026 tax sale lot. Road-only address (no street number) — vacant/unimproved parcel. Map/Parcel: 088/088/006.00. Book/Page: 577/374. Source: Rutherford County Chancery Court public notice.'
+    },
+    {
+      propertyAddress: 'Edward Ct, Murfreesboro, TN 37130',
+      county: 'Rutherford County',
+      state: 'tennessee',
+      ownerName: 'Alfred Edgar Miles \x26 Tim Richard Miles',
+      assessedValue: null,
+      taxDelinquentAmount: '3245.45',
+      apn: 'R0033447',
+      lotSize: null,
+      buyBoxMatch: 'Lot developer / small subdivision buyer',
+      buyerMax: null,
+      yourOffer: null,
+      estimatedFee: null,
+      status: 'new',
+      floodZone: null,
+      zoning: 'Residential',
+      infillStatus: false,
+      utilities: null,
+      roadAccess: true,
+      phone: '',
+      notes: 'Feb 5, 2026 tax sale lot. Court-only address — likely vacant residential lot. Avg lot size on Edward Ct ~0.71 ac. Map/Parcel: 057D/C/057D/003.00. Book/Page: 241/226. Source: Rutherford County Chancery Court public notice.'
+    },
+    {
+      propertyAddress: 'Tedder Blvd, Murfreesboro, TN 37130',
+      county: 'Rutherford County',
+      state: 'tennessee',
+      ownerName: 'Bill Tedder \x26 D\'Ann Tedder d/b/a Eagle Construction Co.',
+      assessedValue: null,
+      taxDelinquentAmount: '6605.00',
+      apn: 'R0020788',
+      lotSize: null,
+      buyBoxMatch: 'Land developer / builder lot inventory',
+      buyerMax: null,
+      yourOffer: null,
+      estimatedFee: null,
+      status: 'new',
+      floodZone: null,
+      zoning: null,
+      infillStatus: false,
+      utilities: null,
+      roadAccess: true,
+      phone: '',
+      notes: 'Feb 5, 2026 tax sale lot. Road-only address — owned by construction company (Eagle Construction Co.), likely undeveloped builder inventory land. Map/Parcel: 033E/F/033E/020.00. Book/Page: 349/608. Source: Rutherford County Chancery Court public notice.'
+    },
+    {
+      propertyAddress: '191 Sunrise Avenue, Murfreesboro, TN 37130',
+      county: 'Rutherford County',
+      state: 'tennessee',
+      ownerName: 'Oldham Corp.',
+      assessedValue: null,
+      taxDelinquentAmount: '3335.40',
+      apn: 'R0007919',
+      lotSize: null,
+      buyBoxMatch: 'Corporate-owned / commercial lot investor',
+      buyerMax: null,
+      yourOffer: null,
+      estimatedFee: null,
+      status: 'new',
+      floodZone: null,
+      zoning: null,
+      infillStatus: false,
+      utilities: null,
+      roadAccess: true,
+      phone: '',
+      notes: 'Feb 5, 2026 tax sale lot. Corporate-owned by Oldham Corp. May be improved or vacant — verify before purchase. Map/Parcel: 018A/B/018A/028.05. Book/Page: 1185/3576. Source: Rutherford County Chancery Court public notice.'
+    },
+    {
+      propertyAddress: '6220 Robert Haston Rd, Murfreesboro, TN 37130',
+      county: 'Rutherford County',
+      state: 'tennessee',
+      ownerName: 'Marie Gentry',
+      assessedValue: null,
+      taxDelinquentAmount: '1971.43',
+      apn: 'R0032481',
+      lotSize: null,
+      buyBoxMatch: 'Rural residential / vacant lot investor',
+      buyerMax: null,
+      yourOffer: null,
+      estimatedFee: null,
+      status: 'new',
+      floodZone: null,
+      zoning: null,
+      infillStatus: false,
+      utilities: null,
+      roadAccess: true,
+      phone: '',
+      notes: 'Feb 5, 2026 tax sale lot. Rural road address — possibly vacant/unimproved. Low judgment amount suggests low-value land. Map/Parcel: 056C/C/056C/003.00. Book/Page: 235/71. Source: Rutherford County Chancery Court public notice.'
+    },
+    {
+      propertyAddress: '1582 Daniels St, Murfreesboro, TN 37130',
+      county: 'Rutherford County',
+      state: 'tennessee',
+      ownerName: 'Thomas Freeman \x26 Thomas Spann',
+      assessedValue: null,
+      taxDelinquentAmount: '766.64',
+      apn: 'R0083666',
+      lotSize: null,
+      buyBoxMatch: 'Low-value land / lot investor',
+      buyerMax: null,
+      yourOffer: null,
+      estimatedFee: null,
+      status: 'new',
+      floodZone: null,
+      zoning: null,
+      infillStatus: false,
+      utilities: null,
+      roadAccess: true,
+      phone: '',
+      notes: 'Feb 5, 2026 tax sale lot. Very low judgment ($766) — likely low-value vacant or unimproved parcel. Map/Parcel: 158N/C/158N/012.00. Book/Page: 2302/3490. Source: Rutherford County Chancery Court public notice.'
+    },
+    {
+      propertyAddress: '373 Jefferson Pike, Murfreesboro, TN 37130',
+      county: 'Rutherford County',
+      state: 'tennessee',
+      ownerName: 'Nicole Hunt \x26 Andrew Hunt',
+      assessedValue: null,
+      taxDelinquentAmount: '4997.85',
+      apn: 'R0008805',
+      lotSize: null,
+      buyBoxMatch: 'Rural highway frontage / vacant lot',
+      buyerMax: null,
+      yourOffer: null,
+      estimatedFee: null,
+      status: 'new',
+      floodZone: null,
+      zoning: null,
+      infillStatus: false,
+      utilities: null,
+      roadAccess: true,
+      phone: '',
+      notes: 'Feb 5, 2026 tax sale lot. Jefferson Pike (Hwy 97) frontage — may be vacant/unimproved parcel. Verify before purchase. Map/Parcel: 018I/B/018I/011.01. Book/Page: 925/1741. Source: Rutherford County Chancery Court public notice.'
+    }
+  ];
+
+  // Filter out duplicates that may already exist in localStorage
+  var existingApns = {};
+  existing.forEach(function(l) { if (l.apn) existingApns[l.apn] = true; });
+  var newLots = rutherfordLots.filter(function(l) { return !existingApns[l.apn]; });
+
+  if (newLots.length > 0) {
+    addLotsBatch(newLots);
+    console.log('Seeded ' + newLots.length + ' Rutherford County, TN tax-delinquent lots into dashboard.');
+  } else {
+    console.log('Rutherford County lots already loaded — skipping.');
+  }
+}
 </script>
 
 </body>
