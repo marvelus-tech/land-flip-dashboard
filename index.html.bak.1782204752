@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Land Flip — Builder Discovery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=SF+Pro+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2C3E2D;
+            --gold: #C5A46E;
+            --bg: #F9F7F2;
+            --surface: #FFFFFF;
+            --text-primary: #1C1C1E;
+            --text-secondary: #636366;
+            --muted: #8E8E93;
+            --border: #EDEBE5;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text-primary);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* === HEADER with subtle aerial === */
+        .header-wrapper {
+            position: relative;
+            padding-top: 48px;
+            padding-bottom: 40px;
+            margin-bottom: 32px;
+            overflow: hidden;
+        }
+
+        .header-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('assets/images/hero-aerial.jpg');
+            background-size: cover;
+            background-position: center 35%;
+            opacity: 0.055;
+            filter: saturate(0.6) contrast(0.95);
+            z-index: 0;
+        }
+
+        .header-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(249,247,242,0.65) 0%, rgba(249,247,242,0.92) 70%);
+        }
+
+        .header {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 24px;
+            padding-bottom: 8px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .header-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+            box-shadow: 0 1px 3px rgba(44, 62, 45, 0.2);
+        }
+
+        .header-title {
+            font-size: 32px;
+            font-weight: 600;
+            letter-spacing: -0.025em;
+            line-height: 1.05;
+        }
+
+        .header-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 400;
+            margin-top: 3px;
+            letter-spacing: -0.01em;
+        }
+
+        .focus-pill {
+            display: inline-flex;
+            align-items: center;
+            padding: 7px 18px;
+            background: #F5F0E6;
+            border: 1px solid #EDE4D3;
+            border-radius: 999px;
+            font-size: 12.5px;
+            font-weight: 500;
+            color: var(--gold);
+            letter-spacing: 0.015em;
+            white-space: nowrap;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+        }
+
+        /* === METRICS — clean & spacious === */
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin-bottom: 44px;
+        }
+
+        .metric {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 26px 28px;
+            transition: all 0.15s ease;
+        }
+
+        .metric:hover {
+            border-color: #E2DFD7;
+        }
+
+        .metric-value {
+            font-size: 36px;
+            font-weight: 500;
+            letter-spacing: -0.03em;
+            line-height: 1.0;
+            margin-bottom: 6px;
+        }
+
+        .metric-value.gold {
+            color: var(--gold);
+        }
+
+        .metric-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--muted);
+        }
+
+        /* === CONTROLS === */
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .search {
+            flex: 1;
+            min-width: 280px;
+            position: relative;
+        }
+
+        .search input {
+            width: 100%;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 11px 16px 11px 44px;
+            font-size: 14.5px;
+            font-weight: 400;
+            color: var(--text-primary);
+            outline: none;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .search input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(44, 62, 45, 0.06);
+        }
+
+        .search svg {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--muted);
+            width: 16px;
+            height: 16px;
+        }
+
+        .state-pills {
+            display: flex;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            padding: 4px;
+            gap: 3px;
+        }
+
+        .state-pill {
+            padding: 7px 20px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            background: transparent;
+            border: none;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all 0.12s ease;
+            white-space: nowrap;
+        }
+
+        .state-pill:hover {
+            color: var(--text-primary);
+        }
+
+        .state-pill.active {
+            background: var(--primary);
+            color: white;
+            font-weight: 500;
+            box-shadow: 0 1px 2px rgba(44, 62, 45, 0.15);
+        }
+
+        .export-btn {
+            margin-left: auto;
+            padding: 10px 20px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            font-size: 13.5px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.15s ease;
+            white-space: nowrap;
+        }
+
+        .export-btn:hover {
+            border-color: #D9D5CD;
+            color: var(--text-primary);
+            background: #FFFEFB;
+        }
+
+        /* === SEGMENTED CONTROL (Apple style) === */
+        .segmented {
+            display: inline-flex;
+            background: #F1EDE6;
+            border-radius: 999px;
+            padding: 4px;
+            margin-bottom: 32px;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+        }
+
+        .segment {
+            padding: 8px 26px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            background: transparent;
+            border: none;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all 0.12s cubic-bezier(0.2, 0, 0, 1);
+        }
+
+        .segment.active {
+            background: var(--surface);
+            color: var(--text-primary);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            font-weight: 600;
+        }
+
+        /* === STATE GROUPS === */
+        .state-group {
+            margin-bottom: 38px;
+        }
+
+        .state-header {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            color: var(--muted);
+            margin-bottom: 12px;
+            padding-left: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .state-header span {
+            font-weight: 400;
+            color: #A8A59E;
+            font-size: 11px;
+            letter-spacing: normal;
+        }
+
+        /* === BUILDER ROWS — very clean === */
+        .builder-row {
+            display: flex;
+            align-items: center;
+            padding: 16px 22px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            margin-bottom: 3px;
+            transition: border-color 0.15s ease, background 0.15s ease;
+            gap: 20px;
+        }
+
+        .builder-row:hover {
+            border-color: #D9D5CD;
+            background: #FFFEFB;
+        }
+
+        .builder-main {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .builder-name {
+            font-size: 15.5px;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: -0.012em;
+            line-height: 1.25;
+        }
+
+        .builder-location {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 2px;
+            font-weight: 400;
+        }
+
+        .builder-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 12px;
+            font-weight: 500;
+            min-width: 78px;
+        }
+
+        .status-dot {
+            width: 6.5px;
+            height: 6.5px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .status-dot.active { background: var(--primary); }
+        .status-dot.research { background: var(--muted); }
+
+        .status-label {
+            color: var(--muted);
+            font-weight: 500;
+            font-size: 12.5px;
+        }
+
+        .status-label.active { color: var(--primary); }
+
+        .builder-actions {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            opacity: 0;
+            transition: opacity 0.15s ease;
+        }
+
+        .builder-row:hover .builder-actions {
+            opacity: 1;
+        }
+
+        .icon-btn {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            background: transparent;
+            color: var(--muted);
+            border-radius: 9px;
+            cursor: pointer;
+            transition: all 0.1s ease;
+        }
+
+        .icon-btn:hover {
+            background: #F4F1EA;
+            color: var(--text-primary);
+        }
+
+        .icon-btn svg {
+            width: 15.5px;
+            height: 15.5px;
+        }
+
+        /* === DETAILS — calm expansion === */
+        .builder-details {
+            margin: 2px 0 14px 22px;
+            padding: 16px 22px;
+            background: #F9F7F2;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            font-size: 13.5px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(168px, 1fr));
+            gap: 14px 28px;
+        }
+
+        .detail {
+            font-size: 13px;
+        }
+
+        .detail-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 2px;
+        }
+
+        .detail-value {
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .detail-value a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .detail-value a:hover {
+            text-decoration: underline;
+        }
+
+        /* === TABS CONTENT === */
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .empty {
+            padding: 72px 20px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 14.5px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+        }
+
+        /* Lots styling */
+        .lot-row {
+            padding: 18px 22px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            margin-bottom: 5px;
+            font-size: 14.5px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        /* Subtle land visual */
+        .land-visual {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 10px 16px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            margin-bottom: 28px;
+            max-width: 420px;
+        }
+
+        .land-visual img {
+            width: 68px;
+            height: 68px;
+            object-fit: cover;
+            border-radius: 8px;
+            opacity: 0.85;
+            filter: saturate(0.75);
+        }
+
+        .land-visual-text {
+            font-size: 12.5px;
+            color: var(--text-secondary);
+        }
+
+        .land-visual-text strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 860px) {
+            .container { padding: 0 24px; }
+            .header { flex-direction: column; align-items: flex-start; gap: 16px; }
+            .metrics { grid-template-columns: repeat(2, 1fr); }
+            .controls { flex-direction: column; align-items: stretch; }
+            .search { min-width: 100%; }
+            .export-btn { margin-left: 0; width: 100%; justify-content: center; }
+            .state-pills { width: 100%; justify-content: center; }
+            .builder-row { flex-wrap: wrap; gap: 10px; }
+            .builder-actions { opacity: 1; }
+        }
+
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header with subtle aerial -->
+        <div class="header-wrapper">
+            <div class="header-bg"></div>
+            <div class="header">
+                <div class="header-left">
+                    <div class="header-icon">
+                        <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 21h18"></path>
+                            <path d="M5 21V7l8-4v18"></path>
+                            <path d="M19 21V11l-6-4"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="header-title">Land Flip</div>
+                        <div class="header-subtitle">Builder Discovery</div>
+                    </div>
+                </div>
+
+                <div class="focus-pill">
+                    Next Focus: South Carolina
+                </div>
+            </div>
+        </div>
+
+        <!-- Metrics -->
+        <div class="metrics">
+            <div class="metric">
+                <div class="metric-value gold" id="metric-total">60</div>
+                <div class="metric-label">Total Builders</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value" id="metric-active">25</div>
+                <div class="metric-label">Active</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value" id="metric-research">35</div>
+                <div class="metric-label">In Research</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value" id="metric-states">2</div>
+                <div class="metric-label">States</div>
+            </div>
+        </div>
+
+        <!-- Subtle land visual using stakes photo -->
+        <div class="land-visual">
+            <img src="assets/images/image-1---0581a595-cb6d-4359-88c1-1f97af12bb86.jpg" alt="">
+            <div class="land-visual-text">
+                <strong>Quiet, ordered land.</strong><br>
+                Precise boundaries. Premium opportunity.
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <div class="search">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" id="search-input" placeholder="Search builders or counties..." oninput="filterAndRender()">
+            </div>
+
+            <div class="state-pills" id="state-pills">
+                <!-- Populated by JS -->
+            </div>
+
+            <button class="export-btn" onclick="exportCSV()">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Export CSV
+            </button>
+        </div>
+
+        <!-- Segmented Tabs -->
+        <div class="segmented" id="segmented-tabs">
+            <button class="segment active" onclick="switchTab('builders')" data-tab="builders">Builders</button>
+            <button class="segment" onclick="switchTab('lots')" data-tab="lots">Lots</button>
+            <button class="segment" onclick="switchTab('contracts')" data-tab="contracts">Contracts</button>
+        </div>
+
+        <!-- Builders Content -->
+        <div id="builders-content" class="content-section active">
+            <div id="builders-list">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+
+        <!-- Lots Content -->
+        <div id="lots-content" class="content-section">
+            <div id="lots-list">
+                <div class="lot-row">
+                    <div style="flex:1">
+                        <div style="font-weight:500">Rutherford County • 12 lots</div>
+                        <div style="font-size:12.5px;color:#8E8E93;margin-top:1px">Identified via LandLot-recon • 4 under contract</div>
+                    </div>
+                    <button onclick="showToast('Lot details opened')" style="padding:6px 16px;border-radius:8px;border:1px solid var(--border);background:white;font-size:12.5px;cursor:pointer">View</button>
+                </div>
+                <div class="lot-row">
+                    <div style="flex:1">
+                        <div style="font-weight:500">Wilson County • 7 lots</div>
+                        <div style="font-size:12.5px;color:#8E8E93;margin-top:1px">Scattered infill opportunities</div>
+                    </div>
+                    <button onclick="showToast('Lot details opened')" style="padding:6px 16px;border-radius:8px;border:1px solid var(--border);background:white;font-size:12.5px;cursor:pointer">View</button>
+                </div>
+                <div class="empty" style="margin-top:12px;padding:38px 20px;font-size:13.5px">More lots will appear after next reconnaissance pass.</div>
+            </div>
+        </div>
+
+        <!-- Contracts Content -->
+        <div id="contracts-content" class="content-section">
+            <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px;">
+                <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; font-weight: 500;">Contract templates • Ready for DocuSign</div>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <div style="padding: 14px 18px; background: #F9F7F2; border-radius: 10px; font-size: 14px; display: flex; justify-content: space-between; align-items: center;">
+                        <div>Florida Vacant Land Contract</div>
+                        <button onclick="showToast('Download started')" style="font-size: 12.5px; padding: 5px 14px; border-radius: 8px; border: 1px solid var(--border); background: white; cursor:pointer;">Download</button>
+                    </div>
+                    <div style="padding: 14px 18px; background: #F9F7F2; border-radius: 10px; font-size: 14px; display: flex; justify-content: space-between; align-items: center;">
+                        <div>Assignment of Contract</div>
+                        <button onclick="showToast('Download started')" style="font-size: 12.5px; padding: 5px 14px; border-radius: 8px; border: 1px solid var(--border); background: white; cursor:pointer;">Download</button>
+                    </div>
+                    <div style="padding: 14px 18px; background: #F9F7F2; border-radius: 10px; font-size: 14px; display: flex; justify-content: space-between; align-items: center;">
+                        <div>Tennessee Land Purchase Addendum</div>
+                        <button onclick="showToast('Download started')" style="font-size: 12.5px; padding: 5px 14px; border-radius: 8px; border: 1px solid var(--border); background: white; cursor:pointer;">Download</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // EXACT BUILDER DATA — PRESERVED 100%
+        // ============================================
+        const DEFAULT_BUILDERS = [
+            {id:1,name:'Rutherford Home Builders',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 410-7496',email:'INFO@RUTHERFORDHB.COM',website:'https://rutherfordhomebuilders.com',buyBox:'Lots 0.25-2 ac',volume:'Active local builder',status:'active',dateAdded:'2026-06-22',initials:'RH'},
+            {id:2,name:'Jensen Quality Homes LLC',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 525-1842',email:'',website:'https://www.jensenqualityhomes.com',buyBox:'Scattered lots',volume:'President, RCHBA',status:'active',dateAdded:'2026-06-22',initials:'JQ'},
+            {id:3,name:'Skill Construction Co., Inc.',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 904-8842',email:'',website:'https://www.skillconstructionco.com',buyBox:'Lots, remodels',volume:'Past President, RCHBA',status:'active',dateAdded:'2026-06-22',initials:'SC'},
+            {id:4,name:'A F Johns Residential, LLC',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 459-4572',email:'',website:'',buyBox:'Scattered lots',volume:'Residential builder',status:'research',dateAdded:'2026-06-22',initials:'AJ'},
+            {id:5,name:'Caywood Builders, LLC',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 394-0379',email:'',website:'https://www.caywoodbuilders.com',buyBox:'Custom homes',volume:'Director, CPB/R',status:'active',dateAdded:'2026-06-22',initials:'CB'},
+            {id:6,name:'Paran Homes, LLC',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(678) 726-9646',email:'',website:'https://www.paranhomes.com',buyBox:'Scattered lots',volume:'Multi-state builder',status:'active',dateAdded:'2026-06-22',initials:'PH'},
+            {id:7,name:'Ole South Properties',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 896-0019',email:'',website:'https://www.olesouth.com',buyBox:'Subdivision lots',volume:'Life Director, Past President',status:'active',dateAdded:'2026-06-22',initials:'OS'},
+            {id:8,name:'Laurel Brook Homes Inc.',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 412-9880',email:'',website:'https://www.LaurelBrookHomes.com',buyBox:'Custom homes',volume:'Local builder',status:'research',dateAdded:'2026-06-22',initials:'LB'},
+            {id:9,name:'Properties Unlimited of Tennessee',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 890-6565',email:'',website:'https://www.LindaDillon.com',buyBox:'Scattered lots',volume:'Past President, Life Director',status:'active',dateAdded:'2026-06-22',initials:'PU'},
+            {id:10,name:'Global Homes, LLC',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 715-9313',email:'',website:'',buyBox:'Scattered lots',volume:'Local builder',status:'research',dateAdded:'2026-06-22',initials:'GH'},
+            {id:11,name:'Steve Martin Construction',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 904-9639',email:'',website:'https://www.stevemartinconstruction.com',buyBox:'Custom homes',volume:'Life Director, Past President, CPB',status:'active',dateAdded:'2026-06-22',initials:'SM'},
+            {id:12,name:'Woodridge Homes LLC',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 974-5100',email:'',website:'https://mywoodridgehome.com',buyBox:'New home communities',volume:'Active builder',status:'research',dateAdded:'2026-06-22',initials:'WH'},
+            {id:13,name:'Slayton Homes, LLC',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 896-6959',email:'',website:'https://www.slaytonhomesllc.com',buyBox:'Custom/scattered lots',volume:'Past President',status:'active',dateAdded:'2026-06-22',initials:'SH'},
+            {id:14,name:'Jim Averwater Construction',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 351-9232',email:'',website:'https://www.averwaterconstruction.com',buyBox:'Scattered lots',volume:'Life Director, CPB, CGB, Past President',status:'active',dateAdded:'2026-06-22',initials:'JA'},
+            {id:15,name:'Southern Lifestyle Homes, LLC',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 369-6464',email:'',website:'https://slhtn.com',buyBox:'Custom homes',volume:'Local builder',status:'research',dateAdded:'2026-06-22',initials:'SL'},
+            {id:16,name:'Waldron Enterprises',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 793-7575',email:'',website:'https://www.waldronenterprises.com',buyBox:'Scattered lots',volume:'Local builder',status:'research',dateAdded:'2026-06-22',initials:'WE'},
+            {id:17,name:'Wright Construction of TN LLC',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 893-3911',email:'',website:'',buyBox:'Scattered lots',volume:'Local builder',status:'research',dateAdded:'2026-06-22',initials:'WC'},
+            {id:18,name:'Conner Homes',county:'Rutherford/Wilson',state:'tennessee',metro:'Nashville',phone:'(888) 302-1252',email:'land@connerhomes.com',website:'https://www.connerhomes.com/conner-homes-land-acquisition',buyBox:'We buy land — scattered lots',volume:'~65 yrs in TN',status:'active',dateAdded:'2026-06-22',initials:'CH'},
+            {id:19,name:'CLQ Land',county:'Rutherford/Williamson',state:'tennessee',metro:'Nashville',phone:'(615) 663-7345',email:'mark@clqland.com',website:'https://www.clqland.com',buyBox:'Lot banking, infill',volume:'Vertical developer',status:'active',dateAdded:'2026-06-22',initials:'CL'},
+            {id:20,name:'R&H Builders',county:'Wilson County',state:'tennessee',metro:'Nashville',phone:'(615) 709-2111',email:'',website:'https://buildwithrh.com',buyBox:'Custom, BOYL',volume:'Local builder',status:'active',dateAdded:'2026-06-22',initials:'RH'},
+            {id:21,name:'Hutton Homes LLC',county:'Wilson County',state:'tennessee',metro:'Nashville',phone:'(615) 838-6649',email:'',website:'https://www.huttonhomesllc.com',buyBox:'Custom homes',volume:'110+ homes built',status:'active',dateAdded:'2026-06-22',initials:'HH'},
+            {id:22,name:'Burge Builders, Inc.',county:'Wilson County',state:'tennessee',metro:'Nashville',phone:'(615) 485-8855',email:'',website:'https://www.burgebuilders.com',buyBox:'Custom estate homes',volume:'17+ yrs experience',status:'active',dateAdded:'2026-06-22',initials:'BB'},
+            {id:23,name:'Lotus Building Group',county:'Wilson/Davidson',state:'tennessee',metro:'Nashville',phone:'(615) 722-9947',email:'hello@lotusbuildingtn.com',website:'https://lotusbuildingtn.com',buyBox:'Custom, BOYL',volume:'Design + build',status:'active',dateAdded:'2026-06-22',initials:'LB'},
+            {id:24,name:'Randy Jones Construction',county:'Sumner County',state:'tennessee',metro:'Nashville',phone:'(615) 452-7731',email:'',website:'https://www.randyjonesconstruction.com',buyBox:'Custom, communities',volume:'50 yrs in Sumner',status:'active',dateAdded:'2026-06-22',initials:'RJ'},
+            {id:25,name:'JR Builders, LLC',county:'Sumner County',state:'tennessee',metro:'Nashville',phone:'(615) 504-1467',email:'info@jrbuildersllc.com',website:'https://www.jrbuildersllc.com',buyBox:'Custom homes',volume:'Builder of Year x5',status:'active',dateAdded:'2026-06-22',initials:'JR'},
+            {id:26,name:'Norfleet Builders',county:'Sumner/Robertson',state:'tennessee',metro:'Nashville',phone:'(615) 682-0148',email:'',website:'https://www.buildnorfleet.com',buyBox:'Fixed-price custom',volume:'Turn-key builder',status:'active',dateAdded:'2026-06-22',initials:'NB'},
+            {id:27,name:'Southern 7 Homes',county:'Sumner County',state:'tennessee',metro:'Nashville',phone:'(615) 456-9234',email:'',website:'https://southern7homes.com',buyBox:'Custom, renovations',volume:'Built with integrity',status:'research',dateAdded:'2026-06-22',initials:'S7'},
+            {id:28,name:'Pettis Builders',county:'Sumner County',state:'tennessee',metro:'Nashville',phone:'',email:'',website:'https://pettisbuilders.com',buyBox:'Luxury custom',volume:'Best of Sumner x13',status:'research',dateAdded:'2026-06-22',initials:'PB'},
+            {id:29,name:'Morgan and Sons Homes, Inc.',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 459-0098',email:'',website:'',buyBox:'Scattered lots',volume:'Local builder',status:'research',dateAdded:'2026-06-22',initials:'MS'},
+            {id:30,name:'Michael\'s Homes LLC',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 216-4589',email:'',website:'https://www.themitchellbowmanteam.com',buyBox:'Custom/scattered',volume:'Director, RCHBA',status:'active',dateAdded:'2026-06-22',initials:'MH'},
+            // Texas
+            {id:31,name:'Precision Homes',county:'Montgomery County',state:'texas',metro:'Houston',phone:'(832) 608-6484',email:'',website:'https://precision-homes.com',buyBox:'Build on your lot',volume:'60+ yrs, custom BOYL',status:'active',dateAdded:'2026-06-22',initials:'PH'},
+            {id:32,name:'Design Tech Homes',county:'Montgomery/Waller/Brazoria',state:'texas',metro:'Houston',phone:'(281) 830-6326',email:'',website:'https://www.dth.com',buyBox:'Build on your lot',volume:'3000+ homes, 29+ yrs',status:'active',dateAdded:'2026-06-22',initials:'DT'},
+            {id:33,name:'Ash Design & Build',county:'Montgomery County',state:'texas',metro:'Conroe/The Woodlands',phone:'(936) 900-4782',email:'info@ashdesignbuild.com',website:'https://www.ashdesignbuild.com',buyBox:'Custom BOYL',volume:'Local custom builder',status:'active',dateAdded:'2026-06-22',initials:'AD'},
+            {id:34,name:'Trust Builders',county:'Montgomery County',state:'texas',metro:'Conroe/The Woodlands',phone:'(936) 777-5804',email:'travis@trustbuilders.us',website:'https://trustbuilders.us',buyBox:'Custom + renovation',volume:'Since 2013',status:'active',dateAdded:'2026-06-22',initials:'TB'},
+            {id:35,name:'Hallmark Builders',county:'Montgomery County',state:'texas',metro:'Lake Conroe',phone:'(936) 259-5550',email:'',website:'https://www.hallmarkbuilderstx.com',buyBox:'Luxury custom',volume:'$250M+ in sales',status:'active',dateAdded:'2026-06-22',initials:'HB'},
+            {id:36,name:'Oak Point Homes LLC',county:'Montgomery County',state:'texas',metro:'Magnolia/The Woodlands',phone:'(346) 331-4736',email:'info@oakpointhomesllc.com',website:'https://oakpointhomesllc.com',buyBox:'Luxury custom',volume:'Family-owned craftsmen',status:'active',dateAdded:'2026-06-22',initials:'OP'},
+            {id:37,name:'Sabo Custom Builders',county:'Harris/Montgomery',state:'texas',metro:'Houston',phone:'',email:'',website:'https://sabocustombuilders.com',buyBox:'Build on your lot',volume:'Houston custom BOYL',status:'research',dateAdded:'2026-06-22',initials:'SB'},
+            {id:38,name:'CRV Homes',county:'Harris/Fort Bend',state:'texas',metro:'Houston/Pearland',phone:'',email:'',website:'https://www.crvhomes.com',buyBox:'Ultra high-end custom',volume:'Modern/contemporary specialist',status:'research',dateAdded:'2026-06-22',initials:'CR'},
+            {id:39,name:'DHY Texas Builders',county:'Harris/Montgomery/Fort Bend',state:'texas',metro:'Houston',phone:'',email:'',website:'https://dhytexasbuilders.com',buyBox:'Build on your lot',volume:'Top 5 Texas contractors',status:'research',dateAdded:'2026-06-22',initials:'DT'},
+            {id:40,name:'Kurk Homes',county:'Montgomery/Harris/Brazoria',state:'texas',metro:'Houston/Austin/SA',phone:'',email:'',website:'https://www.kurkhomes.com',buyBox:'BOYL 125mi radius',volume:'30 yrs, Southern Living builder',status:'research',dateAdded:'2026-06-22',initials:'KH'},
+            {id:41,name:'Frankel Design Build',county:'Harris County',state:'texas',metro:'Houston',phone:'(713) 623-4646',email:'',website:'https://www.frankeldesignbuild.com',buyBox:'Custom + land acquisition',volume:'NAHB Custom Builder of Year',status:'active',dateAdded:'2026-06-22',initials:'FD'},
+            {id:42,name:'Highland Homes',county:'Fort Bend County',state:'texas',metro:'Katy/Fulshear/Richmond',phone:'(281) 517-2550',email:'',website:'https://www.highlandhomes.com',buyBox:'Master-planned communities',volume:'Top production builder',status:'research',dateAdded:'2026-06-22',initials:'HH'},
+            {id:43,name:'Perry Homes',county:'Fort Bend/Montgomery',state:'texas',metro:'Greater Houston',phone:'(832) 706-2884',email:'',website:'https://www.perryhomes.com',buyBox:'New home communities',volume:'Staple Texas builder',status:'research',dateAdded:'2026-06-22',initials:'PH'},
+            {id:44,name:'David Weekley Homes',county:'Fort Bend/Harris/Montgomery',state:'texas',metro:'Greater Houston',phone:'(713) 963-0500',email:'',website:'https://www.davidweekleyhomes.com',buyBox:'Custom feel, production efficiency',volume:'National custom builder',status:'research',dateAdded:'2026-06-22',initials:'DW'},
+            {id:45,name:'Toll Brothers',county:'Fort Bend/Montgomery/Harris',state:'texas',metro:'Greater Houston',phone:'(888) 814-0870',email:'',website:'https://www.tollbrothers.com',buyBox:'Luxury new homes',volume:'National luxury builder',status:'research',dateAdded:'2026-06-22',initials:'TB'},
+            {id:46,name:'Westin Homes / Newmark Homes',county:'Fort Bend County',state:'texas',metro:'Sugar Land/Richmond',phone:'(713) 776-2221',email:'',website:'https://www.westinhomes.com',buyBox:'Design-forward luxury',volume:'High-end design tier',status:'research',dateAdded:'2026-06-22',initials:'WH'},
+            {id:47,name:'Coventry Homes',county:'Fort Bend/Harris',state:'texas',metro:'Greater Houston',phone:'(800) 750-8600',email:'',website:'https://www.coventryhomes.com',buyBox:'Entry-to-mid upscale',volume:'Flexible pricing tier',status:'research',dateAdded:'2026-06-22',initials:'CH'},
+            {id:48,name:'Beazer Homes - Houston',county:'Fort Bend/Montgomery',state:'texas',metro:'Greater Houston',phone:'(888) 439-4848',email:'',website:'https://www.beazer.com',buyBox:'Energy efficient + Choice Plans',volume:'Public national builder',status:'research',dateAdded:'2026-06-22',initials:'BH'},
+            {id:49,name:'Chesmar Homes',county:'Fort Bend County',state:'texas',metro:'Fulshear/Katy',phone:'(281) 758-0400',email:'',website:'https://www.chesmarhomes.com',buyBox:'Transparent build process',volume:'Entry-level / first-time buyer',status:'research',dateAdded:'2026-06-22',initials:'CS'},
+            {id:50,name:'512 Builders',county:'Harris/Fort Bend',state:'texas',metro:'Houston',phone:'(713) 939-8005',email:'',website:'',buyBox:'Custom + design/build',volume:'Custom + expert witness',status:'research',dateAdded:'2026-06-22',initials:'5B'},
+            {id:51,name:'Khalisi Custom Homes',county:'Harris County',state:'texas',metro:'Bellaire/Houston',phone:'(281) 723-0448',email:'',website:'https://www.khalisicustomhomes.com',buyBox:'Custom homes',volume:'GHBA Professional Builder',status:'active',dateAdded:'2026-06-22',initials:'KC'},
+            {id:52,name:'Tushita Builders',county:'Harris County',state:'texas',metro:'Houston',phone:'(713) 440-9577',email:'',website:'https://tushitabuilders.com',buyBox:'Custom homes',volume:'GHBA Professional Builder',status:'active',dateAdded:'2026-06-22',initials:'TB'},
+            {id:53,name:'ADI Homes',county:'Harris County',state:'texas',metro:'Houston',phone:'(713) 380-1101',email:'',website:'',buyBox:'Custom homes',volume:'GHBA Professional Builder',status:'research',dateAdded:'2026-06-22',initials:'AH'},
+            {id:54,name:'CRAFTED Custom Homes + Renovations',county:'Harris/Galveston',state:'texas',metro:'Friendswood/Houston',phone:'(281) 648-3500',email:'',website:'https://craftedhome.com',buyBox:'Custom + renovation',volume:'GHBA Pro Builder + Remodeler',status:'research',dateAdded:'2026-06-22',initials:'CC'},
+            {id:55,name:'Alair Homes Houston',county:'Harris County',state:'texas',metro:'Bellaire/Houston',phone:'(713) 664-7272',email:'',website:'https://www.alairhomes.com/houston223',buyBox:'Custom homes',volume:'Franchise custom builder',status:'research',dateAdded:'2026-06-22',initials:'AH'},
+            {id:56,name:'Sandcastle Homes, Inc.',county:'Harris County',state:'texas',metro:'Houston',phone:'(713) 851-2767',email:'',website:'',buyBox:'Custom homes',volume:'GHBA Distinguished Member',status:'research',dateAdded:'2026-06-22',initials:'SH'},
+            {id:57,name:'Divine Renovation',county:'Harris County',state:'texas',metro:'Houston',phone:'(713) 515-1514',email:'',website:'',buyBox:'Custom + renovation',volume:'GHBA Distinguished Member',status:'research',dateAdded:'2026-06-22',initials:'DR'},
+            {id:58,name:'Centex Homes - Stokesbury',county:'Waller County',state:'texas',metro:'Waller/Houston',phone:'(936) 296-3200',email:'',website:'https://www.centex.com',buyBox:'New home communities',volume:'National production builder',status:'research',dateAdded:'2026-06-22',initials:'CX'},
+            {id:59,name:'K. Hovnanian Homes Lakeview',county:'Waller County',state:'texas',metro:'Waller/Houston',phone:'(888) 425-1559',email:'',website:'https://www.khov.com',buyBox:'New home communities',volume:'66 yrs national builder',status:'research',dateAdded:'2026-06-22',initials:'KH'},
+            {id:60,name:'D.R. Horton - Houston',county:'Fort Bend/Montgomery/Waller',state:'texas',metro:'Greater Houston',phone:'(800) 374-6142',email:'',website:'https://www.drhorton.com',buyBox:'Move-in ready / communities',volume:'Largest US homebuilder',status:'research',dateAdded:'2026-06-22',initials:'DH'}
+        ];
+
+        let builderData = [];
+        let currentFilterState = 'all';
+        let currentSearch = '';
+        let currentTab = 'builders';
+
+        const STATE_LABELS = {
+            'all': 'All',
+            'tennessee': 'Tennessee',
+            'texas': 'Texas'
+        };
+
+        function loadData() {
+            const stored = localStorage.getItem('builderData');
+            if (stored) {
+                const parsed = JSON.parse(stored);
+                builderData = parsed.filter(b => b && b.id);
+                if (builderData.length === 0) {
+                    builderData = JSON.parse(JSON.stringify(DEFAULT_BUILDERS));
+                }
+            } else {
+                builderData = JSON.parse(JSON.stringify(DEFAULT_BUILDERS));
+            }
+        }
+
+        function saveData() {
+            localStorage.setItem('builderData', JSON.stringify(builderData));
+        }
+
+        function updateMetrics(filteredBuilders) {
+            const data = filteredBuilders || builderData;
+            const totalEl = document.getElementById('metric-total');
+            const activeEl = document.getElementById('metric-active');
+            const researchEl = document.getElementById('metric-research');
+            const statesEl = document.getElementById('metric-states');
+
+            if (!totalEl) return;
+
+            totalEl.textContent = data.length;
+            activeEl.textContent = data.filter(b => b.status === 'active').length;
+            researchEl.textContent = data.filter(b => b.status === 'research').length;
+
+            const uniqueStates = new Set(data.map(b => b.state));
+            statesEl.textContent = uniqueStates.size;
+        }
+
+        function renderStatePills() {
+            const container = document.getElementById('state-pills');
+            if (!container) return;
+
+            const statesInData = ['all', 'tennessee', 'texas'];
+            let html = '';
+
+            statesInData.forEach(key => {
+                const isActive = currentFilterState === key;
+                const count = key === 'all' 
+                    ? builderData.length 
+                    : builderData.filter(b => b.state === key).length;
+
+                html += `
+                    <button 
+                        class="state-pill ${isActive ? 'active' : ''}" 
+                        onclick="setStateFilter('${key}')"
+                        data-state="${key}">
+                        ${STATE_LABELS[key]}
+                    </button>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function setStateFilter(state) {
+            currentFilterState = state;
+            renderStatePills();
+            filterAndRender();
+        }
+
+        function filterAndRender() {
+            const searchInput = document.getElementById('search-input');
+            currentSearch = (searchInput ? searchInput.value : '').toLowerCase().trim();
+
+            let filtered = builderData;
+
+            if (currentFilterState !== 'all') {
+                filtered = filtered.filter(b => b.state === currentFilterState);
+            }
+
+            if (currentSearch) {
+                filtered = filtered.filter(b => 
+                    b.name.toLowerCase().includes(currentSearch) ||
+                    (b.county && b.county.toLowerCase().includes(currentSearch)) ||
+                    (b.metro && b.metro.toLowerCase().includes(currentSearch))
+                );
+            }
+
+            renderBuilders(filtered);
+            updateMetrics(filtered);
+        }
+
+        function renderBuilders(filteredBuilders) {
+            const container = document.getElementById('builders-list');
+            if (!container) return;
+
+            let data = filteredBuilders || builderData;
+
+            if (data.length === 0) {
+                container.innerHTML = `<div class="empty">No builders match your search.</div>`;
+                return;
+            }
+
+            const grouped = {};
+            data.forEach(builder => {
+                const key = builder.state || 'unknown';
+                if (!grouped[key]) grouped[key] = [];
+                grouped[key].push(builder);
+            });
+
+            const stateOrder = ['tennessee', 'texas'];
+
+            let html = '';
+
+            stateOrder.forEach(stateKey => {
+                const buildersInState = grouped[stateKey];
+                if (!buildersInState || buildersInState.length === 0) return;
+
+                const stateName = stateKey === 'tennessee' ? 'Tennessee' : 'Texas';
+
+                html += `
+                    <div class="state-group">
+                        <div class="state-header">
+                            ${stateName} 
+                            <span>— ${buildersInState.length} builders</span>
+                        </div>
+                `;
+
+                buildersInState.forEach(builder => {
+                    const isActive = builder.status === 'active';
+                    const statusDotClass = isActive ? 'active' : 'research';
+                    const statusText = isActive ? 'Active' : 'Research';
+
+                    const locationText = builder.county + (builder.metro ? ' • ' + builder.metro : '');
+
+                    html += `
+                        <div class="builder-row" data-id="${builder.id}">
+                            <div class="builder-main">
+                                <div class="builder-name">${builder.name}</div>
+                                <div class="builder-location">${locationText}</div>
+                            </div>
+
+                            <div class="builder-status">
+                                <span class="status-dot ${statusDotClass}"></span>
+                                <span class="status-label ${isActive ? 'active' : ''}">${statusText}</span>
+                            </div>
+
+                            <div class="builder-actions">
+                                <button class="icon-btn" onclick="copyBuilder(${builder.id}, event)" title="Copy details">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                    </svg>
+                                </button>
+                                <button class="icon-btn" onclick="toggleDetails(${builder.id}, event)" title="View details">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="builder-details hidden" id="details-${builder.id}">
+                            ${builder.phone ? `<div class="detail"><div class="detail-label">Phone</div><div class="detail-value">${builder.phone}</div></div>` : ''}
+                            ${builder.email ? `<div class="detail"><div class="detail-label">Email</div><div class="detail-value"><a href="mailto:${builder.email}">${builder.email}</a></div></div>` : ''}
+                            ${builder.website ? `<div class="detail"><div class="detail-label">Website</div><div class="detail-value"><a href="${builder.website}" target="_blank">${builder.website.replace('https://','').replace('http://','')}</a></div></div>` : ''}
+                            ${builder.buyBox ? `<div class="detail"><div class="detail-label">Buy Box</div><div class="detail-value">${builder.buyBox}</div></div>` : ''}
+                            ${builder.volume ? `<div class="detail"><div class="detail-label">Notes</div><div class="detail-value">${builder.volume}</div></div>` : ''}
+                            ${builder.dateAdded ? `<div class="detail"><div class="detail-label">Added</div><div class="detail-value">${builder.dateAdded}</div></div>` : ''}
+                        </div>
+                    `;
+                });
+
+                html += `</div>`;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function toggleDetails(id, e) {
+            if (e) e.stopImmediatePropagation();
+            const el = document.getElementById('details-' + id);
+            if (el) {
+                el.classList.toggle('hidden');
+            }
+        }
+
+        function copyBuilder(id, e) {
+            if (e) e.stopImmediatePropagation();
+            const builder = builderData.find(b => b.id === id);
+            if (!builder) return;
+
+            let text = `${builder.name}\n`;
+            if (builder.phone) text += `Phone: ${builder.phone}\n`;
+            if (builder.email) text += `Email: ${builder.email}\n`;
+            if (builder.website) text += `Web: ${builder.website}\n`;
+            text += `Location: ${builder.county}\n`;
+            if (builder.buyBox) text += `Buy Box: ${builder.buyBox}\n`;
+            if (builder.status) text += `Status: ${builder.status}`;
+
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('Copied to clipboard');
+            }).catch(() => {
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                showToast('Copied to clipboard');
+            });
+        }
+
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.style.cssText = 'position:fixed;bottom:28px;right:28px;background:#2C3E2D;color:white;padding:10px 20px;border-radius:10px;font-size:13.5px;font-weight:500;box-shadow:0 3px 10px rgba(0,0,0,0.12);z-index:9999;letter-spacing:-0.01em;';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.style.transition = 'opacity 0.22s ease';
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 220);
+            }, 1750);
+        }
+
+        function switchTab(tab) {
+            currentTab = tab;
+
+            document.querySelectorAll('.segment').forEach(el => {
+                el.classList.toggle('active', el.dataset.tab === tab);
+            });
+
+            document.getElementById('builders-content').classList.toggle('active', tab === 'builders');
+            document.getElementById('lots-content').classList.toggle('active', tab === 'lots');
+            document.getElementById('contracts-content').classList.toggle('active', tab === 'contracts');
+
+            if (tab !== 'builders') {
+                document.getElementById('metric-total').textContent = tab === 'lots' ? '—' : '3';
+                document.getElementById('metric-active').textContent = '—';
+                document.getElementById('metric-research').textContent = '—';
+                document.getElementById('metric-states').textContent = '—';
+            } else {
+                filterAndRender();
+            }
+        }
+
+        function exportCSV() {
+            const data = builderData;
+            if (!data.length) return;
+
+            const headers = ['Name', 'County', 'State', 'Metro', 'Status', 'Phone', 'Email', 'Website', 'Buy Box', 'Notes'];
+            let csv = headers.join(',') + '\n';
+
+            data.forEach(b => {
+                const row = [
+                    `"${(b.name || '').replace(/"/g, '""')}"`,
+                    `"${(b.county || '').replace(/"/g, '""')}"`,
+                    `"${(b.state || '').replace(/"/g, '""')}"`,
+                    `"${(b.metro || '').replace(/"/g, '""')}"`,
+                    `"${(b.status || '').replace(/"/g, '""')}"`,
+                    `"${(b.phone || '').replace(/"/g, '""')}"`,
+                    `"${(b.email || '').replace(/"/g, '""')}"`,
+                    `"${(b.website || '').replace(/"/g, '""')}"`,
+                    `"${(b.buyBox || '').replace(/"/g, '""')}"`,
+                    `"${(b.volume || '').replace(/"/g, '""')}"`
+                ];
+                csv += row.join(',') + '\n';
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'land-flip-builders.csv';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            showToast('CSV exported');
+        }
+
+        function init() {
+            loadData();
+
+            renderStatePills();
+            renderBuilders(builderData);
+            updateMetrics(builderData);
+
+            const searchInput = document.getElementById('search-input');
+            if (searchInput) {
+                searchInput.addEventListener('input', filterAndRender);
+            }
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === '/' && document.activeElement.tagName === 'BODY') {
+                    e.preventDefault();
+                    const s = document.getElementById('search-input');
+                    if (s) s.focus();
+                }
+                if (e.key.toLowerCase() === 'e' && (e.metaKey || e.ctrlKey)) {
+                    e.preventDefault();
+                    exportCSV();
+                }
+            });
+
+            // Subtle image loading feedback
+            const headerBg = document.querySelector('.header-bg');
+            if (headerBg) {
+                const img = new Image();
+                img.onload = () => {
+                    headerBg.style.transition = 'opacity 800ms ease';
+                };
+                img.src = 'assets/images/hero-aerial.jpg';
+            }
+
+            console.log('%c[Land Flip] Premium Apple-style dashboard ready', 'color:#8E8E93');
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
