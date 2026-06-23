@@ -41,129 +41,148 @@
             padding: 0 40px;
         }
 
-        /* === HEADER with subtle aerial === */
-        .header-wrapper {
+        /* === FULL-BLEED PREMIUM HERO — image bleeds edge to edge, numbers overlay === */
+        .hero {
             position: relative;
-            padding-top: 48px;
-            padding-bottom: 40px;
-            margin-bottom: 32px;
+            width: 100vw;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            height: 580px;
+            background-image: url('assets/images/hero-aerial.jpg');
+            background-size: cover;
+            background-position: center 38%;
+            margin-bottom: 40px;
             overflow: hidden;
         }
 
-        .header-bg {
-            position: absolute;
-            inset: 0;
-            background-image: url('assets/images/hero-aerial.jpg');
-            background-size: cover;
-            background-position: center 35%;
-            opacity: 0.055;
-            filter: saturate(0.6) contrast(0.95);
-            z-index: 0;
-        }
-
-        .header-bg::after {
+        .hero::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(to bottom, rgba(249,247,242,0.65) 0%, rgba(249,247,242,0.92) 70%);
+            background: linear-gradient(
+                to bottom,
+                rgba(28, 28, 30, 0.22) 0%,
+                rgba(28, 28, 30, 0.35) 32%,
+                rgba(28, 28, 30, 0.68) 68%,
+                rgba(28, 28, 30, 0.86) 100%
+            );
+            z-index: 1;
         }
 
-        .header {
+        .hero-content {
             position: relative;
-            z-index: 1;
+            z-index: 2;
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 40px;
+            height: 100%;
             display: flex;
-            align-items: flex-end;
+            flex-direction: column;
+            justify-content: space-between;
+            padding-top: 58px;
+            padding-bottom: 56px;
+        }
+
+        .hero-top {
+            display: flex;
+            align-items: flex-start;
             justify-content: space-between;
             gap: 24px;
-            padding-bottom: 8px;
         }
 
-        .header-left {
+        .hero-left {
             display: flex;
             align-items: center;
             gap: 18px;
         }
 
-        .header-icon {
-            width: 46px;
-            height: 46px;
-            border-radius: 12px;
-            background: var(--primary);
+        .hero-icon {
+            width: 54px;
+            height: 54px;
+            border-radius: 15px;
+            background: rgba(255,255,255,0.95);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: var(--primary);
             flex-shrink: 0;
-            box-shadow: 0 1px 3px rgba(44, 62, 45, 0.2);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.18);
         }
 
-        .header-title {
-            font-size: 32px;
+        .hero-title {
+            font-size: 46px;
             font-weight: 600;
-            letter-spacing: -0.025em;
-            line-height: 1.05;
+            letter-spacing: -0.04em;
+            line-height: 0.98;
+            color: #fff;
         }
 
-        .header-subtitle {
-            font-size: 14px;
-            color: var(--text-secondary);
+        .hero-subtitle {
+            font-size: 15.5px;
+            color: rgba(255,255,255,0.72);
             font-weight: 400;
-            margin-top: 3px;
+            margin-top: 6px;
             letter-spacing: -0.01em;
         }
 
-        .focus-pill {
+        .hero-focus-pill {
             display: inline-flex;
             align-items: center;
-            padding: 7px 18px;
-            background: #F5F0E6;
-            border: 1px solid #EDE4D3;
+            padding: 9px 22px;
+            background: rgba(197, 164, 110, 0.95);
+            border: 1px solid rgba(255,255,255,0.35);
             border-radius: 999px;
-            font-size: 12.5px;
-            font-weight: 500;
-            color: var(--gold);
-            letter-spacing: 0.015em;
+            font-size: 13px;
+            font-weight: 600;
+            color: #1C1C1E;
+            letter-spacing: 0.02em;
             white-space: nowrap;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.22);
         }
 
-        /* === METRICS — clean & spacious === */
-        .metrics {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 14px;
-            margin-bottom: 44px;
+        /* Large overlay metrics on hero — top-tier premium feel */
+        .hero-metrics {
+            display: flex;
+            gap: 42px;
+            align-items: flex-end;
+            padding-bottom: 4px;
         }
 
-        .metric {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 26px 28px;
-            transition: all 0.15s ease;
+        .hero-metric {
+            text-align: left;
         }
 
-        .metric:hover {
-            border-color: #E2DFD7;
-        }
-
-        .metric-value {
-            font-size: 36px;
-            font-weight: 500;
-            letter-spacing: -0.03em;
+        .hero-metric-value {
+            font-size: 48px;
+            font-weight: 600;
+            letter-spacing: -0.045em;
             line-height: 1.0;
-            margin-bottom: 6px;
+            color: #fff;
+            text-shadow: 0 3px 16px rgba(0,0,0,0.5);
         }
 
-        .metric-value.gold {
-            color: var(--gold);
+        .hero-metric-value.gold {
+            color: #F4E9D2;
         }
 
-        .metric-label {
-            font-size: 11px;
+        .hero-metric-label {
+            font-size: 11.5px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.095em;
+            color: rgba(255,255,255,0.62);
+            margin-top: 5px;
+        }
+
+        .empty-market {
+            padding: 22px 24px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            margin-bottom: 12px;
+            font-size: 13.5px;
             color: var(--muted);
         }
 
@@ -542,60 +561,52 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header with subtle aerial -->
-        <div class="header-wrapper">
-            <div class="header-bg"></div>
-            <div class="header">
-                <div class="header-left">
-                    <div class="header-icon">
-                        <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
+    <!-- FULL-BLEED PREMIUM HERO with overlay numbers -->
+    <div class="hero">
+        <div class="hero-content">
+            <div class="hero-top">
+                <div class="hero-left">
+                    <div class="hero-icon">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M3 21h18"></path>
                             <path d="M5 21V7l8-4v18"></path>
                             <path d="M19 21V11l-6-4"></path>
                         </svg>
                     </div>
                     <div>
-                        <div class="header-title">Land Flip</div>
-                        <div class="header-subtitle">Builder Discovery</div>
+                        <div class="hero-title">Land Flip</div>
+                        <div class="hero-subtitle">Builder Discovery</div>
                     </div>
                 </div>
 
-                <div class="focus-pill">
+                <div class="hero-focus-pill">
                     Next Focus: South Carolina
                 </div>
             </div>
-        </div>
 
-        <!-- Metrics -->
-        <div class="metrics">
-            <div class="metric">
-                <div class="metric-value gold" id="metric-total">60</div>
-                <div class="metric-label">Total Builders</div>
-            </div>
-            <div class="metric">
-                <div class="metric-value" id="metric-active">25</div>
-                <div class="metric-label">Active</div>
-            </div>
-            <div class="metric">
-                <div class="metric-value" id="metric-research">35</div>
-                <div class="metric-label">In Research</div>
-            </div>
-            <div class="metric">
-                <div class="metric-value" id="metric-states">2</div>
-                <div class="metric-label">States</div>
-            </div>
-        </div>
-
-        <!-- Subtle land visual using stakes photo -->
-        <div class="land-visual">
-            <img src="assets/images/image-1---0581a595-cb6d-4359-88c1-1f97af12bb86.jpg" alt="">
-            <div class="land-visual-text">
-                <strong>Quiet, ordered land.</strong><br>
-                Precise boundaries. Premium opportunity.
+            <!-- Large overlay metrics on the hero image -->
+            <div class="hero-metrics">
+                <div class="hero-metric">
+                    <div class="hero-metric-value gold" id="hero-total">60</div>
+                    <div class="hero-metric-label">Total Builders</div>
+                </div>
+                <div class="hero-metric">
+                    <div class="hero-metric-value" id="hero-active">25</div>
+                    <div class="hero-metric-label">Active</div>
+                </div>
+                <div class="hero-metric">
+                    <div class="hero-metric-value" id="hero-research">35</div>
+                    <div class="hero-metric-label">In Research</div>
+                </div>
+                <div class="hero-metric">
+                    <div class="hero-metric-value" id="hero-markets">4</div>
+                    <div class="hero-metric-label">Markets</div>
+                </div>
             </div>
         </div>
+    </div>
 
+    <div class="container">
         <!-- Controls -->
         <div class="controls">
             <div class="search">
@@ -750,11 +761,18 @@
         let currentSearch = '';
         let currentTab = 'builders';
 
-        const STATE_LABELS = {
-            'all': 'All',
+        const MARKET_LABELS = {
+            'all': 'All Markets',
+            'north-carolina': 'North Carolina',
+            'south-carolina': 'South Carolina',
             'tennessee': 'Tennessee',
             'texas': 'Texas'
         };
+
+        const MARKET_ORDER = ['north-carolina', 'south-carolina', 'tennessee', 'texas'];
+
+        // All markets we track (show empty ones)
+        const ALL_MARKETS = ['north-carolina', 'south-carolina', 'tennessee', 'texas'];
 
         function loadData() {
             const stored = localStorage.getItem('builderData');
@@ -775,43 +793,65 @@
 
         function updateMetrics(filteredBuilders) {
             const data = filteredBuilders || builderData;
+
+            // Update hero overlay metrics (large numbers on image)
+            const heroTotal = document.getElementById('hero-total');
+            const heroActive = document.getElementById('hero-active');
+            const heroResearch = document.getElementById('hero-research');
+            const heroMarkets = document.getElementById('hero-markets');
+
+            if (heroTotal) heroTotal.textContent = data.length;
+            if (heroActive) heroActive.textContent = data.filter(b => b.status === 'active').length;
+            if (heroResearch) heroResearch.textContent = data.filter(b => b.status === 'research').length;
+            if (heroMarkets) {
+                const activeMarkets = new Set(data.map(b => b.state).filter(Boolean));
+                heroMarkets.textContent = ALL_MARKETS.length; // always show 4 tracked markets
+            }
+
+            // Legacy ids (kept for compatibility if any)
             const totalEl = document.getElementById('metric-total');
             const activeEl = document.getElementById('metric-active');
             const researchEl = document.getElementById('metric-research');
             const statesEl = document.getElementById('metric-states');
 
-            if (!totalEl) return;
-
-            totalEl.textContent = data.length;
-            activeEl.textContent = data.filter(b => b.status === 'active').length;
-            researchEl.textContent = data.filter(b => b.status === 'research').length;
-
-            const uniqueStates = new Set(data.map(b => b.state));
-            statesEl.textContent = uniqueStates.size;
+            if (totalEl) totalEl.textContent = data.length;
+            if (activeEl) activeEl.textContent = data.filter(b => b.status === 'active').length;
+            if (researchEl) researchEl.textContent = data.filter(b => b.status === 'research').length;
+            if (statesEl) statesEl.textContent = ALL_MARKETS.length;
         }
 
         function renderStatePills() {
             const container = document.getElementById('state-pills');
             if (!container) return;
 
-            const statesInData = ['all', 'tennessee', 'texas'];
             let html = '';
 
-            statesInData.forEach(key => {
+            ALL_MARKETS.forEach(key => {
                 const isActive = currentFilterState === key;
-                const count = key === 'all' 
-                    ? builderData.length 
-                    : builderData.filter(b => b.state === key).length;
+                const count = builderData.filter(b => b.state === key).length;
+
+                const label = MARKET_LABELS[key] || key;
 
                 html += `
                     <button 
                         class="state-pill ${isActive ? 'active' : ''}" 
                         onclick="setStateFilter('${key}')"
                         data-state="${key}">
-                        ${STATE_LABELS[key]}
+                        ${label} <span style="opacity:0.6; font-weight:400;">(${count})</span>
                     </button>
                 `;
             });
+
+            // All pill separate
+            const isAll = currentFilterState === 'all';
+            html = `
+                <button 
+                    class="state-pill ${isAll ? 'active' : ''}" 
+                    onclick="setStateFilter('all')"
+                    data-state="all">
+                    All Markets
+                </button>
+            ` + html;
 
             container.innerHTML = html;
         }
@@ -850,11 +890,6 @@
 
             let data = filteredBuilders || builderData;
 
-            if (data.length === 0) {
-                container.innerHTML = `<div class="empty">No builders match your search.</div>`;
-                return;
-            }
-
             const grouped = {};
             data.forEach(builder => {
                 const key = builder.state || 'unknown';
@@ -862,69 +897,81 @@
                 grouped[key].push(builder);
             });
 
-            const stateOrder = ['tennessee', 'texas'];
-
             let html = '';
 
-            stateOrder.forEach(stateKey => {
-                const buildersInState = grouped[stateKey];
-                if (!buildersInState || buildersInState.length === 0) return;
+            // Always render ALL tracked markets (North Carolina, South Carolina, Tennessee, Texas)
+            // Never hide empty markets — user must see the zero state
+            MARKET_ORDER.forEach(stateKey => {
+                const buildersInState = grouped[stateKey] || [];
+                const count = buildersInState.length;
+                const stateName = MARKET_LABELS[stateKey] || stateKey;
 
-                const stateName = stateKey === 'tennessee' ? 'Tennessee' : 'Texas';
+                // When a specific market is filtered, only show that one
+                if (currentFilterState !== 'all' && currentFilterState !== stateKey) {
+                    return;
+                }
 
                 html += `
                     <div class="state-group">
                         <div class="state-header">
                             ${stateName} 
-                            <span>— ${buildersInState.length} builders</span>
+                            <span>— ${count} builder${count === 1 ? '' : 's'}</span>
                         </div>
                 `;
 
-                buildersInState.forEach(builder => {
-                    const isActive = builder.status === 'active';
-                    const statusDotClass = isActive ? 'active' : 'research';
-                    const statusText = isActive ? 'Active' : 'Research';
-
-                    const locationText = builder.county + (builder.metro ? ' • ' + builder.metro : '');
-
+                if (count === 0) {
                     html += `
-                        <div class="builder-row" data-id="${builder.id}">
-                            <div class="builder-main">
-                                <div class="builder-name">${builder.name}</div>
-                                <div class="builder-location">${locationText}</div>
-                            </div>
-
-                            <div class="builder-status">
-                                <span class="status-dot ${statusDotClass}"></span>
-                                <span class="status-label ${isActive ? 'active' : ''}">${statusText}</span>
-                            </div>
-
-                            <div class="builder-actions">
-                                <button class="icon-btn" onclick="copyBuilder(${builder.id}, event)" title="Copy details">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                                    </svg>
-                                </button>
-                                <button class="icon-btn" onclick="toggleDetails(${builder.id}, event)" title="View details">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
-                                        <circle cx="12" cy="12" r="3"></circle>
-                                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="builder-details hidden" id="details-${builder.id}">
-                            ${builder.phone ? `<div class="detail"><div class="detail-label">Phone</div><div class="detail-value">${builder.phone}</div></div>` : ''}
-                            ${builder.email ? `<div class="detail"><div class="detail-label">Email</div><div class="detail-value"><a href="mailto:${builder.email}">${builder.email}</a></div></div>` : ''}
-                            ${builder.website ? `<div class="detail"><div class="detail-label">Website</div><div class="detail-value"><a href="${builder.website}" target="_blank">${builder.website.replace('https://','').replace('http://','')}</a></div></div>` : ''}
-                            ${builder.buyBox ? `<div class="detail"><div class="detail-label">Buy Box</div><div class="detail-value">${builder.buyBox}</div></div>` : ''}
-                            ${builder.volume ? `<div class="detail"><div class="detail-label">Notes</div><div class="detail-value">${builder.volume}</div></div>` : ''}
-                            ${builder.dateAdded ? `<div class="detail"><div class="detail-label">Added</div><div class="detail-value">${builder.dateAdded}</div></div>` : ''}
+                        <div class="empty-market">
+                            No builders tracked yet in ${stateName}. Ready for reconnaissance.
                         </div>
                     `;
-                });
+                } else {
+                    buildersInState.forEach(builder => {
+                        const isActive = builder.status === 'active';
+                        const statusDotClass = isActive ? 'active' : 'research';
+                        const statusText = isActive ? 'Active' : 'Research';
+
+                        const locationText = builder.county + (builder.metro ? ' • ' + builder.metro : '');
+
+                        html += `
+                            <div class="builder-row" data-id="${builder.id}">
+                                <div class="builder-main">
+                                    <div class="builder-name">${builder.name}</div>
+                                    <div class="builder-location">${locationText}</div>
+                                </div>
+
+                                <div class="builder-status">
+                                    <span class="status-dot ${statusDotClass}"></span>
+                                    <span class="status-label ${isActive ? 'active' : ''}">${statusText}</span>
+                                </div>
+
+                                <div class="builder-actions">
+                                    <button class="icon-btn" onclick="copyBuilder(${builder.id}, event)" title="Copy details">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                        </svg>
+                                    </button>
+                                    <button class="icon-btn" onclick="toggleDetails(${builder.id}, event)" title="View details">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="12" cy="12" r="3"></circle>
+                                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="builder-details hidden" id="details-${builder.id}">
+                                ${builder.phone ? `<div class="detail"><div class="detail-label">Phone</div><div class="detail-value">${builder.phone}</div></div>` : ''}
+                                ${builder.email ? `<div class="detail"><div class="detail-label">Email</div><div class="detail-value"><a href="mailto:${builder.email}">${builder.email}</a></div></div>` : ''}
+                                ${builder.website ? `<div class="detail"><div class="detail-label">Website</div><div class="detail-value"><a href="${builder.website}" target="_blank">${builder.website.replace('https://','').replace('http://','')}</a></div></div>` : ''}
+                                ${builder.buyBox ? `<div class="detail"><div class="detail-label">Buy Box</div><div class="detail-value">${builder.buyBox}</div></div>` : ''}
+                                ${builder.volume ? `<div class="detail"><div class="detail-label">Notes</div><div class="detail-value">${builder.volume}</div></div>` : ''}
+                                ${builder.dateAdded ? `<div class="detail"><div class="detail-label">Added</div><div class="detail-value">${builder.dateAdded}</div></div>` : ''}
+                            </div>
+                        `;
+                    });
+                }
 
                 html += `</div>`;
             });
@@ -1059,17 +1106,17 @@
                 }
             });
 
-            // Subtle image loading feedback
-            const headerBg = document.querySelector('.header-bg');
-            if (headerBg) {
+            // Hero image ready (full-bleed)
+            const hero = document.querySelector('.hero');
+            if (hero) {
                 const img = new Image();
                 img.onload = () => {
-                    headerBg.style.transition = 'opacity 800ms ease';
+                    // image is live
                 };
                 img.src = 'assets/images/hero-aerial.jpg';
             }
 
-            console.log('%c[Land Flip] Premium Apple-style dashboard ready', 'color:#8E8E93');
+            console.log('%c[Land Flip] Premium full-bleed hero ready — all markets visible', 'color:#8E8E93');
         }
 
         document.addEventListener('DOMContentLoaded', init);
