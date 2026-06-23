@@ -813,9 +813,7 @@
             {id:301, address:'Montgomery County lot', county:'Montgomery County', state:'texas', city:'Conroe', zip:'77301', acres:0.33, price:165000, status:'identified', date:'2026-06-05', notes:'0.33ac BOYL opportunity.', source:'Land recon' }
         ];
 
-        let lotData = [];
         let builderData = [];
-        let lotData = [];
         let currentFilterState = 'all';
         let currentSearch = '';
         let currentTab = 'builders';
@@ -832,25 +830,6 @@
 
         // All markets we track (show empty ones)
         const ALL_MARKETS = ['north-carolina', 'south-carolina', 'tennessee', 'texas'];
-
-        // ============================================
-        // LOT DATA — full recon + Rankin St purchase
-        // Every lot is accessible. Grouped by county with expandable details.
-        // Seeded from user criteria: 0.18-0.33 acres, specific ZIPs, no flood, low slope, walk to park preference
-        // ============================================
-        const DEFAULT_LOTS = [
-            // NORTH CAROLINA — Rankin St purchase (just acquired) + targeted recon
-            {id:101, address:'1807 Rankin Street', county:'Wake County', city:'Raleigh', state:'north-carolina', zip:'27604', acres:0.25, price:380000, status:'purchased', date:'2025-10-01', notes:'Just purchased on Rankin St. 0.25 acres. Inside beltline. Sold $380k. Topography and easements checked — no flood zone.', source:'User purchase' },
-            {id:102, address:'1805 Rankin Street (adjacent)', county:'Wake County', city:'Raleigh', state:'north-carolina', zip:'27604', acres:0.22, price:310000, status:'sold', date:'2024-01-12', notes:'Recently sold comp on same street. Good benchmark for Rankin St area.', source:'Comp' },
-            {id:103, address:'Mordecai / Belvedere Park lot', county:'Wake County', city:'Raleigh', state:'north-carolina', zip:'27604', acres:0.31, price:465000, status:'identified', date:'2026-06-20', notes:'0.31ac. Walking distance to park. Flat. Meets all criteria (no flood, low slope, not on busy street).', source:'Land recon' },
-            {id:104, address:'Downtown Apex infill', county:'Wake County', city:'Apex', state:'north-carolina', zip:'27502', acres:0.19, price:398000, status:'identified', date:'2026-06-15', notes:'0.19ac downtown Apex. Target ~$400k per 0.25ac. Close to amenities and park access.', source:'Land recon' },
-            {id:105, address:'Inside beltline 27607 candidate', county:'Wake County', city:'Raleigh', state:'north-carolina', zip:'27607', acres:0.28, price:535000, status:'identified', date:'2026-06-12', notes:'0.28ac. Under $550k/0.25ac target. Topography good. Avoided main roads.', source:'Land recon' },
-            // TENNESSEE — from prior recon notes
-            {id:201, address:'Rutherford County infill parcel', county:'Rutherford County', city:'Murfreesboro', state:'tennessee', zip:'37130', acres:0.30, price:185000, status:'identified', date:'2026-06-10', notes:'0.30ac scattered lot. High builder interest in Rutherford.', source:'LandLot-recon' },
-            {id:202, address:'Wilson County lot', county:'Wilson County', city:'Lebanon', state:'tennessee', zip:'37087', acres:0.26, price:198000, status:'under contract', date:'2026-06-08', notes:'Part of the 4 under contract in county from earlier recon pass.', source:'LandLot-recon' },
-            // TEXAS — Houston area examples
-            {id:301, address:'Montgomery County BOYL lot', county:'Montgomery County', city:'Conroe', state:'texas', zip:'77301', acres:0.33, price:165000, status:'identified', date:'2026-06-05', notes:'0.33ac. Good for Build on Your Lot builders in Houston market.', source:'Land recon' }
-        ];
 
         function loadData() {
             // Builders
