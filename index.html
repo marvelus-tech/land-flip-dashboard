@@ -50,7 +50,7 @@
             margin-left: -50vw;
             margin-right: -50vw;
             height: 580px;
-            background-image: url('assets/images/hero-aerial.jpg');
+            background-image: url('assets/images/hero-aerial.jpg'); /* TODO: replace with new hero image user provided (2026-06-23) */
             background-size: cover;
             background-position: center 38%;
             margin-bottom: 40px;
@@ -363,46 +363,60 @@
         }
 
         .builder-name {
-            font-size: 15.5px;
+            font-size: 16px;
             font-weight: 600;
             color: var(--text-primary);
-            letter-spacing: -0.012em;
-            line-height: 1.25;
+            letter-spacing: -0.015em;
+            line-height: 1.2;
         }
 
         .builder-location {
             font-size: 13px;
             color: var(--text-secondary);
-            margin-top: 2px;
+            margin-top: 3px;
             font-weight: 400;
         }
 
+        /* Minor status indicator — not the main title */
         .builder-status {
             display: inline-flex;
             align-items: center;
-            gap: 7px;
-            font-size: 12px;
+            gap: 6px;
+            font-size: 10.5px;
             font-weight: 500;
-            min-width: 78px;
+            min-width: auto;
+            padding: 2px 8px;
+            border-radius: 6px;
+            background: #F5F3ED;
+            border: 1px solid var(--border);
         }
 
         .status-dot {
-            width: 6.5px;
-            height: 6.5px;
+            width: 5px;
+            height: 5px;
             border-radius: 50%;
             flex-shrink: 0;
         }
 
         .status-dot.active { background: var(--primary); }
-        .status-dot.research { background: var(--muted); }
+        .status-dot.research { background: #A8A59E; }
 
         .status-label {
             color: var(--muted);
             font-weight: 500;
-            font-size: 12.5px;
+            font-size: 10.5px;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
         }
 
         .status-label.active { color: var(--primary); }
+
+        .inactive-link {
+            color: var(--muted);
+            text-decoration: none;
+            cursor: default;
+            pointer-events: none;
+        }
 
         .builder-actions {
             display: flex;
@@ -584,7 +598,7 @@
                 </div>
             </div>
 
-            <!-- Large overlay metrics on the hero image -->
+            <!-- Large overlay metrics on the hero image (updated per active tab) -->
             <div class="hero-metrics">
                 <div class="hero-metric">
                     <div class="hero-metric-value gold" id="hero-total">60</div>
@@ -607,6 +621,13 @@
     </div>
 
     <div class="container">
+        <!-- Segmented Tabs — moved higher for better RUX (Apple-style) -->
+        <div class="segmented" id="segmented-tabs" style="margin-bottom: 20px; margin-top: -8px;">
+            <button class="segment active" onclick="switchTab('builders')" data-tab="builders">Builders</button>
+            <button class="segment" onclick="switchTab('lots')" data-tab="lots">Lots</button>
+            <button class="segment" onclick="switchTab('contracts')" data-tab="contracts">Contracts</button>
+        </div>
+
         <!-- Controls -->
         <div class="controls">
             <div class="search">
@@ -629,13 +650,6 @@
                 </svg>
                 Export CSV
             </button>
-        </div>
-
-        <!-- Segmented Tabs -->
-        <div class="segmented" id="segmented-tabs">
-            <button class="segment active" onclick="switchTab('builders')" data-tab="builders">Builders</button>
-            <button class="segment" onclick="switchTab('lots')" data-tab="lots">Lots</button>
-            <button class="segment" onclick="switchTab('contracts')" data-tab="contracts">Contracts</button>
         </div>
 
         <!-- Builders Content -->
@@ -964,7 +978,7 @@
                             <div class="builder-details hidden" id="details-${builder.id}">
                                 ${builder.phone ? `<div class="detail"><div class="detail-label">Phone</div><div class="detail-value">${builder.phone}</div></div>` : ''}
                                 ${builder.email ? `<div class="detail"><div class="detail-label">Email</div><div class="detail-value"><a href="mailto:${builder.email}">${builder.email}</a></div></div>` : ''}
-                                ${builder.website ? `<div class="detail"><div class="detail-label">Website</div><div class="detail-value"><a href="${builder.website}" target="_blank">${builder.website.replace('https://','').replace('http://','')}</a></div></div>` : ''}
+                                ${builder.website ? `<div class="detail"><div class="detail-label">Website</div><div class="detail-value"><span class="inactive-link" title="Link disabled for preview (Zillow hold)">${builder.website.replace('https://','').replace('http://','')}</span></div></div>` : ''}
                                 ${builder.buyBox ? `<div class="detail"><div class="detail-label">Buy Box</div><div class="detail-value">${builder.buyBox}</div></div>` : ''}
                                 ${builder.volume ? `<div class="detail"><div class="detail-label">Notes</div><div class="detail-value">${builder.volume}</div></div>` : ''}
                                 ${builder.dateAdded ? `<div class="detail"><div class="detail-label">Added</div><div class="detail-value">${builder.dateAdded}</div></div>` : ''}
@@ -1025,6 +1039,48 @@
             }, 1750);
         }
 
+        function updateHeroForTab(tab) {
+            const totalEl = document.getElementById('hero-total');
+            const activeEl = document.getElementById('hero-active');
+            const researchEl = document.getElementById('hero-research');
+            const marketsEl = document.getElementById('hero-markets');
+
+            // Update labels too for context (Apple-style contextual stats)
+            const labelEls = document.querySelectorAll('.hero-metric-label');
+
+            if (tab === 'builders') {
+                if (totalEl) totalEl.textContent = builderData.length;
+                if (activeEl) activeEl.textContent = builderData.filter(b => b.status === 'active').length;
+                if (researchEl) researchEl.textContent = builderData.filter(b => b.status === 'research').length;
+                if (marketsEl) marketsEl.textContent = '4';
+
+                if (labelEls[0]) labelEls[0].textContent = 'Total Builders';
+                if (labelEls[1]) labelEls[1].textContent = 'Active';
+                if (labelEls[2]) labelEls[2].textContent = 'In Research';
+                if (labelEls[3]) labelEls[3].textContent = 'Markets';
+            } else if (tab === 'lots') {
+                if (totalEl) totalEl.textContent = '19';
+                if (activeEl) activeEl.textContent = '4';
+                if (researchEl) researchEl.textContent = '15';
+                if (marketsEl) marketsEl.textContent = '2';
+
+                if (labelEls[0]) labelEls[0].textContent = 'Total Lots';
+                if (labelEls[1]) labelEls[1].textContent = 'Under Contract';
+                if (labelEls[2]) labelEls[2].textContent = 'Opportunities';
+                if (labelEls[3]) labelEls[3].textContent = 'Counties';
+            } else if (tab === 'contracts') {
+                if (totalEl) totalEl.textContent = '3';
+                if (activeEl) activeEl.textContent = '3';
+                if (researchEl) researchEl.textContent = '—';
+                if (marketsEl) marketsEl.textContent = 'Ready';
+
+                if (labelEls[0]) labelEls[0].textContent = 'Templates';
+                if (labelEls[1]) labelEls[1].textContent = 'Ready';
+                if (labelEls[2]) labelEls[2].textContent = ' ';
+                if (labelEls[3]) labelEls[3].textContent = ' ';
+            }
+        }
+
         function switchTab(tab) {
             currentTab = tab;
 
@@ -1036,12 +1092,10 @@
             document.getElementById('lots-content').classList.toggle('active', tab === 'lots');
             document.getElementById('contracts-content').classList.toggle('active', tab === 'contracts');
 
-            if (tab !== 'builders') {
-                document.getElementById('metric-total').textContent = tab === 'lots' ? '—' : '3';
-                document.getElementById('metric-active').textContent = '—';
-                document.getElementById('metric-research').textContent = '—';
-                document.getElementById('metric-states').textContent = '—';
-            } else {
+            // Update the big numbers in the hero to be contextual to the tab (Apple web design: numbers change with context)
+            updateHeroForTab(tab);
+
+            if (tab === 'builders') {
                 filterAndRender();
             }
         }
@@ -1088,6 +1142,8 @@
             renderStatePills();
             renderBuilders(builderData);
             updateMetrics(builderData);
+            // Set initial hero stats for Builders tab
+            updateHeroForTab('builders');
 
             const searchInput = document.getElementById('search-input');
             if (searchInput) {
