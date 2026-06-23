@@ -3,20 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Land Flip — Builder Discovery</title>
+    <title>Land Flip — Builder & Lots Recon</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=SF+Pro+Display:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #2C3E2D;
-            --gold: #C5A46E;
-            --bg: #F9F7F2;
+            --primary: #1E3A2F;
+            --primary-soft: #2C4A3A;
+            --gold: #C9A962;
+            --gold-light: #F0E4C8;
+            --bg: #FAF8F4;
             --surface: #FFFFFF;
             --text-primary: #1C1C1E;
-            --text-secondary: #636366;
+            --text-secondary: #48484A;
             --muted: #8E8E93;
-            --border: #EDEBE5;
+            --border: rgba(30, 58, 47, 0.08);
+            --divider: rgba(30, 58, 47, 0.06);
         }
 
         * {
@@ -33,7 +36,11 @@
             -moz-osx-font-smoothing: grayscale;
             line-height: 1.5;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
+
+        .site-main { flex: 1 0 auto; }
 
         .container {
             max-width: 1120px;
@@ -46,14 +53,13 @@
             position: relative;
             width: 100vw;
             left: 50%;
-            right: 50%;
             margin-left: -50vw;
-            margin-right: -50vw;
-            height: 580px;
-            background-image: url('assets/images/hero-aerial.jpg'); /* TODO: replace with new hero image user provided (2026-06-23) */
+            height: min(72vh, 620px);
+            min-height: 480px;
+            background-image: url('assets/images/hero-aerial.jpg');
             background-size: cover;
             background-position: center 38%;
-            margin-bottom: 40px;
+            margin-bottom: 48px;
             overflow: hidden;
         }
 
@@ -62,11 +68,10 @@
             position: absolute;
             inset: 0;
             background: linear-gradient(
-                to bottom,
-                rgba(28, 28, 30, 0.22) 0%,
-                rgba(28, 28, 30, 0.35) 32%,
-                rgba(28, 28, 30, 0.68) 68%,
-                rgba(28, 28, 30, 0.86) 100%
+                180deg,
+                rgba(20, 32, 26, 0.18) 0%,
+                rgba(20, 32, 26, 0.42) 45%,
+                rgba(20, 32, 26, 0.78) 100%
             );
             z-index: 1;
         }
@@ -131,59 +136,66 @@
             display: inline-flex;
             align-items: center;
             padding: 9px 22px;
-            background: rgba(197, 164, 110, 0.95);
-            border: 1px solid rgba(255,255,255,0.35);
+            background: rgba(201, 169, 98, 0.92);
+            border: 1px solid rgba(255, 255, 255, 0.28);
             border-radius: 999px;
-            font-size: 13px;
+            font-size: 12.5px;
             font-weight: 600;
             color: #1C1C1E;
-            letter-spacing: 0.02em;
+            letter-spacing: 0.03em;
             white-space: nowrap;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.22);
         }
 
-        /* Large overlay metrics on hero — top-tier premium feel */
+        /* Glass panel — metrics legible over hero at all breakpoints */
+        .hero-metrics-panel {
+            backdrop-filter: blur(24px) saturate(1.15);
+            -webkit-backdrop-filter: blur(24px) saturate(1.15);
+            background: rgba(22, 36, 28, 0.48);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 20px;
+            padding: 28px 36px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+        }
+
         .hero-metrics {
-            display: flex;
-            gap: 42px;
-            align-items: flex-end;
-            padding-bottom: 4px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            align-items: end;
         }
 
-        .hero-metric {
-            text-align: left;
-        }
+        .hero-metric { text-align: left; }
 
         .hero-metric-value {
-            font-size: 48px;
+            font-size: clamp(32px, 5vw, 48px);
             font-weight: 600;
             letter-spacing: -0.045em;
-            line-height: 1.0;
+            line-height: 1;
             color: #fff;
-            text-shadow: 0 3px 16px rgba(0,0,0,0.5);
+            font-variant-numeric: tabular-nums;
         }
 
-        .hero-metric-value.gold {
-            color: #F4E9D2;
-        }
+        .hero-metric-value.gold { color: var(--gold-light); }
 
         .hero-metric-label {
-            font-size: 11.5px;
+            font-size: 10.5px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.095em;
-            color: rgba(255,255,255,0.62);
-            margin-top: 5px;
+            letter-spacing: 0.1em;
+            color: rgba(255, 255, 255, 0.58);
+            margin-top: 6px;
         }
 
         .empty-market {
-            padding: 22px 24px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            margin-bottom: 12px;
-            font-size: 13.5px;
+            padding: 20px 22px;
+            font-size: 13px;
             color: var(--muted);
+            letter-spacing: -0.01em;
+        }
+
+        .empty-market strong {
+            color: var(--text-secondary);
+            font-weight: 600;
         }
 
         /* === CONTROLS === */
@@ -259,7 +271,13 @@
             background: var(--primary);
             color: white;
             font-weight: 500;
-            box-shadow: 0 1px 2px rgba(44, 62, 45, 0.15);
+            box-shadow: 0 1px 2px rgba(30, 58, 47, 0.15);
+        }
+
+        .state-pill .pill-count {
+            opacity: 0.55;
+            font-weight: 400;
+            font-variant-numeric: tabular-nums;
         }
 
         .export-btn {
@@ -280,19 +298,29 @@
         }
 
         .export-btn:hover {
-            border-color: #D9D5CD;
-            color: var(--text-primary);
+            border-color: rgba(30, 58, 47, 0.18);
+            color: var(--primary);
             background: #FFFEFB;
+        }
+
+        .export-btn.gold-accent {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #fff;
+        }
+
+        .export-btn.gold-accent:hover {
+            background: var(--primary-soft);
+            border-color: var(--primary-soft);
+            color: #fff;
         }
 
         /* === SEGMENTED CONTROL (Apple style) === */
         .segmented {
             display: inline-flex;
-            background: #F1EDE6;
+            background: rgba(30, 58, 47, 0.06);
             border-radius: 999px;
             padding: 4px;
-            margin-bottom: 32px;
-            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
         }
 
         .segment {
@@ -314,48 +342,53 @@
             font-weight: 600;
         }
 
-        /* === STATE GROUPS === */
+        /* === STATE GROUPS — unified list, minimal chrome === */
         .state-group {
-            margin-bottom: 38px;
+            margin-bottom: 48px;
         }
 
         .state-header {
             font-size: 11px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.09em;
+            letter-spacing: 0.1em;
             color: var(--muted);
-            margin-bottom: 12px;
-            padding-left: 6px;
+            margin-bottom: 10px;
+            padding: 0 4px;
             display: flex;
-            align-items: center;
+            align-items: baseline;
             gap: 8px;
         }
 
         .state-header span {
-            font-weight: 400;
-            color: #A8A59E;
+            font-weight: 500;
+            color: var(--gold);
             font-size: 11px;
-            letter-spacing: normal;
+            letter-spacing: 0.04em;
+            text-transform: none;
         }
 
-        /* === BUILDER ROWS — very clean === */
+        .list-panel {
+            background: var(--surface);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(30, 58, 47, 0.04);
+        }
+
+        /* === BUILDER ROWS === */
         .builder-row {
             display: flex;
             align-items: center;
-            padding: 16px 22px;
+            padding: 15px 20px;
             background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            margin-bottom: 3px;
-            transition: border-color 0.15s ease, background 0.15s ease;
-            gap: 20px;
+            border-bottom: 1px solid var(--divider);
+            transition: background 0.12s ease;
+            gap: 16px;
         }
 
-        .builder-row:hover {
-            border-color: #D9D5CD;
-            background: #FFFEFB;
-        }
+        .builder-row:last-child { border-bottom: none; }
+
+        .builder-row:hover { background: #FDFCFA; }
 
         .builder-main {
             flex: 1;
@@ -377,18 +410,18 @@
             font-weight: 400;
         }
 
-        /* Minor status indicator — not the main title */
         .builder-status {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            font-size: 10.5px;
-            font-weight: 500;
-            min-width: auto;
-            padding: 2px 8px;
-            border-radius: 6px;
-            background: #F5F3ED;
-            border: 1px solid var(--border);
+            gap: 5px;
+            font-size: 9.5px;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 5px;
+            background: rgba(30, 58, 47, 0.05);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            flex-shrink: 0;
         }
 
         .status-dot {
@@ -411,12 +444,7 @@
 
         .status-label.active { color: var(--primary); }
 
-        .inactive-link {
-            color: var(--muted);
-            text-decoration: none;
-            cursor: default;
-            pointer-events: none;
-        }
+        .detail-empty { color: var(--muted); font-style: normal; }
 
         .builder-actions {
             display: flex;
@@ -454,17 +482,15 @@
             height: 15.5px;
         }
 
-        /* === DETAILS — calm expansion === */
         .builder-details {
-            margin: 2px 0 14px 22px;
-            padding: 16px 22px;
-            background: #F9F7F2;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            font-size: 13.5px;
+            margin: 0;
+            padding: 18px 20px 20px;
+            background: #F7F5F0;
+            border-top: 1px solid var(--divider);
+            font-size: 13px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(168px, 1fr));
-            gap: 14px 28px;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 16px 24px;
         }
 
         .detail {
@@ -526,94 +552,175 @@
             gap: 16px;
         }
 
-        /* Expandable county groups for lots — every recon item + Rankin purchase visible */
-        .county-group {
-            margin-bottom: 18px;
-        }
+        .county-group { margin-bottom: 8px; }
+
         .county-header {
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 500;
             color: var(--text-primary);
-            padding: 11px 14px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
+            padding: 13px 20px;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-bottom: 1px solid var(--divider);
+            transition: background 0.12s ease;
         }
-        .county-header:hover { border-color: var(--primary); }
-        .county-header .count { font-weight: 500; color: var(--muted); font-size: 12.5px; }
+
+        .county-header:hover { background: #FDFCFA; }
+        .county-header .count { font-weight: 400; color: var(--muted); font-size: 12px; }
+
         .lot-list {
-            margin-top: 4px;
-            margin-left: 4px;
-            padding-left: 14px;
-            border-left: 2px solid var(--border);
+            padding: 8px 20px 16px;
+            background: #FDFCFA;
         }
+
         .lot-item {
-            padding: 12px 14px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            margin: 6px 0;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--divider);
         }
+
+        .lot-item:last-child { border-bottom: none; }
         .lot-address { font-weight: 600; font-size: 14px; color: var(--text-primary); }
         .lot-meta { font-size: 12.5px; color: var(--text-secondary); margin-top: 2px; display: flex; flex-wrap: wrap; gap: 8px 16px; }
         .lot-tag { display: inline-block; font-size: 10px; padding: 1px 7px; border-radius: 4px; background: #F5F3ED; color: var(--muted); font-weight: 500; }
         .lot-tag.purchased { background: #E8F0E6; color: var(--primary); }
-        .lot-tag.under-contract { background: #F5EDE0; color: #B38B5E; }
-        .lot-notes { font-size: 12px; color: var(--text-secondary); margin-top: 6px; line-height: 1.35; }
+        .lot-tag.under-contract { background: rgba(201, 169, 98, 0.15); color: #8A7344; }
+        .lot-notes { font-size: 12px; color: var(--text-secondary); margin-top: 6px; line-height: 1.45; }
 
-        /* Subtle land visual */
-        .land-visual {
+        /* Contracts */
+        .contracts-panel { padding: 4px 0; }
+
+        .contracts-intro {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--muted);
+            margin-bottom: 20px;
+        }
+
+        .contract-row {
             display: flex;
             align-items: center;
-            gap: 14px;
-            padding: 10px 16px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            margin-bottom: 28px;
-            max-width: 420px;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 18px 0;
+            border-bottom: 1px solid var(--divider);
         }
 
-        .land-visual img {
-            width: 68px;
-            height: 68px;
-            object-fit: cover;
-            border-radius: 8px;
-            opacity: 0.85;
-            filter: saturate(0.75);
-        }
+        .contract-row:last-child { border-bottom: none; }
 
-        .land-visual-text {
-            font-size: 12.5px;
-            color: var(--text-secondary);
-        }
-
-        .land-visual-text strong {
-            color: var(--text-primary);
+        .contract-info h3 {
+            font-size: 15px;
             font-weight: 600;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .contract-info p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.45;
+            max-width: 560px;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 9px 18px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--primary);
+            background: transparent;
+            border: 1.5px solid var(--primary);
+            border-radius: 10px;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: all 0.12s ease;
+            cursor: pointer;
+        }
+
+        .download-btn:hover {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .tab-toolbar { margin-bottom: 28px; }
+
+        .segmented-wrap {
+            margin-bottom: 32px;
+            margin-top: -12px;
         }
 
         /* Responsive */
         @media (max-width: 860px) {
-            .container { padding: 0 24px; }
-            .header { flex-direction: column; align-items: flex-start; gap: 16px; }
-            .metrics { grid-template-columns: repeat(2, 1fr); }
+            .container { padding: 0 20px; }
+            .hero-content { padding: 0 20px; padding-top: 44px; padding-bottom: 40px; }
+            .hero-title { font-size: 34px; }
+            .hero-top { flex-direction: column; gap: 16px; }
+            .hero-metrics { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+            .hero-metrics-panel { padding: 22px 24px; }
             .controls { flex-direction: column; align-items: stretch; }
             .search { min-width: 100%; }
             .export-btn { margin-left: 0; width: 100%; justify-content: center; }
-            .state-pills { width: 100%; justify-content: center; }
+            .state-pills { overflow-x: auto; max-width: 100%; flex-wrap: nowrap; }
             .builder-row { flex-wrap: wrap; gap: 10px; }
             .builder-actions { opacity: 1; }
+            .contract-row { flex-direction: column; align-items: flex-start; }
+            .download-btn { width: 100%; justify-content: center; }
+        }
+
+        @media (max-width: 480px) {
+            .hero { min-height: 420px; }
+            .hero-metrics { gap: 18px; }
         }
 
         .hidden { display: none !important; }
+
+        /* Footer — prevents short-page awkwardness */
+        .app-footer {
+            flex-shrink: 0;
+            margin-top: 64px;
+            padding: 40px 0 48px;
+            border-top: 1px solid var(--divider);
+            background: var(--surface);
+        }
+
+        .footer-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            text-align: center;
+        }
+
+        .footer-brand {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: var(--primary);
+        }
+
+        .footer-tagline {
+            font-size: 12.5px;
+            color: var(--text-secondary);
+        }
+
+        .footer-meta {
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--muted);
+            margin-top: 4px;
+        }
     </style>
 </head>
 <body>
+    <div class="site-main">
     <!-- FULL-BLEED PREMIUM HERO with overlay numbers -->
     <div class="hero">
         <div class="hero-content">
@@ -628,7 +735,7 @@
                     </div>
                     <div>
                         <div class="hero-title">Land Flip</div>
-                        <div class="hero-subtitle">Builder Discovery</div>
+                        <div class="hero-subtitle">Builder & Lots Recon</div>
                     </div>
                 </div>
 
@@ -637,51 +744,56 @@
                 </div>
             </div>
 
-            <!-- Large overlay metrics on the hero image (updated per active tab) -->
-            <div class="hero-metrics">
-                <div class="hero-metric">
-                    <div class="hero-metric-value gold" id="hero-total">60</div>
-                    <div class="hero-metric-label">Total Builders</div>
-                </div>
-                <div class="hero-metric">
-                    <div class="hero-metric-value" id="hero-active">25</div>
-                    <div class="hero-metric-label">Active</div>
-                </div>
-                <div class="hero-metric">
-                    <div class="hero-metric-value" id="hero-research">35</div>
-                    <div class="hero-metric-label">In Research</div>
-                </div>
-                <div class="hero-metric">
-                    <div class="hero-metric-value" id="hero-markets">4</div>
-                    <div class="hero-metric-label">Markets</div>
+            <!-- Metrics on glass panel over hero image -->
+            <div class="hero-metrics-panel">
+                <div class="hero-metrics">
+                    <div class="hero-metric">
+                        <div class="hero-metric-value gold" id="hero-total">60</div>
+                        <div class="hero-metric-label" id="hero-label-0">Total Builders</div>
+                    </div>
+                    <div class="hero-metric">
+                        <div class="hero-metric-value" id="hero-active">25</div>
+                        <div class="hero-metric-label" id="hero-label-1">Active</div>
+                    </div>
+                    <div class="hero-metric">
+                        <div class="hero-metric-value" id="hero-research">35</div>
+                        <div class="hero-metric-label" id="hero-label-2">In Research</div>
+                    </div>
+                    <div class="hero-metric">
+                        <div class="hero-metric-value" id="hero-markets">4</div>
+                        <div class="hero-metric-label" id="hero-label-3">Markets</div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="container">
-        <!-- Segmented Tabs — moved higher for better RUX (Apple-style) -->
-        <div class="segmented" id="segmented-tabs" style="margin-bottom: 20px; margin-top: -8px;">
-            <button class="segment active" onclick="switchTab('builders')" data-tab="builders">Builders</button>
-            <button class="segment" onclick="switchTab('lots')" data-tab="lots">Lots</button>
-            <button class="segment" onclick="switchTab('contracts')" data-tab="contracts">Contracts</button>
+        <div class="segmented-wrap">
+            <div class="segmented" id="segmented-tabs">
+                <button class="segment active" onclick="switchTab('builders')" data-tab="builders">Builders</button>
+                <button class="segment" onclick="switchTab('lots')" data-tab="lots">Lots</button>
+                <button class="segment" onclick="switchTab('contracts')" data-tab="contracts">Contracts</button>
+            </div>
         </div>
 
         <!-- Controls -->
-        <div class="controls">
-            <div class="search">
+        <div class="controls tab-toolbar" id="tab-toolbar">
+            <div class="search" id="search-wrap">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="11" cy="11" r="7"></circle>
                     <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                 </svg>
-                <input type="text" id="search-input" placeholder="Search builders or counties..." oninput="filterAndRender()">
+                <input type="text" id="search-input" placeholder="Search builders or counties...">
             </div>
 
-            <div class="state-pills" id="state-pills">
+            <div id="state-pills-wrap">
+                <div class="state-pills" id="state-pills">
                 <!-- Populated by JS -->
+                </div>
             </div>
 
-            <button class="export-btn" onclick="exportCSV()">
+            <button class="export-btn" id="export-btn" onclick="exportCSV()">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                     <polyline points="7 10 12 15 17 10"></polyline>
@@ -707,25 +819,60 @@
 
         <!-- Contracts Content -->
         <div id="contracts-content" class="content-section">
-            <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px;">
-                <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; font-weight: 500;">Contract templates • Ready for DocuSign</div>
-                <div style="display: flex; flex-direction: column; gap: 10px;">
-                    <div style="padding: 14px 18px; background: #F9F7F2; border-radius: 10px; font-size: 14px; display: flex; justify-content: space-between; align-items: center;">
-                        <div>Florida Vacant Land Contract</div>
-                        <button onclick="showToast('Download started')" style="font-size: 12.5px; padding: 5px 14px; border-radius: 8px; border: 1px solid var(--border); background: white; cursor:pointer;">Download</button>
+            <div class="list-panel contracts-panel" style="padding: 24px 28px;">
+                <div class="contracts-intro">Contract templates · Ready for DocuSign</div>
+                <div class="contract-row">
+                    <div class="contract-info">
+                        <h3>Florida Vacant Land Contract</h3>
+                        <p>VAC-14xxx (Rev 8/24) — sale/purchase terms, price, escrow, acceptance, closing.</p>
                     </div>
-                    <div style="padding: 14px 18px; background: #F9F7F2; border-radius: 10px; font-size: 14px; display: flex; justify-content: space-between; align-items: center;">
-                        <div>Assignment of Contract</div>
-                        <button onclick="showToast('Download started')" style="font-size: 12.5px; padding: 5px 14px; border-radius: 8px; border: 1px solid var(--border); background: white; cursor:pointer;">Download</button>
+                    <a class="download-btn" href="contracts/vacant-land-contract-page-01.pdf" download="vacant-land-contract-page-01.pdf" onclick="showToast('Downloading Florida Vacant Land Contract')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        Download
+                    </a>
+                </div>
+                <div class="contract-row">
+                    <div class="contract-info">
+                        <h3>Assignment of Contract</h3>
+                        <p>Assignable purchase with earnest money, deposit terms, and feasibility period.</p>
                     </div>
-                    <div style="padding: 14px 18px; background: #F9F7F2; border-radius: 10px; font-size: 14px; display: flex; justify-content: space-between; align-items: center;">
-                        <div>Tennessee Land Purchase Addendum</div>
-                        <button onclick="showToast('Download started')" style="font-size: 12.5px; padding: 5px 14px; border-radius: 8px; border: 1px solid var(--border); background: white; cursor:pointer;">Download</button>
+                    <a class="download-btn" href="contracts/assignment-contract-01.pdf" download="assignment-contract-01.pdf" onclick="showToast('Downloading Assignment of Contract')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        Download
+                    </a>
+                </div>
+                <div class="contract-row">
+                    <div class="contract-info">
+                        <h3>Tennessee Land Purchase Addendum</h3>
+                        <p>AS-IS purchase with feasibility study, earnest money, buyer-paid closing.</p>
                     </div>
+                    <a class="download-btn" href="contracts/purchase-contract-01.pdf" download="purchase-contract-01.pdf" onclick="showToast('Downloading Purchase Contract')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        Download
+                    </a>
+                </div>
+                <div class="contract-row">
+                    <div class="contract-info">
+                        <h3>Land Sale Agreement</h3>
+                        <p>Standard land sale agreement template for vacant parcel transactions.</p>
+                    </div>
+                    <a class="download-btn" href="contracts/land-sale-agreement-01.pdf" download="land-sale-agreement-01.pdf" onclick="showToast('Downloading Land Sale Agreement')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        Download
+                    </a>
                 </div>
             </div>
         </div>
     </div>
+    </div><!-- .site-main -->
+
+    <footer class="app-footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">Land Flip</div>
+            <div class="footer-tagline">Builder & Lots Recon</div>
+            <div class="footer-meta" id="footer-meta">4 markets · NC · SC · TN · TX</div>
+        </div>
+    </footer>
 
     <script>
         // ============================================
@@ -792,7 +939,16 @@
             {id:57,name:'Divine Renovation',county:'Harris County',state:'texas',metro:'Houston',phone:'(713) 515-1514',email:'',website:'',buyBox:'Custom + renovation',volume:'GHBA Distinguished Member',status:'research',dateAdded:'2026-06-22',initials:'DR'},
             {id:58,name:'Centex Homes - Stokesbury',county:'Waller County',state:'texas',metro:'Waller/Houston',phone:'(936) 296-3200',email:'',website:'https://www.centex.com',buyBox:'New home communities',volume:'National production builder',status:'research',dateAdded:'2026-06-22',initials:'CX'},
             {id:59,name:'K. Hovnanian Homes Lakeview',county:'Waller County',state:'texas',metro:'Waller/Houston',phone:'(888) 425-1559',email:'',website:'https://www.khov.com',buyBox:'New home communities',volume:'66 yrs national builder',status:'research',dateAdded:'2026-06-22',initials:'KH'},
-            {id:60,name:'D.R. Horton - Houston',county:'Fort Bend/Montgomery/Waller',state:'texas',metro:'Greater Houston',phone:'(800) 374-6142',email:'',website:'https://www.drhorton.com',buyBox:'Move-in ready / communities',volume:'Largest US homebuilder',status:'research',dateAdded:'2026-06-22',initials:'DH'}
+            {id:60,name:'D.R. Horton - Houston',county:'Fort Bend/Montgomery/Waller',state:'texas',metro:'Greater Houston',phone:'(800) 374-6142',email:'',website:'https://www.drhorton.com',buyBox:'Move-in ready / communities',volume:'Largest US homebuilder',status:'research',dateAdded:'2026-06-22',initials:'DH'},
+            // North Carolina — Wake County / Triangle (paired with NC lot recon)
+            {id:61,name:'Garman Homes',county:'Wake County',state:'north-carolina',metro:'Raleigh',phone:'(919) 459-8099',email:'',website:'https://garmanhomes.com',buyBox:'Infill lots 0.18–0.33 ac',volume:'Triangle custom + infill specialist',status:'active',dateAdded:'2026-06-23',initials:'GH'},
+            {id:62,name:'Dixon Kirby Custom Homes',county:'Wake County',state:'north-carolina',metro:'Raleigh',phone:'(919) 787-2795',email:'',website:'https://www.dixonkirby.com',buyBox:'Scattered infill lots',volume:'Custom homes, Raleigh area',status:'active',dateAdded:'2026-06-23',initials:'DK'},
+            {id:63,name:'Robuck Design Build',county:'Wake County',state:'north-carolina',metro:'Raleigh',phone:'(919) 787-0099',email:'',website:'https://www.robuckhomes.com',buyBox:'Custom on your lot',volume:'Design-build, Wake County',status:'active',dateAdded:'2026-06-23',initials:'RB'},
+            {id:64,name:'Boone Homes',county:'Wake County',state:'north-carolina',metro:'Raleigh/Cary',phone:'(919) 851-9888',email:'',website:'https://www.boonehomes.com',buyBox:'Custom + infill lots',volume:'40+ yrs Triangle builder',status:'active',dateAdded:'2026-06-23',initials:'BH'},
+            {id:65,name:'Heartwood Custom Homes',county:'Wake County',state:'north-carolina',metro:'Raleigh',phone:'(919) 872-1120',email:'',website:'https://www.heartwoodcustomhomes.com',buyBox:'Small-lot infill',volume:'Custom residential',status:'research',dateAdded:'2026-06-23',initials:'HW'},
+            {id:66,name:'Tonic Design + Build',county:'Wake County',state:'north-carolina',metro:'Raleigh',phone:'(919) 833-8878',email:'',website:'https://www.tonic-design.com',buyBox:'Urban infill lots',volume:'Modern custom design-build',status:'active',dateAdded:'2026-06-23',initials:'TD'},
+            {id:67,name:'Brightleaf Builders',county:'Wake County',state:'north-carolina',metro:'Raleigh/Durham',phone:'(919) 809-1010',email:'',website:'https://www.brightleafbuilders.com',buyBox:'Infill scattered lots',volume:'Local custom builder',status:'research',dateAdded:'2026-06-23',initials:'BB'},
+            {id:68,name:'Mid City Custom Homes',county:'Wake County',state:'north-carolina',metro:'Raleigh',phone:'(919) 833-5200',email:'',website:'',buyBox:'Inside-beltline infill',volume:'Small-lot specialist',status:'research',dateAdded:'2026-06-23',initials:'MC'}
         ];
 
         // ============================================
@@ -814,9 +970,17 @@
         ];
 
         let builderData = [];
+        let lotData = [];
         let currentFilterState = 'all';
         let currentSearch = '';
         let currentTab = 'builders';
+
+        const CONTRACT_TEMPLATES = [
+            { file: 'contracts/vacant-land-contract-page-01.pdf', name: 'Florida Vacant Land Contract' },
+            { file: 'contracts/assignment-contract-01.pdf', name: 'Assignment of Contract' },
+            { file: 'contracts/purchase-contract-01.pdf', name: 'Tennessee Land Purchase Addendum' },
+            { file: 'contracts/land-sale-agreement-01.pdf', name: 'Land Sale Agreement' }
+        ];
 
         const MARKET_LABELS = {
             'all': 'All Markets',
@@ -831,34 +995,145 @@
         // All markets we track (show empty ones)
         const ALL_MARKETS = ['north-carolina', 'south-carolina', 'tennessee', 'texas'];
 
-        function loadData() {
-            // Builders
-            const stored = localStorage.getItem('builderData');
-            if (stored) {
-                const parsed = JSON.parse(stored);
-                builderData = parsed.filter(b => b && b.id);
-                if (builderData.length === 0) {
-                    builderData = JSON.parse(JSON.stringify(DEFAULT_BUILDERS));
-                }
-            } else {
-                builderData = JSON.parse(JSON.stringify(DEFAULT_BUILDERS));
+        function escHtml(str) {
+            if (str == null || str === '') return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        function fmt(val) {
+            return val != null && String(val).trim() !== '' ? escHtml(val) : '<span class="detail-empty">—</span>';
+        }
+
+        function fmtLink(url) {
+            if (!url || !String(url).trim()) return '<span class="detail-empty">—</span>';
+            const safe = escHtml(url);
+            const label = escHtml(url.replace(/^https?:\/\//, ''));
+            return `<a href="${safe}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+        }
+
+        function normalizeStateKey(state) {
+            if (!state) return '';
+            const s = String(state).toLowerCase().trim();
+            const aliases = {
+                'nc': 'north-carolina',
+                'north carolina': 'north-carolina',
+                'sc': 'south-carolina',
+                'south carolina': 'south-carolina',
+                'tn': 'tennessee',
+                'tennessee': 'tennessee',
+                'tx': 'texas',
+                'texas': 'texas'
+            };
+            return aliases[s] || s.replace(/\s+/g, '-');
+        }
+
+        function normalizeBuilder(b) {
+            if (!b) return null;
+            const name = b.name || b.company || b.companyName || b.businessName || '';
+            return {
+                ...b,
+                id: b.id,
+                name: name.trim() || 'Unknown Builder',
+                state: normalizeStateKey(b.state),
+                county: b.county || '—',
+                status: b.status === 'active' ? 'active' : 'research'
+            };
+        }
+
+        function normalizeLot(l) {
+            if (!l) return null;
+            const address = l.address || l.propertyAddress || '';
+            let acres = l.acres;
+            if (acres == null && l.lotSize) {
+                const match = String(l.lotSize).match(/[\d.]+/);
+                acres = match ? parseFloat(match[0]) : null;
+            }
+            return {
+                ...l,
+                id: l.id,
+                address: address.trim() || '—',
+                county: l.county || 'Unknown County',
+                state: normalizeStateKey(l.state),
+                city: l.city || '',
+                zip: l.zip || '',
+                acres: acres,
+                price: l.price ?? l.estimatedFee ?? l.yourOffer ?? l.assessedValue ?? null,
+                status: l.status || 'identified',
+                notes: l.notes || '',
+                source: l.source || 'recon',
+                date: l.date || l.dateAdded || ''
+            };
+        }
+
+        function lotDisplayAddress(lot) {
+            const addr = lot.address || lot.propertyAddress;
+            if (addr && addr !== '—' && String(addr).toLowerCase() !== 'undefined') return addr;
+            return '—';
+        }
+
+        function mergeWithDefaults(stored, defaults, normalizer) {
+            const byId = new Map();
+            defaults.forEach(item => {
+                const n = normalizer(item);
+                if (n && n.id) byId.set(n.id, n);
+            });
+            (stored || []).forEach(item => {
+                const n = normalizer(item);
+                if (n && n.id) byId.set(n.id, { ...byId.get(n.id), ...n });
+            });
+            return Array.from(byId.values()).sort((a, b) => a.id - b.id);
+        }
+
+        function getFilteredLots() {
+            const searchInput = document.getElementById('search-input');
+            const search = (searchInput ? searchInput.value : '').toLowerCase().trim();
+            let filtered = lotData;
+
+            if (currentFilterState !== 'all') {
+                filtered = filtered.filter(l => normalizeStateKey(l.state) === currentFilterState);
             }
 
-            // Lots — make sure all recon data + Rankin St purchase is always accessible
-            const storedLots = localStorage.getItem('lotData');
-            if (storedLots) {
-                const parsedLots = JSON.parse(storedLots);
-                lotData = parsedLots.filter(l => l && l.id);
-                if (lotData.length === 0) {
-                    lotData = JSON.parse(JSON.stringify(DEFAULT_LOTS));
-                }
-            } else {
-                lotData = JSON.parse(JSON.stringify(DEFAULT_LOTS));
+            if (search) {
+                filtered = filtered.filter(l =>
+                    lotDisplayAddress(l).toLowerCase().includes(search) ||
+                    (l.county && l.county.toLowerCase().includes(search)) ||
+                    (l.city && l.city.toLowerCase().includes(search)) ||
+                    (normalizeStateKey(l.state).includes(search))
+                );
             }
+
+            return filtered;
+        }
+
+        function statusBadgeLabel(status) {
+            return status === 'active' ? 'Active' : 'Needs Research';
+        }
+
+        function updateFooterMeta() {
+            const el = document.getElementById('footer-meta');
+            if (!el) return;
+            el.textContent = `${builderData.length} builders · ${lotData.length} lots · ${CONTRACT_TEMPLATES.length} templates · 4 markets`;
+        }
+
+        function loadData() {
+            const storedBuilders = localStorage.getItem('builderData');
+            const parsedBuilders = storedBuilders ? JSON.parse(storedBuilders) : [];
+            builderData = mergeWithDefaults(parsedBuilders, DEFAULT_BUILDERS, normalizeBuilder);
+
+            const storedLots = localStorage.getItem('lotData');
+            const parsedLots = storedLots ? JSON.parse(storedLots) : [];
+            lotData = mergeWithDefaults(parsedLots, DEFAULT_LOTS, normalizeLot);
+
+            saveData();
         }
 
         function saveData() {
             localStorage.setItem('builderData', JSON.stringify(builderData));
+            localStorage.setItem('lotData', JSON.stringify(lotData));
         }
 
         function updateMetrics(filteredBuilders) {
@@ -898,7 +1173,9 @@
 
             ALL_MARKETS.forEach(key => {
                 const isActive = currentFilterState === key;
-                const count = builderData.filter(b => b.state === key).length;
+                const count = currentTab === 'lots'
+                    ? lotData.filter(l => normalizeStateKey(l.state) === key).length
+                    : builderData.filter(b => normalizeStateKey(b.state) === key).length;
 
                 const label = MARKET_LABELS[key] || key;
 
@@ -907,7 +1184,7 @@
                         class="state-pill ${isActive ? 'active' : ''}" 
                         onclick="setStateFilter('${key}')"
                         data-state="${key}">
-                        ${label} <span style="opacity:0.6; font-weight:400;">(${count})</span>
+                        ${label} <span class="pill-count">(${count})</span>
                     </button>
                 `;
             });
@@ -926,10 +1203,46 @@
             container.innerHTML = html;
         }
 
+        function handleSearch() {
+            if (currentTab === 'lots') {
+                renderLots();
+            } else {
+                filterAndRender();
+            }
+        }
+
+        function updateControlsForTab(tab) {
+            const searchWrap = document.getElementById('search-wrap');
+            const pillsWrap = document.getElementById('state-pills-wrap');
+            const exportBtn = document.getElementById('export-btn');
+            const searchInput = document.getElementById('search-input');
+            const hideFilters = tab === 'contracts';
+
+            if (searchWrap) searchWrap.classList.toggle('hidden', hideFilters);
+            if (pillsWrap) pillsWrap.classList.toggle('hidden', hideFilters);
+            if (exportBtn) {
+                exportBtn.classList.toggle('gold-accent', tab === 'contracts');
+                exportBtn.innerHTML = tab === 'contracts'
+                    ? '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> Export All Data'
+                    : '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> Export CSV';
+            }
+            if (searchInput) {
+                searchInput.placeholder = tab === 'lots'
+                    ? 'Search lots by address, county, or city...'
+                    : 'Search builders or counties...';
+                if (hideFilters) searchInput.value = '';
+            }
+        }
+
         function setStateFilter(state) {
             currentFilterState = state;
             renderStatePills();
-            filterAndRender();
+            updateHeroForTab(currentTab);
+            if (currentTab === 'lots') {
+                renderLots();
+            } else {
+                filterAndRender();
+            }
         }
 
         function filterAndRender() {
@@ -939,7 +1252,7 @@
             let filtered = builderData;
 
             if (currentFilterState !== 'all') {
-                filtered = filtered.filter(b => b.state === currentFilterState);
+                filtered = filtered.filter(b => normalizeStateKey(b.state) === currentFilterState);
             }
 
             if (currentSearch) {
@@ -962,7 +1275,7 @@
 
             const grouped = {};
             data.forEach(builder => {
-                const key = builder.state || 'unknown';
+                const key = normalizeStateKey(builder.state) || 'unknown';
                 if (!grouped[key]) grouped[key] = [];
                 grouped[key].push(builder);
             });
@@ -991,26 +1304,27 @@
 
                 if (count === 0) {
                     html += `
-                        <div class="empty-market">
-                            No builders tracked yet in ${stateName}. Ready for reconnaissance.
+                        <div class="list-panel">
+                            <div class="empty-market"><strong>0</strong> builders — No data yet. Ready for reconnaissance.</div>
                         </div>
                     `;
                 } else {
+                    html += `<div class="list-panel">`;
                     buildersInState.forEach(builder => {
                         const isActive = builder.status === 'active';
                         const statusDotClass = isActive ? 'active' : 'research';
-                        const statusText = isActive ? 'Active' : 'Research';
-
-                        const locationText = builder.county + (builder.metro ? ' • ' + builder.metro : '');
+                        const statusText = statusBadgeLabel(builder.status);
+                        const displayName = builder.name || builder.company || 'Unknown Builder';
+                        const locationText = (builder.county || '—') + (builder.metro ? ' • ' + builder.metro : '');
 
                         html += `
                             <div class="builder-row" data-id="${builder.id}">
                                 <div class="builder-main">
-                                    <div class="builder-name">${builder.name}</div>
-                                    <div class="builder-location">${locationText}</div>
+                                    <div class="builder-name">${escHtml(displayName)}</div>
+                                    <div class="builder-location">${escHtml(locationText)}</div>
                                 </div>
 
-                                <div class="builder-status">
+                                <div class="builder-status" aria-label="Status: ${statusText}">
                                     <span class="status-dot ${statusDotClass}"></span>
                                     <span class="status-label ${isActive ? 'active' : ''}">${statusText}</span>
                                 </div>
@@ -1032,15 +1346,16 @@
                             </div>
 
                             <div class="builder-details hidden" id="details-${builder.id}">
-                                ${builder.phone ? `<div class="detail"><div class="detail-label">Phone</div><div class="detail-value">${builder.phone}</div></div>` : ''}
-                                ${builder.email ? `<div class="detail"><div class="detail-label">Email</div><div class="detail-value"><a href="mailto:${builder.email}">${builder.email}</a></div></div>` : ''}
-                                ${builder.website ? `<div class="detail"><div class="detail-label">Website</div><div class="detail-value"><span class="inactive-link" title="Link disabled for preview (Zillow hold)">${builder.website.replace('https://','').replace('http://','')}</span></div></div>` : ''}
-                                ${builder.buyBox ? `<div class="detail"><div class="detail-label">Buy Box</div><div class="detail-value">${builder.buyBox}</div></div>` : ''}
-                                ${builder.volume ? `<div class="detail"><div class="detail-label">Notes</div><div class="detail-value">${builder.volume}</div></div>` : ''}
-                                ${builder.dateAdded ? `<div class="detail"><div class="detail-label">Added</div><div class="detail-value">${builder.dateAdded}</div></div>` : ''}
+                                <div class="detail"><div class="detail-label">Phone</div><div class="detail-value">${fmt(builder.phone)}</div></div>
+                                <div class="detail"><div class="detail-label">Email</div><div class="detail-value">${builder.email ? `<a href="mailto:${escHtml(builder.email)}">${escHtml(builder.email)}</a>` : fmt('')}</div></div>
+                                <div class="detail"><div class="detail-label">Website</div><div class="detail-value">${fmtLink(builder.website)}</div></div>
+                                <div class="detail"><div class="detail-label">Buy Box</div><div class="detail-value">${fmt(builder.buyBox)}</div></div>
+                                <div class="detail"><div class="detail-label">Notes</div><div class="detail-value">${fmt(builder.volume)}</div></div>
+                                <div class="detail"><div class="detail-label">Added</div><div class="detail-value">${fmt(builder.dateAdded)}</div></div>
                             </div>
                         `;
                     });
+                    html += `</div>`;
                 }
 
                 html += `</div>`;
@@ -1085,7 +1400,7 @@
 
         function showToast(message) {
             const toast = document.createElement('div');
-            toast.style.cssText = 'position:fixed;bottom:28px;right:28px;background:#2C3E2D;color:white;padding:10px 20px;border-radius:10px;font-size:13.5px;font-weight:500;box-shadow:0 3px 10px rgba(0,0,0,0.12);z-index:9999;letter-spacing:-0.01em;';
+            toast.style.cssText = 'position:fixed;bottom:28px;right:28px;background:#1E3A2F;color:white;padding:10px 20px;border-radius:10px;font-size:13.5px;font-weight:500;box-shadow:0 3px 10px rgba(0,0,0,0.12);z-index:9999;letter-spacing:-0.01em;';
             toast.textContent = message;
             document.body.appendChild(toast);
             setTimeout(() => {
@@ -1103,69 +1418,85 @@
             const container = document.getElementById('lots-list');
             if (!container) return;
 
-            // Group lots by county for clean expandable sections
-            const grouped = {};
-            lotData.forEach(lot => {
-                const key = lot.county || 'Unknown County';
-                if (!grouped[key]) grouped[key] = [];
-                grouped[key].push(lot);
-            });
+            const filteredLots = getFilteredLots();
 
             let html = '';
-            const counties = Object.keys(grouped).sort();
 
-            counties.forEach(county => {
-                const lots = grouped[county];
-                const firstLot = lots[0];
-                const stateLabel = firstLot.state ? MARKET_LABELS[firstLot.state] || firstLot.state : '';
-                const safeId = county.replace(/[^a-z0-9]/gi, '');
+            MARKET_ORDER.forEach(stateKey => {
+                if (currentFilterState !== 'all' && currentFilterState !== stateKey) return;
+
+                const stateName = MARKET_LABELS[stateKey] || stateKey;
+                const marketLots = filteredLots.filter(l => normalizeStateKey(l.state) === stateKey);
+                const count = marketLots.length;
+
+                const byCounty = {};
+                marketLots.forEach(lot => {
+                    const key = lot.county || 'Unknown County';
+                    if (!byCounty[key]) byCounty[key] = [];
+                    byCounty[key].push(lot);
+                });
+                const counties = Object.keys(byCounty).sort();
 
                 html += `
-                    <div class="county-group">
-                        <div class="county-header" onclick="toggleLotGroup('${safeId}')">
-                            <span>${county} <span class="count">(${lots.length} lots) — ${stateLabel}</span></span>
-                            <span style="font-size:11px; opacity:0.6; margin-left:8px;">click to expand</span>
+                    <div class="state-group">
+                        <div class="state-header">
+                            ${stateName}
+                            <span>— ${count} lot${count === 1 ? '' : 's'}</span>
                         </div>
-                        <div class="lot-list" id="lots-${safeId}" style="display: none;">
-                            ${lots.map(lot => {
-                                const priceStr = lot.price ? '$' + lot.price.toLocaleString() : '—';
-                                const acresStr = lot.acres ? lot.acres + ' acres' : '';
-                                const statusClass = lot.status === 'purchased' ? 'purchased' : (lot.status === 'under contract' ? 'under-contract' : '');
-                                return `
-                                    <div class="lot-item">
-                                        <div class="lot-address">${lot.address}</div>
-                                        <div class="lot-meta">
-                                            <span>${acresStr}</span>
-                                            <span>${priceStr}</span>
-                                            <span class="lot-tag ${statusClass}">${lot.status}</span>
-                                            <span>${lot.city || ''}${lot.zip ? ', ' + lot.zip : ''}</span>
-                                        </div>
-                                        ${lot.notes ? `<div class="lot-notes">${lot.notes}</div>` : ''}
-                                        <div style="font-size:10px; color:#8E8E93; margin-top:4px; display:flex; gap:12px;">
-                                            <span>Source: ${lot.source || 'recon'}</span>
-                                            <span>${lot.date || ''}</span>
-                                        </div>
-                                    </div>
-                                `;
-                            }).join('')}
-                        </div>
-                    </div>
                 `;
+
+                if (count === 0) {
+                    html += `
+                        <div class="list-panel">
+                            <div class="empty-market"><strong>0</strong> lots — No data yet. Ready for reconnaissance.</div>
+                        </div>
+                    `;
+                } else {
+                    html += `<div class="list-panel">`;
+                    counties.forEach(county => {
+                        const lots = byCounty[county];
+                        const safeId = (stateKey + '-' + county).replace(/[^a-z0-9]/gi, '');
+
+                        html += `
+                            <div class="county-group">
+                                <div class="county-header" onclick="toggleLotGroup('${safeId}')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')toggleLotGroup('${safeId}')">
+                                    <span>${escHtml(county)} <span class="count">${lots.length} lot${lots.length === 1 ? '' : 's'}</span></span>
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="opacity:0.4"><polyline points="6 9 12 15 18 9"/></svg>
+                                </div>
+                                <div class="lot-list" id="lots-${safeId}">
+                                    ${lots.map(lot => {
+                                        const priceStr = lot.price != null ? '$' + Number(lot.price).toLocaleString() : '—';
+                                        const acresStr = lot.acres != null ? lot.acres + ' ac' : '—';
+                                        const statusClass = lot.status === 'purchased' ? 'purchased' : (lot.status === 'under contract' ? 'under-contract' : '');
+                                        const addressLabel = lotDisplayAddress(lot);
+                                        return `
+                                            <div class="lot-item">
+                                                <div class="lot-address">${escHtml(addressLabel)}</div>
+                                                <div class="lot-meta">
+                                                    <span>${acresStr}</span>
+                                                    <span>${priceStr}</span>
+                                                    <span class="lot-tag ${statusClass}">${escHtml(lot.status || '—')}</span>
+                                                    <span>${escHtml(lot.city || '—')}${lot.zip ? ', ' + escHtml(lot.zip) : ''}</span>
+                                                </div>
+                                                <div class="lot-notes">${lot.notes ? escHtml(lot.notes) : '<span class="detail-empty">No notes</span>'}</div>
+                                                <div style="font-size:10px; color:var(--muted); margin-top:4px; display:flex; gap:12px;">
+                                                    <span>Source: ${escHtml(lot.source || '—')}</span>
+                                                    <span>${escHtml(lot.date || '—')}</span>
+                                                </div>
+                                            </div>
+                                        `;
+                                    }).join('')}
+                                </div>
+                            </div>
+                        `;
+                    });
+                    html += `</div>`;
+                }
+
+                html += `</div>`;
             });
 
-            if (html === '') {
-                html = '<div class="empty">No lots loaded yet. Run reconnaissance to populate.</div>';
-            }
             container.innerHTML = html;
-
-            // Auto-expand the first county (Rankin / NC) so data is immediately visible
-            if (counties.length > 0) {
-                setTimeout(() => {
-                    const firstId = counties[0].replace(/[^a-z0-9]/gi, '');
-                    const firstEl = document.getElementById('lots-' + firstId);
-                    if (firstEl) firstEl.style.display = 'block';
-                }, 50);
-            }
         }
 
         function toggleLotGroup(safeId) {
@@ -1180,7 +1511,7 @@
             let csv = headers.join(',') + '\n';
             lotData.forEach(l => {
                 const row = [
-                    `"${(l.address || '').replace(/"/g, '""')}"`,
+                    `"${lotDisplayAddress(l).replace(/"/g, '""')}"`,
                     `"${(l.county || '').replace(/"/g, '""')}"`,
                     `"${(l.city || '').replace(/"/g, '""')}"`,
                     `"${(l.zip || '').replace(/"/g, '""')}"`,
@@ -1225,30 +1556,31 @@
                 if (labelEls[2]) labelEls[2].textContent = 'In Research';
                 if (labelEls[3]) labelEls[3].textContent = 'Markets';
             } else if (tab === 'lots') {
-                const totalLots = lotData.length;
-                const underContract = lotData.filter(l => l.status === 'under contract' || l.status === 'purchased').length;
-                const opportunities = lotData.filter(l => l.status === 'identified').length;
-                const counties = new Set(lotData.map(l => l.county)).size;
+                const data = getFilteredLots();
+                const totalLots = data.length;
+                const underContract = data.filter(l => l.status === 'under contract' || l.status === 'purchased').length;
+                const opportunities = data.filter(l => l.status === 'identified').length;
 
                 if (totalEl) totalEl.textContent = totalLots;
                 if (activeEl) activeEl.textContent = underContract;
                 if (researchEl) researchEl.textContent = opportunities;
-                if (marketsEl) marketsEl.textContent = counties;
+                if (marketsEl) marketsEl.textContent = ALL_MARKETS.length;
 
                 if (labelEls[0]) labelEls[0].textContent = 'Total Lots';
-                if (labelEls[1]) labelEls[1].textContent = 'Under Contract / Purchased';
+                if (labelEls[1]) labelEls[1].textContent = 'Contracted / Purchased';
                 if (labelEls[2]) labelEls[2].textContent = 'Opportunities';
-                if (labelEls[3]) labelEls[3].textContent = 'Counties';
+                if (labelEls[3]) labelEls[3].textContent = 'Markets';
             } else if (tab === 'contracts') {
-                if (totalEl) totalEl.textContent = '3';
-                if (activeEl) activeEl.textContent = '3';
+                const count = CONTRACT_TEMPLATES.length;
+                if (totalEl) totalEl.textContent = count;
+                if (activeEl) activeEl.textContent = count;
                 if (researchEl) researchEl.textContent = '—';
-                if (marketsEl) marketsEl.textContent = 'Ready';
+                if (marketsEl) marketsEl.textContent = '4';
 
                 if (labelEls[0]) labelEls[0].textContent = 'Templates';
                 if (labelEls[1]) labelEls[1].textContent = 'Ready';
-                if (labelEls[2]) labelEls[2].textContent = ' ';
-                if (labelEls[3]) labelEls[3].textContent = ' ';
+                if (labelEls[2]) labelEls[2].textContent = 'Pending';
+                if (labelEls[3]) labelEls[3].textContent = 'Markets';
             }
         }
 
@@ -1263,7 +1595,8 @@
             document.getElementById('lots-content').classList.toggle('active', tab === 'lots');
             document.getElementById('contracts-content').classList.toggle('active', tab === 'contracts');
 
-            // Update the big numbers in the hero to be contextual to the tab (Apple web design: numbers change with context)
+            updateControlsForTab(tab);
+            renderStatePills();
             updateHeroForTab(tab);
 
             if (tab === 'builders') {
@@ -1274,6 +1607,16 @@
         }
 
         function exportCSV() {
+            if (currentTab === 'lots') {
+                exportLotsCSV();
+                return;
+            }
+
+            if (currentTab === 'contracts') {
+                exportAllData();
+                return;
+            }
+
             const data = builderData;
             if (!data.length) return;
 
@@ -1309,21 +1652,54 @@
             showToast('CSV exported');
         }
 
+        function exportAllData() {
+            exportLotsCSV();
+            setTimeout(() => {
+                const data = builderData;
+                const headers = ['Name', 'County', 'State', 'Metro', 'Status', 'Phone', 'Email', 'Website', 'Buy Box', 'Notes'];
+                let csv = headers.join(',') + '\n';
+                data.forEach(b => {
+                    const row = [
+                        `"${(b.name || '').replace(/"/g, '""')}"`,
+                        `"${(b.county || '').replace(/"/g, '""')}"`,
+                        `"${(b.state || '').replace(/"/g, '""')}"`,
+                        `"${(b.metro || '').replace(/"/g, '""')}"`,
+                        `"${(b.status || '').replace(/"/g, '""')}"`,
+                        `"${(b.phone || '').replace(/"/g, '""')}"`,
+                        `"${(b.email || '').replace(/"/g, '""')}"`,
+                        `"${(b.website || '').replace(/"/g, '""')}"`,
+                        `"${(b.buyBox || '').replace(/"/g, '""')}"`,
+                        `"${(b.volume || '').replace(/"/g, '""')}"`
+                    ];
+                    csv += row.join(',') + '\n';
+                });
+                const blob = new Blob([csv], { type: 'text/csv' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'land-flip-builders.csv';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                showToast('All data exported');
+            }, 400);
+        }
+
         function init() {
             loadData();
 
             renderStatePills();
             renderBuilders(builderData);
             updateMetrics(builderData);
-            // Set initial hero stats for Builders tab
             updateHeroForTab('builders');
-
-            // Initial render of lots so data is always accessible
+            updateControlsForTab('builders');
             renderLots();
+            updateFooterMeta();
 
             const searchInput = document.getElementById('search-input');
             if (searchInput) {
-                searchInput.addEventListener('input', filterAndRender);
+                searchInput.addEventListener('input', handleSearch);
             }
 
             document.addEventListener('keydown', function(e) {
