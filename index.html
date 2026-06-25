@@ -416,6 +416,36 @@
             border-color: rgba(30, 58, 47, 0.2);
         }
 
+        .notes-input-wrap {
+            margin-top: 6px;
+        }
+
+        .notes-textarea {
+            width: 100%;
+            min-height: 80px;
+            padding: 10px 14px;
+            border: 1px solid rgba(30, 58, 47, 0.1);
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 13px;
+            line-height: 1.5;
+            color: var(--text-secondary);
+            background: var(--surface);
+            resize: vertical;
+            transition: border-color 0.15s ease;
+        }
+
+        .notes-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(30, 58, 47, 0.06);
+        }
+
+        .notes-textarea::placeholder {
+            color: var(--muted);
+            font-style: italic;
+        }
+
         .builder-main {
             flex: 1;
             min-width: 0;
@@ -926,6 +956,7 @@
                 <button class="segment active" onclick="switchTab('builders')" data-tab="builders">Builders</button>
                 <button class="segment" onclick="switchTab('lots')" data-tab="lots">Lots</button>
                 <button class="segment" onclick="switchTab('contracts')" data-tab="contracts">Contracts</button>
+                <button class="segment" onclick="switchTab('titles')" data-tab="titles">Titles</button>
             </div>
         </div>
 
@@ -1015,6 +1046,13 @@
                 </div>
             </div>
         </div>
+        <!-- Titles Content -->
+        <div id="titles-content" class="content-section">
+            <div id="titles-list">
+                <!-- Dynamically populated by renderTitles() -->
+            </div>
+        </div>
+
     </div>
     </div><!-- .site-main -->
 
@@ -1165,6 +1203,13 @@
 
         let builderData = [];
         let lotData = [];
+        let titleData = [];
+        const DEFAULT_TITLES = [
+            {id:1,name:'Austin Title Company',city:'Austin',state:'texas',county:'Travis County',phone:'(512) 555-1001',email:'info@austintitle.com',website:'https://austintitle.com',notes:'Full-service title insurance, closings, escrow',status:'active',dateAdded:'2026-06-25'},
+            {id:2,name:'Houston Title & Escrow',city:'Houston',state:'texas',county:'Harris County',phone:'(713) 555-1002',email:'contact@houstontitle.com',website:'https://houstontitle.com',notes:'Commercial and residential title services',status:'research',dateAdded:'2026-06-25'},
+            {id:3,name:'Raleigh Title Group',city:'Raleigh',state:'north-carolina',county:'Wake County',phone:'(919) 555-1003',email:'info@raleightitle.com',website:'https://raleightitle.com',notes:'NC title insurance, closings',status:'research',dateAdded:'2026-06-25'},
+            {id:4,name:'Nashville Title Services',city:'Nashville',state:'tennessee',county:'Davidson County',phone:'(615) 555-1004',email:'info@nashvilletitle.com',website:'https://nashvilletitle.com',notes:'TN title insurance, escrow services',status:'research',dateAdded:'2026-06-25'}
+        ];
         let currentFilterState = 'all';
         let currentSearch = '';
         let currentTab = 'builders';
@@ -1310,7 +1355,7 @@
         function updateFooterMeta() {
             const el = document.getElementById('footer-meta');
             if (!el) return;
-            el.textContent = `${builderData.length} builders · ${lotData.length} lots · ${CONTRACT_TEMPLATES.length} templates · 4 markets`;
+            el.textContent = `${builderData.length} builders · ${lotData.length} lots · ${titleData.length} title companies · ${CONTRACT_TEMPLATES.length} templates · 4 markets`;
         }
 
         function loadData() {
@@ -1322,12 +1367,17 @@
             const parsedLots = storedLots ? JSON.parse(storedLots) : [];
             lotData = mergeWithDefaults(parsedLots, DEFAULT_LOTS, normalizeLot);
 
+            const storedTitles = localStorage.getItem('titleData');
+            const parsedTitles = storedTitles ? JSON.parse(storedTitles) : [];
+            titleData = mergeWithDefaults(parsedTitles, DEFAULT_TITLES, normalizeTitle);
+
             saveData();
         }
 
         function saveData() {
             localStorage.setItem('builderData', JSON.stringify(builderData));
             localStorage.setItem('lotData', JSON.stringify(lotData));
+            localStorage.setItem('titleData', JSON.stringify(titleData));
         }
 
         function updateMetrics(filteredBuilders) {
@@ -1357,6 +1407,58 @@
             if (activeEl) activeEl.textContent = data.filter(b => b.status === 'active').length;
             if (researchEl) researchEl.textContent = data.filter(b => b.status === 'research').length;
             if (statesEl) statesEl.textContent = ALL_MARKETS.length;
+        }
+
+        function updateHeroForTab(tab) {
+            const heroTotal = document.getElementById('hero-total');
+            const heroActive = document.getElementById('hero-active');
+            const heroResearch = document.getElementById('hero-research');
+            const heroMarkets = document.getElementById('hero-markets');
+            const label0 = document.getElementById('hero-label-0');
+            const label1 = document.getElementById('hero-label-1');
+            const label2 = document.getElementById('hero-label-2');
+            const label3 = document.getElementById('hero-label-3');
+
+            if (!heroTotal || !label0) return;
+
+            if (tab === 'builders') {
+                heroTotal.textContent = builderData.length;
+                heroActive.textContent = builderData.filter(b => b.status === 'active').length;
+                heroResearch.textContent = builderData.filter(b => b.status === 'research').length;
+                heroMarkets.textContent = ALL_MARKETS.length;
+                label0.textContent = 'Total Builders';
+                label1.textContent = 'Active';
+                label2.textContent = 'In Research';
+                label3.textContent = 'Markets';
+            } else if (tab === 'lots') {
+                const filteredLots = getFilteredLots();
+                heroTotal.textContent = filteredLots.length;
+                heroActive.textContent = filteredLots.filter(l => l.status === 'purchased').length;
+                heroResearch.textContent = filteredLots.filter(l => l.status === 'identified').length;
+                heroMarkets.textContent = new Set(filteredLots.map(l => l.state)).size;
+                label0.textContent = 'Total Lots';
+                label1.textContent = 'Purchased';
+                label2.textContent = 'Identified';
+                label3.textContent = 'Markets';
+            } else if (tab === 'titles') {
+                heroTotal.textContent = titleData.length;
+                heroActive.textContent = titleData.filter(t => t.status === 'active').length;
+                heroResearch.textContent = titleData.filter(t => t.status === 'research').length;
+                heroMarkets.textContent = new Set(titleData.map(t => t.state)).size;
+                label0.textContent = 'Title Companies';
+                label1.textContent = 'Active';
+                label2.textContent = 'In Research';
+                label3.textContent = 'Markets';
+            } else {
+                heroTotal.textContent = builderData.length;
+                heroActive.textContent = builderData.filter(b => b.status === 'active').length;
+                heroResearch.textContent = builderData.filter(b => b.status === 'research').length;
+                heroMarkets.textContent = ALL_MARKETS.length;
+                label0.textContent = 'Total Builders';
+                label1.textContent = 'Active';
+                label2.textContent = 'In Research';
+                label3.textContent = 'Markets';
+            }
         }
 
         function renderStatePills() {
@@ -1403,6 +1505,151 @@
             } else {
                 filterAndRender();
             }
+        }
+
+        function normalizeTitle(t) {
+            if (!t) return null;
+            return {
+                ...t,
+                id: t.id,
+                name: t.name || 'Unknown Title Company',
+                city: t.city || '',
+                state: normalizeStateKey(t.state),
+                county: t.county || '—',
+                status: t.status === 'active' ? 'active' : 'research'
+            };
+        }
+
+        function renderTitles() {
+            const container = document.getElementById('titles-list');
+            if (!container) return;
+
+            const searchInput = document.getElementById('search-input');
+            const search = (searchInput ? searchInput.value : '').toLowerCase().trim();
+
+            let filtered = titleData;
+            if (currentFilterState !== 'all') {
+                filtered = filtered.filter(t => normalizeStateKey(t.state) === currentFilterState);
+            }
+            if (search) {
+                filtered = filtered.filter(t => 
+                    t.name.toLowerCase().includes(search) ||
+                    (t.city && t.city.toLowerCase().includes(search)) ||
+                    (t.county && t.county.toLowerCase().includes(search))
+                );
+            }
+
+            const grouped = {};
+            filtered.forEach(title => {
+                const key = normalizeStateKey(title.state) || 'unknown';
+                if (!grouped[key]) grouped[key] = [];
+                grouped[key].push(title);
+            });
+
+            let html = '';
+            MARKET_ORDER.forEach(stateKey => {
+                if (currentFilterState !== 'all' && currentFilterState !== stateKey) return;
+                const titlesInState = grouped[stateKey] || [];
+                const count = titlesInState.length;
+                const stateName = MARKET_LABELS[stateKey] || stateKey;
+
+                html += `
+                    <div class="state-group">
+                        <div class="state-header">
+                            ${stateName} 
+                            <span>— ${count} title compan${count === 1 ? 'y' : 'ies'}</span>
+                        </div>
+                `;
+
+                if (count === 0) {
+                    html += `
+                        <div class="list-panel">
+                            <div class="empty-market"><strong>0</strong> title companies — No data yet. Ready for research.</div>
+                        </div>
+                    `;
+                } else {
+                    html += `<div class="list-panel">`;
+                    titlesInState.forEach(title => {
+                        const isActive = title.status === 'active';
+                        const statusDotClass = isActive ? 'active' : 'research';
+                        const statusText = statusBadgeLabel(title.status);
+                        
+                        html += `
+                            <div class="builder-row" data-id="${title.id}" onclick="toggleTitleDetails(${title.id})" style="cursor: pointer;">
+                                <div class="builder-main">
+                                    <div class="builder-name">${escHtml(title.name)}</div>
+                                    <div class="builder-location">${escHtml(title.city)}${title.county ? ' • ' + escHtml(title.county) : ''}</div>
+                                </div>
+                                <div class="builder-status" aria-label="Status: ${statusText}" onclick="event.stopPropagation(); toggleTitleStatus(${title.id}, event)">
+                                    <span class="status-dot ${statusDotClass}"></span>
+                                    <span class="status-label ${isActive ? 'active' : ''}">${statusText}</span>
+                                </div>
+                                <div class="builder-actions" onclick="event.stopPropagation()">
+                                    <button class="icon-btn" onclick="copyTitle(${title.id}, event)" title="Copy details">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="builder-details hidden" id="title-details-${title.id}">
+                                <div class="detail"><div class="detail-label">Phone</div><div class="detail-value">${fmt(title.phone)}</div></div>
+                                <div class="detail"><div class="detail-label">Email</div><div class="detail-value">${title.email ? `<a href="mailto:${escHtml(title.email)}">${escHtml(title.email)}</a>` : fmt('')}</div></div>
+                                <div class="detail"><div class="detail-label">Website</div><div class="detail-value">${fmtLink(title.website)}</div></div>
+                                <div class="detail"><div class="detail-label">Notes</div><div class="detail-value">${fmt(title.notes)}</div></div>
+                                <div class="detail"><div class="detail-label">Added</div><div class="detail-value">${fmt(title.dateAdded)}</div></div>
+                                <div class="detail" style="grid-column: 1 / -1; margin-top: 8px; padding-top: 12px; border-top: 1px solid rgba(30, 58, 47, 0.08);">
+                                    <button class="status-toggle-btn ${isActive ? 'active' : ''}" onclick="event.stopPropagation(); toggleTitleStatus(${title.id}, event)">
+                                        ${isActive ? '✓ Mark as Needs Research' : '✓ Mark as Active'}
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    html += `</div>`;
+                }
+                html += `</div>`;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function toggleTitleDetails(id, e) {
+            if (e) e.stopImmediatePropagation();
+            const el = document.getElementById('title-details-' + id);
+            if (el) el.classList.toggle('hidden');
+        }
+
+        function toggleTitleStatus(id, e) {
+            if (e) { e.stopPropagation(); e.preventDefault(); }
+            const title = titleData.find(t => t.id === id);
+            if (!title) return;
+            title.status = title.status === 'active' ? 'research' : 'active';
+            saveData();
+            renderTitles();
+            showToast(`Title company marked as ${statusBadgeLabel(title.status)}`);
+        }
+
+        function copyTitle(id, e) {
+            if (e) e.stopImmediatePropagation();
+            const title = titleData.find(t => t.id === id);
+            if (!title) return;
+            let text = `${title.name}\n`;
+            if (title.phone) text += `Phone: ${title.phone}\n`;
+            if (title.email) text += `Email: ${title.email}\n`;
+            if (title.website) text += `Web: ${title.website}\n`;
+            text += `Location: ${title.city}, ${title.county}\n`;
+            if (title.notes) text += `Notes: ${title.notes}`;
+            navigator.clipboard.writeText(text).then(() => showToast('Copied to clipboard')).catch(() => {
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                showToast('Copied to clipboard');
+            });
         }
 
         function updateControlsForTab(tab) {
@@ -1547,7 +1794,18 @@
                                 <div class="detail"><div class="detail-label">Notes</div><div class="detail-value">${fmt(builder.volume)}</div></div>
                                 <div class="detail"><div class="detail-label">Added</div><div class="detail-value">${fmt(builder.dateAdded)}</div></div>
                                 <div class="detail" style="grid-column: 1 / -1; margin-top: 8px; padding-top: 12px; border-top: 1px solid rgba(30, 58, 47, 0.08);">
-                                    <button class="status-toggle-btn ${isActive ? 'active' : ''}" onclick="toggleBuilderStatus(${builder.id}, event)">
+                                    <div class="detail-label">Your Notes</div>
+                                    <div class="notes-input-wrap">
+                                        <textarea 
+                                            class="notes-textarea" 
+                                            placeholder="Add notes about contact attempts, buy box details, next follow-up..."
+                                            oninput="updateBuilderNotes(${builder.id}, this.value)"
+                                            onclick="event.stopPropagation()"
+                                        >${escHtml(builder.notes || '')}</textarea>
+                                    </div>
+                                </div>
+                                <div class="detail" style="grid-column: 1 / -1; margin-top: 8px; padding-top: 12px; border-top: 1px solid rgba(30, 58, 47, 0.08);">
+                                    <button class="status-toggle-btn ${isActive ? 'active' : ''}" onclick="event.stopPropagation(); toggleBuilderStatus(${builder.id}, event)">
                                         ${isActive ? '✓ Mark as Needs Research' : '✓ Mark as Active'}
                                     </button>
                                 </div>
@@ -1561,6 +1819,13 @@
             });
 
             container.innerHTML = html;
+        }
+
+        function updateBuilderNotes(id, notes) {
+            const builder = builderData.find(b => b.id === id);
+            if (!builder) return;
+            builder.notes = notes;
+            saveData();
         }
 
         function toggleBuilderStatus(id, e) {
@@ -1799,6 +2064,36 @@
             el.style.display = (el.style.display === 'none' || el.style.display === '') ? 'block' : 'none';
         }
 
+        function exportTitlesCSV() {
+            if (!titleData.length) return;
+            const headers = ['Name', 'City', 'County', 'State', 'Status', 'Phone', 'Email', 'Website', 'Notes'];
+            let csv = headers.join(',') + '\n';
+            titleData.forEach(t => {
+                const row = [
+                    `"${(t.name || '').replace(/"/g, '""')}"`,
+                    `"${(t.city || '').replace(/"/g, '""')}"`,
+                    `"${(t.county || '').replace(/"/g, '""')}"`,
+                    `"${(t.state || '').replace(/"/g, '""')}"`,
+                    `"${(t.status || '').replace(/"/g, '""')}"`,
+                    `"${(t.phone || '').replace(/"/g, '""')}"`,
+                    `"${(t.email || '').replace(/"/g, '""')}"`,
+                    `"${(t.website || '').replace(/"/g, '""')}"`,
+                    `"${(t.notes || '').replace(/"/g, '""')}"`
+                ];
+                csv += row.join(',') + '\n';
+            });
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'land-flip-title-companies.csv';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showToast('Exported title companies CSV');
+        }
+
         function exportLotsCSV() {
             if (!lotData.length) return;
             const headers = ['Address', 'County', 'City', 'ZIP', 'Acres', 'Price', 'Status', 'Date', 'Notes', 'Source'];
@@ -1875,6 +2170,21 @@
                 if (labelEls[1]) labelEls[1].textContent = 'Ready';
                 if (labelEls[2]) labelEls[2].textContent = 'Pending';
                 if (labelEls[3]) labelEls[3].textContent = 'Markets';
+            } else if (tab === 'titles') {
+                const totalTitles = titleData.length;
+                const activeTitles = titleData.filter(t => t.status === 'active').length;
+                const researchTitles = titleData.filter(t => t.status === 'research').length;
+                const titleMarkets = new Set(titleData.map(t => t.state)).size;
+
+                if (totalEl) totalEl.textContent = totalTitles;
+                if (activeEl) activeEl.textContent = activeTitles;
+                if (researchEl) researchEl.textContent = researchTitles;
+                if (marketsEl) marketsEl.textContent = titleMarkets || '4';
+
+                if (labelEls[0]) labelEls[0].textContent = 'Title Companies';
+                if (labelEls[1]) labelEls[1].textContent = 'Active';
+                if (labelEls[2]) labelEls[2].textContent = 'In Research';
+                if (labelEls[3]) labelEls[3].textContent = 'Markets';
             }
         }
 
@@ -1888,6 +2198,7 @@
             document.getElementById('builders-content').classList.toggle('active', tab === 'builders');
             document.getElementById('lots-content').classList.toggle('active', tab === 'lots');
             document.getElementById('contracts-content').classList.toggle('active', tab === 'contracts');
+            document.getElementById('titles-content').classList.toggle('active', tab === 'titles');
 
             updateControlsForTab(tab);
             renderStatePills();
@@ -1897,6 +2208,8 @@
                 filterAndRender();
             } else if (tab === 'lots') {
                 renderLots();
+            } else if (tab === 'titles') {
+                renderTitles();
             }
         }
 
@@ -1908,6 +2221,11 @@
 
             if (currentTab === 'contracts') {
                 exportAllData();
+                return;
+            }
+
+            if (currentTab === 'titles') {
+                exportTitlesCSV();
                 return;
             }
 
