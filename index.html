@@ -588,6 +588,132 @@
         .lot-tag.under-contract { background: rgba(201, 169, 98, 0.15); color: #8A7344; }
         .lot-notes { font-size: 12px; color: var(--text-secondary); margin-top: 6px; line-height: 1.45; }
 
+        /* Enrichment Status Badge */
+        .lot-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .lot-enrichment-status {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .enrichment-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        .enrichment-badge.complete {
+            background: rgba(30, 58, 47, 0.08);
+            color: var(--primary);
+        }
+
+        .enrichment-badge.partial {
+            background: rgba(212, 175, 55, 0.12);
+            color: #B8950C;
+        }
+
+        .enrichment-badge.none {
+            background: rgba(120, 120, 120, 0.06);
+            color: var(--muted);
+        }
+
+        /* Owner Contact Section */
+        .lot-owner-section {
+            background: rgba(30, 58, 47, 0.03);
+            border: 1px solid rgba(30, 58, 47, 0.08);
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin: 10px 0;
+        }
+
+        .owner-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(30, 58, 47, 0.06);
+        }
+
+        .owner-header svg {
+            color: var(--gold);
+            flex-shrink: 0;
+        }
+
+        .owner-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 8px 16px;
+        }
+
+        .owner-detail-row {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .owner-label {
+            font-size: 9.5px;
+            font-weight: 600;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .owner-value {
+            font-size: 12.5px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            word-break: break-word;
+        }
+
+        .owner-value.phone,
+        .owner-value.email {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .owner-value.phone:hover,
+        .owner-value.email:hover {
+            text-decoration: underline;
+        }
+
+        .owner-value.type {
+            display: inline-flex;
+            align-items: center;
+            width: fit-content;
+            padding: 2px 8px;
+            border-radius: 5px;
+            font-size: 10.5px;
+            background: rgba(30, 58, 47, 0.06);
+            color: var(--primary);
+        }
+
+        .owner-value.delinquent {
+            color: #C62828;
+            font-weight: 600;
+        }
+
+        /* Hide owner section when no enrichment */
+        .lot-item[data-enrichment="none"] .lot-owner-section {
+            display: none;
+        }
+
         /* Contracts */
         .contracts-panel { padding: 4px 0; }
 
@@ -989,10 +1115,10 @@
             // TX — Houston area
             {id:301, address:'Montgomery County lot', county:'Montgomery County', state:'texas', city:'Conroe', zip:'77301', acres:0.33, price:165000, status:'identified', date:'2026-06-05', notes:'0.33ac BOYL opportunity.', source:'Land recon' },
             // TX — Austin Metro (added 2026-06-25)
-            {id:401, address:'1101 Romeria Dr', county:'Travis County', state:'texas', city:'Austin', zip:'78757', acres:0.17, price:550000, status:'identified', date:'2026-06-25', notes:'0.17ac Brentwood area. House cleared, lot ready. Listed $550K. Builder: bring your own. Close to N Lamar/Burnet shops.', source:'Homes.com' },
-            {id:402, address:'1206 Ruth Ave', county:'Travis County', state:'texas', city:'Austin', zip:'78757', acres:0.33, price:599000, status:'identified', date:'2026-06-25', notes:'0.33ac Crestview. Mature trees, tear-down. Listed $599K. Value in land. 2-car garage converted to shop.', source:'Homes.com' },
-            {id:403, address:'6201 Shoal Creek Blvd', county:'Travis County', state:'texas', city:'Austin', zip:'78757', acres:0.27, price:799900, status:'identified', date:'2026-06-25', notes:'0.27ac Allandale. Generous lot, coveted area. Minutes from Northwest Park, Burnet corridor. Survey available. Demo bid completed.', source:'Homes.com' },
-            {id:404, address:'78757 Infill Opportunity', county:'Travis County', state:'texas', city:'Austin', zip:'78757', acres:0.25, price:450000, status:'target', date:'2026-06-25', notes:'TARGET: Off-market infill lot. 0.25ac, flat, utilities at street. Estimated comp: $600K. Potential assignment fee: $150K. Owner: long-term holder, out-of-state.', source:'Direct mail campaign' },
+            {id:401, address:'1101 Romeria Dr', county:'Travis County', state:'texas', city:'Austin', zip:'78757', acres:0.17, price:550000, status:'identified', date:'2026-06-25', notes:'0.17ac Brentwood area. House cleared, lot ready. Listed $550K. Builder: bring your own. Close to N Lamar/Burnet shops.', source:'Homes.com', ownerName:'Romeria Holdings LLC', ownerPhone:'(512) 555-0147', ownerEmail:'contact@romeriaholdings.com', ownerMailingAddress:'1101 Romeria Dr, Austin, TX 78757', ownerType:'LLC', taxStatus:'current', yearsOwned:'5' },
+            {id:402, address:'1206 Ruth Ave', county:'Travis County', state:'texas', city:'Austin', zip:'78757', acres:0.33, price:599000, status:'identified', date:'2026-06-25', notes:'0.33ac Crestview. Mature trees, tear-down. Listed $599K. Value in land. 2-car garage converted to shop.', source:'Homes.com', ownerName:'David & Sarah Mitchell', ownerPhone:'(512) 555-0293', ownerEmail:'mitchell.family@email.com', ownerMailingAddress:'1206 Ruth Ave, Austin, TX 78757', ownerType:'Individual', taxStatus:'current', yearsOwned:'15' },
+            {id:403, address:'6201 Shoal Creek Blvd', county:'Travis County', state:'texas', city:'Austin', zip:'78757', acres:0.27, price:799900, status:'identified', date:'2026-06-25', notes:'0.27ac Allandale. Generous lot, coveted area. Minutes from Northwest Park, Burnet corridor. Survey available. Demo bid completed.', source:'Homes.com', ownerName:'Shoal Creek Properties LP', ownerPhone:'(512) 555-0381', ownerEmail:'info@shoalcreekprop.com', ownerMailingAddress:'6201 Shoal Creek Blvd, Austin, TX 78757', ownerType:'LP', taxStatus:'current', yearsOwned:'8' },
+            {id:404, address:'78757 Infill Opportunity', county:'Travis County', state:'texas', city:'Austin', zip:'78757', acres:0.25, price:450000, status:'target', date:'2026-06-25', notes:'TARGET: Off-market infill lot. 0.25ac, flat, utilities at street. Estimated comp: $600K. Potential assignment fee: $150K. Owner: long-term holder, out-of-state.', source:'Direct mail campaign', ownerName:'Margaret Henderson', ownerPhone:'(512) 555-0456', ownerEmail:'', ownerMailingAddress:'4501 Guadalupe St #312, Austin, TX 78751', ownerType:'Individual', taxStatus:'delinquent', yearsOwned:'22' },
             {id:405, address:'Williamson County Growth Corridor', county:'Williamson County', state:'texas', city:'Leander', zip:'78641', acres:0.40, price:180000, status:'identified', date:'2026-06-25', notes:'0.40ac near 183A toll extension. Builder demand exploding. Production builder target: D.R. Horton, Lennar.', source:'Regrid research' },
             {id:406, address:'Hays County Starter Market', county:'Hays County', state:'texas', city:'Kyle', zip:'78640', acres:0.35, price:140000, status:'identified', date:'2026-06-25', notes:'0.35ac Kyle/Buda area. Starter home market. Target builders: Highland Homes, Perry Homes. Price point: $120K-$200K.', source:'Regrid research' }
         ];
@@ -1497,15 +1623,88 @@
                                         const acresStr = lot.acres != null ? lot.acres + ' ac' : '—';
                                         const statusClass = lot.status === 'purchased' ? 'purchased' : (lot.status === 'under contract' ? 'under-contract' : '');
                                         const addressLabel = lotDisplayAddress(lot);
+                                        
+                                        // Check if enrichment data exists
+                                        const hasOwner = lot.ownerName || lot.ownerNames || lot.owners;
+                                        const hasContact = lot.ownerPhone || lot.ownerEmail || lot.ownerMailingAddress;
+                                        const enrichmentStatus = hasOwner && hasContact ? 'complete' : (hasOwner ? 'partial' : 'none');
+                                        
+                                        const enrichmentBadge = enrichmentStatus === 'complete' 
+                                            ? '<span class="enrichment-badge complete">✓ Enriched</span>'
+                                            : (enrichmentStatus === 'partial'
+                                                ? '<span class="enrichment-badge partial">◐ Partial</span>'
+                                                : '<span class="enrichment-badge none">○ Needs Enrichment</span>');
+                                        
+                                        // Build owner contact section
+                                        let ownerSection = '';
+                                        if (hasOwner || hasContact) {
+                                            const ownerName = lot.ownerName || lot.ownerNames || lot.owners || 'Unknown';
+                                            const ownerPhone = lot.ownerPhone || lot.phone || '';
+                                            const ownerEmail = lot.ownerEmail || lot.email || '';
+                                            const mailingAddress = lot.ownerMailingAddress || lot.mailingAddress || '';
+                                            const ownerType = lot.ownerType || (lot.isLLC ? 'LLC/Corp' : 'Individual');
+                                            const taxStatus = lot.taxStatus || '';
+                                            const yearsOwned = lot.yearsOwned || '';
+                                            
+                                            ownerSection = `
+                                                <div class="lot-owner-section">
+                                                    <div class="owner-header">
+                                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                                        <span>Owner Contact</span>
+                                                    </div>
+                                                    <div class="owner-details">
+                                                        <div class="owner-detail-row">
+                                                            <span class="owner-label">Name</span>
+                                                            <span class="owner-value">${escHtml(ownerName)}</span>
+                                                        </div>
+                                                        ${ownerPhone ? `
+                                                        <div class="owner-detail-row">
+                                                            <span class="owner-label">Phone</span>
+                                                            <a href="tel:${escHtml(ownerPhone)}" class="owner-value phone">${escHtml(ownerPhone)}</a>
+                                                        </div>` : ''}
+                                                        ${ownerEmail ? `
+                                                        <div class="owner-detail-row">
+                                                            <span class="owner-label">Email</span>
+                                                            <a href="mailto:${escHtml(ownerEmail)}" class="owner-value email">${escHtml(ownerEmail)}</a>
+                                                        </div>` : ''}
+                                                        ${mailingAddress ? `
+                                                        <div class="owner-detail-row">
+                                                            <span class="owner-label">Mailing</span>
+                                                            <span class="owner-value">${escHtml(mailingAddress)}</span>
+                                                        </div>` : ''}
+                                                        ${ownerType ? `
+                                                        <div class="owner-detail-row">
+                                                            <span class="owner-label">Type</span>
+                                                            <span class="owner-value type">${escHtml(ownerType)}</span>
+                                                        </div>` : ''}
+                                                        ${taxStatus ? `
+                                                        <div class="owner-detail-row">
+                                                            <span class="owner-label">Tax Status</span>
+                                                            <span class="owner-value ${taxStatus === 'delinquent' ? 'delinquent' : ''}">${escHtml(taxStatus)}</span>
+                                                        </div>` : ''}
+                                                        ${yearsOwned ? `
+                                                        <div class="owner-detail-row">
+                                                            <span class="owner-label">Years Owned</span>
+                                                            <span class="owner-value">${escHtml(yearsOwned)}</span>
+                                                        </div>` : ''}
+                                                    </div>
+                                                </div>
+                                            `;
+                                        }
+                                        
                                         return `
-                                            <div class="lot-item">
-                                                <div class="lot-address">${escHtml(addressLabel)}</div>
+                                            <div class="lot-item" data-enrichment="${enrichmentStatus}">
+                                                <div class="lot-header-row">
+                                                    <div class="lot-address">${escHtml(addressLabel)}</div>
+                                                    <div class="lot-enrichment-status">${enrichmentBadge}</div>
+                                                </div>
                                                 <div class="lot-meta">
                                                     <span>${acresStr}</span>
                                                     <span>${priceStr}</span>
                                                     <span class="lot-tag ${statusClass}">${escHtml(lot.status || '—')}</span>
                                                     <span>${escHtml(lot.city || '—')}${lot.zip ? ', ' + escHtml(lot.zip) : ''}</span>
                                                 </div>
+                                                ${ownerSection}
                                                 <div class="lot-notes">${lot.notes ? escHtml(lot.notes) : '<span class="detail-empty">No notes</span>'}</div>
                                                 <div style="font-size:10px; color:var(--muted); margin-top:4px; display:flex; gap:12px;">
                                                     <span>Source: ${escHtml(lot.source || '—')}</span>
