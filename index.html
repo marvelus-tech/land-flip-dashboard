@@ -384,11 +384,37 @@
             border-bottom: 1px solid var(--divider);
             transition: background 0.12s ease;
             gap: 16px;
+            cursor: pointer;
         }
 
         .builder-row:last-child { border-bottom: none; }
 
         .builder-row:hover { background: #FDFCFA; }
+
+        .status-toggle-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            border: 1px solid rgba(30, 58, 47, 0.12);
+            background: rgba(30, 58, 47, 0.04);
+            color: var(--primary);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .status-toggle-btn:hover {
+            background: rgba(30, 58, 47, 0.08);
+        }
+
+        .status-toggle-btn.active {
+            background: rgba(30, 58, 47, 0.08);
+            border-color: rgba(30, 58, 47, 0.2);
+        }
 
         .builder-main {
             flex: 1;
@@ -1005,51 +1031,51 @@
         // EXACT BUILDER DATA — PRESERVED 100%
         // ============================================
         const DEFAULT_BUILDERS = [
-            {id:1,name:'Rutherford Home Builders',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 410-7496',email:'INFO@RUTHERFORDHB.COM',website:'https://rutherfordhomebuilders.com',buyBox:'Lots 0.25-2 ac',volume:'Active local builder',status:'active',dateAdded:'2026-06-22',initials:'RH'},
-            {id:2,name:'Jensen Quality Homes LLC',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 525-1842',email:'',website:'https://www.jensenqualityhomes.com',buyBox:'Scattered lots',volume:'President, RCHBA',status:'active',dateAdded:'2026-06-22',initials:'JQ'},
-            {id:3,name:'Skill Construction Co., Inc.',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 904-8842',email:'',website:'https://www.skillconstructionco.com',buyBox:'Lots, remodels',volume:'Past President, RCHBA',status:'active',dateAdded:'2026-06-22',initials:'SC'},
+            {id:1,name:'Rutherford Home Builders',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 410-7496',email:'INFO@RUTHERFORDHB.COM',website:'https://rutherfordhomebuilders.com',buyBox:'Lots 0.25-2 ac',volume:'Active local builder',status:'research',dateAdded:'2026-06-22',initials:'RH'},
+            {id:2,name:'Jensen Quality Homes LLC',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 525-1842',email:'',website:'https://www.jensenqualityhomes.com',buyBox:'Scattered lots',volume:'President, RCHBA',status:'research',dateAdded:'2026-06-22',initials:'JQ'},
+            {id:3,name:'Skill Construction Co., Inc.',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 904-8842',email:'',website:'https://www.skillconstructionco.com',buyBox:'Lots, remodels',volume:'Past President, RCHBA',status:'research',dateAdded:'2026-06-22',initials:'SC'},
             {id:4,name:'A F Johns Residential, LLC',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 459-4572',email:'',website:'',buyBox:'Scattered lots',volume:'Residential builder',status:'research',dateAdded:'2026-06-22',initials:'AJ'},
-            {id:5,name:'Caywood Builders, LLC',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 394-0379',email:'',website:'https://www.caywoodbuilders.com',buyBox:'Custom homes',volume:'Director, CPB/R',status:'active',dateAdded:'2026-06-22',initials:'CB'},
-            {id:6,name:'Paran Homes, LLC',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(678) 726-9646',email:'',website:'https://www.paranhomes.com',buyBox:'Scattered lots',volume:'Multi-state builder',status:'active',dateAdded:'2026-06-22',initials:'PH'},
-            {id:7,name:'Ole South Properties',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 896-0019',email:'',website:'https://www.olesouth.com',buyBox:'Subdivision lots',volume:'Life Director, Past President',status:'active',dateAdded:'2026-06-22',initials:'OS'},
+            {id:5,name:'Caywood Builders, LLC',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 394-0379',email:'',website:'https://www.caywoodbuilders.com',buyBox:'Custom homes',volume:'Director, CPB/R',status:'research',dateAdded:'2026-06-22',initials:'CB'},
+            {id:6,name:'Paran Homes, LLC',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(678) 726-9646',email:'',website:'https://www.paranhomes.com',buyBox:'Scattered lots',volume:'Multi-state builder',status:'research',dateAdded:'2026-06-22',initials:'PH'},
+            {id:7,name:'Ole South Properties',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 896-0019',email:'',website:'https://www.olesouth.com',buyBox:'Subdivision lots',volume:'Life Director, Past President',status:'research',dateAdded:'2026-06-22',initials:'OS'},
             {id:8,name:'Laurel Brook Homes Inc.',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 412-9880',email:'',website:'https://www.LaurelBrookHomes.com',buyBox:'Custom homes',volume:'Local builder',status:'research',dateAdded:'2026-06-22',initials:'LB'},
-            {id:9,name:'Properties Unlimited of Tennessee',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 890-6565',email:'',website:'https://www.LindaDillon.com',buyBox:'Scattered lots',volume:'Past President, Life Director',status:'active',dateAdded:'2026-06-22',initials:'PU'},
+            {id:9,name:'Properties Unlimited of Tennessee',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 890-6565',email:'',website:'https://www.LindaDillon.com',buyBox:'Scattered lots',volume:'Past President, Life Director',status:'research',dateAdded:'2026-06-22',initials:'PU'},
             {id:10,name:'Global Homes, LLC',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 715-9313',email:'',website:'',buyBox:'Scattered lots',volume:'Local builder',status:'research',dateAdded:'2026-06-22',initials:'GH'},
-            {id:11,name:'Steve Martin Construction',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 904-9639',email:'',website:'https://www.stevemartinconstruction.com',buyBox:'Custom homes',volume:'Life Director, Past President, CPB',status:'active',dateAdded:'2026-06-22',initials:'SM'},
+            {id:11,name:'Steve Martin Construction',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 904-9639',email:'',website:'https://www.stevemartinconstruction.com',buyBox:'Custom homes',volume:'Life Director, Past President, CPB',status:'research',dateAdded:'2026-06-22',initials:'SM'},
             {id:12,name:'Woodridge Homes LLC',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 974-5100',email:'',website:'https://mywoodridgehome.com',buyBox:'New home communities',volume:'Active builder',status:'research',dateAdded:'2026-06-22',initials:'WH'},
-            {id:13,name:'Slayton Homes, LLC',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 896-6959',email:'',website:'https://www.slaytonhomesllc.com',buyBox:'Custom/scattered lots',volume:'Past President',status:'active',dateAdded:'2026-06-22',initials:'SH'},
-            {id:14,name:'Jim Averwater Construction',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 351-9232',email:'',website:'https://www.averwaterconstruction.com',buyBox:'Scattered lots',volume:'Life Director, CPB, CGB, Past President',status:'active',dateAdded:'2026-06-22',initials:'JA'},
+            {id:13,name:'Slayton Homes, LLC',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 896-6959',email:'',website:'https://www.slaytonhomesllc.com',buyBox:'Custom/scattered lots',volume:'Past President',status:'research',dateAdded:'2026-06-22',initials:'SH'},
+            {id:14,name:'Jim Averwater Construction',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 351-9232',email:'',website:'https://www.averwaterconstruction.com',buyBox:'Scattered lots',volume:'Life Director, CPB, CGB, Past President',status:'research',dateAdded:'2026-06-22',initials:'JA'},
             {id:15,name:'Southern Lifestyle Homes, LLC',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 369-6464',email:'',website:'https://slhtn.com',buyBox:'Custom homes',volume:'Local builder',status:'research',dateAdded:'2026-06-22',initials:'SL'},
             {id:16,name:'Waldron Enterprises',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 793-7575',email:'',website:'https://www.waldronenterprises.com',buyBox:'Scattered lots',volume:'Local builder',status:'research',dateAdded:'2026-06-22',initials:'WE'},
             {id:17,name:'Wright Construction of TN LLC',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 893-3911',email:'',website:'',buyBox:'Scattered lots',volume:'Local builder',status:'research',dateAdded:'2026-06-22',initials:'WC'},
-            {id:18,name:'Conner Homes',county:'Rutherford/Wilson',state:'tennessee',metro:'Nashville',phone:'(888) 302-1252',email:'land@connerhomes.com',website:'https://www.connerhomes.com/conner-homes-land-acquisition',buyBox:'We buy land — scattered lots',volume:'~65 yrs in TN',status:'active',dateAdded:'2026-06-22',initials:'CH'},
-            {id:19,name:'CLQ Land',county:'Rutherford/Williamson',state:'tennessee',metro:'Nashville',phone:'(615) 663-7345',email:'mark@clqland.com',website:'https://www.clqland.com',buyBox:'Lot banking, infill',volume:'Vertical developer',status:'active',dateAdded:'2026-06-22',initials:'CL'},
-            {id:20,name:'R&H Builders',county:'Wilson County',state:'tennessee',metro:'Nashville',phone:'(615) 709-2111',email:'',website:'https://buildwithrh.com',buyBox:'Custom, BOYL',volume:'Local builder',status:'active',dateAdded:'2026-06-22',initials:'RH'},
-            {id:21,name:'Hutton Homes LLC',county:'Wilson County',state:'tennessee',metro:'Nashville',phone:'(615) 838-6649',email:'',website:'https://www.huttonhomesllc.com',buyBox:'Custom homes',volume:'110+ homes built',status:'active',dateAdded:'2026-06-22',initials:'HH'},
-            {id:22,name:'Burge Builders, Inc.',county:'Wilson County',state:'tennessee',metro:'Nashville',phone:'(615) 485-8855',email:'',website:'https://www.burgebuilders.com',buyBox:'Custom estate homes',volume:'17+ yrs experience',status:'active',dateAdded:'2026-06-22',initials:'BB'},
-            {id:23,name:'Lotus Building Group',county:'Wilson/Davidson',state:'tennessee',metro:'Nashville',phone:'(615) 722-9947',email:'hello@lotusbuildingtn.com',website:'https://lotusbuildingtn.com',buyBox:'Custom, BOYL',volume:'Design + build',status:'active',dateAdded:'2026-06-22',initials:'LB'},
-            {id:24,name:'Randy Jones Construction',county:'Sumner County',state:'tennessee',metro:'Nashville',phone:'(615) 452-7731',email:'',website:'https://www.randyjonesconstruction.com',buyBox:'Custom, communities',volume:'50 yrs in Sumner',status:'active',dateAdded:'2026-06-22',initials:'RJ'},
-            {id:25,name:'JR Builders, LLC',county:'Sumner County',state:'tennessee',metro:'Nashville',phone:'(615) 504-1467',email:'info@jrbuildersllc.com',website:'https://www.jrbuildersllc.com',buyBox:'Custom homes',volume:'Builder of Year x5',status:'active',dateAdded:'2026-06-22',initials:'JR'},
-            {id:26,name:'Norfleet Builders',county:'Sumner/Robertson',state:'tennessee',metro:'Nashville',phone:'(615) 682-0148',email:'',website:'https://www.buildnorfleet.com',buyBox:'Fixed-price custom',volume:'Turn-key builder',status:'active',dateAdded:'2026-06-22',initials:'NB'},
+            {id:18,name:'Conner Homes',county:'Rutherford/Wilson',state:'tennessee',metro:'Nashville',phone:'(888) 302-1252',email:'land@connerhomes.com',website:'https://www.connerhomes.com/conner-homes-land-acquisition',buyBox:'We buy land — scattered lots',volume:'~65 yrs in TN',status:'research',dateAdded:'2026-06-22',initials:'CH'},
+            {id:19,name:'CLQ Land',county:'Rutherford/Williamson',state:'tennessee',metro:'Nashville',phone:'(615) 663-7345',email:'mark@clqland.com',website:'https://www.clqland.com',buyBox:'Lot banking, infill',volume:'Vertical developer',status:'research',dateAdded:'2026-06-22',initials:'CL'},
+            {id:20,name:'R&H Builders',county:'Wilson County',state:'tennessee',metro:'Nashville',phone:'(615) 709-2111',email:'',website:'https://buildwithrh.com',buyBox:'Custom, BOYL',volume:'Local builder',status:'research',dateAdded:'2026-06-22',initials:'RH'},
+            {id:21,name:'Hutton Homes LLC',county:'Wilson County',state:'tennessee',metro:'Nashville',phone:'(615) 838-6649',email:'',website:'https://www.huttonhomesllc.com',buyBox:'Custom homes',volume:'110+ homes built',status:'research',dateAdded:'2026-06-22',initials:'HH'},
+            {id:22,name:'Burge Builders, Inc.',county:'Wilson County',state:'tennessee',metro:'Nashville',phone:'(615) 485-8855',email:'',website:'https://www.burgebuilders.com',buyBox:'Custom estate homes',volume:'17+ yrs experience',status:'research',dateAdded:'2026-06-22',initials:'BB'},
+            {id:23,name:'Lotus Building Group',county:'Wilson/Davidson',state:'tennessee',metro:'Nashville',phone:'(615) 722-9947',email:'hello@lotusbuildingtn.com',website:'https://lotusbuildingtn.com',buyBox:'Custom, BOYL',volume:'Design + build',status:'research',dateAdded:'2026-06-22',initials:'LB'},
+            {id:24,name:'Randy Jones Construction',county:'Sumner County',state:'tennessee',metro:'Nashville',phone:'(615) 452-7731',email:'',website:'https://www.randyjonesconstruction.com',buyBox:'Custom, communities',volume:'50 yrs in Sumner',status:'research',dateAdded:'2026-06-22',initials:'RJ'},
+            {id:25,name:'JR Builders, LLC',county:'Sumner County',state:'tennessee',metro:'Nashville',phone:'(615) 504-1467',email:'info@jrbuildersllc.com',website:'https://www.jrbuildersllc.com',buyBox:'Custom homes',volume:'Builder of Year x5',status:'research',dateAdded:'2026-06-22',initials:'JR'},
+            {id:26,name:'Norfleet Builders',county:'Sumner/Robertson',state:'tennessee',metro:'Nashville',phone:'(615) 682-0148',email:'',website:'https://www.buildnorfleet.com',buyBox:'Fixed-price custom',volume:'Turn-key builder',status:'research',dateAdded:'2026-06-22',initials:'NB'},
             {id:27,name:'Southern 7 Homes',county:'Sumner County',state:'tennessee',metro:'Nashville',phone:'(615) 456-9234',email:'',website:'https://southern7homes.com',buyBox:'Custom, renovations',volume:'Built with integrity',status:'research',dateAdded:'2026-06-22',initials:'S7'},
             {id:28,name:'Pettis Builders',county:'Sumner County',state:'tennessee',metro:'Nashville',phone:'',email:'',website:'https://pettisbuilders.com',buyBox:'Luxury custom',volume:'Best of Sumner x13',status:'research',dateAdded:'2026-06-22',initials:'PB'},
             {id:29,name:'Morgan and Sons Homes, Inc.',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 459-0098',email:'',website:'',buyBox:'Scattered lots',volume:'Local builder',status:'research',dateAdded:'2026-06-22',initials:'MS'},
-            {id:30,name:'Michael\'s Homes LLC',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 216-4589',email:'',website:'https://www.themitchellbowmanteam.com',buyBox:'Custom/scattered',volume:'Director, RCHBA',status:'active',dateAdded:'2026-06-22',initials:'MH'},
+            {id:30,name:'Michael\'s Homes LLC',county:'Rutherford County',state:'tennessee',metro:'Nashville',phone:'(615) 216-4589',email:'',website:'https://www.themitchellbowmanteam.com',buyBox:'Custom/scattered',volume:'Director, RCHBA',status:'research',dateAdded:'2026-06-22',initials:'MH'},
             // Texas
-            {id:31,name:'Precision Homes',county:'Montgomery County',state:'texas',metro:'Houston',phone:'(832) 608-6484',email:'',website:'https://precision-homes.com',buyBox:'Build on your lot',volume:'60+ yrs, custom BOYL',status:'active',dateAdded:'2026-06-22',initials:'PH'},
-            {id:32,name:'Design Tech Homes',county:'Montgomery/Waller/Brazoria',state:'texas',metro:'Houston',phone:'(281) 830-6326',email:'',website:'https://www.dth.com',buyBox:'Build on your lot',volume:'3000+ homes, 29+ yrs',status:'active',dateAdded:'2026-06-22',initials:'DT'},
-            {id:33,name:'Ash Design & Build',county:'Montgomery County',state:'texas',metro:'Conroe/The Woodlands',phone:'(936) 900-4782',email:'info@ashdesignbuild.com',website:'https://www.ashdesignbuild.com',buyBox:'Custom BOYL',volume:'Local custom builder',status:'active',dateAdded:'2026-06-22',initials:'AD'},
-            {id:34,name:'Trust Builders',county:'Montgomery County',state:'texas',metro:'Conroe/The Woodlands',phone:'(936) 777-5804',email:'travis@trustbuilders.us',website:'https://trustbuilders.us',buyBox:'Custom + renovation',volume:'Since 2013',status:'active',dateAdded:'2026-06-22',initials:'TB'},
-            {id:35,name:'Hallmark Builders',county:'Montgomery County',state:'texas',metro:'Lake Conroe',phone:'(936) 259-5550',email:'',website:'https://www.hallmarkbuilderstx.com',buyBox:'Luxury custom',volume:'$250M+ in sales',status:'active',dateAdded:'2026-06-22',initials:'HB'},
-            {id:36,name:'Oak Point Homes LLC',county:'Montgomery County',state:'texas',metro:'Magnolia/The Woodlands',phone:'(346) 331-4736',email:'info@oakpointhomesllc.com',website:'https://oakpointhomesllc.com',buyBox:'Luxury custom',volume:'Family-owned craftsmen',status:'active',dateAdded:'2026-06-22',initials:'OP'},
+            {id:31,name:'Precision Homes',county:'Montgomery County',state:'texas',metro:'Houston',phone:'(832) 608-6484',email:'',website:'https://precision-homes.com',buyBox:'Build on your lot',volume:'60+ yrs, custom BOYL',status:'research',dateAdded:'2026-06-22',initials:'PH'},
+            {id:32,name:'Design Tech Homes',county:'Montgomery/Waller/Brazoria',state:'texas',metro:'Houston',phone:'(281) 830-6326',email:'',website:'https://www.dth.com',buyBox:'Build on your lot',volume:'3000+ homes, 29+ yrs',status:'research',dateAdded:'2026-06-22',initials:'DT'},
+            {id:33,name:'Ash Design & Build',county:'Montgomery County',state:'texas',metro:'Conroe/The Woodlands',phone:'(936) 900-4782',email:'info@ashdesignbuild.com',website:'https://www.ashdesignbuild.com',buyBox:'Custom BOYL',volume:'Local custom builder',status:'research',dateAdded:'2026-06-22',initials:'AD'},
+            {id:34,name:'Trust Builders',county:'Montgomery County',state:'texas',metro:'Conroe/The Woodlands',phone:'(936) 777-5804',email:'travis@trustbuilders.us',website:'https://trustbuilders.us',buyBox:'Custom + renovation',volume:'Since 2013',status:'research',dateAdded:'2026-06-22',initials:'TB'},
+            {id:35,name:'Hallmark Builders',county:'Montgomery County',state:'texas',metro:'Lake Conroe',phone:'(936) 259-5550',email:'',website:'https://www.hallmarkbuilderstx.com',buyBox:'Luxury custom',volume:'$250M+ in sales',status:'research',dateAdded:'2026-06-22',initials:'HB'},
+            {id:36,name:'Oak Point Homes LLC',county:'Montgomery County',state:'texas',metro:'Magnolia/The Woodlands',phone:'(346) 331-4736',email:'info@oakpointhomesllc.com',website:'https://oakpointhomesllc.com',buyBox:'Luxury custom',volume:'Family-owned craftsmen',status:'research',dateAdded:'2026-06-22',initials:'OP'},
             {id:37,name:'Sabo Custom Builders',county:'Harris/Montgomery',state:'texas',metro:'Houston',phone:'',email:'',website:'https://sabocustombuilders.com',buyBox:'Build on your lot',volume:'Houston custom BOYL',status:'research',dateAdded:'2026-06-22',initials:'SB'},
             // North Carolina - Wake County (added 2026-06-24)
-            {id:38,name:'Loyd Builders',county:'Wake County',state:'north-carolina',metro:'Raleigh',phone:'(919) 387-1455',email:'',website:'',buyBox:'Custom luxury BOYL, infill lots',volume:'Apex-based',status:'active',dateAdded:'2026-06-24',initials:'LB'},
-            {id:39,name:'Fuller Land & Development',county:'Wake County',state:'north-carolina',metro:'Raleigh',phone:'(919) 417-0057',email:'',website:'',buyBox:'Land development + homebuilding',volume:'Raleigh',status:'active',dateAdded:'2026-06-24',initials:'FL'},
+            {id:38,name:'Loyd Builders',county:'Wake County',state:'north-carolina',metro:'Raleigh',phone:'(919) 387-1455',email:'',website:'',buyBox:'Custom luxury BOYL, infill lots',volume:'Apex-based',status:'research',dateAdded:'2026-06-24',initials:'LB'},
+            {id:39,name:'Fuller Land & Development',county:'Wake County',state:'north-carolina',metro:'Raleigh',phone:'(919) 417-0057',email:'',website:'',buyBox:'Land development + homebuilding',volume:'Raleigh',status:'research',dateAdded:'2026-06-24',initials:'FL'},
             {id:38,name:'CRV Homes',county:'Harris/Fort Bend',state:'texas',metro:'Houston/Pearland',phone:'',email:'',website:'https://www.crvhomes.com',buyBox:'Ultra high-end custom',volume:'Modern/contemporary specialist',status:'research',dateAdded:'2026-06-22',initials:'CR'},
             {id:39,name:'DHY Texas Builders',county:'Harris/Montgomery/Fort Bend',state:'texas',metro:'Houston',phone:'',email:'',website:'https://dhytexasbuilders.com',buyBox:'Build on your lot',volume:'Top 5 Texas contractors',status:'research',dateAdded:'2026-06-22',initials:'DT'},
             {id:40,name:'Kurk Homes',county:'Montgomery/Harris/Brazoria',state:'texas',metro:'Houston/Austin/SA',phone:'',email:'',website:'https://www.kurkhomes.com',buyBox:'BOYL 125mi radius',volume:'30 yrs, Southern Living builder',status:'research',dateAdded:'2026-06-22',initials:'KH'},
-            {id:41,name:'Frankel Design Build',county:'Harris County',state:'texas',metro:'Houston',phone:'(713) 623-4646',email:'',website:'https://www.frankeldesignbuild.com',buyBox:'Custom + land acquisition',volume:'NAHB Custom Builder of Year',status:'active',dateAdded:'2026-06-22',initials:'FD'},
+            {id:41,name:'Frankel Design Build',county:'Harris County',state:'texas',metro:'Houston',phone:'(713) 623-4646',email:'',website:'https://www.frankeldesignbuild.com',buyBox:'Custom + land acquisition',volume:'NAHB Custom Builder of Year',status:'research',dateAdded:'2026-06-22',initials:'FD'},
             {id:42,name:'Highland Homes',county:'Fort Bend County',state:'texas',metro:'Katy/Fulshear/Richmond',phone:'(281) 517-2550',email:'',website:'https://www.highlandhomes.com',buyBox:'Master-planned communities',volume:'Top production builder',status:'research',dateAdded:'2026-06-22',initials:'HH'},
             {id:43,name:'Perry Homes',county:'Fort Bend/Montgomery',state:'texas',metro:'Greater Houston',phone:'(832) 706-2884',email:'',website:'https://www.perryhomes.com',buyBox:'New home communities',volume:'Staple Texas builder',status:'research',dateAdded:'2026-06-22',initials:'PH'},
             {id:44,name:'David Weekley Homes',county:'Fort Bend/Harris/Montgomery',state:'texas',metro:'Greater Houston',phone:'(713) 963-0500',email:'',website:'https://www.davidweekleyhomes.com',buyBox:'Custom feel, production efficiency',volume:'National custom builder',status:'research',dateAdded:'2026-06-22',initials:'DW'},
@@ -1059,8 +1085,8 @@
             {id:48,name:'Beazer Homes - Houston',county:'Fort Bend/Montgomery',state:'texas',metro:'Greater Houston',phone:'(888) 439-4848',email:'',website:'https://www.beazer.com',buyBox:'Energy efficient + Choice Plans',volume:'Public national builder',status:'research',dateAdded:'2026-06-22',initials:'BH'},
             {id:49,name:'Chesmar Homes',county:'Fort Bend County',state:'texas',metro:'Fulshear/Katy',phone:'(281) 758-0400',email:'',website:'https://www.chesmarhomes.com',buyBox:'Transparent build process',volume:'Entry-level / first-time buyer',status:'research',dateAdded:'2026-06-22',initials:'CS'},
             {id:50,name:'512 Builders',county:'Harris/Fort Bend',state:'texas',metro:'Houston',phone:'(713) 939-8005',email:'',website:'',buyBox:'Custom + design/build',volume:'Custom + expert witness',status:'research',dateAdded:'2026-06-22',initials:'5B'},
-            {id:51,name:'Khalisi Custom Homes',county:'Harris County',state:'texas',metro:'Bellaire/Houston',phone:'(281) 723-0448',email:'',website:'https://www.khalisicustomhomes.com',buyBox:'Custom homes',volume:'GHBA Professional Builder',status:'active',dateAdded:'2026-06-22',initials:'KC'},
-            {id:52,name:'Tushita Builders',county:'Harris County',state:'texas',metro:'Houston',phone:'(713) 440-9577',email:'',website:'https://tushitabuilders.com',buyBox:'Custom homes',volume:'GHBA Professional Builder',status:'active',dateAdded:'2026-06-22',initials:'TB'},
+            {id:51,name:'Khalisi Custom Homes',county:'Harris County',state:'texas',metro:'Bellaire/Houston',phone:'(281) 723-0448',email:'',website:'https://www.khalisicustomhomes.com',buyBox:'Custom homes',volume:'GHBA Professional Builder',status:'research',dateAdded:'2026-06-22',initials:'KC'},
+            {id:52,name:'Tushita Builders',county:'Harris County',state:'texas',metro:'Houston',phone:'(713) 440-9577',email:'',website:'https://tushitabuilders.com',buyBox:'Custom homes',volume:'GHBA Professional Builder',status:'research',dateAdded:'2026-06-22',initials:'TB'},
             {id:53,name:'ADI Homes',county:'Harris County',state:'texas',metro:'Houston',phone:'(713) 380-1101',email:'',website:'',buyBox:'Custom homes',volume:'GHBA Professional Builder',status:'research',dateAdded:'2026-06-22',initials:'AH'},
             {id:54,name:'CRAFTED Custom Homes + Renovations',county:'Harris/Galveston',state:'texas',metro:'Friendswood/Houston',phone:'(281) 648-3500',email:'',website:'https://craftedhome.com',buyBox:'Custom + renovation',volume:'GHBA Pro Builder + Remodeler',status:'research',dateAdded:'2026-06-22',initials:'CC'},
             {id:55,name:'Alair Homes Houston',county:'Harris County',state:'texas',metro:'Bellaire/Houston',phone:'(713) 664-7272',email:'',website:'https://www.alairhomes.com/houston223',buyBox:'Custom homes',volume:'Franchise custom builder',status:'research',dateAdded:'2026-06-22',initials:'AH'},
@@ -1070,18 +1096,18 @@
             {id:59,name:'K. Hovnanian Homes Lakeview',county:'Waller County',state:'texas',metro:'Waller/Houston',phone:'(888) 425-1559',email:'',website:'https://www.khov.com',buyBox:'New home communities',volume:'66 yrs national builder',status:'research',dateAdded:'2026-06-22',initials:'KH'},
             {id:60,name:'D.R. Horton - Houston',county:'Fort Bend/Montgomery/Waller',state:'texas',metro:'Greater Houston',phone:'(800) 374-6142',email:'',website:'https://www.drhorton.com',buyBox:'Move-in ready / communities',volume:'Largest US homebuilder',status:'research',dateAdded:'2026-06-22',initials:'DH'},
             // North Carolina — Wake County / Triangle (paired with NC lot recon)
-            {id:61,name:'Garman Homes',county:'Wake County',state:'north-carolina',metro:'Raleigh',phone:'(919) 459-8099',email:'',website:'https://garmanhomes.com',buyBox:'Infill lots 0.18–0.33 ac',volume:'Triangle custom + infill specialist',status:'active',dateAdded:'2026-06-23',initials:'GH'},
-            {id:62,name:'Dixon Kirby Custom Homes',county:'Wake County',state:'north-carolina',metro:'Raleigh',phone:'(919) 787-2795',email:'',website:'https://www.dixonkirby.com',buyBox:'Scattered infill lots',volume:'Custom homes, Raleigh area',status:'active',dateAdded:'2026-06-23',initials:'DK'},
-            {id:63,name:'Robuck Design Build',county:'Wake County',state:'north-carolina',metro:'Raleigh',phone:'(919) 787-0099',email:'',website:'https://www.robuckhomes.com',buyBox:'Custom on your lot',volume:'Design-build, Wake County',status:'active',dateAdded:'2026-06-23',initials:'RB'},
-            {id:64,name:'Boone Homes',county:'Wake County',state:'north-carolina',metro:'Raleigh/Cary',phone:'(919) 851-9888',email:'',website:'https://www.boonehomes.com',buyBox:'Custom + infill lots',volume:'40+ yrs Triangle builder',status:'active',dateAdded:'2026-06-23',initials:'BH'},
+            {id:61,name:'Garman Homes',county:'Wake County',state:'north-carolina',metro:'Raleigh',phone:'(919) 459-8099',email:'',website:'https://garmanhomes.com',buyBox:'Infill lots 0.18–0.33 ac',volume:'Triangle custom + infill specialist',status:'research',dateAdded:'2026-06-23',initials:'GH'},
+            {id:62,name:'Dixon Kirby Custom Homes',county:'Wake County',state:'north-carolina',metro:'Raleigh',phone:'(919) 787-2795',email:'',website:'https://www.dixonkirby.com',buyBox:'Scattered infill lots',volume:'Custom homes, Raleigh area',status:'research',dateAdded:'2026-06-23',initials:'DK'},
+            {id:63,name:'Robuck Design Build',county:'Wake County',state:'north-carolina',metro:'Raleigh',phone:'(919) 787-0099',email:'',website:'https://www.robuckhomes.com',buyBox:'Custom on your lot',volume:'Design-build, Wake County',status:'research',dateAdded:'2026-06-23',initials:'RB'},
+            {id:64,name:'Boone Homes',county:'Wake County',state:'north-carolina',metro:'Raleigh/Cary',phone:'(919) 851-9888',email:'',website:'https://www.boonehomes.com',buyBox:'Custom + infill lots',volume:'40+ yrs Triangle builder',status:'research',dateAdded:'2026-06-23',initials:'BH'},
             {id:65,name:'Heartwood Custom Homes',county:'Wake County',state:'north-carolina',metro:'Raleigh',phone:'(919) 872-1120',email:'',website:'https://www.heartwoodcustomhomes.com',buyBox:'Small-lot infill',volume:'Custom residential',status:'research',dateAdded:'2026-06-23',initials:'HW'},
-            {id:66,name:'Tonic Design + Build',county:'Wake County',state:'north-carolina',metro:'Raleigh',phone:'(919) 833-8878',email:'',website:'https://www.tonic-design.com',buyBox:'Urban infill lots',volume:'Modern custom design-build',status:'active',dateAdded:'2026-06-23',initials:'TD'},
+            {id:66,name:'Tonic Design + Build',county:'Wake County',state:'north-carolina',metro:'Raleigh',phone:'(919) 833-8878',email:'',website:'https://www.tonic-design.com',buyBox:'Urban infill lots',volume:'Modern custom design-build',status:'research',dateAdded:'2026-06-23',initials:'TD'},
             {id:67,name:'Brightleaf Builders',county:'Wake County',state:'north-carolina',metro:'Raleigh/Durham',phone:'(919) 809-1010',email:'',website:'https://www.brightleafbuilders.com',buyBox:'Infill scattered lots',volume:'Local custom builder',status:'research',dateAdded:'2026-06-23',initials:'BB'},
             {id:68,name:'Mid City Custom Homes',county:'Wake County',state:'north-carolina',metro:'Raleigh',phone:'(919) 833-5200',email:'',website:'',buyBox:'Inside-beltline infill',volume:'Small-lot specialist',status:'research',dateAdded:'2026-06-23',initials:'MC'},
             // Texas — Austin Metro (added 2026-06-25)
-            {id:69,name:'Mission Home Builders',county:'Travis County',state:'texas',metro:'Austin',phone:'(512) 576-0288',email:'',website:'https://www.missionhomebuilders.com',buyBox:'Custom infill, lot evals included',volume:'Austin custom builder',status:'active',dateAdded:'2026-06-25',initials:'MH'},
-            {id:70,name:'3rd Angle Realty',county:'Travis County',state:'texas',metro:'Austin',phone:'(512) 999-5330',email:'Josh@3rdAngleRealty.com',website:'https://www.3rdanglerealty.com',buyBox:'Infill land specialists',volume:'Austin infill focus',status:'active',dateAdded:'2026-06-25',initials:'3A'},
-            {id:71,name:'Builders Land Source',county:'Travis/Williamson/Hays',state:'texas',metro:'Austin/San Antonio/Houston',phone:'(281) 767-8555',email:'info@builderslandsource.com',website:'https://builderslandsource.com',buyBox:'Off-market land for builders',volume:'Texas-wide land sourcing',status:'active',dateAdded:'2026-06-25',initials:'BL'},
+            {id:69,name:'Mission Home Builders',county:'Travis County',state:'texas',metro:'Austin',phone:'(512) 576-0288',email:'',website:'https://www.missionhomebuilders.com',buyBox:'Custom infill, lot evals included',volume:'Austin custom builder',status:'research',dateAdded:'2026-06-25',initials:'MH'},
+            {id:70,name:'3rd Angle Realty',county:'Travis County',state:'texas',metro:'Austin',phone:'(512) 999-5330',email:'Josh@3rdAngleRealty.com',website:'https://www.3rdanglerealty.com',buyBox:'Infill land specialists',volume:'Austin infill focus',status:'research',dateAdded:'2026-06-25',initials:'3A'},
+            {id:71,name:'Builders Land Source',county:'Travis/Williamson/Hays',state:'texas',metro:'Austin/San Antonio/Houston',phone:'(281) 767-8555',email:'info@builderslandsource.com',website:'https://builderslandsource.com',buyBox:'Off-market land for builders',volume:'Texas-wide land sourcing',status:'research',dateAdded:'2026-06-25',initials:'BL'},
             {id:72,name:'Tonic Design + Build',county:'Travis County',state:'texas',metro:'Austin',phone:'(512) 555-0199',email:'',website:'https://www.tonic-design.com',buyBox:'Urban infill lots',volume:'Modern design-build',status:'research',dateAdded:'2026-06-25',initials:'TD'},
             {id:73,name:'D.R. Horton - Austin',county:'Travis/Williamson/Hays',state:'texas',metro:'Austin',phone:'(512) 555-0200',email:'',website:'https://www.drhorton.com',buyBox:'Production communities',volume:'Largest US homebuilder',status:'research',dateAdded:'2026-06-25',initials:'DH'},
             {id:74,name:'Lennar - Austin',county:'Travis/Williamson/Hays',state:'texas',metro:'Austin',phone:'(512) 555-0201',email:'',website:'https://www.lennar.com',buyBox:'Entry-level production',volume:'National production builder',status:'research',dateAdded:'2026-06-25',initials:'LE'},
@@ -1090,7 +1116,7 @@
             {id:77,name:'Perry Homes - Austin',county:'Travis/Williamson/Hays',state:'texas',metro:'Austin',phone:'(512) 555-0204',email:'',website:'https://www.perryhomes.com',buyBox:'New home communities',volume:'Texas staple builder',status:'research',dateAdded:'2026-06-25',initials:'PH'},
             {id:78,name:'Wilshire Homes',county:'Williamson County',state:'texas',metro:'Austin',phone:'(512) 555-0205',email:'',website:'https://www.wilshirehomes.com',buyBox:'Central Texas infill',volume:'Regional builder',status:'research',dateAdded:'2026-06-25',initials:'WH'},
             {id:79,name:'Highlander Homes',county:'Williamson County',state:'texas',metro:'Austin',phone:'(512) 555-0206',email:'',website:'https://www.highlanderhomes.com',buyBox:'Austin growth corridor',volume:'Regional builder',status:'research',dateAdded:'2026-06-25',initials:'HL'},
-            {id:80,name:'Austin Infill Coalition',county:'Travis County',state:'texas',metro:'Austin',phone:'',email:'',website:'https://austininfill.org',buyBox:'Network of 300+ infill pros',volume:'Industry organization',status:'active',dateAdded:'2026-06-25',initials:'AIC'},
+            {id:80,name:'Austin Infill Coalition',county:'Travis County',state:'texas',metro:'Austin',phone:'',email:'',website:'https://austininfill.org',buyBox:'Network of 300+ infill pros',volume:'Industry organization',status:'research',dateAdded:'2026-06-25',initials:'AIC'},
             // Tier 3: Emerging Growth Corridors (Austin Donut)
             {id:81,name:'Manor Spec Builders',county:'Travis County',state:'texas',metro:'Manor/78653',phone:'(512) 555-0300',email:'',website:'',buyBox:'Starter homes, spec builds',volume:'Local spec builder',status:'research',dateAdded:'2026-06-25',initials:'MSB'},
             {id:82,name:'Pflugerville Home Builders',county:'Travis County',state:'texas',metro:'Pflugerville/78660',phone:'(512) 555-0301',email:'',website:'',buyBox:'Production homes, Dell/Samsung employees',volume:'Local builder',status:'research',dateAdded:'2026-06-25',initials:'PFB'},
@@ -1486,18 +1512,18 @@
                         const locationText = (builder.county || '—') + (builder.metro ? ' • ' + builder.metro : '');
 
                         html += `
-                            <div class="builder-row" data-id="${builder.id}">
+                            <div class="builder-row" data-id="${builder.id}" onclick="toggleDetails(${builder.id})" style="cursor: pointer;">
                                 <div class="builder-main">
                                     <div class="builder-name">${escHtml(displayName)}</div>
                                     <div class="builder-location">${escHtml(locationText)}</div>
                                 </div>
 
-                                <div class="builder-status" aria-label="Status: ${statusText}">
+                                <div class="builder-status" aria-label="Status: ${statusText}" onclick="event.stopPropagation(); toggleBuilderStatus(${builder.id}, event)">
                                     <span class="status-dot ${statusDotClass}"></span>
                                     <span class="status-label ${isActive ? 'active' : ''}">${statusText}</span>
                                 </div>
 
-                                <div class="builder-actions">
+                                <div class="builder-actions" onclick="event.stopPropagation()">
                                     <button class="icon-btn" onclick="copyBuilder(${builder.id}, event)" title="Copy details">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -1520,6 +1546,11 @@
                                 <div class="detail"><div class="detail-label">Buy Box</div><div class="detail-value">${fmt(builder.buyBox)}</div></div>
                                 <div class="detail"><div class="detail-label">Notes</div><div class="detail-value">${fmt(builder.volume)}</div></div>
                                 <div class="detail"><div class="detail-label">Added</div><div class="detail-value">${fmt(builder.dateAdded)}</div></div>
+                                <div class="detail" style="grid-column: 1 / -1; margin-top: 8px; padding-top: 12px; border-top: 1px solid rgba(30, 58, 47, 0.08);">
+                                    <button class="status-toggle-btn ${isActive ? 'active' : ''}" onclick="toggleBuilderStatus(${builder.id}, event)">
+                                        ${isActive ? '✓ Mark as Needs Research' : '✓ Mark as Active'}
+                                    </button>
+                                </div>
                             </div>
                         `;
                     });
@@ -1530,6 +1561,28 @@
             });
 
             container.innerHTML = html;
+        }
+
+        function toggleBuilderStatus(id, e) {
+            if (e) {
+                e.stopPropagation();
+                e.preventDefault();
+            }
+            const builder = builderData.find(b => b.id === id);
+            if (!builder) return;
+            
+            // Toggle status
+            builder.status = builder.status === 'active' ? 'research' : 'active';
+            
+            // Save to localStorage
+            saveData();
+            
+            // Re-render to show updated status
+            filterAndRender();
+            
+            // Show toast
+            const statusText = builder.status === 'active' ? 'Active' : 'Needs Research';
+            showToast(`Builder marked as ${statusText}`);
         }
 
         function toggleDetails(id, e) {
