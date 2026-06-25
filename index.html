@@ -878,27 +878,301 @@
             margin-top: -12px;
         }
 
-        /* Responsive */
+
+    /* === MOBILE FILTER SHEET — Apple HIG compliant === */
+    .filter-sheet-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0);
+        backdrop-filter: blur(0px);
+        -webkit-backdrop-filter: blur(0px);
+        z-index: 200;
+        opacity: 0;
+        pointer-events: none;
+        transition: background 0.35s ease, backdrop-filter 0.35s ease, opacity 0.35s ease;
+    }
+    .filter-sheet-overlay.open {
+        background: rgba(0, 0, 0, 0.35);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        opacity: 1;
+        pointer-events: auto;
+    }
+    .filter-sheet {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 201;
+        background: var(--surface);
+        border-radius: 24px 24px 0 0;
+        padding: 20px 0 32px;
+        box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.15);
+        transform: translateY(100%);
+        transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+        max-height: 70vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    .filter-sheet.open {
+        transform: translateY(0);
+    }
+    .filter-sheet-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px 16px;
+        border-bottom: 1px solid var(--divider);
+        margin-bottom: 8px;
+    }
+    .filter-sheet-title {
+        font-size: 18px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        color: var(--text-primary);
+    }
+    .filter-sheet-done {
+        font-size: 16px;
+        font-weight: 500;
+        color: var(--primary);
+        background: none;
+        border: none;
+        padding: 8px 12px;
+        cursor: pointer;
+        border-radius: 8px;
+        min-height: 44px;
+        min-width: 44px;
+    }
+    .filter-sheet-done:active {
+        opacity: 0.6;
+    }
+    .filter-sheet-option {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 20px;
+        font-size: 16px;
+        font-weight: 400;
+        color: var(--text-primary);
+        background: none;
+        border: none;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+        min-height: 48px;
+        transition: background 0.12s ease;
+        -webkit-tap-highlight-color: transparent;
+    }
+    .filter-sheet-option:active {
+        background: rgba(30, 58, 47, 0.04);
+    }
+    .filter-sheet-option.selected {
+        font-weight: 600;
+        color: var(--primary);
+    }
+    .filter-sheet-option .checkmark {
+        width: 22px;
+        height: 22px;
+        opacity: 0;
+        transition: opacity 0.15s ease;
+    }
+    .filter-sheet-option.selected .checkmark {
+        opacity: 1;
+    }
+    .filter-sheet-drag {
+        width: 36px;
+        height: 4px;
+        background: rgba(0,0,0,0.15);
+        border-radius: 2px;
+        margin: 0 auto 12px;
+    }
+
+    /* Mobile filter trigger button */
+    .mobile-filter-btn {
+        display: none;
+        align-items: center;
+        gap: 6px;
+        padding: 10px 16px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-secondary);
+        cursor: pointer;
+        transition: all 0.15s ease;
+        min-height: 44px;
+        -webkit-tap-highlight-color: transparent;
+    }
+    .mobile-filter-btn:active {
+        background: var(--bg);
+    }
+    .mobile-filter-btn .filter-badge {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--gold);
+        display: none;
+    }
+    .mobile-filter-btn.has-filter .filter-badge {
+        display: block;
+    }
+
+        /* === RESPONSIVE — Apple HIG Mobile First === */
         @media (max-width: 860px) {
-            .container { padding: 0 20px; }
-            .hero-content { padding: 0 20px; padding-top: 44px; padding-bottom: 40px; }
-            .hero-title { font-size: 34px; }
+            .container { padding: 0 16px; }
+            .hero { height: auto; min-height: 520px; margin-bottom: 32px; }
+            .hero-content { padding: 0 16px; padding-top: 40px; padding-bottom: 32px; }
+            .hero-title { font-size: 32px; letter-spacing: -0.03em; }
+            .hero-subtitle { font-size: 14px; }
             .hero-top { flex-direction: column; gap: 16px; }
-            .hero-metrics { grid-template-columns: repeat(2, 1fr); gap: 24px; }
-            .hero-metrics-panel { padding: 22px 24px; }
-            .controls { flex-direction: column; align-items: stretch; }
-            .search { min-width: 100%; }
-            .export-btn { margin-left: 0; width: 100%; justify-content: center; }
-            .state-pills { overflow-x: auto; max-width: 100%; flex-wrap: nowrap; }
-            .builder-row { flex-wrap: wrap; gap: 10px; }
-            .builder-actions { opacity: 1; }
-            .contract-row { flex-direction: column; align-items: flex-start; }
-            .download-btn { width: 100%; justify-content: center; }
+            .hero-focus-pill { font-size: 11.5px; padding: 8px 16px; align-self: flex-start; }
+            .hero-icon { width: 48px; height: 48px; border-radius: 13px; }
+            .hero-metrics-panel { padding: 20px; border-radius: 16px; }
+            .hero-metrics { grid-template-columns: repeat(2, 1fr); gap: 20px 16px; }
+            .hero-metric-value { font-size: 32px; }
+            .hero-metric-label { font-size: 9.5px; }
+
+            /* Controls: search + filter button row */
+            .controls {
+                flex-direction: row;
+                align-items: center;
+                gap: 10px;
+                margin-bottom: 20px;
+            }
+            .search { flex: 1; min-width: 0; }
+            .search input { padding: 11px 14px 11px 40px; font-size: 16px; border-radius: 10px; }
+            .search svg { left: 14px; width: 15px; height: 15px; }
+
+            /* Hide desktop pills, show mobile filter button */
+            .state-pills { display: none !important; }
+            .mobile-filter-btn { display: inline-flex; flex-shrink: 0; }
+
+            .export-btn {
+                display: none;
+            }
+            .export-btn.mobile-visible {
+                display: inline-flex;
+                margin-left: 0;
+                width: auto;
+                padding: 10px 16px;
+            }
+
+            /* Segmented tabs: horizontal scroll with snap */
+            .segmented-wrap {
+                margin-bottom: 24px;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                padding: 0 16px;
+                margin-left: -16px;
+                margin-right: -16px;
+            }
+            .segmented-wrap::-webkit-scrollbar { display: none; }
+            .segmented {
+                display: flex;
+                width: max-content;
+                min-width: 100%;
+                padding: 4px;
+            }
+            .segment {
+                padding: 8px 20px;
+                font-size: 14px;
+                white-space: nowrap;
+            }
+
+            /* Builder rows: card-like on mobile */
+            .builder-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+                padding: 16px;
+                position: relative;
+            }
+            .builder-main { width: 100%; }
+            .builder-name { font-size: 15px; }
+            .builder-location { font-size: 12.5px; }
+            .builder-status {
+                position: absolute;
+                top: 16px;
+                right: 16px;
+                padding: 4px 10px;
+                font-size: 9px;
+            }
+            .builder-actions {
+                opacity: 1;
+                width: 100%;
+                justify-content: flex-end;
+                gap: 6px;
+            }
+            .icon-btn {
+                width: 40px;
+                height: 40px;
+                border-radius: 10px;
+            }
+            .icon-btn svg { width: 17px; height: 17px; }
+
+            .builder-details {
+                padding: 16px;
+                grid-template-columns: 1fr;
+                gap: 12px 16px;
+            }
+            .builder-details .detail {
+                padding: 8px 0;
+                border-bottom: 1px solid var(--divider);
+            }
+            .builder-details .detail:last-child {
+                border-bottom: none;
+            }
+            .detail-label { font-size: 10px; margin-bottom: 4px; }
+            .detail-value { font-size: 14px; }
+            .notes-textarea { min-height: 100px; font-size: 15px; }
+            .status-toggle-btn { width: 100%; justify-content: center; padding: 12px; font-size: 13px; }
+
+            /* State group headers */
+            .state-group { margin-bottom: 36px; }
+            .state-header { padding: 0 2px; margin-bottom: 8px; }
+
+            /* Lots */
+            .lot-row { padding: 14px 16px; gap: 12px; }
+            .lot-address { font-size: 13.5px; }
+            .lot-meta { font-size: 12px; gap: 6px 12px; }
+            .county-header { padding: 12px 16px; font-size: 13px; }
+            .lot-list { padding: 8px 16px 14px; }
+            .lot-owner-section { padding: 12px; }
+            .owner-details { grid-template-columns: 1fr; }
+            .owner-value { font-size: 13px; }
+
+            /* Activity tracker */
+            .activity-tracker { gap: 8px; }
+            .activity-icon { width: 40px; height: 40px; }
+            .activity-icon svg { width: 16px; height: 16px; }
+
+            /* Contracts */
+            .contract-row { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px 0; }
+            .contract-info h3 { font-size: 14.5px; }
+            .contract-info p { font-size: 12.5px; }
+            .download-btn { width: 100%; justify-content: center; padding: 12px; min-height: 48px; }
+
+            /* Tab toolbar */
+            .tab-toolbar { margin-bottom: 20px; }
         }
 
         @media (max-width: 480px) {
-            .hero { min-height: 420px; }
-            .hero-metrics { gap: 18px; }
+            .hero { min-height: 460px; }
+            .hero-title { font-size: 28px; }
+            .hero-metrics { gap: 16px 12px; }
+            .hero-metric-value { font-size: 28px; }
+            .hero-metrics-panel { padding: 18px 16px; }
+
+            /* Even tighter controls */
+            .controls { gap: 8px; }
+            .mobile-filter-btn { padding: 10px 12px; font-size: 13px; }
+            .search input { font-size: 16px !important; } /* Prevent iOS zoom */
+            
+            /* Disable hover effects on touch devices */
+            .builder-row:hover { background: var(--surface); }
+            .builder-row:active { background: #FDFCFA; }
         }
 
         .hidden { display: none !important; }
@@ -1010,6 +1284,14 @@
                 </svg>
                 <input type="text" id="search-input" placeholder="Search builders or counties...">
             </div>
+
+            <button class="mobile-filter-btn" id="mobile-filter-btn" onclick="openFilterSheet()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                </svg>
+                <span id="mobile-filter-label">All Markets</span>
+                <span class="filter-badge"></span>
+            </button>
 
             <div id="state-pills-wrap">
                 <div class="state-pills" id="state-pills">
@@ -1631,6 +1913,73 @@
             ` + html;
 
             container.innerHTML = html;
+
+            // Also populate mobile filter sheet
+            renderFilterSheetOptions();
+            updateMobileFilterButton();
+        }
+
+        function renderFilterSheetOptions() {
+            const container = document.getElementById('filter-sheet-options');
+            if (!container) return;
+
+            let html = '';
+            const markets = ['all', ...ALL_MARKETS];
+
+            markets.forEach(key => {
+                const isActive = currentFilterState === key;
+                const count = key === 'all' ? '' : (
+                    currentTab === 'lots'
+                        ? lotData.filter(l => normalizeStateKey(l.state) === key).length
+                        : builderData.filter(b => normalizeStateKey(b.state) === key).length
+                );
+                const label = MARKET_LABELS[key] || key;
+                const countStr = count !== '' ? ` (${count})` : '';
+
+                html += `
+                    <button class="filter-sheet-option ${isActive ? 'selected' : ''}" onclick="selectFilterSheetOption('${key}')">
+                        <span>${label}${countStr}</span>
+                        <svg class="checkmark" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </button>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function updateMobileFilterButton() {
+            const btn = document.getElementById('mobile-filter-btn');
+            const label = document.getElementById('mobile-filter-label');
+            if (!btn || !label) return;
+
+            const filterLabel = MARKET_LABELS[currentFilterState] || currentFilterState;
+            label.textContent = filterLabel;
+
+            if (currentFilterState !== 'all') {
+                btn.classList.add('has-filter');
+            } else {
+                btn.classList.remove('has-filter');
+            }
+        }
+
+        function openFilterSheet() {
+            renderFilterSheetOptions();
+            document.getElementById('filter-sheet-overlay').classList.add('open');
+            document.getElementById('filter-sheet').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeFilterSheet() {
+            document.getElementById('filter-sheet-overlay').classList.remove('open');
+            document.getElementById('filter-sheet').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function selectFilterSheetOption(state) {
+            setStateFilter(state);
+            closeFilterSheet();
         }
 
         function handleSearch() {
@@ -1812,9 +2161,12 @@
         function setStateFilter(state) {
             currentFilterState = state;
             renderStatePills();
+            updateMobileFilterButton();
             updateHeroForTab(currentTab);
             if (currentTab === 'lots') {
                 renderLots();
+            } else if (currentTab === 'titles') {
+                renderTitles();
             } else {
                 filterAndRender();
             }
@@ -2496,6 +2848,20 @@
 
         document.addEventListener('DOMContentLoaded', init);
     </script>
+
+    <!-- Mobile Filter Sheet -->
+    <div class="filter-sheet-overlay" id="filter-sheet-overlay" onclick="closeFilterSheet()"></div>
+    <div class="filter-sheet" id="filter-sheet">
+        <div class="filter-sheet-drag"></div>
+        <div class="filter-sheet-header">
+            <div class="filter-sheet-title">Filter Markets</div>
+            <button class="filter-sheet-done" onclick="closeFilterSheet()">Done</button>
+        </div>
+        <div id="filter-sheet-options">
+            <!-- Populated by JS -->
+        </div>
+    </div>
+
 </body>
 </html>
 
