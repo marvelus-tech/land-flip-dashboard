@@ -1,0 +1,54 @@
+{
+  "project": "Dallas Land Flip - Q3 2026",
+  "buyerBox": {
+    "targetZips": ["75230", "75229", "75220", "75218", "75214", "75206", "75225", "75212"],
+    "propertyType": "Single-family teardown or vacant lot",
+    "minLotSize": "8000 sq ft",
+    "budget": "$350K-$450K",
+    "arv": "$1.8M",
+    "mustHaves": [
+      "Utilities in place",
+      "Out of flood zone",
+      "Platted with valid address",
+      "Dallas city limits preferred"
+    ],
+    "builderPartner": "Active - Ready to buy NOW"
+  },
+  "phase1": {
+    "name": "List Building",
+    "status": "in_progress",
+    "sources": [
+      {
+        "name": "DCAD Public Records",
+        "url": "https://www.dallascad.org/searchaddr.aspx",
+        "method": "Manual search by ZIP + land use code",
+        "priority": 1
+      },
+      {
+        "name": "Redfin Land Listings",
+        "url": "https://www.redfin.com/city/30794/TX/Dallas/land",
+        "method": "Filter by target ZIPs, 8000+ sq ft",
+        "priority": 2
+      },
+      {
+        "name": "Zillow Vacant Land",
+        "url": "https://www.zillow.com/dallas-tx/land_type/",
+        "method": "Filter by target ZIPs",
+        "priority": 2
+      },
+      {
+        "name": "Tax Delinquent List",
+        "source": "Dallas County Tax Office",
+        "contact": "214-653-7811",
+        "method": "Request delinquent tax roll",
+        "priority": 3
+      }
+    ]
+  },
+  "targets": [],
+  "outreach": {
+    "methods": ["Direct mail", "Cold calling", "Door hangers", "Digital ads"],
+    "mailTemplate": "dallas-seller-letter-v1",
+    "callScript": "dallas-cold-call-v1"
+  }
+}
