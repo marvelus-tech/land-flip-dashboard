@@ -3773,10 +3773,15 @@
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                                     DCAD
                                 </a>
-                                <a class="td-action" href="https://www.zillow.com/homes/${encodeURIComponent(p.property_address || '').replace(/%20/g, '-')}_rb/" target="_blank" rel="noopener">
+                                ${(() => {
+                                    const cleanAddr = (p.property_address || '').replace(/\s+/g, ' ').trim().replace(/\s/g, '-');
+                                    const zip = p.search_zip || p.zip_code || '';
+                                    const zillowUrl = cleanAddr ? `https://www.zillow.com/homes/${cleanAddr}-Dallas-TX${zip ? '-' + zip : ''}_rb/` : '#';
+                                    return `<a class="td-action" href="${zillowUrl}" target="_blank" rel="noopener">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
                                     Zillow
-                                </a>
+                                </a>`;
+                                })()}
                                 ${p.owner_name ? `<button class="td-action" onclick="copyToClipboard('${p.owner_name}\n${p.property_address}\n${p.mailing_address || ''}')">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
                                     Copy
