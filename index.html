@@ -3173,7 +3173,7 @@
                     ${p.mailing_address ? `<div style="font-size: 11px; color: var(--muted); margin-top: 6px;">📬 Mailing: ${p.mailing_address}, ${p.mailing_city} ${p.mailing_state} ${p.mailing_zip}</div>` : ''}
                     ${p.score_reasons ? `<div style="font-size: 11px; color: var(--gold); margin-top: 4px;">✓ ${p.score_reasons}</div>` : ''}
                     <div style="display: flex; gap: 8px; margin-top: 10px;">
-                        <a href="${p.dcad_url || '#'}`" target="_blank" style="font-size: 12px; color: var(--primary); text-decoration: none;">View DCAD →</a>
+                        <a href="${p.dcad_url || '#'}" target="_blank" style="font-size: 12px; color: var(--primary); text-decoration: none;">View DCAD →</a>
                         ${p.owner_name ? `<button onclick="copyToClipboard('${p.owner_name}\n${p.property_address}\n${p.mailing_address || ''}')" style="font-size: 12px; background: none; border: none; color: var(--primary); cursor: pointer;">Copy Owner Info</button>` : ''}
                     </div>
                 </div>
