@@ -3176,16 +3176,19 @@
                         const statusText = statusBadgeLabel(title.status);
                         
                         html += `
-                            <div class="builder-row" data-id="${title.id}" onclick="toggleTitleDetails(${title.id})" style="cursor: pointer;">
+                            <div class="builder-row" data-id="${title.id}">
                                 <div class="builder-main">
                                     <div class="builder-name">${escHtml(title.name)}</div>
                                     <div class="builder-location">${escHtml(title.city)}${title.county ? ' • ' + escHtml(title.county) : ''}</div>
                                 </div>
-                                <div class="builder-status" aria-label="Status: ${statusText}" onclick="event.stopPropagation(); toggleTitleStatus(${title.id}, event)">
+                                <div class="builder-status" aria-label="Status: ${statusText}">
                                     <span class="status-dot ${statusDotClass}"></span>
                                     <span class="status-label ${isActive ? 'active' : ''}">${statusText}</span>
                                 </div>
-                                <div class="builder-actions" onclick="event.stopPropagation()">
+                                <div class="builder-actions">
+                                    <button class="status-toggle-btn ${isActive ? 'active' : ''}" onclick="toggleTitleStatus(${title.id}, event)" title="${isActive ? 'Mark as Needs Research' : 'Mark as Active'}" style="margin-right: 8px;">
+                                        ${isActive ? '✓ Active' : 'Mark Active'}
+                                    </button>
                                     <button class="icon-btn" onclick="copyTitle(${title.id}, event)" title="Copy details">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -3194,17 +3197,12 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="builder-details hidden" id="title-details-${title.id}">
+                            <div class="builder-details" id="title-details-${title.id}">
                                 <div class="detail"><div class="detail-label">Phone</div><div class="detail-value">${fmt(title.phone)}</div></div>
                                 <div class="detail"><div class="detail-label">Email</div><div class="detail-value">${title.email ? `<a href="mailto:${escHtml(title.email)}">${escHtml(title.email)}</a>` : fmt('')}</div></div>
                                 <div class="detail"><div class="detail-label">Website</div><div class="detail-value">${fmtLink(title.website)}</div></div>
                                 <div class="detail"><div class="detail-label">Notes</div><div class="detail-value">${fmt(title.notes)}</div></div>
                                 <div class="detail"><div class="detail-label">Added</div><div class="detail-value">${fmt(title.dateAdded)}</div></div>
-                                <div class="detail" style="grid-column: 1 / -1; margin-top: 8px; padding-top: 12px; border-top: 1px solid rgba(30, 58, 47, 0.08);">
-                                    <button class="status-toggle-btn ${isActive ? 'active' : ''}" onclick="event.stopPropagation(); toggleTitleStatus(${title.id}, event)">
-                                        ${isActive ? '✓ Mark as Needs Research' : '✓ Mark as Active'}
-                                    </button>
-                                </div>
                             </div>
                         `;
                     });
