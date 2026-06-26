@@ -2413,59 +2413,59 @@
             </div>
         </div>
 
+        <!-- Teardown Candidates Section -->
+        <section id="teardowns-section" class="teardowns-container" style="display: none;">
+            <div class="teardowns-header">
+                <div>
+                    <h2 class="teardowns-header-title">Teardown Candidates</h2>
+                    <p class="teardowns-header-subtitle">Off-market properties from DCAD — pre-1980 builds on 8K+ sq ft lots</p>
+                </div>
+                <div class="teardowns-actions">
+                    <button class="teardown-btn" onclick="loadDCADData()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+                        Refresh
+                    </button>
+                    <button class="teardown-btn primary" onclick="exportTeardownCSV()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        Export
+                    </button>
+                </div>
+            </div>
+
+            <div class="teardown-filters" id="teardown-filters">
+                <label class="filter-chip active" data-filter="teardown">
+                    <input type="checkbox" id="teardown-only" checked onchange="renderTeardowns()">
+                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    Teardowns
+                </label>
+                <label class="filter-chip" data-filter="vacant">
+                    <input type="checkbox" id="vacant-only" onchange="renderTeardowns()">
+                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    Vacant Lots
+                </label>
+                <label class="filter-chip" data-filter="absentee">
+                    <input type="checkbox" id="absentee-only" onchange="renderTeardowns()">
+                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    Absentee Owners
+                </label>
+                <label class="filter-chip" data-filter="budget">
+                    <input type="checkbox" id="budget-only" onchange="renderTeardowns()">
+                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    In Budget
+                </label>
+                <label class="filter-chip" data-filter="hot">
+                    <input type="checkbox" id="hot-only" onchange="renderTeardowns()">
+                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    Score A/B
+                </label>
+            </div>
+
+            <div class="teardown-count" id="teardown-count"></div>
+            <div class="teardown-grid" id="teardowns-list"></div>
+        </section>
+
     </div>
     </div><!-- .site-main -->
-
-    <!-- Teardown Candidates Section -->
-    <section id="teardowns-section" class="container teardowns-container" style="display: none;">
-        <div class="teardowns-header">
-            <div>
-                <h2 class="teardowns-header-title">Teardown Candidates</h2>
-                <p class="teardowns-header-subtitle">Off-market properties from DCAD — pre-1980 builds on 8K+ sq ft lots</p>
-            </div>
-            <div class="teardowns-actions">
-                <button class="teardown-btn" onclick="loadDCADData()">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
-                    Refresh
-                </button>
-                <button class="teardown-btn primary" onclick="exportTeardownCSV()">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                    Export
-                </button>
-            </div>
-        </div>
-
-        <div class="teardown-filters" id="teardown-filters">
-            <label class="filter-chip active" data-filter="teardown">
-                <input type="checkbox" id="teardown-only" checked onchange="renderTeardowns()">
-                <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                Teardowns
-            </label>
-            <label class="filter-chip" data-filter="vacant">
-                <input type="checkbox" id="vacant-only" onchange="renderTeardowns()">
-                <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                Vacant Lots
-            </label>
-            <label class="filter-chip" data-filter="absentee">
-                <input type="checkbox" id="absentee-only" onchange="renderTeardowns()">
-                <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                Absentee Owners
-            </label>
-            <label class="filter-chip" data-filter="budget">
-                <input type="checkbox" id="budget-only" onchange="renderTeardowns()">
-                <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                In Budget
-            </label>
-            <label class="filter-chip" data-filter="hot">
-                <input type="checkbox" id="hot-only" onchange="renderTeardowns()">
-                <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                Score A/B
-            </label>
-        </div>
-
-        <div class="teardown-count" id="teardown-count"></div>
-        <div class="teardown-grid" id="teardowns-list"></div>
-    </section>
 
     <footer class="app-footer">
         <div class="container footer-inner">
@@ -3268,11 +3268,15 @@
             const pillsWrap = document.getElementById('state-pills-wrap');
             const exportBtn = document.getElementById('export-btn');
             const searchInput = document.getElementById('search-input');
-            const hideFilters = tab === 'contracts';
+            const mobileFilterBtn = document.getElementById('mobile-filter-btn');
+            const isTeardowns = tab === 'teardowns';
+            const hideFilters = tab === 'contracts' || isTeardowns;
 
             if (searchWrap) searchWrap.classList.toggle('hidden', hideFilters);
             if (pillsWrap) pillsWrap.classList.toggle('hidden', hideFilters);
+            if (mobileFilterBtn) mobileFilterBtn.classList.toggle('hidden', isTeardowns);
             if (exportBtn) {
+                exportBtn.classList.toggle('hidden', isTeardowns);
                 exportBtn.classList.toggle('gold-accent', tab === 'contracts');
                 exportBtn.innerHTML = tab === 'contracts'
                     ? '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> Export All Data'
@@ -3544,6 +3548,8 @@
             if (section.style.display === 'none' || section.style.display === '') {
                 section.style.display = 'block';
                 document.querySelector('[data-tab="teardowns"]')?.classList.add('active');
+                updateControlsForTab('teardowns');
+                updateHeroForTab('teardowns');
                 loadDCADData();
                 window.scrollTo({ top: section.offsetTop - 20, behavior: 'smooth' });
             } else {
@@ -3551,6 +3557,8 @@
                 // Show the lots section by default
                 document.getElementById('lots-content')?.classList.add('active');
                 document.querySelector('[data-tab="lots"]')?.classList.add('active');
+                updateControlsForTab('lots');
+                updateHeroForTab('lots');
             }
         }
 
@@ -4093,6 +4101,20 @@
                 if (labelEls[0]) labelEls[0].textContent = 'Title Companies';
                 if (labelEls[1]) labelEls[1].textContent = 'Active';
                 if (labelEls[2]) labelEls[2].textContent = 'In Research';
+                if (labelEls[3]) labelEls[3].textContent = 'Markets';
+            } else if (tab === 'teardowns') {
+                const totalTeardowns = teardownData.length;
+                const teardownCount = teardownData.filter(p => p._type === 'teardown').length;
+                const vacantCount = teardownData.filter(p => p._type === 'vacant').length;
+
+                if (totalEl) totalEl.textContent = totalTeardowns;
+                if (activeEl) activeEl.textContent = teardownCount;
+                if (researchEl) researchEl.textContent = vacantCount;
+                if (marketsEl) marketsEl.textContent = '1';
+
+                if (labelEls[0]) labelEls[0].textContent = 'Total Properties';
+                if (labelEls[1]) labelEls[1].textContent = 'Teardowns';
+                if (labelEls[2]) labelEls[2].textContent = 'Vacant Lots';
                 if (labelEls[3]) labelEls[3].textContent = 'Markets';
             }
         }
