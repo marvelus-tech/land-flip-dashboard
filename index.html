@@ -391,6 +391,38 @@
 
         .builder-row:hover { background: #FDFCFA; }
 
+        /* Title Company Card — unified, elevated, distinct */
+        .title-card {
+            background: var(--surface);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(30, 58, 47, 0.04);
+            overflow: hidden;
+            margin-bottom: 12px;
+            transition: box-shadow 0.15s ease;
+        }
+
+        .title-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .title-card:hover {
+            box-shadow: 0 4px 16px rgba(30, 58, 47, 0.08);
+        }
+
+        .title-card .builder-row {
+            border-bottom: none;
+            padding: 18px 20px;
+        }
+
+        .title-card .builder-details {
+            background: #F7F5F0;
+            border-top: 1px solid var(--divider);
+            border-radius: 0 0 16px 16px;
+            margin: 0;
+            padding: 18px 20px 20px;
+        }
+
         .status-toggle-btn {
             display: inline-flex;
             align-items: center;
@@ -3176,6 +3208,7 @@
                         const statusText = statusBadgeLabel(title.status);
                         
                         html += `
+                            <div class="title-card">
                             <div class="builder-row" data-id="${title.id}">
                                 <div class="builder-main">
                                     <div class="builder-name">${escHtml(title.name)}</div>
@@ -3203,6 +3236,7 @@
                                 <div class="detail"><div class="detail-label">Website</div><div class="detail-value">${fmtLink(title.website)}</div></div>
                                 <div class="detail"><div class="detail-label">Notes</div><div class="detail-value">${fmt(title.notes)}</div></div>
                                 <div class="detail"><div class="detail-label">Added</div><div class="detail-value">${fmt(title.dateAdded)}</div></div>
+                            </div>
                             </div>
                         `;
                     });
