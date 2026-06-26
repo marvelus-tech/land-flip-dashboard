@@ -4100,6 +4100,12 @@
         function switchTab(tab) {
             currentTab = tab;
 
+            // Hide teardown section when switching to other tabs
+            const teardownSection = document.getElementById('teardowns-section');
+            if (teardownSection) {
+                teardownSection.style.display = 'none';
+            }
+
             document.querySelectorAll('.segment').forEach(el => {
                 el.classList.toggle('active', el.dataset.tab === tab);
             });
