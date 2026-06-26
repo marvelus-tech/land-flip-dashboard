@@ -3774,9 +3774,11 @@
                                     DCAD
                                 </a>
                                 ${(() => {
-                                    const cleanAddr = (p.property_address || '').replace(/\s+/g, ' ').trim().replace(/\s/g, '-');
+                                    const cleanAddr = (p.property_address || '').replace(/\s+/g, ' ').trim();
+                                    const titleCaseAddr = cleanAddr.toLowerCase().replace(/\b\w/g, c => c.toUpperCase()).replace(/\s/g, '-');
                                     const zip = p.search_zip || p.zip_code || '';
-                                    const zillowUrl = cleanAddr ? `https://www.zillow.com/homes/${cleanAddr}-Dallas-TX${zip ? '-' + zip : ''}_rb/` : '#';
+                                    const zipClean = /^\d{5}$/.test(zip) ? zip : '';
+                                    const zillowUrl = titleCaseAddr ? `https://www.zillow.com/homes/${titleCaseAddr}-Dallas-TX${zipClean ? '-' + zipClean : ''}_rb/` : '#';
                                     return `<a class="td-action" href="${zillowUrl}" target="_blank" rel="noopener">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
                                     Zillow
