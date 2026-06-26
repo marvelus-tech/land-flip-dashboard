@@ -1769,6 +1769,487 @@
         .badge-absentee { background: #6F42C1; color: white; }
         .badge-budget { background: #28A745; color: white; }
 
+        /* === TEARDOWN CANDIDATES — Apple HIG Redesign === */
+        .teardowns-container {
+            margin-top: 48px;
+        }
+
+        .teardowns-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 24px;
+            margin-bottom: 28px;
+        }
+
+        .teardowns-header-title {
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .teardowns-header-subtitle {
+            font-size: 13.5px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .teardowns-actions {
+            display: flex;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .teardown-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 9px 18px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.12s ease;
+            white-space: nowrap;
+        }
+
+        .teardown-btn:hover {
+            border-color: rgba(30, 58, 47, 0.18);
+            color: var(--primary);
+        }
+
+        .teardown-btn.primary {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #fff;
+        }
+
+        .teardown-btn.primary:hover {
+            background: var(--primary-soft);
+            border-color: var(--primary-soft);
+        }
+
+        .teardown-btn svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Filter Bar */
+        .teardown-filters {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 14px;
+            font-size: 12.5px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all 0.12s ease;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .filter-chip:hover {
+            border-color: rgba(30, 58, 47, 0.15);
+            color: var(--text-primary);
+        }
+
+        .filter-chip.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #fff;
+        }
+
+        .filter-chip input {
+            display: none;
+        }
+
+        .filter-chip .check-icon {
+            width: 14px;
+            height: 14px;
+            opacity: 0;
+            transition: opacity 0.12s ease;
+        }
+
+        .filter-chip.active .check-icon {
+            opacity: 1;
+        }
+
+        .teardown-count {
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 16px;
+            font-weight: 400;
+        }
+
+        /* Property Cards */
+        .teardown-grid {
+            display: grid;
+            gap: 10px;
+        }
+
+        .teardown-card {
+            background: var(--surface);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(30, 58, 47, 0.04);
+            border: 1px solid var(--border);
+            transition: box-shadow 0.15s ease, transform 0.15s ease;
+        }
+
+        .teardown-card:hover {
+            box-shadow: 0 4px 16px rgba(30, 58, 47, 0.08);
+        }
+
+        .teardown-card-inner {
+            display: flex;
+            padding: 0;
+        }
+
+        .teardown-accent {
+            width: 4px;
+            flex-shrink: 0;
+            background: var(--primary-soft);
+        }
+
+        .teardown-accent.vacant {
+            background: var(--primary);
+        }
+
+        .teardown-accent.teardown {
+            background: #8B6914;
+        }
+
+        .teardown-content {
+            flex: 1;
+            padding: 18px 20px;
+            min-width: 0;
+        }
+
+        .teardown-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+
+        .teardown-info {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .teardown-address {
+            font-size: 15.5px;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
+            line-height: 1.3;
+            margin-bottom: 4px;
+            word-break: break-word;
+        }
+
+        .teardown-owner {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .teardown-badges {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            flex-shrink: 0;
+            justify-content: flex-end;
+        }
+
+        .td-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 10.5px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+        }
+
+        .td-badge.type-vacant {
+            background: rgba(30, 58, 47, 0.08);
+            color: var(--primary);
+        }
+
+        .td-badge.type-teardown {
+            background: rgba(139, 105, 20, 0.10);
+            color: #8B6914;
+        }
+
+        .td-badge.score-a {
+            background: rgba(198, 40, 40, 0.08);
+            color: #C62828;
+        }
+
+        .td-badge.score-b {
+            background: rgba(184, 149, 12, 0.10);
+            color: #B8950C;
+        }
+
+        .td-badge.score-c {
+            background: rgba(120, 120, 120, 0.08);
+            color: var(--muted);
+        }
+
+        .td-badge.tag {
+            background: rgba(30, 58, 47, 0.04);
+            color: var(--text-secondary);
+        }
+
+        /* Property Details Grid */
+        .teardown-details {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 12px 16px;
+            padding: 12px 0;
+            border-top: 1px solid var(--divider);
+            border-bottom: 1px solid var(--divider);
+            margin-bottom: 12px;
+        }
+
+        .td-detail {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .td-detail-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .td-detail-value {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .td-detail-value.highlight {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Mailing & Score Info */
+        .teardown-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-bottom: 12px;
+        }
+
+        .teardown-meta-item {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .teardown-meta-item.score-reason {
+            color: var(--gold);
+            font-weight: 500;
+        }
+
+        /* Card Actions */
+        .teardown-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .td-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 7px 14px;
+            font-size: 12.5px;
+            font-weight: 500;
+            color: var(--primary);
+            background: transparent;
+            border: 1.5px solid rgba(30, 58, 47, 0.12);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.12s ease;
+            text-decoration: none;
+        }
+
+        .td-action:hover {
+            background: rgba(30, 58, 47, 0.04);
+            border-color: rgba(30, 58, 47, 0.2);
+        }
+
+        .td-action svg {
+            width: 13px;
+            height: 13px;
+        }
+
+        /* Empty State */
+        .teardown-empty {
+            padding: 64px 20px;
+            text-align: center;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+        }
+
+        .teardown-empty-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 16px;
+            color: var(--muted);
+        }
+
+        .teardown-empty-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .teardown-empty-text {
+            font-size: 13.5px;
+            color: var(--muted);
+        }
+
+        /* === TEARDOWN RESPONSIVE === */
+        @media (max-width: 860px) {
+            .teardowns-header {
+                flex-direction: column;
+                gap: 16px;
+                margin-bottom: 24px;
+            }
+
+            .teardowns-actions {
+                width: 100%;
+            }
+
+            .teardown-btn {
+                flex: 1;
+                justify-content: center;
+                padding: 11px 16px;
+                font-size: 14px;
+                min-height: 44px;
+            }
+
+            .teardown-filters {
+                gap: 6px;
+                margin-bottom: 16px;
+            }
+
+            .filter-chip {
+                padding: 8px 14px;
+                font-size: 13px;
+                min-height: 36px;
+            }
+
+            .teardown-card {
+                border-radius: 14px;
+            }
+
+            .teardown-content {
+                padding: 16px;
+            }
+
+            .teardown-main {
+                flex-direction: column;
+                gap: 12px;
+                margin-bottom: 14px;
+            }
+
+            .teardown-badges {
+                justify-content: flex-start;
+                width: 100%;
+            }
+
+            .teardown-address {
+                font-size: 15px;
+                padding-right: 0;
+            }
+
+            .teardown-details {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px 12px;
+                padding: 10px 0;
+            }
+
+            .td-detail-label {
+                font-size: 9.5px;
+            }
+
+            .td-detail-value {
+                font-size: 12.5px;
+            }
+
+            .teardown-actions {
+                flex-wrap: wrap;
+            }
+
+            .td-action {
+                flex: 1;
+                justify-content: center;
+                padding: 10px 14px;
+                font-size: 13px;
+                min-height: 44px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .teardowns-container {
+                margin-top: 32px;
+            }
+
+            .teardowns-header-title {
+                font-size: 20px;
+            }
+
+            .teardowns-header-subtitle {
+                font-size: 13px;
+            }
+
+            .teardown-details {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px 10px;
+            }
+
+            .teardown-content {
+                padding: 14px;
+            }
+
+            .td-badge {
+                padding: 2px 8px;
+                font-size: 10px;
+            }
+
+            .teardown-card {
+                border-radius: 12px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1936,26 +2417,54 @@
     </div><!-- .site-main -->
 
     <!-- Teardown Candidates Section -->
-    <section id="teardowns-section" class="container" style="margin-top: 48px; display: none;">
-        <div class="recon-header" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
+    <section id="teardowns-section" class="container teardowns-container" style="display: none;">
+        <div class="teardowns-header">
             <div>
-                <h2 class="recon-title">🏚️ Teardown Candidates</h2>
-                <p class="recon-subtitle">Off-market properties from DCAD — pre-1980 builds on 8K+ sq ft lots</p>
+                <h2 class="teardowns-header-title">Teardown Candidates</h2>
+                <p class="teardowns-header-subtitle">Off-market properties from DCAD — pre-1980 builds on 8K+ sq ft lots</p>
             </div>
-            <div style="display: flex; gap: 8px;">
-                <button class="pill-btn" onclick="loadDCADData()">🔄 Refresh</button>
-                <button class="pill-btn" onclick="exportTeardownCSV()">📥 Export</button>
+            <div class="teardowns-actions">
+                <button class="teardown-btn" onclick="loadDCADData()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+                    Refresh
+                </button>
+                <button class="teardown-btn primary" onclick="exportTeardownCSV()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Export
+                </button>
             </div>
         </div>
-        <div id="teardown-filters" style="display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap;">
-            <label class="filter-chip"><input type="checkbox" id="teardown-only" checked onchange="renderTeardowns()"> 🏚️ Teardowns Only</label>
-            <label class="filter-chip"><input type="checkbox" id="vacant-only" onchange="renderTeardowns()"> 🏝️ Vacant Lots</label>
-            <label class="filter-chip"><input type="checkbox" id="absentee-only" onchange="renderTeardowns()"> ✈️ Absentee Owners</label>
-            <label class="filter-chip"><input type="checkbox" id="budget-only" onchange="renderTeardowns()"> 💰 In Budget ($350K-$450K)</label>
-            <label class="filter-chip"><input type="checkbox" id="hot-only" onchange="renderTeardowns()"> 🔥 Score A/B Only</label>
+
+        <div class="teardown-filters" id="teardown-filters">
+            <label class="filter-chip active" data-filter="teardown">
+                <input type="checkbox" id="teardown-only" checked onchange="renderTeardowns()">
+                <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Teardowns
+            </label>
+            <label class="filter-chip" data-filter="vacant">
+                <input type="checkbox" id="vacant-only" onchange="renderTeardowns()">
+                <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Vacant Lots
+            </label>
+            <label class="filter-chip" data-filter="absentee">
+                <input type="checkbox" id="absentee-only" onchange="renderTeardowns()">
+                <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Absentee Owners
+            </label>
+            <label class="filter-chip" data-filter="budget">
+                <input type="checkbox" id="budget-only" onchange="renderTeardowns()">
+                <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                In Budget
+            </label>
+            <label class="filter-chip" data-filter="hot">
+                <input type="checkbox" id="hot-only" onchange="renderTeardowns()">
+                <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Score A/B
+            </label>
         </div>
-        <div id="teardown-count" style="font-size: 13px; color: var(--muted); margin-bottom: 16px;"></div>
-        <div id="teardowns-list"></div>
+
+        <div class="teardown-count" id="teardown-count"></div>
+        <div class="teardown-grid" id="teardowns-list"></div>
     </section>
 
     <footer class="app-footer">
@@ -3001,6 +3510,24 @@
             }, 1750);
         }
 
+        async function copyToClipboard(text) {
+            try {
+                await navigator.clipboard.writeText(text);
+                showToast('Copied to clipboard');
+            } catch (err) {
+                // Fallback
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                showToast('Copied to clipboard');
+            }
+        }
+
         // ============================================
         // TEARDOWN CANDIDATES — DCAD Data Integration
         // ============================================
@@ -3107,6 +3634,16 @@
             const budgetOnly = document.getElementById('budget-only')?.checked;
             const hotOnly = document.getElementById('hot-only')?.checked;
 
+            // Update filter chip visual states
+            document.querySelectorAll('.filter-chip').forEach(chip => {
+                const input = chip.querySelector('input');
+                if (input && input.checked) {
+                    chip.classList.add('active');
+                } else {
+                    chip.classList.remove('active');
+                }
+            });
+
             let filtered = teardownData;
 
             if (teardownOnly) {
@@ -3125,61 +3662,103 @@
                 filtered = filtered.filter(p => p._score === 'A' || p._score === 'B');
             }
 
-            // Default: show all data, don't filter by lot size unless user wants
-            // Filter by buyer box only when explicitly requested
-            // filtered = filtered.filter(p => p._lotSize >= 8000 && p._yearBuilt > 0 && p._yearBuilt <= 1980);
-
             if (countEl) {
-                countEl.textContent = `Showing ${filtered.length} of ${teardownData.length} properties | Filters: Teardowns=${teardownOnly}, Vacant=${vacantOnly}, Budget=${budgetOnly}`;
+                const activeFilters = [];
+                if (teardownOnly) activeFilters.push('Teardowns');
+                if (vacantOnly) activeFilters.push('Vacant');
+                if (absenteeOnly) activeFilters.push('Absentee');
+                if (budgetOnly) activeFilters.push('Budget');
+                if (hotOnly) activeFilters.push('A/B Score');
+                
+                const filterText = activeFilters.length > 0 ? activeFilters.join(' · ') : 'All Properties';
+                countEl.textContent = `${filtered.length.toLocaleString()} of ${teardownData.length.toLocaleString()} properties · ${filterText}`;
             }
 
             if (filtered.length === 0) {
-                container.innerHTML = '<div style="padding: 40px; text-align: center; color: var(--muted);">No teardown candidates match current filters. Run the scraper to populate data.</div>';
+                container.innerHTML = `
+                    <div class="teardown-empty">
+                        <svg class="teardown-empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                            <line x1="12" y1="22.08" x2="12" y2="12"/>
+                        </svg>
+                        <div class="teardown-empty-title">No properties match</div>
+                        <div class="teardown-empty-text">Try adjusting your filters to see more results</div>
+                    </div>
+                `;
                 return;
             }
 
-            let html = '<div style="display: grid; gap: 12px;">';
+            let html = '';
             filtered.forEach(p => {
-                const typeBadge = p._type === 'vacant' 
-                    ? '<span style="background: #2C4A3A; color: #F0E4C8; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">🏝️ VACANT</span>'
-                    : '<span style="background: #8B4513; color: white; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">🏚️ TEARDOWN</span>';
-                
-                const scoreBadge = p._score === 'A' 
-                    ? '<span style="background: #DC3545; color: white; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">🔥 HOT</span>'
-                    : p._score === 'B'
-                    ? '<span style="background: #F0AD4E; color: #1C1C1E; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">🌡️ WARM</span>'
-                    : '<span style="background: #6C757D; color: white; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">🧊 COLD</span>';
+                const accentClass = p._type === 'vacant' ? 'vacant' : 'teardown';
+                const typeLabel = p._type === 'vacant' ? 'Vacant' : 'Teardown';
+                const scoreClass = p._score === 'A' ? 'score-a' : p._score === 'B' ? 'score-b' : 'score-c';
+                const scoreLabel = p._score === 'A' ? 'Hot' : p._score === 'B' ? 'Warm' : 'Cold';
 
-                const absenteeBadge = p._absentee ? '<span style="background: #6F42C1; color: white; padding: 2px 8px; border-radius: 4px; font-size: 11px;">✈️ Absentee</span>' : '';
-                const budgetBadge = p._budget ? '<span style="background: #28A745; color: white; padding: 2px 8px; border-radius: 4px; font-size: 11px;">💰 Budget</span>' : '';
+                const impValue = parseInt(p.improvement_value) || 0;
+                const impRatio = p.improvement_ratio ? parseFloat(p.improvement_ratio).toFixed(2) : 'N/A';
 
                 html += `
-                <div class="list-panel" style="padding: 16px 20px; border-left: 3px solid ${p._type === 'vacant' ? '#2C4A3A' : '#8B4513'};">
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
-                        <div>
-                            <div style="font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">${p.property_address || p.account_number}</div>
-                            <div style="font-size: 13px; color: var(--text-secondary);">${p.owner_name || 'Unknown Owner'}</div>
+                <div class="teardown-card">
+                    <div class="teardown-card-inner">
+                        <div class="teardown-accent ${accentClass}"></div>
+                        <div class="teardown-content">
+                            <div class="teardown-main">
+                                <div class="teardown-info">
+                                    <div class="teardown-address">${p.property_address || p.account_number}</div>
+                                    <div class="teardown-owner">${p.owner_name || 'Unknown Owner'}</div>
+                                </div>
+                                <div class="teardown-badges">
+                                    <span class="td-badge type-${accentClass}">${typeLabel}</span>
+                                    <span class="td-badge ${scoreClass}">${scoreLabel}</span>
+                                    ${p._absentee ? '<span class="td-badge tag">Absentee</span>' : ''}
+                                    ${p._budget ? '<span class="td-badge tag">In Budget</span>' : ''}
+                                </div>
+                            </div>
+                            <div class="teardown-details">
+                                <div class="td-detail">
+                                    <span class="td-detail-label">Lot Size</span>
+                                    <span class="td-detail-value highlight">${p._lotSize.toLocaleString()} sq ft</span>
+                                </div>
+                                <div class="td-detail">
+                                    <span class="td-detail-label">Year Built</span>
+                                    <span class="td-detail-value">${p._yearBuilt || 'N/A'}</span>
+                                </div>
+                                <div class="td-detail">
+                                    <span class="td-detail-label">Land Value</span>
+                                    <span class="td-detail-value highlight">$${p._landValue.toLocaleString()}</span>
+                                </div>
+                                <div class="td-detail">
+                                    <span class="td-detail-label">Improvement</span>
+                                    <span class="td-detail-value">$${impValue.toLocaleString()}</span>
+                                </div>
+                                <div class="td-detail">
+                                    <span class="td-detail-label">Imp. Ratio</span>
+                                    <span class="td-detail-value">${impRatio}</span>
+                                </div>
+                                <div class="td-detail">
+                                    <span class="td-detail-label">ZIP</span>
+                                    <span class="td-detail-value">${p.zip_code || 'N/A'}</span>
+                                </div>
+                            </div>
+                            ${p.mailing_address ? `<div class="teardown-meta"><div class="teardown-meta-item">Mailing: ${p.mailing_address}${p.mailing_city ? ', ' + p.mailing_city : ''}${p.mailing_state ? ' ' + p.mailing_state : ''}${p.mailing_zip ? ' ' + p.mailing_zip : ''}</div></div>` : ''}
+                            ${p.score_reasons ? `<div class="teardown-meta"><div class="teardown-meta-item score-reason">${p.score_reasons}</div></div>` : ''}
+                            <div class="teardown-actions">
+                                <a class="td-action" href="${p.dcad_url || '#'}" target="_blank" rel="noopener">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                                    DCAD
+                                </a>
+                                ${p.owner_name ? `<button class="td-action" onclick="copyToClipboard('${p.owner_name}\n${p.property_address}\n${p.mailing_address || ''}')">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                    Copy
+                                </button>` : ''}
+                            </div>
                         </div>
-                        <div style="display: flex; gap: 4px; flex-wrap: wrap;">${typeBadge} ${scoreBadge} ${absenteeBadge} ${budgetBadge}</div>
-                    </div>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; font-size: 12px; color: var(--text-secondary); margin-top: 8px;">
-                        <div>📐 ${p._lotSize.toLocaleString()} sq ft</div>
-                        <div>📅 Built ${p._yearBuilt}</div>
-                        <div>💵 Land: $${p._landValue.toLocaleString()}</div>
-                        <div>🏠 Imp: $${(parseInt(p.improvement_value) || 0).toLocaleString()}</div>
-                        <div>📊 Ratio: ${p.improvement_ratio || 'N/A'}</div>
-                        <div>📮 ${p.zip_code || 'N/A'}</div>
-                    </div>
-                    ${p.mailing_address ? `<div style="font-size: 11px; color: var(--muted); margin-top: 6px;">📬 Mailing: ${p.mailing_address}, ${p.mailing_city} ${p.mailing_state} ${p.mailing_zip}</div>` : ''}
-                    ${p.score_reasons ? `<div style="font-size: 11px; color: var(--gold); margin-top: 4px;">✓ ${p.score_reasons}</div>` : ''}
-                    <div style="display: flex; gap: 8px; margin-top: 10px;">
-                        <a href="${p.dcad_url || '#'}" target="_blank" style="font-size: 12px; color: var(--primary); text-decoration: none;">View DCAD →</a>
-                        ${p.owner_name ? `<button onclick="copyToClipboard('${p.owner_name}\n${p.property_address}\n${p.mailing_address || ''}')" style="font-size: 12px; background: none; border: none; color: var(--primary); cursor: pointer;">Copy Owner Info</button>` : ''}
                     </div>
                 </div>
                 `;
             });
-            html += '</div>';
             container.innerHTML = html;
         }
 
