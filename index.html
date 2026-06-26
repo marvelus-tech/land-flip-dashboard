@@ -1918,23 +1918,13 @@
         }
 
         .teardown-card-inner {
-            display: flex;
             padding: 0;
         }
 
-        .teardown-accent {
-            width: 4px;
-            flex-shrink: 0;
-            background: var(--primary-soft);
-        }
-
-        .teardown-accent.vacant {
-            background: var(--primary);
-        }
-
-        .teardown-accent.teardown {
-            background: #8B6914;
-        }
+        /* Accent bar removed - user found it tacky */
+        .teardown-accent { display: none; }
+        .teardown-accent.vacant { display: none; }
+        .teardown-accent.teardown { display: none; }
 
         .teardown-content {
             flex: 1;
@@ -3709,9 +3699,7 @@
 
                 html += `
                 <div class="teardown-card">
-                    <div class="teardown-card-inner">
-                        <div class="teardown-accent ${accentClass}"></div>
-                        <div class="teardown-content">
+                    <div class="teardown-content">
                             <div class="teardown-main">
                                 <div class="teardown-info">
                                     <div class="teardown-address">${p.property_address || p.account_number}</div>
@@ -3764,7 +3752,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
                 `;
             });
             container.innerHTML = html;
