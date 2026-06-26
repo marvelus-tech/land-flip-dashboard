@@ -1,0 +1,50 @@
+# Focused batch for ZIPs with larger lot sizes
+# These neighborhoods have bigger residential lots
+
+# === 75218 — Old Lake Highlands / White Rock (older homes, larger lots) ===
+Peavy 75218
+Groveland 75218
+Bella Vista 75218
+Peninsula 75218
+Eastwood 75218
+Lake Gardens 75218
+San Rafael 75218
+Monica 75218
+Casa Loma 75218
+Forest Lane 75218
+
+# === 75220 — North Dallas / Bluffview (large lots, mix of ages) ===
+Inwood 75220
+Midway 75220
+Forest 75220
+Northaven 75220
+Shadybrook 75220
+Park 75220
+Ferndale 75220
+Waldemar 75220
+Wolfe 75220
+Marsh 75220
+
+# === 75229 — Preston Hollow NW (very large lots) ===
+Royal 75229
+Walnut 75229
+Ferndale 75229
+Shadybrook 75229
+Crestline 75229
+Northaven 75229
+Foster 75229
+Hollow 75229
+Davenport 75229
+Mimosa 75229
+
+# === 75230 — Preston Hollow (large lots, premium) ===
+Forest 75230
+Northaven 75230
+Stichter 75230
+Davenport 75230
+Windsor 75230
+Dorset 75230
+Wedgwood 75230
+Honey Creek 75230
+Kirkwood 75230
+Foster 75230

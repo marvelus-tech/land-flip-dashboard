@@ -1753,6 +1753,22 @@
             color: var(--muted);
             margin-top: 4px;
         }
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-right: 4px;
+        }
+        .badge-vacant { background: #2C4A3A; color: #F0E4C8; }
+        .badge-teardown { background: #8B4513; color: white; }
+        .badge-hot { background: #DC3545; color: white; }
+        .badge-warm { background: #F0AD4E; color: #1C1C1E; }
+        .badge-cold { background: #6C757D; color: white; }
+        .badge-absentee { background: #6F42C1; color: white; }
+        .badge-budget { background: #28A745; color: white; }
+
     </style>
 </head>
 <body>
@@ -1811,6 +1827,7 @@
                 <button class="segment" onclick="switchTab('lots')" data-tab="lots">Lots</button>
                 <button class="segment" onclick="switchTab('contracts')" data-tab="contracts">Contracts</button>
                 <button class="segment" onclick="switchTab('titles')" data-tab="titles">Titles</button>
+                <button class="segment" onclick="toggleTeardowns()" data-tab="teardowns">🏚️ Teardowns</button>
             </div>
         </div>
 
@@ -1917,6 +1934,29 @@
 
     </div>
     </div><!-- .site-main -->
+
+    <!-- Teardown Candidates Section -->
+    <section id="teardowns-section" class="container" style="margin-top: 48px; display: none;">
+        <div class="recon-header" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
+            <div>
+                <h2 class="recon-title">🏚️ Teardown Candidates</h2>
+                <p class="recon-subtitle">Off-market properties from DCAD — pre-1980 builds on 8K+ sq ft lots</p>
+            </div>
+            <div style="display: flex; gap: 8px;">
+                <button class="pill-btn" onclick="loadDCADData()">🔄 Refresh</button>
+                <button class="pill-btn" onclick="exportTeardownCSV()">📥 Export</button>
+            </div>
+        </div>
+        <div id="teardown-filters" style="display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap;">
+            <label class="filter-chip"><input type="checkbox" id="teardown-only" checked onchange="renderTeardowns()"> 🏚️ Teardowns Only</label>
+            <label class="filter-chip"><input type="checkbox" id="vacant-only" onchange="renderTeardowns()"> 🏝️ Vacant Lots</label>
+            <label class="filter-chip"><input type="checkbox" id="absentee-only" onchange="renderTeardowns()"> ✈️ Absentee Owners</label>
+            <label class="filter-chip"><input type="checkbox" id="budget-only" onchange="renderTeardowns()"> 💰 In Budget ($350K-$450K)</label>
+            <label class="filter-chip"><input type="checkbox" id="hot-only" onchange="renderTeardowns()"> 🔥 Score A/B Only</label>
+        </div>
+        <div id="teardown-count" style="font-size: 13px; color: var(--muted); margin-bottom: 16px;"></div>
+        <div id="teardowns-list"></div>
+    </section>
 
     <footer class="app-footer">
         <div class="container footer-inner">
@@ -2959,6 +2999,209 @@
                 toast.style.opacity = '0';
                 setTimeout(() => toast.remove(), 220);
             }, 1750);
+        }
+
+        // ============================================
+        // TEARDOWN CANDIDATES — DCAD Data Integration
+        // ============================================
+        let teardownData = [];
+
+        function toggleTeardowns() {
+            const section = document.getElementById('teardowns-section');
+            if (!section) return;
+            
+            // Hide other content sections
+            document.querySelectorAll('.content-section').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.segment').forEach(el => el.classList.remove('active'));
+            
+            if (section.style.display === 'none' || section.style.display === '') {
+                section.style.display = 'block';
+                document.querySelector('[data-tab="teardowns"]')?.classList.add('active');
+                loadDCADData();
+                window.scrollTo({ top: section.offsetTop - 20, behavior: 'smooth' });
+            } else {
+                section.style.display = 'none';
+                // Show the lots section by default
+                document.getElementById('lots-content')?.classList.add('active');
+                document.querySelector('[data-tab="lots"]')?.classList.add('active');
+            }
+        }
+
+        async function loadDCADData() {
+            try {
+                // Try both filenames for flexibility
+                let response = await fetch('data/large-lot-leads.csv');
+                if (!response.ok) {
+                    response = await fetch('data/priority-leads.csv');
+                }
+                if (!response.ok) throw new Error('No DCAD data found');
+                const csv = await response.text();
+                teardownData = parseCSV(csv);
+                renderTeardowns();
+                showToast(`Loaded ${teardownData.length} teardown candidates`);
+            } catch (err) {
+                showToast('No DCAD data found — run scraper first');
+                console.warn('DCAD load error:', err);
+            }
+        }
+
+        function parseCSV(csv) {
+            // Robust CSV parser that handles quoted fields with commas
+            const lines = csv.trim().split('\n');
+            if (lines.length < 2) return [];
+            const headers = parseCSVLine(lines[0]);
+            const results = [];
+            for (let i = 1; i < lines.length; i++) {
+                const values = parseCSVLine(lines[i]);
+                if (values.length < 5) continue;
+                const obj = {};
+                headers.forEach((h, idx) => {
+                    obj[h] = values[idx] !== undefined ? values[idx].trim() : '';
+                });
+                // Determine type
+                const impVal = parseInt(obj.improvement_value) || 0;
+                obj._type = impVal === 0 ? 'vacant' : 'teardown';
+                obj._score = obj.score || 'C';
+                obj._lotSize = parseInt(obj.lot_size_sqft) || 0;
+                obj._yearBuilt = parseInt(obj.year_built) || 0;
+                obj._landValue = parseInt(obj.land_value) || 0;
+                obj._absentee = obj.is_absentee_owner === 'True' || obj.is_absentee_owner === 'true';
+                obj._budget = obj.meets_budget === 'True' || obj.meets_budget === 'true';
+                results.push(obj);
+            }
+            return results;
+        }
+
+        function parseCSVLine(line) {
+            const result = [];
+            let current = '';
+            let inQuotes = false;
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                if (char === '"') {
+                    if (inQuotes && line[i + 1] === '"') {
+                        current += '"';
+                        i++;
+                    } else {
+                        inQuotes = !inQuotes;
+                    }
+                } else if (char === ',' && !inQuotes) {
+                    result.push(current);
+                    current = '';
+                } else {
+                    current += char;
+                }
+            }
+            result.push(current);
+            return result;
+        }
+
+        function renderTeardowns() {
+            const container = document.getElementById('teardowns-list');
+            const countEl = document.getElementById('teardown-count');
+            if (!container) return;
+
+            const teardownOnly = document.getElementById('teardown-only')?.checked;
+            const vacantOnly = document.getElementById('vacant-only')?.checked;
+            const absenteeOnly = document.getElementById('absentee-only')?.checked;
+            const budgetOnly = document.getElementById('budget-only')?.checked;
+            const hotOnly = document.getElementById('hot-only')?.checked;
+
+            let filtered = teardownData;
+
+            if (teardownOnly) {
+                filtered = filtered.filter(p => p._type === 'teardown');
+            }
+            if (vacantOnly) {
+                filtered = filtered.filter(p => p._type === 'vacant');
+            }
+            if (absenteeOnly) {
+                filtered = filtered.filter(p => p._absentee);
+            }
+            if (budgetOnly) {
+                filtered = filtered.filter(p => p._budget);
+            }
+            if (hotOnly) {
+                filtered = filtered.filter(p => p._score === 'A' || p._score === 'B');
+            }
+
+            // Default: show all data, don't filter by lot size unless user wants
+            // Filter by buyer box only when explicitly requested
+            // filtered = filtered.filter(p => p._lotSize >= 8000 && p._yearBuilt > 0 && p._yearBuilt <= 1980);
+
+            if (countEl) {
+                countEl.textContent = `Showing ${filtered.length} of ${teardownData.length} properties | Filters: Teardowns=${teardownOnly}, Vacant=${vacantOnly}, Budget=${budgetOnly}`;
+            }
+
+            if (filtered.length === 0) {
+                container.innerHTML = '<div style="padding: 40px; text-align: center; color: var(--muted);">No teardown candidates match current filters. Run the scraper to populate data.</div>';
+                return;
+            }
+
+            let html = '<div style="display: grid; gap: 12px;">';
+            filtered.forEach(p => {
+                const typeBadge = p._type === 'vacant' 
+                    ? '<span style="background: #2C4A3A; color: #F0E4C8; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">🏝️ VACANT</span>'
+                    : '<span style="background: #8B4513; color: white; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">🏚️ TEARDOWN</span>';
+                
+                const scoreBadge = p._score === 'A' 
+                    ? '<span style="background: #DC3545; color: white; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">🔥 HOT</span>'
+                    : p._score === 'B'
+                    ? '<span style="background: #F0AD4E; color: #1C1C1E; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">🌡️ WARM</span>'
+                    : '<span style="background: #6C757D; color: white; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">🧊 COLD</span>';
+
+                const absenteeBadge = p._absentee ? '<span style="background: #6F42C1; color: white; padding: 2px 8px; border-radius: 4px; font-size: 11px;">✈️ Absentee</span>' : '';
+                const budgetBadge = p._budget ? '<span style="background: #28A745; color: white; padding: 2px 8px; border-radius: 4px; font-size: 11px;">💰 Budget</span>' : '';
+
+                html += `
+                <div class="list-panel" style="padding: 16px 20px; border-left: 3px solid ${p._type === 'vacant' ? '#2C4A3A' : '#8B4513'};">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                        <div>
+                            <div style="font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">${p.property_address || p.account_number}</div>
+                            <div style="font-size: 13px; color: var(--text-secondary);">${p.owner_name || 'Unknown Owner'}</div>
+                        </div>
+                        <div style="display: flex; gap: 4px; flex-wrap: wrap;">${typeBadge} ${scoreBadge} ${absenteeBadge} ${budgetBadge}</div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; font-size: 12px; color: var(--text-secondary); margin-top: 8px;">
+                        <div>📐 ${p._lotSize.toLocaleString()} sq ft</div>
+                        <div>📅 Built ${p._yearBuilt}</div>
+                        <div>💵 Land: $${p._landValue.toLocaleString()}</div>
+                        <div>🏠 Imp: $${(parseInt(p.improvement_value) || 0).toLocaleString()}</div>
+                        <div>📊 Ratio: ${p.improvement_ratio || 'N/A'}</div>
+                        <div>📮 ${p.zip_code || 'N/A'}</div>
+                    </div>
+                    ${p.mailing_address ? `<div style="font-size: 11px; color: var(--muted); margin-top: 6px;">📬 Mailing: ${p.mailing_address}, ${p.mailing_city} ${p.mailing_state} ${p.mailing_zip}</div>` : ''}
+                    ${p.score_reasons ? `<div style="font-size: 11px; color: var(--gold); margin-top: 4px;">✓ ${p.score_reasons}</div>` : ''}
+                    <div style="display: flex; gap: 8px; margin-top: 10px;">
+                        <a href="${p.dcad_url || '#'}`" target="_blank" style="font-size: 12px; color: var(--primary); text-decoration: none;">View DCAD →</a>
+                        ${p.owner_name ? `<button onclick="copyToClipboard('${p.owner_name}\n${p.property_address}\n${p.mailing_address || ''}')" style="font-size: 12px; background: none; border: none; color: var(--primary); cursor: pointer;">Copy Owner Info</button>` : ''}
+                    </div>
+                </div>
+                `;
+            });
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        function exportTeardownCSV() {
+            const filtered = teardownData.filter(p => p._lotSize >= 8000 && p._yearBuilt > 0 && p._yearBuilt <= 1980);
+            if (filtered.length === 0) {
+                showToast('No teardown data to export');
+                return;
+            }
+            const headers = ['account_number','property_address','zip_code','owner_name','mailing_address','lot_size_sqft','year_built','land_value','improvement_value','score','is_absentee_owner','dcad_url'];
+            let csv = headers.join(',') + '\n';
+            filtered.forEach(p => {
+                csv += headers.map(h => `"${(p[h] || '').replace(/"/g, '""')}"`).join(',') + '\n';
+            });
+            const blob = new Blob([csv], {type: 'text/csv'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `teardown-candidates-${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast(`Exported ${filtered.length} teardown candidates`);
         }
 
         // ============================================
