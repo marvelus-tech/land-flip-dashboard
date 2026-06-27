@@ -48,6 +48,18 @@
             padding: 0;
         }
 
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+        ::selection {
+            background: var(--gold-muted);
+            color: var(--primary);
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", system-ui, sans-serif;
             background: var(--bg);
@@ -278,7 +290,7 @@
         .state-pill {
             padding: 7px 18px;
             font-size: 13px;
-            font-weight: 500;
+            font-weight: 400;
             color: var(--text-secondary);
             background: transparent;
             border: none;
@@ -290,6 +302,11 @@
 
         .state-pill:hover {
             color: var(--text-primary);
+            background: var(--bg-warm);
+        }
+
+        .state-pill:active {
+            transform: scale(0.96);
         }
 
         .state-pill.active {
@@ -328,6 +345,10 @@
             background: var(--surface-hover);
         }
 
+        .export-btn:active {
+            transform: scale(0.97);
+        }
+
         .export-btn.gold-accent {
             background: var(--gold);
             border-color: var(--gold);
@@ -343,6 +364,10 @@
             box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
         }
 
+        .export-btn.gold-accent:active {
+            transform: translateY(0) scale(0.97);
+        }
+
         /* === SEGMENTED CONTROL (Apple style) === */
         .segmented {
             display: inline-flex;
@@ -355,7 +380,7 @@
         .segment {
             padding: 8px 24px;
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 400;
             color: var(--text-secondary);
             background: transparent;
             border: none;
@@ -363,6 +388,9 @@
             cursor: pointer;
             transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
         }
+
+        .segment:hover { color: var(--text-primary); }
+        .segment:active { transform: scale(0.96); }
 
         .segment.active {
             background: var(--surface);
@@ -419,6 +447,7 @@
         .builder-row:last-child { border-bottom: none; }
 
         .builder-row:hover { background: var(--surface-hover); }
+        .builder-row:active { transform: scale(0.998); transition: transform 0.05s ease; }
 
         /* Title Company Card — unified, elevated, distinct */
         .title-card {
@@ -428,7 +457,7 @@
             box-shadow: var(--shadow-sm);
             overflow: hidden;
             margin-bottom: 12px;
-            transition: box-shadow 0.2s ease;
+            transition: box-shadow 0.2s cubic-bezier(0.2, 0, 0, 1), transform 0.1s ease;
         }
 
         .title-card:last-child {
@@ -438,6 +467,7 @@
         .title-card:hover {
             box-shadow: var(--shadow-md);
         }
+        .title-card:active { transform: scale(0.996); }
 
         .title-card .builder-row {
             border-bottom: none;
@@ -596,6 +626,11 @@
             color: var(--text-primary);
         }
 
+        .icon-btn:active {
+            transform: scale(0.92);
+            background: var(--border);
+        }
+
         .icon-btn svg {
             width: 16px;
             height: 16px;
@@ -671,10 +706,11 @@
             display: flex;
             align-items: center;
             gap: 16px;
-            transition: box-shadow 0.15s ease;
+            transition: box-shadow 0.15s ease, transform 0.05s ease;
         }
 
         .lot-row:hover { box-shadow: var(--shadow-sm); }
+        .lot-row:active { transform: scale(0.997); }
 
         .county-group { margin-bottom: 8px; }
 
@@ -952,6 +988,11 @@
         .download-btn:hover {
             background: var(--primary);
             color: #fff;
+        }
+
+        .download-btn:active {
+            transform: scale(0.97);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .tab-toolbar { margin-bottom: 28px; }
@@ -1839,6 +1880,71 @@
             color: var(--text-tertiary);
             margin-top: 4px;
         }
+
+        /* Skeleton Loading States */
+        @keyframes skeleton-shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .skeleton {
+            background: linear-gradient(90deg, var(--bg-warm) 25%, var(--surface-hover) 50%, var(--bg-warm) 75%);
+            background-size: 200% 100%;
+            animation: skeleton-shimmer 1.5s cubic-bezier(0.2, 0, 0, 1) infinite;
+            border-radius: 8px;
+        }
+
+        .skeleton-title {
+            height: 20px;
+            width: 60%;
+            margin-bottom: 8px;
+        }
+
+        .skeleton-line {
+            height: 14px;
+            width: 100%;
+            margin-bottom: 6px;
+        }
+
+        .skeleton-line.short { width: 40%; }
+        .skeleton-line.medium { width: 70%; }
+
+        .skeleton-card {
+            padding: 20px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            margin-bottom: 12px;
+        }
+
+        .skeleton-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .skeleton-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 18px 22px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            margin-bottom: 6px;
+        }
+
+        .skeleton-content {
+            flex: 1;
+        }
+
+        .skeleton-action {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+        }
+
         .badge {
             display: inline-block;
             padding: 2px 8px;
@@ -3839,16 +3945,22 @@
             });
         }
 
-        function showToast(message) {
+        function showToast(message, type = 'info') {
             const toast = document.createElement('div');
-            toast.style.cssText = 'position:fixed;bottom:28px;right:28px;background:#1E3A2F;color:white;padding:10px 20px;border-radius:10px;font-size:13.5px;font-weight:500;box-shadow:0 3px 10px rgba(0,0,0,0.12);z-index:9999;letter-spacing:-0.01em;';
+            const bgColor = type === 'success' ? 'var(--primary)' : type === 'error' ? 'var(--danger)' : 'var(--primary)';
+            toast.style.cssText = `position:fixed;bottom:28px;right:28px;background:${bgColor};color:white;padding:12px 24px;border-radius:12px;font-size:13.5px;font-weight:500;box-shadow:0 4px 16px rgba(0,0,0,0.12);z-index:9999;letter-spacing:-0.01em;transform:translateY(12px);opacity:0;transition:all 0.3s cubic-bezier(0.2,0,0,1);`;
             toast.textContent = message;
             document.body.appendChild(toast);
+            // Animate in
+            requestAnimationFrame(() => {
+                toast.style.transform = 'translateY(0)';
+                toast.style.opacity = '1';
+            });
             setTimeout(() => {
-                toast.style.transition = 'opacity 0.22s ease';
+                toast.style.transform = 'translateY(12px)';
                 toast.style.opacity = '0';
-                setTimeout(() => toast.remove(), 220);
-            }, 1750);
+                setTimeout(() => toast.remove(), 300);
+            }, 2200);
         }
 
         async function copyToClipboard(text) {
