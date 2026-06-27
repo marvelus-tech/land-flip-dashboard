@@ -3224,7 +3224,9 @@
                 const isActive = currentFilterState === key;
                 const count = currentTab === 'lots'
                     ? lotData.filter(l => normalizeStateKey(l.state) === key).length
-                    : builderData.filter(b => normalizeStateKey(b.state) === key).length;
+                    : currentTab === 'titles'
+                        ? titleData.filter(t => normalizeStateKey(t.state) === key).length
+                        : builderData.filter(b => normalizeStateKey(b.state) === key).length;
 
                 const label = MARKET_LABELS[key] || key;
 
@@ -3268,7 +3270,9 @@
                 const count = key === 'all' ? '' : (
                     currentTab === 'lots'
                         ? lotData.filter(l => normalizeStateKey(l.state) === key).length
-                        : builderData.filter(b => normalizeStateKey(b.state) === key).length
+                        : currentTab === 'titles'
+                            ? titleData.filter(t => normalizeStateKey(t.state) === key).length
+                            : builderData.filter(b => normalizeStateKey(b.state) === key).length
                 );
                 const label = MARKET_LABELS[key] || key;
                 const countStr = count !== '' ? ` (${count})` : '';
@@ -3492,7 +3496,9 @@
             if (searchInput) {
                 searchInput.placeholder = tab === 'lots'
                     ? 'Search lots by address, county, or city...'
-                    : 'Search builders or counties...';
+                    : tab === 'titles'
+                        ? 'Search title companies...'
+                        : 'Search builders or counties...';
                 if (hideFilters) searchInput.value = '';
             }
         }
@@ -4304,7 +4310,7 @@
                 if (totalEl) totalEl.textContent = builderData.length;
                 if (activeEl) activeEl.textContent = builderData.filter(b => b.status === 'active').length;
                 if (researchEl) researchEl.textContent = builderData.filter(b => b.status === 'research').length;
-                if (marketsEl) marketsEl.textContent = '4';
+                if (marketsEl) marketsEl.textContent = ALL_MARKETS.length;
 
                 if (labelEls[0]) labelEls[0].textContent = 'Total Builders';
                 if (labelEls[1]) labelEls[1].textContent = 'Active';
@@ -4332,7 +4338,7 @@
                 if (totalEl) totalEl.textContent = count;
                 if (activeEl) activeEl.textContent = count;
                 if (researchEl) researchEl.textContent = '—';
-                if (marketsEl) marketsEl.textContent = '4';
+                if (marketsEl) marketsEl.textContent = ALL_MARKETS.length;
 
                 if (labelEls[0]) labelEls[0].textContent = 'Templates';
                 if (labelEls[1]) labelEls[1].textContent = 'Ready';
@@ -4347,7 +4353,7 @@
                 if (totalEl) totalEl.textContent = totalTitles;
                 if (activeEl) activeEl.textContent = activeTitles;
                 if (researchEl) researchEl.textContent = researchTitles;
-                if (marketsEl) marketsEl.textContent = titleMarkets || '4';
+                if (marketsEl) marketsEl.textContent = ALL_MARKETS.length;
 
                 if (labelEls[0]) labelEls[0].textContent = 'Title Companies';
                 if (labelEls[1]) labelEls[1].textContent = 'Active';
