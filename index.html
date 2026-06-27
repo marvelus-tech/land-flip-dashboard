@@ -670,6 +670,16 @@
         .lot-tag { display: inline-block; font-size: 10px; padding: 1px 7px; border-radius: 4px; background: #F5F3ED; color: var(--muted); font-weight: 500; }
         .lot-tag.purchased { background: #E8F0E6; color: var(--primary); }
         .lot-tag.under-contract { background: rgba(201, 169, 98, 0.15); color: #8A7344; }
+        .lot-tag.teardown { background: rgba(139, 105, 20, 0.10); color: #8B6914; }
+        .lot-tag.vacant { background: rgba(30, 58, 47, 0.08); color: var(--primary); }
+        .lot-tag.score-a { background: rgba(201, 169, 98, 0.15); color: #8A7344; }
+        .lot-tag.score-b { background: rgba(201, 169, 98, 0.10); color: #9A8548; }
+        .lot-tag.score-c { background: rgba(120, 120, 120, 0.06); color: var(--muted); }
+        .lot-tag.teardown { background: rgba(139, 105, 20, 0.10); color: #8B6914; }
+        .lot-tag.vacant { background: rgba(30, 58, 47, 0.08); color: var(--primary); }
+        .lot-tag.score-a { background: rgba(201, 169, 98, 0.15); color: #8A7344; }
+        .lot-tag.score-b { background: rgba(201, 169, 98, 0.10); color: #9A8548; }
+        .lot-tag.score-c { background: rgba(120, 120, 120, 0.06); color: var(--muted); }
         .lot-notes { font-size: 12px; color: var(--text-secondary); margin-top: 6px; line-height: 1.45; }
 
         /* Activity Tracker */
@@ -3794,7 +3804,7 @@
             const hotOnly = document.getElementById('hot-only')?.checked;
 
             // Update filter chip visual states
-            document.querySelectorAll('.filter-chip').forEach(chip => {
+            document.querySelectorAll('#teardown-filters .filter-chip').forEach(chip => {
                 const input = chip.querySelector('input');
                 if (input && input.checked) {
                     chip.classList.add('active');
@@ -3835,14 +3845,9 @@
 
             if (filtered.length === 0) {
                 container.innerHTML = `
-                    <div class="teardown-empty">
-                        <svg class="teardown-empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
-                            <line x1="12" y1="22.08" x2="12" y2="12"/>
-                        </svg>
-                        <div class="teardown-empty-title">No properties match</div>
-                        <div class="teardown-empty-text">Try adjusting your filters to see more results</div>
+                    <div class="empty-market" style="padding: 32px 20px; text-align: center;">
+                        <strong>No properties match</strong><br>
+                        <span style="color: var(--muted); font-size: 13px;">Try adjusting your filters to see more results</span>
                     </div>
                 `;
                 return;
@@ -3850,15 +3855,10 @@
 
             let html = '';
             filtered.forEach(p => {
-                const accentClass = p._type === 'vacant' ? 'vacant' : 'teardown';
-                const typeLabel = p._type === 'vacant' ? 'Vacant' : 'Teardown';
                 const scoreClass = p._score === 'A' ? 'score-a' : p._score === 'B' ? 'score-b' : 'score-c';
                 const scoreLabel = p._score === 'A' ? 'Hot' : p._score === 'B' ? 'Warm' : 'Cold';
-                const scoreIcon = p._score === 'A' ? '●' : p._score === 'B' ? '◐' : '○';
-
-                const impValue = parseInt(p.improvement_value) || 0;
-                const impRatio = p.improvement_ratio ? parseFloat(p.improvement_ratio).toFixed(2) : 'N/A';
                 const lotSizeAcres = (p._lotSize / 43560).toFixed(2);
+                const impValue = parseInt(p.improvement_value) || 0;
                 
                 const zip = p.search_zip || p.zip_code || '';
                 const zipClean = /^\d{5}$/.test(zip) ? zip : '';
@@ -3867,80 +3867,70 @@
                 const hasPhone = p.owner_phone && p.owner_phone !== 'unknown' && p.owner_phone !== '';
                 const hasEmail = p.owner_email && p.owner_email !== '';
                 const hasMail = p.mailing_address && p.mailing_address !== '';
-                const hasContacts = hasPhone || hasEmail || hasMail;
 
+                // Build status tag like lot-tag
+                const statusTag = p._type === 'vacant' ? 'vacant' : 'teardown';
+                const statusLabel = p._type === 'vacant' ? 'Vacant' : 'Teardown';
+                
                 html += `
-                <div class="teardown-card">
-                    <div class="teardown-card-inner">
-                        <!-- Top Row: Identity + Score -->
-                        <div class="teardown-card-header">
-                            <div class="teardown-card-identity">
-                                <div class="teardown-card-address">${p.property_address || p.account_number}</div>
-                                <div class="teardown-card-sub">${p.owner_name || 'Unknown Owner'}${p.zip_code ? ' · ' + p.zip_code : ''}</div>
-                            </div>
-                            <div class="teardown-card-score">
-                                <span class="score-pill ${scoreClass}">${scoreIcon} ${scoreLabel}</span>
-                                ${p._absentee ? '<span class="score-pill absentee">Absentee</span>' : ''}
-                                ${p._budget ? '<span class="score-pill budget">In Budget</span>' : ''}
-                            </div>
+                <div class="lot-item" data-teardown="true">
+                    <div class="lot-header-row">
+                        <div class="lot-address">${p.property_address || p.account_number}</div>
+                        <div class="lot-enrichment-status">
+                            <span class="lot-tag ${statusTag}">${statusLabel}</span>
+                            <span class="lot-tag ${scoreClass}">${scoreLabel}</span>
+                            ${p._absentee ? '<span class="lot-tag">Absentee</span>' : ''}
+                            ${p._budget ? '<span class="lot-tag">In Budget</span>' : ''}
                         </div>
-                        
-                        <!-- Metrics Row: The only 3 that matter -->
-                        <div class="teardown-card-metrics">
-                            <div class="metric-cell">
-                                <span class="metric-value">${lotSizeAcres} <span class="metric-unit">ac</span></span>
-                                <span class="metric-label">Lot Size</span>
-                            </div>
-                            <div class="metric-cell">
-                                <span class="metric-value">${p._yearBuilt || '—'}</span>
-                                <span class="metric-label">Year Built</span>
-                            </div>
-                            <div class="metric-cell">
-                                <span class="metric-value highlight">$${p._landValue.toLocaleString()}</span>
-                                <span class="metric-label">Land Value</span>
-                            </div>
-                            <div class="metric-cell">
-                                <span class="metric-value">${impRatio}</span>
-                                <span class="metric-label">Imp. Ratio</span>
-                            </div>
-                        </div>
-                        
-                        <!-- Action Bar: Clean, unified -->
-                        <div class="teardown-card-actions">
-                            <a class="td-action" href="${p.dcad_url || '#'}" target="_blank" rel="noopener">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                                DCAD
-                            </a>
-                            <a class="td-action" href="${zillowUrl}" target="_blank" rel="noopener">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                                Zillow
-                            </a>
-                            ${p.owner_name ? `<button class="td-action" onclick="copyToClipboard('${p.owner_name}\n${p.property_address}\n${p.mailing_address || ''}')">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                                Copy
-                            </button>` : ''}
-                        </div>
-                        
-                        <!-- Contact Row: Only when data exists, compact -->
-                        ${hasContacts ? `
-                        <div class="teardown-card-contacts">
-                            ${hasPhone ? `<a class="td-contact" href="tel:${p.owner_phone}" title="Call ${p.owner_name || 'Owner'}">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                                <span>${p.owner_phone}</span>
-                            </a>` : ''}
-                            ${hasEmail ? `<a class="td-contact" href="mailto:${p.owner_email}" title="Email ${p.owner_name || 'Owner'}">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                                <span>${p.owner_email}</span>
-                            </a>` : ''}
-                            ${hasMail ? `<a class="td-contact" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.mailing_address + ', ' + (p.mailing_city || '') + ' ' + (p.mailing_state || '') + ' ' + (p.mailing_zip || ''))}" target="_blank" rel="noopener" title="View on map">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                                <span>${p.mailing_address}</span>
-                            </a>` : ''}
-                        </div>` : ''}
-                        
-                        <!-- Score insight (collapsible, subtle) -->
-                        ${p.score_reasons ? `<div class="teardown-card-insight">${p.score_reasons}</div>` : ''}
                     </div>
+                    <div class="lot-meta">
+                        <span>${lotSizeAcres} ac</span>
+                        <span>Built ${p._yearBuilt || '—'}</span>
+                        <span>Land: $${p._landValue.toLocaleString()}</span>
+                        <span>Imp: $${impValue.toLocaleString()}</span>
+                        <span>${p.zip_code || '—'}</span>
+                    </div>
+                    <div class="activity-tracker">
+                        <a class="activity-icon" href="${p.dcad_url || '#'}" target="_blank" rel="noopener" title="DCAD Record">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        </a>
+                        <a class="activity-icon" href="${zillowUrl}" target="_blank" rel="noopener" title="Zillow">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                        </a>
+                        ${p.owner_name ? `<button class="activity-icon" onclick="copyToClipboard('${p.owner_name}\n${p.property_address}\n${p.mailing_address || ''}')" title="Copy info">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        </button>` : ''}
+                    </div>
+                    ${hasPhone || hasEmail || hasMail ? `
+                    <div class="lot-owner-section">
+                        <div class="owner-header">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                            <span>Owner Contact</span>
+                        </div>
+                        <div class="owner-details">
+                            ${p.owner_name ? `
+                            <div class="owner-detail-row">
+                                <span class="owner-label">Name</span>
+                                <span class="owner-value">${p.owner_name}</span>
+                            </div>` : ''}
+                            ${hasPhone ? `
+                            <div class="owner-detail-row">
+                                <span class="owner-label">Phone</span>
+                                <a href="tel:${p.owner_phone}" class="owner-value phone">${p.owner_phone}</a>
+                            </div>` : ''}
+                            ${hasEmail ? `
+                            <div class="owner-detail-row">
+                                <span class="owner-label">Email</span>
+                                <a href="mailto:${p.owner_email}" class="owner-value email">${p.owner_email}</a>
+                            </div>` : ''}
+                            ${hasMail ? `
+                            <div class="owner-detail-row">
+                                <span class="owner-label">Mailing</span>
+                                <span class="owner-value">${p.mailing_address}${p.mailing_city ? ', ' + p.mailing_city : ''}${p.mailing_state ? ' ' + p.mailing_state : ''}${p.mailing_zip ? ' ' + p.mailing_zip : ''}</span>
+                            </div>` : ''}
+                        </div>
+                    </div>` : ''}
+                    ${p.score_reasons ? `<div class="lot-notes" style="font-style: italic; color: var(--gold);">${p.score_reasons}</div>` : ''}
                 </div>
                 `;
             });
@@ -3985,7 +3975,13 @@
 
                 const stateName = MARKET_LABELS[stateKey] || stateKey;
                 const marketLots = filteredLots.filter(l => normalizeStateKey(l.state) === stateKey);
-                const count = marketLots.length;
+                let count = marketLots.length;
+                
+                // Add teardowns to Texas count
+                const texasTeardowns = teardownData.filter(p => p.zip_code && p.zip_code.startsWith('75'));
+                if (stateKey === 'dallas' && texasTeardowns.length > 0) {
+                    count += texasTeardowns.length;
+                }
 
                 const byCounty = {};
                 marketLots.forEach(lot => {
@@ -4244,8 +4240,9 @@
                 const underContract = data.filter(l => l.status === 'under contract' || l.status === 'purchased').length;
                 const opportunities = data.filter(l => l.status === 'identified').length;
                 const teardownCount = teardownData.length;
+                const totalWithTeardowns = totalLots + teardownCount;
 
-                if (totalEl) totalEl.textContent = totalLots;
+                if (totalEl) totalEl.textContent = totalWithTeardowns;
                 if (activeEl) activeEl.textContent = underContract;
                 if (researchEl) researchEl.textContent = opportunities;
                 if (marketsEl) marketsEl.textContent = teardownCount > 0 ? teardownCount : ALL_MARKETS.length;
