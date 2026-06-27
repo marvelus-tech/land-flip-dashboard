@@ -709,8 +709,8 @@
         }
 
         .activity-icon svg {
-            width: 14px;
-            height: 14px;
+            width: 16px;
+            height: 16px;
         }
 
         /* Enrichment Status Badge */
@@ -1797,9 +1797,11 @@
         .badge-absentee { background: #6F42C1; color: white; }
         .badge-budget { background: #28A745; color: white; }
 
-        /* === TEARDOWN CANDIDATES — Apple HIG Redesign === */
+        /* === TEARDOWN CANDIDATES — Apple HIG Refined === */
         .teardowns-container {
-            margin-top: 48px;
+            margin-top: 64px;
+            padding-top: 48px;
+            border-top: 1px solid var(--divider);
         }
 
         .teardowns-header {
@@ -1807,26 +1809,29 @@
             align-items: flex-start;
             justify-content: space-between;
             gap: 24px;
-            margin-bottom: 28px;
+            margin-bottom: 32px;
         }
 
         .teardowns-header-title {
-            font-size: 22px;
+            font-size: 28px;
             font-weight: 600;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.03em;
             color: var(--text-primary);
-            margin-bottom: 4px;
+            margin-bottom: 6px;
+            line-height: 1.1;
         }
 
         .teardowns-header-subtitle {
-            font-size: 13.5px;
+            font-size: 14px;
             color: var(--text-secondary);
             font-weight: 400;
+            letter-spacing: -0.01em;
+            line-height: 1.4;
         }
 
         .teardowns-actions {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             flex-shrink: 0;
         }
 
@@ -1834,27 +1839,29 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 9px 18px;
+            padding: 10px 20px;
             font-size: 13px;
             font-weight: 500;
             color: var(--text-secondary);
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 10px;
+            border-radius: 12px;
             cursor: pointer;
-            transition: all 0.12s ease;
+            transition: all 0.15s ease;
             white-space: nowrap;
         }
 
         .teardown-btn:hover {
             border-color: rgba(30, 58, 47, 0.18);
             color: var(--primary);
+            background: #FDFCFA;
         }
 
         .teardown-btn.primary {
             background: var(--primary);
             border-color: var(--primary);
             color: #fff;
+            font-weight: 600;
         }
 
         .teardown-btn.primary:hover {
@@ -1867,28 +1874,29 @@
             height: 14px;
         }
 
-        /* Filter Bar */
+        /* Filter Bar — refined, minimal */
         .teardown-filters {
             display: flex;
             align-items: center;
-            gap: 8px;
-            margin-bottom: 20px;
+            gap: 10px;
+            margin-bottom: 24px;
             flex-wrap: wrap;
+            padding: 4px 0;
         }
 
         .filter-chip {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 7px 14px;
-            font-size: 12.5px;
+            padding: 8px 16px;
+            font-size: 13px;
             font-weight: 500;
             color: var(--text-secondary);
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 999px;
             cursor: pointer;
-            transition: all 0.12s ease;
+            transition: all 0.15s ease;
             user-select: none;
             -webkit-tap-highlight-color: transparent;
         }
@@ -1896,12 +1904,14 @@
         .filter-chip:hover {
             border-color: rgba(30, 58, 47, 0.15);
             color: var(--text-primary);
+            background: #FDFCFA;
         }
 
         .filter-chip.active {
             background: var(--primary);
             border-color: var(--primary);
             color: #fff;
+            font-weight: 600;
         }
 
         .filter-chip input {
@@ -1912,7 +1922,7 @@
             width: 14px;
             height: 14px;
             opacity: 0;
-            transition: opacity 0.12s ease;
+            transition: opacity 0.15s ease;
         }
 
         .filter-chip.active .check-icon {
@@ -1920,140 +1930,173 @@
         }
 
         .teardown-count {
-            font-size: 13px;
+            font-size: 14px;
             color: var(--muted);
-            margin-bottom: 16px;
+            margin-bottom: 20px;
             font-weight: 400;
+            letter-spacing: -0.01em;
         }
 
-        /* Property Cards */
+        /* Teardown Cards — Apple HIG, completely redesigned */
         .teardown-grid {
             display: grid;
-            gap: 10px;
+            gap: 16px;
         }
 
         .teardown-card {
             background: var(--surface);
-            border-radius: 16px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 1px 3px rgba(30, 58, 47, 0.04);
+            box-shadow: 0 1px 4px rgba(30, 58, 47, 0.04);
             border: 1px solid var(--border);
-            transition: box-shadow 0.15s ease, transform 0.15s ease;
+            transition: box-shadow 0.25s ease, transform 0.25s ease;
         }
 
         .teardown-card:hover {
-            box-shadow: 0 4px 16px rgba(30, 58, 47, 0.08);
+            box-shadow: 0 12px 32px rgba(30, 58, 47, 0.08);
+            transform: translateY(-2px);
         }
 
         .teardown-card-inner {
             padding: 0;
         }
 
-        /* Accent bar removed - user found it tacky */
-        .teardown-accent { display: none; }
-        .teardown-accent.vacant { display: none; }
-        .teardown-accent.teardown { display: none; }
-
-        .teardown-content {
-            flex: 1;
-            padding: 18px 20px;
-            min-width: 0;
-        }
-
-        .teardown-main {
+        /* Card Header: Address + Score */
+        .teardown-card-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            gap: 16px;
-            margin-bottom: 12px;
+            gap: 20px;
+            padding: 24px 24px 16px;
+            border-bottom: 1px solid var(--divider);
         }
 
-        .teardown-info {
+        .teardown-card-identity {
             min-width: 0;
             flex: 1;
         }
 
-        .teardown-address {
-            font-size: 15.5px;
+        .teardown-card-address {
+            font-size: 18px;
             font-weight: 600;
             color: var(--text-primary);
-            letter-spacing: -0.01em;
-            line-height: 1.3;
+            letter-spacing: -0.02em;
+            line-height: 1.25;
             margin-bottom: 4px;
             word-break: break-word;
         }
 
-        .teardown-owner {
-            font-size: 13px;
+        .teardown-card-sub {
+            font-size: 14px;
             color: var(--text-secondary);
             font-weight: 400;
+            letter-spacing: -0.01em;
         }
 
-        .teardown-badges {
+        .teardown-card-score {
             display: flex;
-            gap: 5px;
+            gap: 6px;
             flex-wrap: wrap;
             flex-shrink: 0;
             justify-content: flex-end;
+            align-items: flex-start;
         }
 
-        .td-badge {
+        .score-pill {
             display: inline-flex;
             align-items: center;
             gap: 4px;
-            padding: 3px 10px;
-            border-radius: 6px;
-            font-size: 10.5px;
+            padding: 5px 12px;
+            border-radius: 100px;
+            font-size: 12px;
             font-weight: 600;
-            letter-spacing: 0.02em;
+            letter-spacing: -0.01em;
             white-space: nowrap;
         }
 
-        .td-badge.type-vacant {
-            background: rgba(30, 58, 47, 0.08);
-            color: var(--primary);
+        .score-pill.score-a {
+            background: rgba(201, 169, 98, 0.18);
+            color: #8B7344;
         }
 
-        .td-badge.type-teardown {
-            background: rgba(139, 105, 20, 0.10);
-            color: #8B6914;
+        .score-pill.score-b {
+            background: rgba(201, 169, 98, 0.10);
+            color: #9A8548;
         }
 
-        .td-badge.score-a {
-            background: rgba(198, 40, 40, 0.08);
-            color: #C62828;
-        }
-
-        .td-badge.score-b {
-            background: rgba(184, 149, 12, 0.10);
-            color: #B8950C;
-        }
-
-        .td-badge.score-c {
-            background: rgba(120, 120, 120, 0.08);
+        .score-pill.score-c {
+            background: rgba(120, 120, 120, 0.06);
             color: var(--muted);
         }
 
-        .td-badge.tag {
-            background: rgba(30, 58, 47, 0.04);
+        .score-pill.absentee {
+            background: rgba(30, 58, 47, 0.06);
+            color: var(--primary);
+        }
+
+        .score-pill.budget {
+            background: rgba(52, 168, 83, 0.08);
+            color: #2E7D32;
+        }
+
+        /* Metrics: The 4 key numbers */
+        .teardown-card-metrics {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--divider);
+        }
+
+        .metric-cell {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 0 16px;
+            border-right: 1px solid var(--divider);
+        }
+
+        .metric-cell:first-child {
+            padding-left: 0;
+        }
+
+        .metric-cell:last-child {
+            border-right: none;
+            padding-right: 0;
+        }
+
+        .metric-value {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .metric-value.highlight {
+            color: var(--gold);
+        }
+
+        .metric-unit {
+            font-size: 14px;
+            font-weight: 500;
             color: var(--text-secondary);
         }
 
-        /* Property Details Grid */
-        .teardown-details {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 12px 16px;
-            padding: 12px 0;
-            border-top: 1px solid var(--divider);
-            border-bottom: 1px solid var(--divider);
-            margin-bottom: 12px;
+        .metric-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
         }
+
+        /* Property Details Grid — refined */
 
         .td-detail {
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            gap: 4px;
         }
 
         .td-detail-label {
@@ -2061,14 +2104,15 @@
             font-weight: 600;
             color: var(--muted);
             text-transform: uppercase;
-            letter-spacing: 0.06em;
+            letter-spacing: 0.08em;
         }
 
         .td-detail-value {
-            font-size: 13px;
+            font-size: 14px;
             color: var(--text-secondary);
             font-weight: 500;
             font-variant-numeric: tabular-nums;
+            letter-spacing: -0.01em;
         }
 
         .td-detail-value.highlight {
@@ -2076,44 +2120,28 @@
             font-weight: 600;
         }
 
-        /* Mailing & Score Info */
-        .teardown-meta {
+        /* Card Action Bar — unified, clean */
+        .teardown-card-actions {
             display: flex;
-            flex-direction: column;
-            gap: 4px;
-            margin-bottom: 12px;
-        }
-
-        .teardown-meta-item {
-            font-size: 12px;
-            color: var(--muted);
-        }
-
-        .teardown-meta-item.score-reason {
-            color: var(--gold);
-            font-weight: 500;
-        }
-
-        /* Card Actions */
-        .teardown-actions {
-            display: flex;
-            gap: 8px;
+            gap: 10px;
             align-items: center;
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--divider);
         }
 
         .td-action {
             display: inline-flex;
             align-items: center;
-            gap: 5px;
-            padding: 7px 14px;
-            font-size: 12.5px;
+            gap: 6px;
+            padding: 8px 16px;
+            font-size: 13px;
             font-weight: 500;
             color: var(--primary);
             background: transparent;
-            border: 1.5px solid rgba(30, 58, 47, 0.12);
-            border-radius: 8px;
+            border: 1.5px solid rgba(30, 58, 47, 0.1);
+            border-radius: 10px;
             cursor: pointer;
-            transition: all 0.12s ease;
+            transition: all 0.15s ease;
             text-decoration: none;
         }
 
@@ -2123,55 +2151,75 @@
         }
 
         .td-action svg {
-            width: 13px;
-            height: 13px;
+            width: 14px;
+            height: 14px;
         }
 
-        /* Contact Icons */
-        .teardown-contacts {
+        /* Contact Row — inline text links, not just icons */
+        .teardown-card-contacts {
             display: flex;
-            gap: 6px;
+            flex-wrap: wrap;
+            gap: 12px;
             align-items: center;
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px solid var(--divider);
+            padding: 14px 24px;
+            border-bottom: 1px solid var(--divider);
         }
 
         .td-contact {
-            width: 34px;
-            height: 34px;
             display: inline-flex;
             align-items: center;
-            justify-content: center;
-            border-radius: 8px;
-            border: 1.5px solid rgba(30, 58, 47, 0.1);
-            background: transparent;
+            gap: 8px;
+            padding: 8px 14px;
+            font-size: 13px;
+            font-weight: 500;
             color: var(--primary);
+            background: rgba(30, 58, 47, 0.03);
+            border: 1px solid rgba(30, 58, 47, 0.08);
+            border-radius: 10px;
             cursor: pointer;
-            transition: all 0.12s ease;
+            transition: all 0.15s ease;
             text-decoration: none;
+            max-width: 100%;
         }
 
         .td-contact:hover {
-            background: rgba(30, 58, 47, 0.04);
-            border-color: rgba(30, 58, 47, 0.2);
+            background: rgba(30, 58, 47, 0.06);
+            border-color: rgba(30, 58, 47, 0.15);
         }
 
         .td-contact svg {
-            width: 15px;
-            height: 15px;
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        .td-contact span {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         .td-contact.disabled {
             color: var(--muted);
-            border-color: rgba(30, 58, 47, 0.06);
+            background: rgba(30, 58, 47, 0.02);
+            border-color: rgba(30, 58, 47, 0.04);
             cursor: not-allowed;
-            opacity: 0.5;
+            opacity: 0.6;
         }
 
         .td-contact.disabled:hover {
-            background: transparent;
-            border-color: rgba(30, 58, 47, 0.06);
+            background: rgba(30, 58, 47, 0.02);
+            border-color: rgba(30, 58, 47, 0.04);
+        }
+
+        /* Insight — subtle, collapsible-feel */
+        .teardown-card-insight {
+            padding: 12px 24px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            background: rgba(201, 169, 98, 0.04);
+            font-style: italic;
+            letter-spacing: -0.01em;
         }
 
         /* Empty State */
@@ -2204,11 +2252,110 @@
 
         /* === TEARDOWN RESPONSIVE === */
         @media (max-width: 860px) {
+            .teardowns-container {
+                margin-top: 48px;
+                padding-top: 32px;
+            }
             .teardowns-header {
                 flex-direction: column;
                 gap: 16px;
                 margin-bottom: 24px;
             }
+            .teardowns-actions {
+                width: 100%;
+                gap: 10px;
+            }
+            .teardown-btn {
+                flex: 1;
+                justify-content: center;
+                padding: 11px 16px;
+                font-size: 14px;
+                min-height: 44px;
+                border-radius: 12px;
+            }
+            .teardown-filters {
+                gap: 8px;
+                margin-bottom: 20px;
+            }
+            .filter-chip {
+                padding: 8px 14px;
+                font-size: 13px;
+                min-height: 36px;
+            }
+            .teardown-card {
+                border-radius: 16px;
+            }
+            .teardown-card-header {
+                flex-direction: column;
+                gap: 12px;
+                padding: 20px 20px 14px;
+            }
+            .teardown-card-score {
+                justify-content: flex-start;
+                width: 100%;
+            }
+            .teardown-card-metrics {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 14px 0;
+                padding: 14px 20px;
+            }
+            .metric-cell {
+                padding: 0 14px;
+                border-right: none;
+                border-bottom: 1px solid var(--divider);
+                padding-bottom: 14px;
+            }
+            .metric-cell:nth-child(odd) {
+                padding-left: 0;
+                border-right: 1px solid var(--divider);
+            }
+            .metric-cell:nth-child(even) {
+                padding-right: 0;
+            }
+            .metric-cell:nth-child(3),
+            .metric-cell:nth-child(4) {
+                border-bottom: none;
+                padding-top: 14px;
+                padding-bottom: 0;
+            }
+            .metric-value {
+                font-size: 18px;
+            }
+            .teardown-card-actions {
+                flex-wrap: wrap;
+                gap: 8px;
+                padding: 14px 20px;
+            }
+            .td-action {
+                flex: 1;
+                min-width: 100px;
+                justify-content: center;
+                padding: 10px 14px;
+                min-height: 44px;
+                border-radius: 10px;
+            }
+            .teardown-card-contacts {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 8px;
+                padding: 12px 20px;
+            }
+            .td-contact {
+                width: 100%;
+                justify-content: center;
+                padding: 10px 14px;
+                min-height: 44px;
+            }
+            .td-contact span {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .teardown-card-insight {
+                padding: 12px 20px;
+                font-size: 12px;
+            }
+        }
 
             .teardowns-actions {
                 width: 100%;
@@ -2237,49 +2384,12 @@
                 border-radius: 14px;
             }
 
-            .teardown-content {
-                padding: 16px;
-            }
-
-            .teardown-main {
-                flex-direction: column;
-                gap: 12px;
-                margin-bottom: 14px;
-            }
-
-            .teardown-badges {
-                justify-content: flex-start;
-                width: 100%;
-            }
-
-            .teardown-address {
-                font-size: 15px;
-                padding-right: 0;
-            }
-
-            .teardown-details {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 10px 12px;
-                padding: 10px 0;
-            }
-
             .td-detail-label {
                 font-size: 9.5px;
             }
 
             .td-detail-value {
                 font-size: 12.5px;
-            }
-
-            .teardown-actions {
-                flex-wrap: wrap;
-            }
-
-            .teardown-contacts {
-                justify-content: center;
-                width: 100%;
-                margin-top: 12px;
-                padding-top: 12px;
             }
 
             .td-contact {
@@ -2312,15 +2422,6 @@
 
             .teardowns-header-subtitle {
                 font-size: 13px;
-            }
-
-            .teardown-details {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 8px 10px;
-            }
-
-            .teardown-content {
-                padding: 14px;
             }
 
             .td-badge {
@@ -2390,8 +2491,7 @@
                 <button class="segment" onclick="switchTab('lots')" data-tab="lots">Lots</button>
                 <button class="segment" onclick="switchTab('contracts')" data-tab="contracts">Contracts</button>
                 <button class="segment" onclick="switchTab('titles')" data-tab="titles">Titles</button>
-                <button class="segment" onclick="toggleTeardowns()" data-tab="teardowns">🏚️ Teardowns</button>
-            </div>
+                </div>
         </div>
 
         <!-- Controls -->
@@ -2438,8 +2538,57 @@
         <!-- Lots Content -->
         <div id="lots-content" class="content-section">
             <div id="lots-list">
-                <!-- Dynamically populated by renderLots() — ALL lot data (Rankin St purchase + full recon) is here and expandable by county -->
+                <!-- Dynamically populated by renderLots() -->
             </div>
+            <section id="teardowns-section" class="teardowns-container">
+            <div class="teardowns-header">
+                <div>
+                    <h2 class="teardowns-header-title">Teardown Candidates</h2>
+                    <p class="teardowns-header-subtitle">Off-market properties from DCAD — pre-1980 builds on 8K+ sq ft lots</p>
+                </div>
+                <div class="teardowns-actions">
+                    <button class="teardown-btn" onclick="loadDCADData()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+                        Refresh
+                    </button>
+                    <button class="teardown-btn primary" onclick="exportTeardownCSV()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        Export
+                    </button>
+                </div>
+            </div>
+
+            <div class="teardown-filters" id="teardown-filters">
+                <label class="filter-chip active" data-filter="teardown">
+                    <input type="checkbox" id="teardown-only" checked onchange="renderTeardowns()">
+                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    Teardowns
+                </label>
+                <label class="filter-chip" data-filter="vacant">
+                    <input type="checkbox" id="vacant-only" onchange="renderTeardowns()">
+                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    Vacant Lots
+                </label>
+                <label class="filter-chip" data-filter="absentee">
+                    <input type="checkbox" id="absentee-only" onchange="renderTeardowns()">
+                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    Absentee Owners
+                </label>
+                <label class="filter-chip" data-filter="budget">
+                    <input type="checkbox" id="budget-only" onchange="renderTeardowns()">
+                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    In Budget
+                </label>
+                <label class="filter-chip" data-filter="hot">
+                    <input type="checkbox" id="hot-only" onchange="renderTeardowns()">
+                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    Score A/B
+                </label>
+            </div>
+
+            <div class="teardown-count" id="teardown-count"></div>
+            <div class="teardown-grid" id="teardowns-list"></div>
+        </section>
         </div>
 
         <!-- Contracts Content -->
@@ -2496,55 +2645,7 @@
         </div>
 
         <!-- Teardown Candidates Section -->
-        <section id="teardowns-section" class="teardowns-container" style="display: none;">
-            <div class="teardowns-header">
-                <div>
-                    <h2 class="teardowns-header-title">Teardown Candidates</h2>
-                    <p class="teardowns-header-subtitle">Off-market properties from DCAD — pre-1980 builds on 8K+ sq ft lots</p>
-                </div>
-                <div class="teardowns-actions">
-                    <button class="teardown-btn" onclick="loadDCADData()">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
-                        Refresh
-                    </button>
-                    <button class="teardown-btn primary" onclick="exportTeardownCSV()">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                        Export
-                    </button>
-                </div>
-            </div>
-
-            <div class="teardown-filters" id="teardown-filters">
-                <label class="filter-chip active" data-filter="teardown">
-                    <input type="checkbox" id="teardown-only" checked onchange="renderTeardowns()">
-                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    Teardowns
-                </label>
-                <label class="filter-chip" data-filter="vacant">
-                    <input type="checkbox" id="vacant-only" onchange="renderTeardowns()">
-                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    Vacant Lots
-                </label>
-                <label class="filter-chip" data-filter="absentee">
-                    <input type="checkbox" id="absentee-only" onchange="renderTeardowns()">
-                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    Absentee Owners
-                </label>
-                <label class="filter-chip" data-filter="budget">
-                    <input type="checkbox" id="budget-only" onchange="renderTeardowns()">
-                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    In Budget
-                </label>
-                <label class="filter-chip" data-filter="hot">
-                    <input type="checkbox" id="hot-only" onchange="renderTeardowns()">
-                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    Score A/B
-                </label>
-            </div>
-
-            <div class="teardown-count" id="teardown-count"></div>
-            <div class="teardown-grid" id="teardowns-list"></div>
-        </section>
+        
 
     </div>
     </div><!-- .site-main -->
@@ -3035,58 +3136,6 @@
             if (statesEl) statesEl.textContent = ALL_MARKETS.length;
         }
 
-        function updateHeroForTab(tab) {
-            const heroTotal = document.getElementById('hero-total');
-            const heroActive = document.getElementById('hero-active');
-            const heroResearch = document.getElementById('hero-research');
-            const heroMarkets = document.getElementById('hero-markets');
-            const label0 = document.getElementById('hero-label-0');
-            const label1 = document.getElementById('hero-label-1');
-            const label2 = document.getElementById('hero-label-2');
-            const label3 = document.getElementById('hero-label-3');
-
-            if (!heroTotal || !label0) return;
-
-            if (tab === 'builders') {
-                heroTotal.textContent = builderData.length;
-                heroActive.textContent = builderData.filter(b => b.status === 'active').length;
-                heroResearch.textContent = builderData.filter(b => b.status === 'research').length;
-                heroMarkets.textContent = ALL_MARKETS.length;
-                label0.textContent = 'Total Builders';
-                label1.textContent = 'Active';
-                label2.textContent = 'In Research';
-                label3.textContent = 'Markets';
-            } else if (tab === 'lots') {
-                const filteredLots = getFilteredLots();
-                heroTotal.textContent = filteredLots.length;
-                heroActive.textContent = filteredLots.filter(l => l.status === 'purchased').length;
-                heroResearch.textContent = filteredLots.filter(l => l.status === 'identified').length;
-                heroMarkets.textContent = new Set(filteredLots.map(l => l.state)).size;
-                label0.textContent = 'Total Lots';
-                label1.textContent = 'Purchased';
-                label2.textContent = 'Identified';
-                label3.textContent = 'Markets';
-            } else if (tab === 'titles') {
-                heroTotal.textContent = titleData.length;
-                heroActive.textContent = titleData.filter(t => t.status === 'active').length;
-                heroResearch.textContent = titleData.filter(t => t.status === 'research').length;
-                heroMarkets.textContent = new Set(titleData.map(t => t.state)).size;
-                label0.textContent = 'Title Companies';
-                label1.textContent = 'Active';
-                label2.textContent = 'In Research';
-                label3.textContent = 'Markets';
-            } else {
-                heroTotal.textContent = builderData.length;
-                heroActive.textContent = builderData.filter(b => b.status === 'active').length;
-                heroResearch.textContent = builderData.filter(b => b.status === 'research').length;
-                heroMarkets.textContent = ALL_MARKETS.length;
-                label0.textContent = 'Total Builders';
-                label1.textContent = 'Active';
-                label2.textContent = 'In Research';
-                label3.textContent = 'Markets';
-            }
-        }
-
         function renderStatePills() {
             const container = document.getElementById('state-pills');
             if (!container) return;
@@ -3351,14 +3400,12 @@
             const exportBtn = document.getElementById('export-btn');
             const searchInput = document.getElementById('search-input');
             const mobileFilterBtn = document.getElementById('mobile-filter-btn');
-            const isTeardowns = tab === 'teardowns';
-            const hideFilters = tab === 'contracts' || isTeardowns;
+            const hideFilters = tab === 'contracts';
 
             if (searchWrap) searchWrap.classList.toggle('hidden', hideFilters);
             if (pillsWrap) pillsWrap.classList.toggle('hidden', hideFilters);
-            if (mobileFilterBtn) mobileFilterBtn.classList.toggle('hidden', isTeardowns);
             if (exportBtn) {
-                exportBtn.classList.toggle('hidden', isTeardowns);
+                exportBtn.classList.toggle('hidden', hideFilters);
                 exportBtn.classList.toggle('gold-accent', tab === 'contracts');
                 exportBtn.innerHTML = tab === 'contracts'
                     ? '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> Export All Data'
@@ -3620,28 +3667,7 @@
         let teardownData = [];
 
         function toggleTeardowns() {
-            const section = document.getElementById('teardowns-section');
-            if (!section) return;
-            
-            // Hide other content sections
-            document.querySelectorAll('.content-section').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.segment').forEach(el => el.classList.remove('active'));
-            
-            if (section.style.display === 'none' || section.style.display === '') {
-                section.style.display = 'block';
-                document.querySelector('[data-tab="teardowns"]')?.classList.add('active');
-                updateControlsForTab('teardowns');
-                updateHeroForTab('teardowns');
-                loadDCADData();
-                window.scrollTo({ top: section.offsetTop - 20, behavior: 'smooth' });
-            } else {
-                section.style.display = 'none';
-                // Show the lots section by default
-                document.getElementById('lots-content')?.classList.add('active');
-                document.querySelector('[data-tab="lots"]')?.classList.add('active');
-                updateControlsForTab('lots');
-                updateHeroForTab('lots');
-            }
+            switchTab('lots');
         }
 
         async function loadDCADData() {
@@ -3785,91 +3811,94 @@
                 const typeLabel = p._type === 'vacant' ? 'Vacant' : 'Teardown';
                 const scoreClass = p._score === 'A' ? 'score-a' : p._score === 'B' ? 'score-b' : 'score-c';
                 const scoreLabel = p._score === 'A' ? 'Hot' : p._score === 'B' ? 'Warm' : 'Cold';
+                const scoreIcon = p._score === 'A' ? '●' : p._score === 'B' ? '◐' : '○';
 
                 const impValue = parseInt(p.improvement_value) || 0;
                 const impRatio = p.improvement_ratio ? parseFloat(p.improvement_ratio).toFixed(2) : 'N/A';
+                const lotSizeAcres = (p._lotSize / 43560).toFixed(2);
+                
+                const zip = p.search_zip || p.zip_code || '';
+                const zipClean = /^\d{5}$/.test(zip) ? zip : '';
+                const zillowUrl = zipClean ? `https://www.zillow.com/homes/${zipClean}_rb/` : 'https://www.zillow.com/homes/Dallas-TX_rb/';
+                
+                const hasPhone = p.owner_phone && p.owner_phone !== 'unknown' && p.owner_phone !== '';
+                const hasEmail = p.owner_email && p.owner_email !== '';
+                const hasMail = p.mailing_address && p.mailing_address !== '';
+                const hasContacts = hasPhone || hasEmail || hasMail;
 
                 html += `
                 <div class="teardown-card">
-                    <div class="teardown-content">
-                            <div class="teardown-main">
-                                <div class="teardown-info">
-                                    <div class="teardown-address">${p.property_address || p.account_number}</div>
-                                    <div class="teardown-owner">${p.owner_name || 'Unknown Owner'}</div>
-                                </div>
-                                <div class="teardown-badges">
-                                    <span class="td-badge type-${accentClass}">${typeLabel}</span>
-                                    <span class="td-badge ${scoreClass}">${scoreLabel}</span>
-                                    ${p._absentee ? '<span class="td-badge tag">Absentee</span>' : ''}
-                                    ${p._budget ? '<span class="td-badge tag">In Budget</span>' : ''}
-                                </div>
+                    <div class="teardown-card-inner">
+                        <!-- Top Row: Identity + Score -->
+                        <div class="teardown-card-header">
+                            <div class="teardown-card-identity">
+                                <div class="teardown-card-address">${p.property_address || p.account_number}</div>
+                                <div class="teardown-card-sub">${p.owner_name || 'Unknown Owner'}${p.zip_code ? ' · ' + p.zip_code : ''}</div>
                             </div>
-                            <div class="teardown-details">
-                                <div class="td-detail">
-                                    <span class="td-detail-label">Lot Size</span>
-                                    <span class="td-detail-value highlight">${p._lotSize.toLocaleString()} sq ft</span>
-                                </div>
-                                <div class="td-detail">
-                                    <span class="td-detail-label">Year Built</span>
-                                    <span class="td-detail-value">${p._yearBuilt || 'N/A'}</span>
-                                </div>
-                                <div class="td-detail">
-                                    <span class="td-detail-label">Land Value</span>
-                                    <span class="td-detail-value highlight">$${p._landValue.toLocaleString()}</span>
-                                </div>
-                                <div class="td-detail">
-                                    <span class="td-detail-label">Improvement</span>
-                                    <span class="td-detail-value">$${impValue.toLocaleString()}</span>
-                                </div>
-                                <div class="td-detail">
-                                    <span class="td-detail-label">Imp. Ratio</span>
-                                    <span class="td-detail-value">${impRatio}</span>
-                                </div>
-                                <div class="td-detail">
-                                    <span class="td-detail-label">ZIP</span>
-                                    <span class="td-detail-value">${p.zip_code || 'N/A'}</span>
-                                </div>
+                            <div class="teardown-card-score">
+                                <span class="score-pill ${scoreClass}">${scoreIcon} ${scoreLabel}</span>
+                                ${p._absentee ? '<span class="score-pill absentee">Absentee</span>' : ''}
+                                ${p._budget ? '<span class="score-pill budget">In Budget</span>' : ''}
                             </div>
-                            ${p.mailing_address ? `<div class="teardown-meta"><div class="teardown-meta-item">Mailing: ${p.mailing_address}${p.mailing_city ? ', ' + p.mailing_city : ''}${p.mailing_state ? ' ' + p.mailing_state : ''}${p.mailing_zip ? ' ' + p.mailing_zip : ''}</div></div>` : ''}
-                            ${p.score_reasons ? `<div class="teardown-meta"><div class="teardown-meta-item score-reason">${p.score_reasons}</div></div>` : ''}
-                            <div class="teardown-actions">
-                                <a class="td-action" href="${p.dcad_url || '#'}" target="_blank" rel="noopener">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                                    DCAD
-                                </a>
-                                ${(() => {
-                                    const zip = p.search_zip || p.zip_code || '';
-                                    const zipClean = /^\d{5}$/.test(zip) ? zip : '';
-                                    const zillowUrl = zipClean ? `https://www.zillow.com/homes/${zipClean}_rb/` : 'https://www.zillow.com/homes/Dallas-TX_rb/';
-                                    return `<a class="td-action" href="${zillowUrl}" target="_blank" rel="noopener">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                                    Zillow
-                                </a>`;
-                                })()}
-                                ${p.owner_name ? `<button class="td-action" onclick="copyToClipboard('${p.owner_name}\n${p.property_address}\n${p.mailing_address || ''}')">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                                    Copy
-                                </button>` : ''}
-                            </div>
-                            ${(() => {
-                                const hasPhone = p.owner_phone && p.owner_phone !== 'unknown' && p.owner_phone !== '';
-                                const hasEmail = p.owner_email && p.owner_email !== '';
-                                const hasMail = p.mailing_address && p.mailing_address !== '';
-                                if (!hasPhone && !hasEmail && !hasMail) return '';
-                                return `<div class="teardown-contacts">
-                                    ${hasPhone ? `<a class="td-contact" href="tel:${p.owner_phone}" title="Call ${p.owner_name || 'Owner'}">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                                    </a>` : '<span class="td-contact disabled" title="No phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>'}
-                                    ${hasEmail ? `<a class="td-contact" href="mailto:${p.owner_email}" title="Email ${p.owner_name || 'Owner'}">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                                    </a>` : '<span class="td-contact disabled" title="No email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>'}
-                                    ${hasMail ? `<a class="td-contact" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.mailing_address + ', ' + (p.mailing_city || '') + ' ' + (p.mailing_state || '') + ' ' + (p.mailing_zip || ''))}" target="_blank" rel="noopener" title="View mailing address on map">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                                    </a>` : '<span class="td-contact disabled" title="No mailing address"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>'}
-                                </div>`;
-                            })()}
                         </div>
+                        
+                        <!-- Metrics Row: The only 3 that matter -->
+                        <div class="teardown-card-metrics">
+                            <div class="metric-cell">
+                                <span class="metric-value">${lotSizeAcres} <span class="metric-unit">ac</span></span>
+                                <span class="metric-label">Lot Size</span>
+                            </div>
+                            <div class="metric-cell">
+                                <span class="metric-value">${p._yearBuilt || '—'}</span>
+                                <span class="metric-label">Year Built</span>
+                            </div>
+                            <div class="metric-cell">
+                                <span class="metric-value highlight">$${p._landValue.toLocaleString()}</span>
+                                <span class="metric-label">Land Value</span>
+                            </div>
+                            <div class="metric-cell">
+                                <span class="metric-value">${impRatio}</span>
+                                <span class="metric-label">Imp. Ratio</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Action Bar: Clean, unified -->
+                        <div class="teardown-card-actions">
+                            <a class="td-action" href="${p.dcad_url || '#'}" target="_blank" rel="noopener">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                                DCAD
+                            </a>
+                            <a class="td-action" href="${zillowUrl}" target="_blank" rel="noopener">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                                Zillow
+                            </a>
+                            ${p.owner_name ? `<button class="td-action" onclick="copyToClipboard('${p.owner_name}\n${p.property_address}\n${p.mailing_address || ''}')">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                Copy
+                            </button>` : ''}
+                        </div>
+                        
+                        <!-- Contact Row: Only when data exists, compact -->
+                        ${hasContacts ? `
+                        <div class="teardown-card-contacts">
+                            ${hasPhone ? `<a class="td-contact" href="tel:${p.owner_phone}" title="Call ${p.owner_name || 'Owner'}">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                <span>${p.owner_phone}</span>
+                            </a>` : ''}
+                            ${hasEmail ? `<a class="td-contact" href="mailto:${p.owner_email}" title="Email ${p.owner_name || 'Owner'}">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                <span>${p.owner_email}</span>
+                            </a>` : ''}
+                            ${hasMail ? `<a class="td-contact" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.mailing_address + ', ' + (p.mailing_city || '') + ' ' + (p.mailing_state || '') + ' ' + (p.mailing_zip || ''))}" target="_blank" rel="noopener" title="View on map">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                                <span>${p.mailing_address}</span>
+                            </a>` : ''}
+                        </div>` : ''}
+                        
+                        <!-- Score insight (collapsible, subtle) -->
+                        ${p.score_reasons ? `<div class="teardown-card-insight">${p.score_reasons}</div>` : ''}
                     </div>
+                </div>
                 `;
             });
             container.innerHTML = html;
@@ -4171,16 +4200,17 @@
                 const totalLots = data.length;
                 const underContract = data.filter(l => l.status === 'under contract' || l.status === 'purchased').length;
                 const opportunities = data.filter(l => l.status === 'identified').length;
+                const teardownCount = teardownData.length;
 
                 if (totalEl) totalEl.textContent = totalLots;
                 if (activeEl) activeEl.textContent = underContract;
                 if (researchEl) researchEl.textContent = opportunities;
-                if (marketsEl) marketsEl.textContent = ALL_MARKETS.length;
+                if (marketsEl) marketsEl.textContent = teardownCount > 0 ? teardownCount : ALL_MARKETS.length;
 
                 if (labelEls[0]) labelEls[0].textContent = 'Total Lots';
                 if (labelEls[1]) labelEls[1].textContent = 'Contracted / Purchased';
                 if (labelEls[2]) labelEls[2].textContent = 'Opportunities';
-                if (labelEls[3]) labelEls[3].textContent = 'Markets';
+                if (labelEls[3]) labelEls[3].textContent = teardownCount > 0 ? 'Teardowns' : 'Markets';
             } else if (tab === 'contracts') {
                 const count = CONTRACT_TEMPLATES.length;
                 if (totalEl) totalEl.textContent = count;
@@ -4227,12 +4257,6 @@
         function switchTab(tab) {
             currentTab = tab;
 
-            // Hide teardown section when switching to other tabs
-            const teardownSection = document.getElementById('teardowns-section');
-            if (teardownSection) {
-                teardownSection.style.display = 'none';
-            }
-
             document.querySelectorAll('.segment').forEach(el => {
                 el.classList.toggle('active', el.dataset.tab === tab);
             });
@@ -4250,6 +4274,7 @@
                 filterAndRender();
             } else if (tab === 'lots') {
                 renderLots();
+                loadDCADData();
             } else if (tab === 'titles') {
                 renderTitles();
             }
@@ -4258,6 +4283,7 @@
         function exportCSV() {
             if (currentTab === 'lots') {
                 exportLotsCSV();
+                exportTeardownCSV();
                 return;
             }
 
