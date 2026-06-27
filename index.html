@@ -1812,6 +1812,7 @@
             margin-top: 64px;
             padding-top: 48px;
             border-top: 1px solid var(--divider);
+            display: none;
         }
 
         .teardowns-header {
@@ -3005,14 +3006,13 @@
             'south-carolina': 'South Carolina',
             'tennessee': 'Tennessee',
             'texas': 'Texas',
-            'georgia': 'Georgia',
-            'dallas': 'Dallas (TX)'
+            'georgia': 'Georgia'
         };
 
-        const MARKET_ORDER = ['north-carolina', 'south-carolina', 'tennessee', 'texas', 'georgia', 'dallas'];
+        const MARKET_ORDER = ['north-carolina', 'south-carolina', 'tennessee', 'texas', 'georgia'];
 
         // All markets we track (show empty ones)
-        const ALL_MARKETS = ['north-carolina', 'south-carolina', 'tennessee', 'texas', 'georgia', 'dallas'];
+        const ALL_MARKETS = ['north-carolina', 'south-carolina', 'tennessee', 'texas', 'georgia'];
 
         function escHtml(str) {
             if (str == null || str === '') return '';
@@ -3045,7 +3045,8 @@
                 'tn': 'tennessee',
                 'tennessee': 'tennessee',
                 'tx': 'texas',
-                'texas': 'texas'
+                'texas': 'texas',
+                'dallas': 'texas'
             };
             return aliases[s] || s.replace(/\s+/g, '-');
         }
@@ -3612,6 +3613,21 @@
                             </div>
                         `;
                     });
+                    
+                    // Inject teardowns as Dallas County section within Texas
+                    if (stateKey === 'texas' && teardownData.length > 0) {
+                        const texasTeardowns = teardownData.filter(p => p.zip_code && p.zip_code.startsWith('75'));
+                        if (texasTeardowns.length > 0) {
+                            html += `<div class="county-group">
+                                <div class="county-header" onclick="toggleLotGroup('texas-dallas-teardowns')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')toggleLotGroup('texas-dallas-teardowns')">
+                                    <span>Dallas County — Teardowns <span class="count">${texasTeardowns.length} properties</span></span>
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="opacity:0.4"><polyline points="6 9 12 15 18 9"/></svg>
+                                </div>
+                                <div class="lot-list" id="lots-texas-dallas-teardowns"></div>
+                            </div>`;
+                        }
+                    }
+                    
                     html += `</div>`;
                 }
 
@@ -3794,8 +3810,9 @@
 
         function renderTeardowns() {
             const container = document.getElementById('teardowns-list');
+            const texasContainer = document.getElementById('lots-texas-dallas-teardowns');
             const countEl = document.getElementById('teardown-count');
-            if (!container) return;
+            if (!container && !texasContainer) return;
 
             const teardownOnly = document.getElementById('teardown-only')?.checked;
             const vacantOnly = document.getElementById('vacant-only')?.checked;
@@ -3933,8 +3950,8 @@
                     ${p.score_reasons ? `<div class="lot-notes" style="font-style: italic; color: var(--gold);">${p.score_reasons}</div>` : ''}
                 </div>
                 `;
-            });
-            container.innerHTML = html;
+            if (container) container.innerHTML = html;
+            if (texasContainer) texasContainer.innerHTML = html;
         }
 
         function exportTeardownCSV() {
@@ -3979,7 +3996,7 @@
                 
                 // Add teardowns to Texas count
                 const texasTeardowns = teardownData.filter(p => p.zip_code && p.zip_code.startsWith('75'));
-                if (stateKey === 'dallas' && texasTeardowns.length > 0) {
+                if (stateKey === 'texas' && texasTeardowns.length > 0) {
                     count += texasTeardowns.length;
                 }
 
@@ -4131,6 +4148,21 @@
                             </div>
                         `;
                     });
+                    
+                    // Inject teardowns as Dallas County section within Texas
+                    if (stateKey === 'texas' && teardownData.length > 0) {
+                        const texasTeardowns = teardownData.filter(p => p.zip_code && p.zip_code.startsWith('75'));
+                        if (texasTeardowns.length > 0) {
+                            html += `<div class="county-group">
+                                <div class="county-header" onclick="toggleLotGroup('texas-dallas-teardowns')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')toggleLotGroup('texas-dallas-teardowns')">
+                                    <span>Dallas County — Teardowns <span class="count">${texasTeardowns.length} properties</span></span>
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="opacity:0.4"><polyline points="6 9 12 15 18 9"/></svg>
+                                </div>
+                                <div class="lot-list" id="lots-texas-dallas-teardowns"></div>
+                            </div>`;
+                        }
+                    }
+                    
                     html += `</div>`;
                 }
 
@@ -4239,18 +4271,18 @@
                 const totalLots = data.length;
                 const underContract = data.filter(l => l.status === 'under contract' || l.status === 'purchased').length;
                 const opportunities = data.filter(l => l.status === 'identified').length;
-                const teardownCount = teardownData.length;
+                const teardownCount = teardownData.filter(p => p.zip_code && p.zip_code.startsWith('75')).length;
                 const totalWithTeardowns = totalLots + teardownCount;
 
                 if (totalEl) totalEl.textContent = totalWithTeardowns;
                 if (activeEl) activeEl.textContent = underContract;
                 if (researchEl) researchEl.textContent = opportunities;
-                if (marketsEl) marketsEl.textContent = teardownCount > 0 ? teardownCount : ALL_MARKETS.length;
+                if (marketsEl) marketsEl.textContent = ALL_MARKETS.length;
 
                 if (labelEls[0]) labelEls[0].textContent = 'Total Lots';
                 if (labelEls[1]) labelEls[1].textContent = 'Contracted / Purchased';
                 if (labelEls[2]) labelEls[2].textContent = 'Opportunities';
-                if (labelEls[3]) labelEls[3].textContent = teardownCount > 0 ? 'Teardowns' : 'Markets';
+                if (labelEls[3]) labelEls[3].textContent = 'Markets';
             } else if (tab === 'contracts') {
                 const count = CONTRACT_TEMPLATES.length;
                 if (totalEl) totalEl.textContent = count;
