@@ -3154,6 +3154,16 @@
             const parsedTitles = storedTitles ? JSON.parse(storedTitles) : [];
             titleData = mergeWithDefaults(parsedTitles, DEFAULT_TITLES, normalizeTitle);
 
+            // Load teardown data from localStorage (falls back to empty array)
+            const storedTeardowns = localStorage.getItem('teardownData');
+            if (storedTeardowns) {
+                try {
+                    teardownData = JSON.parse(storedTeardowns);
+                } catch (e) {
+                    teardownData = [];
+                }
+            }
+
             saveData();
         }
 
@@ -3161,6 +3171,7 @@
             localStorage.setItem('builderData', JSON.stringify(builderData));
             localStorage.setItem('lotData', JSON.stringify(lotData));
             localStorage.setItem('titleData', JSON.stringify(titleData));
+            localStorage.setItem('teardownData', JSON.stringify(teardownData));
         }
 
         function updateMetrics(filteredBuilders) {
@@ -3742,19 +3753,38 @@
         }
 
         async function loadDCADData() {
+            // If we already have teardown data in memory, just render it
+            if (teardownData.length > 0) {
+                renderTeardowns();
+                return;
+            }
+            
+            // Try to fetch fresh data
             try {
-                // Try both filenames for flexibility
                 let response = await fetch('data/large-lot-leads.csv');
                 if (!response.ok) {
                     response = await fetch('data/priority-leads.csv');
                 }
-                if (!response.ok) throw new Error('No DCAD data found');
+                if (!response.ok) {
+                    // No CSV found — check if we have cached data from localStorage
+                    if (teardownData.length === 0) {
+                        showToast('No DCAD data found — upload CSV to data/ folder');
+                    }
+                    return;
+                }
                 const csv = await response.text();
                 teardownData = parseCSV(csv);
+                saveData(); // Persist to localStorage
                 renderTeardowns();
                 showToast(`Loaded ${teardownData.length} teardown candidates`);
             } catch (err) {
-                showToast('No DCAD data found — run scraper first');
+                // Network or parsing error — show cached data if available
+                if (teardownData.length > 0) {
+                    renderTeardowns();
+                    showToast('Using cached teardown data');
+                } else {
+                    showToast('No DCAD data found — upload CSV to data/ folder');
+                }
                 console.warn('DCAD load error:', err);
             }
         }
