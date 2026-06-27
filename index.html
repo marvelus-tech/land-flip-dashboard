@@ -9,17 +9,37 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=SF+Pro+Display:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1E3A2F;
-            --primary-soft: #2C4A3A;
-            --gold: #C9A962;
-            --gold-light: #F0E4C8;
-            --bg: #FAF8F4;
+            /* Refined Premium Palette */
+            --primary: #0F1E17;
+            --primary-soft: #1A3329;
+            --primary-muted: #2A4A3A;
+            --gold: #D4AF37;
+            --gold-bright: #E8C547;
+            --gold-light: #F5ECD7;
+            --gold-muted: rgba(212, 175, 55, 0.12);
+            --bg: #F5F5F0;
+            --bg-warm: #FAFAF8;
             --surface: #FFFFFF;
-            --text-primary: #1C1C1E;
-            --text-secondary: #48484A;
-            --muted: #8E8E93;
-            --border: rgba(30, 58, 47, 0.08);
-            --divider: rgba(30, 58, 47, 0.06);
+            --surface-hover: #F8F8F6;
+            --text-primary: #1A1A1A;
+            --text-secondary: #5A5A5A;
+            --text-tertiary: #9A9A9A;
+            --text-quaternary: #B5B5B5;
+            --muted: #9A9A9A;
+            --border: rgba(15, 30, 23, 0.06);
+            --border-strong: rgba(15, 30, 23, 0.12);
+            --divider: rgba(15, 30, 23, 0.04);
+            --divider-strong: rgba(15, 30, 23, 0.08);
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08);
+            --focus-ring: 0 0 0 3px rgba(15, 30, 23, 0.08);
+            --success: #2D6A4F;
+            --success-soft: rgba(45, 106, 79, 0.08);
+            --warning: #B8860B;
+            --warning-soft: rgba(184, 134, 11, 0.08);
+            --danger: #9B2335;
+            --danger-soft: rgba(155, 35, 53, 0.08);
         }
 
         * {
@@ -34,6 +54,7 @@
             color: var(--text-primary);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
             line-height: 1.5;
             min-height: 100vh;
             display: flex;
@@ -43,9 +64,9 @@
         .site-main { flex: 1 0 auto; }
 
         .container {
-            max-width: 1120px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 40px;
+            padding: 0 32px;
         }
 
         /* === FULL-BLEED PREMIUM HERO — image bleeds edge to edge, numbers overlay === */
@@ -54,8 +75,8 @@
             width: 100vw;
             left: 50%;
             margin-left: -50vw;
-            height: min(30vh, 280px);
-            min-height: 200px;
+            height: min(32vh, 300px);
+            min-height: 220px;
             background-image: url('assets/images/hero-aerial.jpg');
             background-size: cover;
             background-position: center 38%;
@@ -69,9 +90,9 @@
             inset: 0;
             background: linear-gradient(
                 180deg,
-                rgba(20, 32, 26, 0.18) 0%,
-                rgba(20, 32, 26, 0.42) 45%,
-                rgba(20, 32, 26, 0.78) 100%
+                rgba(15, 30, 23, 0.2) 0%,
+                rgba(15, 30, 23, 0.45) 40%,
+                rgba(15, 30, 23, 0.82) 100%
             );
             z-index: 1;
         }
@@ -79,15 +100,13 @@
         .hero-content {
             position: relative;
             z-index: 2;
-            max-width: 1120px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 40px;
+            padding: 24px 32px;
             height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding-top: 24px;
-            padding-bottom: 24px;
         }
 
         .hero-top {
@@ -104,16 +123,16 @@
         }
 
         .hero-icon {
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             border-radius: 12px;
-            background: rgba(255,255,255,0.95);
+            background: rgba(255,255,255,0.96);
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--primary);
             flex-shrink: 0;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
         }
 
         .hero-title {
@@ -126,7 +145,7 @@
 
         .hero-subtitle {
             font-size: 13px;
-            color: rgba(255,255,255,0.72);
+            color: rgba(255,255,255,0.68);
             font-weight: 400;
             margin-top: 4px;
             letter-spacing: -0.01em;
@@ -135,26 +154,27 @@
         .hero-focus-pill {
             display: inline-flex;
             align-items: center;
-            padding: 6px 16px;
-            background: rgba(201, 169, 98, 0.92);
-            border: 1px solid rgba(255, 255, 255, 0.28);
+            padding: 6px 18px;
+            background: var(--gold);
+            border: none;
             border-radius: 999px;
             font-size: 11px;
             font-weight: 600;
-            color: #1C1C1E;
+            color: var(--primary);
             letter-spacing: 0.03em;
             white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
         }
 
         /* Glass panel — metrics legible over hero at all breakpoints */
         .hero-metrics-panel {
-            backdrop-filter: blur(24px) saturate(1.15);
-            -webkit-backdrop-filter: blur(24px) saturate(1.15);
-            background: rgba(22, 36, 28, 0.48);
-            border: 1px solid rgba(255, 255, 255, 0.14);
+            backdrop-filter: blur(28px) saturate(1.2);
+            -webkit-backdrop-filter: blur(28px) saturate(1.2);
+            background: rgba(15, 30, 23, 0.42);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 16px;
             padding: 16px 24px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
         }
 
         .hero-metrics {
@@ -175,7 +195,7 @@
             font-variant-numeric: tabular-nums;
         }
 
-        .hero-metric-value.gold { color: var(--gold-light); }
+        .hero-metric-value.gold { color: var(--gold-bright); }
 
         .hero-metric-label {
             font-size: 9.5px;
@@ -189,7 +209,7 @@
         .empty-market {
             padding: 20px 22px;
             font-size: 13px;
-            color: var(--muted);
+            color: var(--text-tertiary);
             letter-spacing: -0.01em;
         }
 
@@ -218,17 +238,22 @@
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 11px 16px 11px 44px;
+            padding: 12px 16px 12px 44px;
+            font-family: inherit;
             font-size: 14.5px;
             font-weight: 400;
             color: var(--text-primary);
             outline: none;
-            transition: border-color 0.15s ease, box-shadow 0.15s ease;
+            transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
         }
 
         .search input:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(44, 62, 45, 0.06);
+            box-shadow: var(--focus-ring);
+        }
+
+        .search input::placeholder {
+            color: var(--text-quaternary);
         }
 
         .search svg {
@@ -236,7 +261,7 @@
             left: 16px;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--muted);
+            color: var(--text-tertiary);
             width: 16px;
             height: 16px;
         }
@@ -247,11 +272,11 @@
             border: 1px solid var(--border);
             border-radius: 999px;
             padding: 4px;
-            gap: 3px;
+            gap: 2px;
         }
 
         .state-pill {
-            padding: 7px 20px;
+            padding: 7px 18px;
             font-size: 13px;
             font-weight: 500;
             color: var(--text-secondary);
@@ -259,7 +284,7 @@
             border: none;
             border-radius: 999px;
             cursor: pointer;
-            transition: all 0.12s ease;
+            transition: all 0.15s ease;
             white-space: nowrap;
         }
 
@@ -270,12 +295,12 @@
         .state-pill.active {
             background: var(--primary);
             color: white;
-            font-weight: 500;
-            box-shadow: 0 1px 2px rgba(30, 58, 47, 0.15);
+            font-weight: 600;
+            box-shadow: 0 1px 3px rgba(15, 30, 23, 0.2);
         }
 
         .state-pill .pill-count {
-            opacity: 0.55;
+            opacity: 0.5;
             font-weight: 400;
             font-variant-numeric: tabular-nums;
         }
@@ -298,33 +323,37 @@
         }
 
         .export-btn:hover {
-            border-color: rgba(30, 58, 47, 0.18);
-            color: var(--primary);
-            background: #FFFEFB;
+            border-color: var(--border-strong);
+            color: var(--text-primary);
+            background: var(--surface-hover);
         }
 
         .export-btn.gold-accent {
-            background: var(--primary);
-            border-color: var(--primary);
-            color: #fff;
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--primary);
+            font-weight: 600;
         }
 
         .export-btn.gold-accent:hover {
-            background: var(--primary-soft);
-            border-color: var(--primary-soft);
-            color: #fff;
+            background: var(--gold-bright);
+            border-color: var(--gold-bright);
+            color: var(--primary);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
         }
 
         /* === SEGMENTED CONTROL (Apple style) === */
         .segmented {
             display: inline-flex;
-            background: rgba(30, 58, 47, 0.06);
+            background: var(--bg-warm);
             border-radius: 999px;
             padding: 4px;
+            border: 1px solid var(--border);
         }
 
         .segment {
-            padding: 8px 26px;
+            padding: 8px 24px;
             font-size: 14px;
             font-weight: 500;
             color: var(--text-secondary);
@@ -332,13 +361,13 @@
             border: none;
             border-radius: 999px;
             cursor: pointer;
-            transition: all 0.12s cubic-bezier(0.2, 0, 0, 1);
+            transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
         }
 
         .segment.active {
             background: var(--surface);
             color: var(--text-primary);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            box-shadow: var(--shadow-sm);
             font-weight: 600;
         }
 
@@ -352,7 +381,7 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: var(--muted);
+            color: var(--text-tertiary);
             margin-bottom: 10px;
             padding: 0 4px;
             display: flex;
@@ -372,14 +401,14 @@
             background: var(--surface);
             border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 1px 3px rgba(30, 58, 47, 0.04);
+            box-shadow: var(--shadow-sm);
         }
 
         /* === BUILDER ROWS === */
         .builder-row {
             display: flex;
             align-items: center;
-            padding: 15px 20px;
+            padding: 16px 20px;
             background: var(--surface);
             border-bottom: 1px solid var(--divider);
             transition: background 0.12s ease;
@@ -389,17 +418,17 @@
 
         .builder-row:last-child { border-bottom: none; }
 
-        .builder-row:hover { background: #FDFCFA; }
+        .builder-row:hover { background: var(--surface-hover); }
 
         /* Title Company Card — unified, elevated, distinct */
         .title-card {
             background: var(--surface);
             border-radius: 16px;
-            border: 1px solid var(--border);
-            box-shadow: 0 1px 3px rgba(30, 58, 47, 0.04);
+            border: none;
+            box-shadow: var(--shadow-sm);
             overflow: hidden;
             margin-bottom: 12px;
-            transition: box-shadow 0.15s ease;
+            transition: box-shadow 0.2s ease;
         }
 
         .title-card:last-child {
@@ -407,7 +436,7 @@
         }
 
         .title-card:hover {
-            box-shadow: 0 4px 16px rgba(30, 58, 47, 0.08);
+            box-shadow: var(--shadow-md);
         }
 
         .title-card .builder-row {
@@ -416,7 +445,7 @@
         }
 
         .title-card .builder-details {
-            background: #F7F5F0;
+            background: var(--bg-warm);
             border-top: 1px solid var(--divider);
             border-radius: 0 0 16px 16px;
             margin: 0;
@@ -432,50 +461,50 @@
             font-size: 12px;
             font-weight: 600;
             letter-spacing: 0.02em;
-            border: 1px solid rgba(30, 58, 47, 0.12);
-            background: rgba(30, 58, 47, 0.04);
+            border: 1px solid var(--border-strong);
+            background: var(--bg-warm);
             color: var(--primary);
             cursor: pointer;
             transition: all 0.15s ease;
         }
 
         .status-toggle-btn:hover {
-            background: rgba(30, 58, 47, 0.08);
+            background: var(--bg);
         }
 
         .status-toggle-btn.active {
-            background: rgba(30, 58, 47, 0.08);
-            border-color: rgba(30, 58, 47, 0.2);
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
         }
 
         .notes-input-wrap {
-            margin-top: 6px;
+            margin-top: 8px;
         }
 
         .notes-textarea {
             width: 100%;
             min-height: 80px;
-            padding: 10px 14px;
-            border: 1px solid rgba(30, 58, 47, 0.1);
-            border-radius: 10px;
+            padding: 12px 16px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
             font-family: inherit;
             font-size: 13px;
             line-height: 1.5;
             color: var(--text-secondary);
             background: var(--surface);
             resize: vertical;
-            transition: border-color 0.15s ease;
+            transition: all 0.15s ease;
         }
 
         .notes-textarea:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(30, 58, 47, 0.06);
+            box-shadow: var(--focus-ring);
         }
 
         .notes-textarea::placeholder {
-            color: var(--muted);
-            font-style: italic;
+            color: var(--text-quaternary);
         }
 
         .builder-main {
@@ -484,17 +513,17 @@
         }
 
         .builder-name {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             color: var(--text-primary);
             letter-spacing: -0.015em;
-            line-height: 1.2;
+            line-height: 1.3;
         }
 
         .builder-location {
             font-size: 13px;
             color: var(--text-secondary);
-            margin-top: 3px;
+            margin-top: 2px;
             font-weight: 400;
         }
 
@@ -502,11 +531,15 @@
             display: inline-flex;
             align-items: center;
             gap: 5px;
-            font-size: 9.5px;
+            font-size: 10px;
             font-weight: 600;
-            padding: 3px 8px;
-            border-radius: 5px;
-            background: rgba(30, 58, 47, 0.05);
+            padding: 4px 10px;
+            border-radius: 6px;
+            background: var(--bg-warm);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            flex-shrink: 0;
+        }
             letter-spacing: 0.05em;
             text-transform: uppercase;
             flex-shrink: 0;
@@ -520,10 +553,10 @@
         }
 
         .status-dot.active { background: var(--primary); }
-        .status-dot.research { background: #A8A59E; }
+        .status-dot.research { background: var(--text-quaternary); }
 
         .status-label {
-            color: var(--muted);
+            color: var(--text-tertiary);
             font-weight: 500;
             font-size: 10.5px;
             letter-spacing: 0.02em;
@@ -532,44 +565,46 @@
 
         .status-label.active { color: var(--primary); }
 
-        .detail-empty { color: var(--muted); font-style: normal; }
+        .detail-empty { color: var(--text-tertiary); font-style: normal; }
 
         .builder-actions {
             display: flex;
             align-items: center;
             gap: 2px;
-            opacity: 1;
+            opacity: 0.7;
             transition: opacity 0.15s ease;
         }
 
+        .builder-row:hover .builder-actions { opacity: 1; }
+
         .icon-btn {
-            width: 32px;
-            height: 32px;
+            width: 34px;
+            height: 34px;
             display: flex;
             align-items: center;
             justify-content: center;
             border: none;
             background: transparent;
-            color: var(--muted);
-            border-radius: 9px;
+            color: var(--text-tertiary);
+            border-radius: 8px;
             cursor: pointer;
             transition: all 0.1s ease;
         }
 
         .icon-btn:hover {
-            background: #F4F1EA;
+            background: var(--bg);
             color: var(--text-primary);
         }
 
         .icon-btn svg {
-            width: 15.5px;
-            height: 15.5px;
+            width: 16px;
+            height: 16px;
         }
 
         .builder-details {
             margin: 0;
             padding: 18px 20px 20px;
-            background: #F7F5F0;
+            background: var(--bg-warm);
             border-top: 1px solid var(--divider);
             font-size: 13px;
             display: grid;
@@ -584,20 +619,22 @@
         .detail-label {
             font-size: 10px;
             font-weight: 600;
-            color: var(--muted);
+            color: var(--text-tertiary);
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 2px;
+            letter-spacing: 0.06em;
+            margin-bottom: 3px;
         }
 
         .detail-value {
             color: var(--text-secondary);
             font-weight: 400;
+            line-height: 1.4;
         }
 
         .detail-value a {
             color: var(--primary);
             text-decoration: none;
+            font-weight: 500;
         }
 
         .detail-value a:hover {
@@ -616,11 +653,11 @@
         .empty {
             padding: 72px 20px;
             text-align: center;
-            color: var(--muted);
-            font-size: 14.5px;
+            color: var(--text-tertiary);
+            font-size: 15px;
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 14px;
+            border-radius: 16px;
         }
 
         /* Lots styling */
@@ -629,12 +666,15 @@
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 14px;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
             font-size: 14.5px;
             display: flex;
             align-items: center;
             gap: 16px;
+            transition: box-shadow 0.15s ease;
         }
+
+        .lot-row:hover { box-shadow: var(--shadow-sm); }
 
         .county-group { margin-bottom: 8px; }
 
@@ -642,7 +682,7 @@
             font-size: 14px;
             font-weight: 500;
             color: var(--text-primary);
-            padding: 13px 20px;
+            padding: 14px 20px;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
@@ -651,12 +691,12 @@
             transition: background 0.12s ease;
         }
 
-        .county-header:hover { background: #FDFCFA; }
-        .county-header .count { font-weight: 400; color: var(--muted); font-size: 12px; }
+        .county-header:hover { background: var(--surface-hover); }
+        .county-header .count { font-weight: 400; color: var(--text-tertiary); font-size: 12px; }
 
         .lot-list {
             padding: 8px 20px 16px;
-            background: #FDFCFA;
+            background: var(--bg-warm);
         }
 
         .lot-item {
@@ -668,21 +708,24 @@
             border-left: 3px solid var(--gold);
             padding-left: 12px;
             margin-left: -15px;
-            background: rgba(201, 169, 98, 0.02);
+            background: var(--gold-muted);
         }
 
         .lot-item:last-child { border-bottom: none; }
         .lot-address { font-weight: 600; font-size: 14px; color: var(--text-primary); }
         .lot-meta { font-size: 12.5px; color: var(--text-secondary); margin-top: 2px; display: flex; flex-wrap: wrap; gap: 8px 16px; }
-        .lot-tag { display: inline-block; font-size: 10px; padding: 1px 7px; border-radius: 4px; background: #F5F3ED; color: var(--muted); font-weight: 500; }
-        .lot-tag.purchased { background: #E8F0E6; color: var(--primary); }
-        .lot-tag.under-contract { background: rgba(201, 169, 98, 0.15); color: #8A7344; }
+        .lot-tag { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 6px; background: var(--bg); color: var(--text-tertiary); font-weight: 500; }
+        .lot-tag.purchased { background: var(--success-soft); color: var(--success); }
+        .lot-tag.under-contract { background: var(--warning-soft); color: var(--warning); }
         .lot-tag.teardown { background: rgba(139, 105, 20, 0.10); color: #8B6914; }
-        .lot-tag.vacant { background: rgba(30, 58, 47, 0.08); color: var(--primary); }
-        .lot-tag.score-a { background: rgba(201, 169, 98, 0.15); color: #8A7344; }
-        .lot-tag.score-b { background: rgba(201, 169, 98, 0.10); color: #9A8548; }
-        .lot-tag.score-c { background: rgba(120, 120, 120, 0.06); color: var(--muted); }
-        .lot-notes { font-size: 12px; color: var(--text-secondary); margin-top: 6px; line-height: 1.45; }
+        .lot-tag.vacant { background: var(--primary-muted); color: #fff; }
+        .lot-tag.score-a { background: var(--warning-soft); color: var(--warning); }
+        .lot-tag.score-b { background: rgba(184, 134, 11, 0.06); color: #9A8548; }
+        .lot-tag.score-c { background: var(--bg); color: var(--text-tertiary); }
+        .lot-notes { font-size: 12px; color: var(--text-secondary); margin-top: 6px; line-height: 1.5; }
+        .lot-tag.score-b { background: rgba(184, 134, 11, 0.06); color: #9A8548; }
+        .lot-tag.score-c { background: var(--bg); color: var(--text-tertiary); }
+        .lot-notes { font-size: 12px; color: var(--text-secondary); margin-top: 6px; line-height: 1.5; }
 
         /* Activity Tracker */
         .activity-tracker {
@@ -703,7 +746,7 @@
             border: 1.5px solid var(--border);
             border-radius: 8px;
             background: var(--surface);
-            color: var(--muted);
+            color: var(--text-tertiary);
             cursor: pointer;
             transition: all 0.15s ease;
         }
@@ -711,7 +754,7 @@
         .activity-icon:hover {
             border-color: var(--primary);
             color: var(--primary);
-            background: rgba(30, 58, 47, 0.04);
+            background: var(--bg-warm);
         }
 
         .activity-icon.active {
@@ -752,24 +795,24 @@
         }
 
         .enrichment-badge.complete {
-            background: rgba(30, 58, 47, 0.08);
-            color: var(--primary);
+            background: var(--success-soft);
+            color: var(--success);
         }
 
         .enrichment-badge.partial {
-            background: rgba(212, 175, 55, 0.12);
-            color: #B8950C;
+            background: var(--warning-soft);
+            color: var(--warning);
         }
 
         .enrichment-badge.none {
-            background: rgba(120, 120, 120, 0.06);
-            color: var(--muted);
+            background: var(--bg);
+            color: var(--text-tertiary);
         }
 
         /* Owner Contact Section */
         .lot-owner-section {
-            background: rgba(30, 58, 47, 0.03);
-            border: 1px solid rgba(30, 58, 47, 0.08);
+            background: var(--bg-warm);
+            border: 1px solid var(--border);
             border-radius: 10px;
             padding: 12px 14px;
             margin: 10px 0;
@@ -784,7 +827,7 @@
             color: var(--primary);
             margin-bottom: 10px;
             padding-bottom: 8px;
-            border-bottom: 1px solid rgba(30, 58, 47, 0.06);
+            border-bottom: 1px solid var(--divider);
         }
 
         .owner-header svg {
@@ -805,11 +848,11 @@
         }
 
         .owner-label {
-            font-size: 9.5px;
+            font-size: 10px;
             font-weight: 600;
-            color: var(--muted);
+            color: var(--text-tertiary);
             text-transform: uppercase;
-            letter-spacing: 0.04em;
+            letter-spacing: 0.06em;
         }
 
         .owner-value {
@@ -835,14 +878,14 @@
             align-items: center;
             width: fit-content;
             padding: 2px 8px;
-            border-radius: 5px;
+            border-radius: 6px;
             font-size: 10.5px;
-            background: rgba(30, 58, 47, 0.06);
-            color: var(--primary);
+            background: var(--bg);
+            color: var(--text-secondary);
         }
 
         .owner-value.delinquent {
-            color: #C62828;
+            color: var(--danger);
             font-weight: 600;
         }
 
@@ -859,7 +902,7 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.08em;
-            color: var(--muted);
+            color: var(--text-tertiary);
             margin-bottom: 20px;
         }
 
@@ -1004,7 +1047,7 @@
         -webkit-tap-highlight-color: transparent;
     }
     .filter-sheet-option:active {
-        background: rgba(30, 58, 47, 0.04);
+        background: rgba(15, 30, 23, 0.04);
     }
     .filter-sheet-option.selected {
         font-weight: 600;
@@ -1215,7 +1258,7 @@
                 margin-bottom: 12px;
                 border: 1px solid var(--border);
                 border-bottom: 1px solid var(--border);
-                box-shadow: 0 1px 3px rgba(30, 58, 47, 0.04);
+                box-shadow: 0 1px 3px rgba(15, 30, 23, 0.04);
             }
             .builder-row:last-child { margin-bottom: 0; }
             .builder-main { 
@@ -1270,7 +1313,7 @@
                 padding: 16px;
                 grid-template-columns: 1fr;
                 gap: 10px;
-                background: rgba(30, 58, 47, 0.02);
+                background: rgba(15, 30, 23, 0.02);
                 border-radius: 10px;
                 margin-top: 4px;
             }
@@ -1289,7 +1332,7 @@
                 font-size: 11px; 
                 margin-bottom: 0;
                 letter-spacing: 0.03em;
-                color: var(--muted);
+                color: var(--text-tertiary);
                 font-weight: 500;
             }
             .detail-value { 
@@ -1352,7 +1395,7 @@
             }
             .lot-list { 
                 padding: 12px 20px 16px; 
-                background: rgba(30, 58, 47, 0.02);
+                background: rgba(15, 30, 23, 0.02);
                 border-radius: 0 0 14px 14px;
             }
             .lot-owner-section { 
@@ -1371,7 +1414,7 @@
             }
             .owner-label { 
                 font-size: 11px; 
-                color: var(--muted);
+                color: var(--text-tertiary);
                 margin-bottom: 2px;
             }
 
@@ -1420,7 +1463,7 @@
             /* List panel elevation on mobile */
             .list-panel {
                 border-radius: 16px;
-                box-shadow: 0 1px 4px rgba(30, 58, 47, 0.06);
+                box-shadow: 0 1px 4px rgba(15, 30, 23, 0.06);
                 border: 1px solid var(--border);
             }
             
@@ -1637,8 +1680,8 @@
             
             /* Disable hover effects on touch devices */
             .builder-row:hover { background: var(--surface); }
-            .builder-row:active { background: #FDFCFA; }
-            .title-row:active { background: #FDFCFA; }
+            .builder-row:active { background: var(--surface-hover); }
+            .title-row:active { background: var(--surface-hover); }
         }
 
         @media (max-width: 860px) {
@@ -1663,7 +1706,7 @@
                 content: attr(data-label);
                 font-weight: 500;
                 font-size: 12px;
-                color: var(--muted);
+                color: var(--text-tertiary);
                 letter-spacing: 0.02em;
                 flex-shrink: 0;
                 margin-right: 16px;
@@ -1743,7 +1786,7 @@
                 content: attr(data-label);
                 font-weight: 600;
                 font-size: 12px;
-                color: var(--muted);
+                color: var(--text-tertiary);
                 text-transform: uppercase;
                 letter-spacing: 0.04em;
             }
@@ -1793,7 +1836,7 @@
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.08em;
-            color: var(--muted);
+            color: var(--text-tertiary);
             margin-top: 4px;
         }
         .badge {
@@ -1868,9 +1911,9 @@
         }
 
         .teardown-btn:hover {
-            border-color: rgba(30, 58, 47, 0.18);
-            color: var(--primary);
-            background: #FDFCFA;
+            border-color: var(--border-strong);
+            color: var(--text-primary);
+            background: var(--surface-hover);
         }
 
         .teardown-btn.primary {
@@ -1918,9 +1961,9 @@
         }
 
         .filter-chip:hover {
-            border-color: rgba(30, 58, 47, 0.15);
+            border-color: var(--border-strong);
             color: var(--text-primary);
-            background: #FDFCFA;
+            background: var(--surface-hover);
         }
 
         .filter-chip.active {
@@ -1947,7 +1990,7 @@
 
         .teardown-count {
             font-size: 14px;
-            color: var(--muted);
+            color: var(--text-tertiary);
             margin-bottom: 20px;
             font-weight: 400;
             letter-spacing: -0.01em;
@@ -2019,7 +2062,7 @@
             align-items: center;
             gap: 3px;
             padding: 2px 8px;
-            border-radius: 4px;
+            border-radius: 6px;
             font-size: 10px;
             font-weight: 600;
             letter-spacing: 0.02em;
@@ -2027,28 +2070,28 @@
         }
 
         .score-pill.score-a {
-            background: rgba(201, 169, 98, 0.15);
-            color: #8A7344;
+            background: var(--warning-soft);
+            color: var(--warning);
         }
 
         .score-pill.score-b {
-            background: rgba(201, 169, 98, 0.10);
+            background: rgba(184, 134, 11, 0.06);
             color: #9A8548;
         }
 
         .score-pill.score-c {
-            background: rgba(120, 120, 120, 0.06);
-            color: var(--muted);
+            background: var(--bg);
+            color: var(--text-tertiary);
         }
 
         .score-pill.absentee {
-            background: rgba(30, 58, 47, 0.06);
-            color: var(--primary);
+            background: var(--bg);
+            color: var(--text-secondary);
         }
 
         .score-pill.budget {
-            background: rgba(52, 168, 83, 0.08);
-            color: #2E7D32;
+            background: var(--success-soft);
+            color: var(--success);
         }
 
         /* Metrics: Compact inline row like lot-meta */
@@ -2092,7 +2135,7 @@
         .metric-label {
             font-size: 10px;
             font-weight: 500;
-            color: var(--muted);
+            color: var(--text-tertiary);
             text-transform: none;
             letter-spacing: 0;
         }
@@ -2125,8 +2168,8 @@
         }
 
         .td-action:hover {
-            background: rgba(30, 58, 47, 0.04);
-            border-color: rgba(30, 58, 47, 0.15);
+            background: rgba(15, 30, 23, 0.04);
+            border-color: rgba(15, 30, 23, 0.15);
         }
 
         .td-action svg {
@@ -2154,8 +2197,8 @@
             font-size: 11.5px;
             font-weight: 500;
             color: var(--primary);
-            background: rgba(30, 58, 47, 0.03);
-            border: 1px solid rgba(30, 58, 47, 0.08);
+            background: rgba(15, 30, 23, 0.03);
+            border: 1px solid rgba(15, 30, 23, 0.08);
             border-radius: 6px;
             cursor: pointer;
             transition: all 0.15s ease;
@@ -2164,8 +2207,8 @@
         }
 
         .td-contact:hover {
-            background: rgba(30, 58, 47, 0.06);
-            border-color: rgba(30, 58, 47, 0.15);
+            background: rgba(15, 30, 23, 0.06);
+            border-color: rgba(15, 30, 23, 0.15);
         }
 
         .td-contact svg {
@@ -2181,16 +2224,16 @@
         }
 
         .td-contact.disabled {
-            color: var(--muted);
-            background: rgba(30, 58, 47, 0.02);
-            border-color: rgba(30, 58, 47, 0.04);
+            color: var(--text-tertiary);
+            background: rgba(15, 30, 23, 0.02);
+            border-color: rgba(15, 30, 23, 0.04);
             cursor: not-allowed;
             opacity: 0.6;
         }
 
         .td-contact.disabled:hover {
-            background: rgba(30, 58, 47, 0.02);
-            border-color: rgba(30, 58, 47, 0.04);
+            background: rgba(15, 30, 23, 0.02);
+            border-color: rgba(15, 30, 23, 0.04);
         }
 
         /* Insight — compact like lot-notes */
@@ -2218,7 +2261,7 @@
             width: 48px;
             height: 48px;
             margin: 0 auto 16px;
-            color: var(--muted);
+            color: var(--text-tertiary);
         }
 
         .teardown-empty-title {
@@ -2230,7 +2273,7 @@
 
         .teardown-empty-text {
             font-size: 13.5px;
-            color: var(--muted);
+            color: var(--text-tertiary);
         }
 
         /* === TEARDOWN RESPONSIVE === */
@@ -3690,7 +3733,7 @@
                                 <div class="detail"><div class="detail-label">Buy Box</div><div class="detail-value">${fmt(builder.buyBox)}</div></div>
                                 <div class="detail"><div class="detail-label">Notes</div><div class="detail-value">${fmt(builder.volume)}</div></div>
                                 <div class="detail"><div class="detail-label">Added</div><div class="detail-value">${fmt(builder.dateAdded)}</div></div>
-                                <div class="detail" style="grid-column: 1 / -1; margin-top: 8px; padding-top: 12px; border-top: 1px solid rgba(30, 58, 47, 0.08);">
+                                <div class="detail" style="grid-column: 1 / -1; margin-top: 8px; padding-top: 12px; border-top: 1px solid rgba(15, 30, 23, 0.08);">
                                     <div class="detail-label">Your Notes</div>
                                     <div class="notes-input-wrap">
                                         <textarea 
@@ -3701,7 +3744,7 @@
                                         >${escHtml(builder.notes || '')}</textarea>
                                     </div>
                                 </div>
-                                <div class="detail" style="grid-column: 1 / -1; margin-top: 8px; padding-top: 12px; border-top: 1px solid rgba(30, 58, 47, 0.08);">
+                                <div class="detail" style="grid-column: 1 / -1; margin-top: 8px; padding-top: 12px; border-top: 1px solid rgba(15, 30, 23, 0.08);">
                                     <button class="status-toggle-btn ${isActive ? 'active' : ''}" onclick="event.stopPropagation(); toggleBuilderStatus(${builder.id}, event)">
                                         ${isActive ? '✓ Mark as Needs Research' : '✓ Mark as Active'}
                                     </button>
@@ -3979,7 +4022,7 @@
                 container.innerHTML = `
                     <div class="empty-market" style="padding: 32px 20px; text-align: center;">
                         <strong>No properties match</strong><br>
-                        <span style="color: var(--muted); font-size: 13px;">Try adjusting your filters to see more results</span>
+                        <span style="color: var(--text-tertiary); font-size: 13px;">Try adjusting your filters to see more results</span>
                     </div>
                 `;
                 return;
@@ -4253,7 +4296,7 @@
                                                 ${lot.sourceUrl ? `<div style="margin-top:8px;"><a href="${escHtml(lot.sourceUrl)}" target="_blank" rel="noopener noreferrer" style="color:var(--primary); font-size:12px; font-weight:500; text-decoration:none; display:inline-flex; align-items:center; gap:4px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> View Original Listing</a></div>` : ''}
                                                 ${lot.zillowUrl ? `<div style="margin-top:6px;"><a href="${escHtml(lot.zillowUrl)}" target="_blank" rel="noopener noreferrer" style="color:#006AFF; font-size:12px; font-weight:500; text-decoration:none; display:inline-flex; align-items:center; gap:4px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> View on Zillow</a></div>` : ''}
                                                 ${lot.mapUrl ? `<div style="margin-top:6px;"><a href="${escHtml(lot.mapUrl)}" target="_blank" rel="noopener noreferrer" style="color:#34A853; font-size:12px; font-weight:500; text-decoration:none; display:inline-flex; align-items:center; gap:4px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg> View on Google Maps</a></div>` : ''}
-                                                <div style="font-size:10px; color:var(--muted); margin-top:4px; display:flex; gap:12px;">
+                                                <div style="font-size:10px; color:var(--text-tertiary); margin-top:4px; display:flex; gap:12px;">
                                                     <span>Source: ${escHtml(lot.source || '—')}</span>
                                                     <span>${escHtml(lot.date || '—')}</span>
                                                 </div>
