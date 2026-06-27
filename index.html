@@ -426,38 +426,47 @@
         }
 
         .list-panel {
-            background: var(--surface);
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: var(--shadow-sm);
+            background: transparent;
+            border-radius: 0;
+            overflow: visible;
+            box-shadow: none;
+            padding: 0;
         }
 
-        /* === BUILDER ROWS === */
+        /* === BUILDER ROWS — Card-style separation === */
         .builder-row {
             display: flex;
             align-items: center;
-            padding: 16px 20px;
+            padding: 20px 24px;
             background: var(--surface);
-            border-bottom: 1px solid var(--divider);
-            transition: background 0.12s ease;
+            border-radius: 14px;
+            margin-bottom: 8px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
             gap: 16px;
             cursor: pointer;
         }
 
-        .builder-row:last-child { border-bottom: none; }
+        .builder-row:last-child { margin-bottom: 0; }
 
-        .builder-row:hover { background: var(--surface-hover); }
-        .builder-row:active { transform: scale(0.998); transition: transform 0.05s ease; }
+        .builder-row:hover {
+            background: var(--surface);
+            border-color: var(--border-strong);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+        }
+        .builder-row:active { transform: translateY(0) scale(0.997); }
 
-        /* Title Company Card — unified, elevated, distinct */
+        /* Title Company Card — elevated, more separation */
         .title-card {
             background: var(--surface);
             border-radius: 16px;
-            border: none;
+            border: 1px solid var(--border);
             box-shadow: var(--shadow-sm);
             overflow: hidden;
-            margin-bottom: 12px;
-            transition: box-shadow 0.2s cubic-bezier(0.2, 0, 0, 1), transform 0.1s ease;
+            margin-bottom: 16px;
+            transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
         }
 
         .title-card:last-child {
@@ -466,20 +475,34 @@
 
         .title-card:hover {
             box-shadow: var(--shadow-md);
+            border-color: var(--border-strong);
+            transform: translateY(-1px);
         }
-        .title-card:active { transform: scale(0.996); }
+        .title-card:active { transform: translateY(0) scale(0.996); }
 
         .title-card .builder-row {
             border-bottom: none;
-            padding: 18px 20px;
+            border: none;
+            box-shadow: none;
+            margin-bottom: 0;
+            padding: 20px 24px;
+            border-radius: 16px 16px 0 0;
+        }
+        .title-card .builder-row:hover {
+            border: none;
+            box-shadow: none;
+            transform: none;
+        }
+        .title-card .builder-row:active {
+            transform: none;
         }
 
         .title-card .builder-details {
             background: var(--bg-warm);
             border-top: 1px solid var(--divider);
-            border-radius: 0 0 16px 16px;
+            border-radius: 0 0 14px 14px;
             margin: 0;
-            padding: 18px 20px 20px;
+            padding: 20px 24px 24px;
         }
 
         .status-toggle-btn {
@@ -697,26 +720,34 @@
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 16px;
+            box-shadow: var(--shadow-sm);
         }
 
         /* Lots styling */
         .lot-row {
-            padding: 18px 22px;
+            padding: 20px 24px;
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 14px;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             font-size: 14.5px;
             display: flex;
             align-items: center;
             gap: 16px;
-            transition: box-shadow 0.15s ease, transform 0.05s ease;
+            transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+            box-shadow: var(--shadow-sm);
         }
 
-        .lot-row:hover { box-shadow: var(--shadow-sm); }
-        .lot-row:active { transform: scale(0.997); }
+        .lot-row:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--border-strong);
+            transform: translateY(-1px);
+        }
+        .lot-row:active { transform: translateY(0) scale(0.997); }
+        .lot-row:last-child { margin-bottom: 0; }
 
-        .county-group { margin-bottom: 8px; }
+        .county-group { margin-bottom: 12px; }
+        .county-group:last-child { margin-bottom: 0; }
 
         .county-header {
             font-size: 14px;
@@ -736,33 +767,48 @@
         .county-header .count { font-weight: 400; color: var(--text-tertiary); font-size: 12px; }
 
         .lot-list {
-            padding: 8px 20px 16px;
-            background: var(--bg-warm);
+            padding: 12px 0;
+            background: transparent;
         }
 
         .lot-item {
-            padding: 14px 0;
-            border-bottom: 1px solid var(--divider);
+            padding: 18px 20px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            margin-bottom: 8px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+        }
+
+        .lot-item:hover {
+            border-color: var(--border-strong);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+        }
+
+        .lot-item:active {
+            transform: translateY(0) scale(0.997);
         }
 
         .lot-item[data-teardown="true"] {
             border-left: 3px solid var(--gold);
-            padding-left: 12px;
-            margin-left: -15px;
-            background: var(--gold-muted);
+            padding-left: 20px;
+            margin-left: 0;
+            background: var(--surface);
         }
 
-        .lot-item:last-child { border-bottom: none; }
+        .lot-item:last-child { margin-bottom: 0; }
         .lot-address { font-weight: 600; font-size: 14px; color: var(--text-primary); }
         .lot-meta { font-size: 12.5px; color: var(--text-secondary); margin-top: 2px; display: flex; flex-wrap: wrap; gap: 8px 16px; }
-        .lot-tag { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 6px; background: var(--bg); color: var(--text-tertiary); font-weight: 500; }
+        .lot-tag { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 6px; background: var(--bg-warm); color: var(--text-tertiary); font-weight: 500; }
         .lot-tag.purchased { background: var(--success-soft); color: var(--success); }
         .lot-tag.under-contract { background: var(--warning-soft); color: var(--warning); }
         .lot-tag.teardown { background: rgba(139, 105, 20, 0.10); color: #8B6914; }
         .lot-tag.vacant { background: var(--primary-muted); color: #fff; }
         .lot-tag.score-a { background: var(--warning-soft); color: var(--warning); }
         .lot-tag.score-b { background: rgba(184, 134, 11, 0.06); color: #9A8548; }
-        .lot-tag.score-c { background: var(--bg); color: var(--text-tertiary); }
+        .lot-tag.score-c { background: var(--bg-warm); color: var(--text-tertiary); }
         .lot-notes { font-size: 12px; color: var(--text-secondary); margin-top: 6px; line-height: 1.5; }
         .lot-tag.score-b { background: rgba(184, 134, 11, 0.06); color: #9A8548; }
         .lot-tag.score-c { background: var(--bg); color: var(--text-tertiary); }
@@ -2122,22 +2168,27 @@
 
         /* Teardown Cards — unified with lot-item design */
         .teardown-card {
-            padding: 14px 0;
-            border-bottom: 1px solid var(--divider);
-            background: transparent;
-            border-radius: 0;
-            box-shadow: none;
-            border: none;
-            transition: none;
+            padding: 18px 20px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            margin-bottom: 8px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
         }
 
         .teardown-card:hover {
-            box-shadow: none;
-            transform: none;
+            box-shadow: var(--shadow-md);
+            border-color: var(--border-strong);
+            transform: translateY(-1px);
+        }
+
+        .teardown-card:active {
+            transform: translateY(0) scale(0.997);
         }
 
         .teardown-card:last-child {
-            border-bottom: none;
+            margin-bottom: 0;
         }
 
         /* Card Header: Address + Score — compact like lot-item */
