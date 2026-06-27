@@ -2535,7 +2535,7 @@
                         <div class="hero-metric-label" id="hero-label-2">In Research</div>
                     </div>
                     <div class="hero-metric">
-                        <div class="hero-metric-value" id="hero-markets">4</div>
+                        <div class="hero-metric-value" id="hero-markets">11</div>
                         <div class="hero-metric-label" id="hero-label-3">Markets</div>
                     </div>
                 </div>
@@ -2567,7 +2567,7 @@
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
                     <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
                 </svg>
-                <span id="mobile-filter-label">All Markets</span>
+                <span id="mobile-filter-label">All</span>
                 <span class="filter-badge"></span>
             </button>
 
@@ -2713,7 +2713,7 @@
         <div class="container footer-inner">
             <div class="footer-brand">Land Flip</div>
             <div class="footer-tagline">Builder & Lots Recon</div>
-            <div class="footer-meta" id="footer-meta">6 markets · NC · SC · TN · TX · GA · Dallas</div>
+            <div class="footer-meta" id="footer-meta">11 markets · NC · SC · TN · TX · GA · PA · AZ · FL · OH · ID · IN</div>
         </div>
     </footer>
 
@@ -3006,18 +3006,24 @@
         ];
 
         const MARKET_LABELS = {
-            'all': 'All Markets',
-            'north-carolina': 'North Carolina',
-            'south-carolina': 'South Carolina',
-            'tennessee': 'Tennessee',
-            'texas': 'Texas',
-            'georgia': 'Georgia'
+            'all': 'All',
+            'NC': 'NC',
+            'SC': 'SC',
+            'TN': 'TN',
+            'TX': 'TX',
+            'GA': 'GA',
+            'PA': 'PA',
+            'AZ': 'AZ',
+            'FL': 'FL',
+            'OH': 'OH',
+            'ID': 'ID',
+            'IN': 'IN'
         };
 
-        const MARKET_ORDER = ['north-carolina', 'south-carolina', 'tennessee', 'texas', 'georgia'];
+        const MARKET_ORDER = ['NC', 'SC', 'TN', 'TX', 'GA', 'PA', 'AZ', 'FL', 'OH', 'ID', 'IN'];
 
         // All markets we track (show empty ones)
-        const ALL_MARKETS = ['north-carolina', 'south-carolina', 'tennessee', 'texas', 'georgia'];
+        const ALL_MARKETS = ['NC', 'SC', 'TN', 'TX', 'GA', 'PA', 'AZ', 'FL', 'OH', 'ID', 'IN'];
 
         function escHtml(str) {
             if (str == null || str === '') return '';
@@ -3043,17 +3049,19 @@
             if (!state) return '';
             const s = String(state).toLowerCase().trim();
             const aliases = {
-                'nc': 'north-carolina',
-                'north carolina': 'north-carolina',
-                'sc': 'south-carolina',
-                'south carolina': 'south-carolina',
-                'tn': 'tennessee',
-                'tennessee': 'tennessee',
-                'tx': 'texas',
-                'texas': 'texas',
-                'dallas': 'texas'
+                'nc': 'NC', 'north carolina': 'NC', 'north-carolina': 'NC',
+                'sc': 'SC', 'south carolina': 'SC', 'south-carolina': 'SC',
+                'tn': 'TN', 'tennessee': 'TN',
+                'tx': 'TX', 'texas': 'TX', 'dallas': 'TX',
+                'ga': 'GA', 'georgia': 'GA',
+                'pa': 'PA', 'pennsylvania': 'PA',
+                'az': 'AZ', 'arizona': 'AZ',
+                'fl': 'FL', 'florida': 'FL',
+                'oh': 'OH', 'ohio': 'OH',
+                'id': 'ID', 'idaho': 'ID',
+                'in': 'IN', 'indiana': 'IN'
             };
-            return aliases[s] || s.replace(/\s+/g, '-');
+            return aliases[s] || s.toUpperCase();
         }
 
         function normalizeBuilder(b) {
@@ -3141,7 +3149,7 @@
         function updateFooterMeta() {
             const el = document.getElementById('footer-meta');
             if (!el) return;
-            el.textContent = `${builderData.length} builders · ${lotData.length} lots · ${titleData.length} title companies · ${CONTRACT_TEMPLATES.length} templates · 4 markets`;
+            el.textContent = `${builderData.length} builders · ${lotData.length} lots · ${titleData.length} title companies · ${CONTRACT_TEMPLATES.length} templates · 11 markets`;
         }
 
         function loadData() {
@@ -3191,7 +3199,7 @@
             if (heroResearch) heroResearch.textContent = data.filter(b => b.status === 'research').length;
             if (heroMarkets) {
                 const activeMarkets = new Set(data.map(b => b.state).filter(Boolean));
-                heroMarkets.textContent = ALL_MARKETS.length; // always show 4 tracked markets
+                heroMarkets.textContent = ALL_MARKETS.length; // always show all tracked markets
             }
 
             // Legacy ids (kept for compatibility if any)
@@ -3237,7 +3245,7 @@
                     class="state-pill ${isAll ? 'active' : ''}" 
                     onclick="setStateFilter('all')"
                     data-state="all">
-                    All Markets
+                    All
                 </button>
             ` + html;
 
