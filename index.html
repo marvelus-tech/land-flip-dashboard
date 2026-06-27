@@ -2291,6 +2291,10 @@
             text-decoration: none;
         }
 
+        .td-action:active {
+            transform: scale(0.95);
+        }
+
         .td-action:hover {
             background: rgba(15, 30, 23, 0.04);
             border-color: rgba(15, 30, 23, 0.15);
@@ -2333,6 +2337,10 @@
         .td-contact:hover {
             background: rgba(15, 30, 23, 0.06);
             border-color: rgba(15, 30, 23, 0.15);
+        }
+
+        .td-contact:active {
+            transform: scale(0.95);
         }
 
         .td-contact svg {
@@ -3643,6 +3651,7 @@
                                     <span class="status-label ${isActive ? 'active' : ''}">${statusText}</span>
                                 </div>
                                 <div class="builder-actions">
+                                    ${activityTrackerHTML(getTitleActivity(title.id), title.id, 'title')}
                                     <button class="status-toggle-btn ${isActive ? 'active' : ''}" onclick="toggleTitleStatus(${title.id}, event)" title="${isActive ? 'Mark as Needs Research' : 'Mark as Active'}" style="margin-right: 8px;">
                                         ${isActive ? '✓ Active' : 'Mark Active'}
                                     </button>
@@ -3707,6 +3716,64 @@
                 document.body.removeChild(ta);
                 showToast('Copied to clipboard');
             });
+        }
+
+        // ============================================
+        // ACTIVITY TRACKING — Call / Email / Mail
+        // ============================================
+        const builderActivity = {};
+        const titleActivity = {};
+
+        function getBuilderActivity(id) {
+            return builderActivity[id] || { call: false, email: false, mail: false };
+        }
+
+        function getTitleActivity(id) {
+            return titleActivity[id] || { call: false, email: false, mail: false };
+        }
+
+        function toggleBuilderActivity(id, type, e) {
+            if (e) e.stopImmediatePropagation();
+            const current = getBuilderActivity(id);
+            current[type] = !current[type];
+            builderActivity[id] = current;
+            showToast(`${type.charAt(0).toUpperCase() + type.slice(1)} marked ${current[type] ? 'done' : 'pending'}`, current[type] ? 'success' : 'info');
+            renderBuilders();
+        }
+
+        function toggleTitleActivity(id, type, e) {
+            if (e) e.stopImmediatePropagation();
+            const current = getTitleActivity(id);
+            current[type] = !current[type];
+            titleActivity[id] = current;
+            showToast(`${type.charAt(0).toUpperCase() + type.slice(1)} marked ${current[type] ? 'done' : 'pending'}`, current[type] ? 'success' : 'info');
+            renderTitles();
+        }
+
+        function activityTrackerHTML(activity, id, type) {
+            const isBuilder = type === 'builder';
+            const toggleFn = isBuilder ? 'toggleBuilderActivity' : 'toggleTitleActivity';
+            return `
+                <div class="activity-tracker" onclick="event.stopPropagation()">
+                    <button class="activity-icon ${activity.call ? 'active' : ''}" onclick="${toggleFn}(${id}, 'call', event)" title="${activity.call ? 'Call completed' : 'Mark call done'}">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+                        </svg>
+                    </button>
+                    <button class="activity-icon ${activity.email ? 'active' : ''}" onclick="${toggleFn}(${id}, 'email', event)" title="${activity.email ? 'Email sent' : 'Mark email done'}">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="4" width="20" height="16" rx="2"/>
+                            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                        </svg>
+                    </button>
+                    <button class="activity-icon ${activity.mail ? 'active' : ''}" onclick="${toggleFn}(${id}, 'mail', event)" title="${activity.mail ? 'Mail sent' : 'Mark mail done'}">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                    </button>
+                </div>
+            `;
         }
 
         function updateControlsForTab(tab) {
@@ -3835,6 +3902,7 @@
                                 </div>
 
                                 <div class="builder-actions" onclick="event.stopPropagation()">
+                                    ${activityTrackerHTML(getBuilderActivity(builder.id), builder.id, 'builder')}
                                     <button class="icon-btn" onclick="copyBuilder(${builder.id}, event)" title="Copy details">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
