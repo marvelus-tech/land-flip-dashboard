@@ -2000,14 +2000,172 @@
             border-radius: 8px;
         }
 
-        .badge {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: 600;
-            margin-right: 4px;
-        }
+                        .enrich-summary {
+                            display: inline-flex;
+                            align-items: center;
+                            gap: 4px;
+                            padding: 2px 8px;
+                            border-radius: 12px;
+                            font-size: 10px;
+                            font-weight: 600;
+                            margin-left: 4px;
+                        }
+
+                        /* Enrichment Modal */
+                        .enrich-modal-overlay {
+                            position: fixed;
+                            inset: 0;
+                            background: rgba(0,0,0,0.2);
+                            backdrop-filter: blur(4px);
+                            z-index: 1000;
+                            opacity: 0;
+                            pointer-events: none;
+                            transition: opacity 0.2s ease;
+                        }
+                        .enrich-modal-overlay.open {
+                            opacity: 1;
+                            pointer-events: auto;
+                        }
+                        .enrich-modal {
+                            position: fixed;
+                            right: 0;
+                            top: 0;
+                            width: 420px;
+                            max-width: 100vw;
+                            height: 100vh;
+                            background: var(--surface);
+                            box-shadow: -8px 0 40px rgba(0,0,0,0.12);
+                            z-index: 1001;
+                            transform: translateX(100%);
+                            transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+                            display: flex;
+                            flex-direction: column;
+                        }
+                        .enrich-modal.open {
+                            transform: translateX(0);
+                        }
+                        .enrich-modal-header {
+                            padding: 24px 24px 16px;
+                            border-bottom: 1px solid var(--border);
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                        }
+                        .enrich-modal-title {
+                            font-size: 18px;
+                            font-weight: 600;
+                            letter-spacing: -0.02em;
+                            color: var(--text-primary);
+                        }
+                        .enrich-modal-subtitle {
+                            font-size: 12px;
+                            color: var(--text-tertiary);
+                            margin-top: 2px;
+                        }
+                        .enrich-modal-close {
+                            width: 32px;
+                            height: 32px;
+                            border-radius: 50%;
+                            border: none;
+                            background: transparent;
+                            cursor: pointer;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            color: var(--text-secondary);
+                            transition: background 0.2s;
+                        }
+                        .enrich-modal-close:hover {
+                            background: var(--surface-hover);
+                        }
+                        .enrich-modal-body {
+                            flex: 1;
+                            overflow-y: auto;
+                            padding: 20px 24px;
+                        }
+                        .enrich-field {
+                            margin-bottom: 16px;
+                        }
+                        .enrich-field label {
+                            display: block;
+                            font-size: 11px;
+                            font-weight: 600;
+                            text-transform: uppercase;
+                            letter-spacing: 0.04em;
+                            color: var(--text-secondary);
+                            margin-bottom: 6px;
+                        }
+                        .enrich-field input,
+                        .enrich-field select,
+                        .enrich-field textarea {
+                            width: 100%;
+                            padding: 10px 12px;
+                            border: 1px solid var(--border);
+                            border-radius: 8px;
+                            font-family: inherit;
+                            font-size: 13px;
+                            background: var(--surface);
+                            color: var(--text-primary);
+                            outline: none;
+                            transition: all 0.2s;
+                        }
+                        .enrich-field input:focus,
+                        .enrich-field select:focus,
+                        .enrich-field textarea:focus {
+                            border-color: var(--primary);
+                            box-shadow: 0 0 0 3px var(--primary-soft);
+                        }
+                        .enrich-field textarea {
+                            min-height: 100px;
+                            resize: vertical;
+                        }
+                        .enrich-modal-footer {
+                            padding: 16px 24px 24px;
+                            border-top: 1px solid var(--border);
+                            display: flex;
+                            gap: 8px;
+                            justify-content: flex-end;
+                        }
+                        .enrich-btn {
+                            padding: 10px 18px;
+                            border-radius: 8px;
+                            font-family: inherit;
+                            font-size: 13px;
+                            font-weight: 500;
+                            cursor: pointer;
+                            transition: all 0.2s;
+                            border: none;
+                        }
+                        .enrich-btn-secondary {
+                            background: var(--surface-hover);
+                            color: var(--text-primary);
+                            border: 1px solid var(--border);
+                        }
+                        .enrich-btn-secondary:hover {
+                            background: var(--bg);
+                        }
+                        .enrich-btn-primary {
+                            background: var(--primary);
+                            color: white;
+                        }
+                        .enrich-btn-primary:hover {
+                            background: var(--primary-soft);
+                        }
+
+                        @media (max-width: 640px) {
+                            .enrich-modal {
+                                width: 100%;
+                            }
+                        }
+
+                        /* Style the edit button on cards */
+                        .activity-icon[title="Enrich this listing"] {
+                            color: var(--primary);
+                        }
+                        .activity-icon[title="Enrich this listing"]:hover {
+                            background: var(--primary-soft);
+                            color: var(--primary);
+                        }
         .badge-vacant { background: #2C4A3A; color: #F0E4C8; }
         .badge-teardown { background: #8B4513; color: white; }
         .badge-hot { background: #DC3545; color: white; }
@@ -4305,6 +4463,7 @@
                             <span class="lot-tag ${scoreClass}">${scoreLabel}</span>
                             ${p._absentee ? '<span class="lot-tag">Absentee</span>' : ''}
                             ${p._budget ? '<span class="lot-tag">In Budget</span>' : ''}
+                            ${renderEnrichSummary('teardown-' + p.account_number)}
                         </div>
                     </div>
                     <div class="lot-meta">
@@ -4315,6 +4474,9 @@
                         <span>${p.zip_code || '—'}</span>
                     </div>
                     <div class="activity-tracker">
+                        <button class="activity-icon" onclick="event.stopPropagation(); openEnrichForTeardown('${p.account_number}')" title="Enrich this listing">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                        </button>
                         <a class="activity-icon" href="${p.dcad_url || '#'}" target="_blank" rel="noopener" title="DCAD Record">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                         </a>
@@ -4325,6 +4487,7 @@
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
                         </button>` : ''}
                     </div>
+                    ${renderEnrichBlock('teardown-' + p.account_number)}
                     ${hasPhone || hasEmail || hasMail ? `
                     <div class="lot-owner-section">
                         <div class="owner-header">
@@ -4362,25 +4525,132 @@
             if (texasContainer) texasContainer.innerHTML = html;
         }
 
-        function exportTeardownCSV() {
-            const filtered = teardownData.filter(p => p._lotSize >= 8000 && p._yearBuilt > 0 && p._yearBuilt <= 1980);
-            if (filtered.length === 0) {
-                showToast('No teardown data to export');
-                return;
-            }
-            const headers = ['account_number','property_address','zip_code','owner_name','mailing_address','lot_size_sqft','year_built','land_value','improvement_value','score','is_absentee_owner','dcad_url'];
-            let csv = headers.join(',') + '\n';
-            filtered.forEach(p => {
-                csv += headers.map(h => `"${(p[h] || '').replace(/"/g, '""')}"`).join(',') + '\n';
+        // Enrichment data store (per-id, persisted to localStorage)
+        let enrichData = {};
+
+        function loadEnrichData() {
+            try {
+                const raw = localStorage.getItem('landflip-enrich');
+                if (raw) enrichData = JSON.parse(raw);
+            } catch(e) { enrichData = {}; }
+        }
+
+        function saveEnrichData() {
+            localStorage.setItem('landflip-enrich', JSON.stringify(enrichData));
+        }
+
+        function getEnrich(id) {
+            return enrichData[id] || {};
+        }
+
+        function setEnrich(id, patch) {
+            enrichData[id] = { ...enrichData[id], ...patch, updatedAt: new Date().toISOString() };
+            saveEnrichData();
+        }
+
+        // Status options for enrichment
+        const ENRICH_STATUSES = [
+            { value: 'new', label: 'New', color: '#6C757D' },
+            { value: 'contacted', label: 'Contacted', color: '#0071E3' },
+            { value: 'interested', label: 'Interested', color: '#34C759' },
+            { value: 'not-interested', label: 'Not Interested', color: '#FF3B30' },
+            { value: 'under-contract', label: 'Under Contract', color: '#FF9500' },
+            { value: 'closed', label: 'Closed', color: '#5856D6' }
+        ];
+
+        // Open enrichment modal for a given ID
+        function openEnrichModal(id, title, context) {
+            const existing = getEnrich(id);
+            const status = existing.status || 'new';
+            const statusOption = ENRICH_STATUSES.find(s => s.value === status);
+
+            document.getElementById('enrich-modal-title').textContent = title || 'Enrich Listing';
+            document.getElementById('enrich-modal-context').textContent = context || '';
+            document.getElementById('enrich-modal').dataset.id = id;
+
+            document.getElementById('enrich-status').value = status;
+            document.getElementById('enrich-phone').value = existing.phone || '';
+            document.getElementById('enrich-email').value = existing.email || '';
+            document.getElementById('enrich-contact-name').value = existing.contactName || '';
+            document.getElementById('enrich-offer').value = existing.offer || '';
+            document.getElementById('enrich-followup').value = existing.followup || '';
+            document.getElementById('enrich-priority').value = existing.priority || '';
+            document.getElementById('enrich-notes').value = existing.notes || '';
+
+            document.getElementById('enrich-modal-overlay').classList.add('open');
+            document.getElementById('enrich-modal').classList.add('open');
+        }
+
+        function closeEnrichModal() {
+            document.getElementById('enrich-modal-overlay').classList.remove('open');
+            document.getElementById('enrich-modal').classList.remove('open');
+        }
+
+        function saveEnrichModal() {
+            const id = document.getElementById('enrich-modal').dataset.id;
+            if (!id) return;
+            setEnrich(id, {
+                status: document.getElementById('enrich-status').value,
+                phone: document.getElementById('enrich-phone').value.trim(),
+                email: document.getElementById('enrich-email').value.trim(),
+                contactName: document.getElementById('enrich-contact-name').value.trim(),
+                offer: document.getElementById('enrich-offer').value.trim(),
+                followup: document.getElementById('enrich-followup').value,
+                priority: document.getElementById('enrich-priority').value,
+                notes: document.getElementById('enrich-notes').value.trim()
             });
-            const blob = new Blob([csv], {type: 'text/csv'});
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `teardown-candidates-${new Date().toISOString().split('T')[0]}.csv`;
-            a.click();
-            URL.revokeObjectURL(url);
-            showToast(`Exported ${filtered.length} teardown candidates`);
+            closeEnrichModal();
+            renderLots();
+            renderTeardowns();
+            showToast('Saved');
+        }
+
+        // Render a small enrichment summary chip for a card
+        function renderEnrichSummary(id) {
+            const e = getEnrich(id);
+            if (!e.status || e.status === 'new') return '';
+            const s = ENRICH_STATUSES.find(x => x.value === e.status) || ENRICH_STATUSES[0];
+            const parts = [];
+            if (e.phone) parts.push('📞');
+            if (e.email) parts.push('✉️');
+            if (e.notes) parts.push('📝');
+            const icons = parts.join(' ');
+            return `<span class="enrich-summary" style="background:${s.color}15;color:${s.color};border:1px solid ${s.color}30;">${s.label}${icons ? ' ' + icons : ''}</span>`;
+        }
+
+        // Render enrichment detail block for expanded/inline view
+        function renderEnrichBlock(id) {
+            const e = getEnrich(id);
+            if (!e.status || e.status === 'new') return '';
+            const s = ENRICH_STATUSES.find(x => x.value === e.status) || ENRICH_STATUSES[0];
+            let rows = '';
+            if (e.phone) rows += `<div class="owner-detail-row"><span class="owner-label">Phone</span><a href="tel:${escHtml(e.phone)}" class="owner-value phone">${escHtml(e.phone)}</a></div>`;
+            if (e.email) rows += `<div class="owner-detail-row"><span class="owner-label">Email</span><a href="mailto:${escHtml(e.email)}" class="owner-value email">${escHtml(e.email)}</a></div>`;
+            if (e.contactName) rows += `<div class="owner-detail-row"><span class="owner-label">Contact</span><span class="owner-value">${escHtml(e.contactName)}</span></div>`;
+            if (e.offer) rows += `<div class="owner-detail-row"><span class="owner-label">Offer</span><span class="owner-value">$${escHtml(e.offer)}</span></div>`;
+            if (e.followup) rows += `<div class="owner-detail-row"><span class="owner-label">Follow-up</span><span class="owner-value">${escHtml(e.followup)}</span></div>`;
+            if (e.notes) rows += `<div class="owner-detail-row"><span class="owner-label">Notes</span><span class="owner-value" style="white-space:pre-wrap;font-size:12px;">${escHtml(e.notes)}</span></div>`;
+            return `
+                <div class="lot-owner-section" style="border-left:3px solid ${s.color};">
+                    <div class="owner-header" style="color:${s.color};">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        <span>Enrichment — ${s.label}</span>
+                    </div>
+                    <div class="owner-details">${rows}</div>
+                </div>
+            `;
+        }
+
+        function openEnrichForLot(lotId) {
+            const lot = lotData.find(l => l.id === lotId);
+            const title = lot ? lotDisplayAddress(lot) : 'Lot #' + lotId;
+            openEnrichModal('lot-' + lotId, title, 'Lot Listing');
+        }
+
+        function openEnrichForTeardown(accountNumber) {
+            const p = teardownData.find(t => t.account_number === accountNumber);
+            const title = p ? p.property_address : 'Property #' + accountNumber;
+            openEnrichModal('teardown-' + accountNumber, title, 'DCAD Teardown');
         }
 
         // ============================================
@@ -4518,30 +4788,37 @@
                                         }
                                         
                                         return `
-                                            <div class="lot-item" data-enrichment="${enrichmentStatus}">
-                                                <div class="lot-header-row">
-                                                    <div class="lot-address">${escHtml(addressLabel)}</div>
-                                                    <div class="lot-enrichment-status">${enrichmentBadge}</div>
-                                                </div>
-                                                <div class="lot-meta">
-                                                    <span>${acresStr}</span>
-                                                    <span>${priceStr}</span>
-                                                    <span class="lot-tag ${statusClass}">${escHtml(lot.status || '—')}</span>
-                                                    <span>${escHtml(lot.city || '—')}${lot.zip ? ', ' + escHtml(lot.zip) : ''}</span>
-                                                </div>
-                                                <div class="activity-tracker">
-                                                    <button class="activity-icon ${lot.mailSent ? 'active' : ''}" onclick="event.stopPropagation(); toggleLotActivity(${lot.id}, 'mailSent')" title="Physical mail sent">
-                                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                                                    </button>
-                                                    <button class="activity-icon ${lot.called ? 'active' : ''}" onclick="event.stopPropagation(); toggleLotActivity(${lot.id}, 'called')" title="Called">
-                                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                                                    </button>
-                                                    <button class="activity-icon ${lot.emailed ? 'active' : ''}" onclick="event.stopPropagation(); toggleLotActivity(${lot.id}, 'emailed')" title="Email sent">
-                                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"/></svg>
-                                                    </button>
-                                                </div>
-                                                ${ownerSection}
-                                                <div class="lot-notes">${lot.notes ? escHtml(lot.notes) : '<span class="detail-empty">No notes</span>'}</div>
+                <div class="lot-item" data-enrichment="${enrichmentStatus}">
+                    <div class="lot-header-row">
+                        <div class="lot-address">${escHtml(addressLabel)}</div>
+                        <div class="lot-enrichment-status">
+                            ${enrichmentBadge}
+                            ${renderEnrichSummary('lot-' + lot.id)}
+                        </div>
+                    </div>
+                    <div class="lot-meta">
+                        <span>${acresStr}</span>
+                        <span>${priceStr}</span>
+                        <span class="lot-tag ${statusClass}">${escHtml(lot.status || '—')}</span>
+                        <span>${escHtml(lot.city || '—')}${lot.zip ? ', ' + escHtml(lot.zip) : ''}</span>
+                    </div>
+                    <div class="activity-tracker">
+                        <button class="activity-icon" onclick="event.stopPropagation(); openEnrichForLot(${lot.id})" title="Enrich this listing">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                        </button>
+                        <button class="activity-icon ${lot.mailSent ? 'active' : ''}" onclick="event.stopPropagation(); toggleLotActivity(${lot.id}, 'mailSent')" title="Physical mail sent">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                        </button>
+                        <button class="activity-icon ${lot.called ? 'active' : ''}" onclick="event.stopPropagation(); toggleLotActivity(${lot.id}, 'called')" title="Called">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        </button>
+                        <button class="activity-icon ${lot.emailed ? 'active' : ''}" onclick="event.stopPropagation(); toggleLotActivity(${lot.id}, 'emailed')" title="Email sent">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"/></svg>
+                        </button>
+                    </div>
+                    ${renderEnrichBlock('lot-' + lot.id)}
+                    ${ownerSection}
+                    <div class="lot-notes">${lot.notes ? escHtml(lot.notes) : '<span class="detail-empty">No notes</span>'}</div>
                                                 ${lot.sourceUrl ? `<div style="margin-top:8px;"><a href="${escHtml(lot.sourceUrl)}" target="_blank" rel="noopener noreferrer" style="color:var(--primary); font-size:12px; font-weight:500; text-decoration:none; display:inline-flex; align-items:center; gap:4px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> View Original Listing</a></div>` : ''}
                                                 ${lot.zillowUrl ? `<div style="margin-top:6px;"><a href="${escHtml(lot.zillowUrl)}" target="_blank" rel="noopener noreferrer" style="color:#006AFF; font-size:12px; font-weight:500; text-decoration:none; display:inline-flex; align-items:center; gap:4px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> View on Zillow</a></div>` : ''}
                                                 ${lot.mapUrl ? `<div style="margin-top:6px;"><a href="${escHtml(lot.mapUrl)}" target="_blank" rel="noopener noreferrer" style="color:#34A853; font-size:12px; font-weight:500; text-decoration:none; display:inline-flex; align-items:center; gap:4px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg> View on Google Maps</a></div>` : ''}
@@ -4847,6 +5124,7 @@
         }
 
         function init() {
+            loadEnrichData();
             loadData();
 
             renderStatePills();
@@ -4902,6 +5180,69 @@
             <!-- Populated by JS -->
         </div>
     </div>
+
+    <!-- Enrichment Modal -->
+    <div class="enrich-modal-overlay" id="enrich-modal-overlay" onclick="closeEnrichModal()"></div>
+    <div class="enrich-modal" id="enrich-modal">
+        <div class="enrich-modal-header">
+            <div>
+                <div class="enrich-modal-title" id="enrich-modal-title">Enrich Listing</div>
+                <div class="enrich-modal-subtitle" id="enrich-modal-context"></div>
+            </div>
+            <button class="enrich-modal-close" onclick="closeEnrichModal()">✕</button>
+        </div>
+        <div class="enrich-modal-body">
+            <div class="enrich-field">
+                <label>Status</label>
+                <select id="enrich-status">
+                    <option value="new">New</option>
+                    <option value="contacted">Contacted</option>
+                    <option value="interested">Interested</option>
+                    <option value="not-interested">Not Interested</option>
+                    <option value="under-contract">Under Contract</option>
+                    <option value="closed">Closed</option>
+                </select>
+            </div>
+            <div class="enrich-field">
+                <label>Phone Number</label>
+                <input type="tel" id="enrich-phone" placeholder="(214) 555-0199">
+            </div>
+            <div class="enrich-field">
+                <label>Email</label>
+                <input type="email" id="enrich-email" placeholder="owner@email.com">
+            </div>
+            <div class="enrich-field">
+                <label>Contact Name</label>
+                <input type="text" id="enrich-contact-name" placeholder="Property manager, heir, etc.">
+            </div>
+            <div class="enrich-field">
+                <label>Offer Amount</label>
+                <input type="number" id="enrich-offer" placeholder="385000">
+            </div>
+            <div class="enrich-field">
+                <label>Priority</label>
+                <select id="enrich-priority">
+                    <option value="">Normal</option>
+                    <option value="high">🔥 High</option>
+                    <option value="low">Low</option>
+                </select>
+            </div>
+            <div class="enrich-field">
+                <label>Next Follow-up</label>
+                <input type="date" id="enrich-followup">
+            </div>
+            <div class="enrich-field">
+                <label>Notes</label>
+                <textarea id="enrich-notes" placeholder="Conversation notes, objections, next steps..."></textarea>
+            </div>
+        </div>
+        <div class="enrich-modal-footer">
+            <button class="enrich-btn enrich-btn-secondary" onclick="closeEnrichModal()">Cancel</button>
+            <button class="enrich-btn enrich-btn-primary" onclick="saveEnrichModal()">Save Changes</button>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
 
 </body>
 </html>
