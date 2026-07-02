@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Land Flip — Lead Enrichment</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #F5F5F7;
+            --surface: #FFFFFF;
+            --surface-hover: #F9F9FB;
+            --surface-active: #F0F0F2;
+            --text: #1D1D1F;
+            --text-secondary: #6E6E73;
+            --text-tertiary: #A1A1A6;
+            --accent: #0071E3;
+            --accent-soft: rgba(0,113,227,0.08);
+            --accent-hover: #0077ED;
+            --success: #34C759;
+            --success-soft: rgba(52,199,89,0.08);
+            --warning: #FF9500;
+            --warning-soft: rgba(255,149,0,0.08);
+            --danger: #FF3B30;
+            --danger-soft: rgba(255,59,48,0.08);
+            --border: rgba(0,0,0,0.06);
+            --border-strong: rgba(0,0,0,0.12);
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.06);
+            --shadow-lg: 0 12px 40px rgba(0,0,0,0.08);
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 14px;
+            --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'SF Pro Text', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            font-size: 13px;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255,255,255,0.72);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-icon {
+            width: 28px;
+            height: 28px;
+            background: var(--accent);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+        }
+
+        .header-stats {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text);
+            line-height: 1.2;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 6px 14px;
+            border-radius: var(--radius-sm);
+            border: none;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--text);
+            border: 1px solid var(--border-strong);
+        }
+
+        .btn-secondary:hover {
+            background: var(--surface-hover);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        /* Toolbar */
+        .toolbar {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 240px;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 8px 12px 8px 34px;
+            border: 1px solid var(--border-strong);
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            font-size: 13px;
+            background: var(--surface);
+            transition: var(--transition);
+            outline: none;
+        }
+
+        .search-box input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-soft);
+        }
+
+        .search-box::before {
+            content: "🔍";
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 12px;
+            opacity: 0.5;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .filter-select {
+            padding: 7px 28px 7px 10px;
+            border: 1px solid var(--border-strong);
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            font-size: 12px;
+            background: var(--surface);
+            cursor: pointer;
+            outline: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236E6E73' stroke-width='1.5' fill='none' fill-rule='evenodd'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+        }
+
+        .filter-select:focus {
+            border-color: var(--accent);
+        }
+
+        /* Main Content */
+        .main {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 24px 40px;
+        }
+
+        /* Table */
+        .table-wrap {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .table-scroll {
+            overflow-x: auto;
+            max-height: calc(100vh - 220px);
+            overflow-y: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+        thead {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(8px);
+        }
+
+        th {
+            text-align: left;
+            padding: 10px 12px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            border-bottom: 1px solid var(--border);
+            white-space: nowrap;
+            cursor: pointer;
+            user-select: none;
+            transition: var(--transition);
+        }
+
+        th:hover {
+            color: var(--text);
+            background: var(--surface-hover);
+        }
+
+        th .sort-indicator {
+            opacity: 0.3;
+            margin-left: 4px;
+        }
+
+        th.sort-asc .sort-indicator::after { content: "↑"; opacity: 1; }
+        th.sort-desc .sort-indicator::after { content: "↓"; opacity: 1; }
+
+        td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+            transition: var(--transition);
+        }
+
+        tr:hover td {
+            background: var(--surface-hover);
+        }
+
+        tr.editing td {
+            background: var(--accent-soft);
+        }
+
+        tr.absentee td {
+            border-left: 3px solid var(--warning);
+        }
+
+        tr.high-profit td {
+            border-left: 3px solid var(--success);
+        }
+
+        /* Cell Content */
+        .cell-owner {
+            font-weight: 500;
+            color: var(--text);
+            max-width: 180px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .cell-address {
+            color: var(--text-secondary);
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .cell-mailing {
+            color: var(--text-secondary);
+            font-size: 11px;
+            max-width: 180px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .cell-value {
+            font-weight: 500;
+            color: var(--text);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .cell-profit {
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .cell-profit.positive { color: var(--success); }
+        .cell-profit.negative { color: var(--danger); }
+
+        /* Status Badge */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 500;
+            gap: 4px;
+        }
+
+        .status-new { background: var(--surface-active); color: var(--text-secondary); }
+        .status-contacted { background: var(--accent-soft); color: var(--accent); }
+        .status-interested { background: var(--success-soft); color: var(--success); }
+        .status-not-interested { background: var(--danger-soft); color: var(--danger); }
+        .status-under-contract { background: #E8F5E9; color: #2E7D32; }
+        .status-closed { background: #E3F2FD; color: #1565C0; }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+
+        .status-new .status-dot { background: var(--text-tertiary); }
+        .status-contacted .status-dot { background: var(--accent); }
+        .status-interested .status-dot { background: var(--success); }
+        .status-not-interested .status-dot { background: var(--danger); }
+        .status-under-contract .status-dot { background: #2E7D32; }
+        .status-closed .status-dot { background: #1565C0; }
+
+        /* Inline Edit Inputs */
+        .edit-input {
+            width: 100%;
+            padding: 5px 8px;
+            border: 1px solid var(--accent);
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            font-size: 12px;
+            outline: none;
+            background: var(--surface);
+        }
+
+        .edit-textarea {
+            min-height: 60px;
+            resize: vertical;
+        }
+
+        .edit-select {
+            cursor: pointer;
+        }
+
+        /* Editable cell hint */
+        .editable {
+            cursor: pointer;
+            border-radius: var(--radius-sm);
+            padding: 2px 4px;
+            margin: -2px -4px;
+            transition: var(--transition);
+        }
+
+        .editable:hover {
+            background: var(--accent-soft);
+            color: var(--accent);
+        }
+
+        /* Actions column */
+        .actions {
+            display: flex;
+            gap: 4px;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        tr:hover .actions {
+            opacity: 1;
+        }
+
+        .action-btn {
+            width: 26px;
+            height: 26px;
+            border-radius: var(--radius-sm);
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
+
+        .action-btn:hover {
+            background: var(--surface-active);
+            color: var(--text);
+        }
+
+        .action-btn.save { color: var(--success); }
+        .action-btn.save:hover { background: var(--success-soft); }
+        .action-btn.cancel { color: var(--danger); }
+        .action-btn.cancel:hover { background: var(--danger-soft); }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 80px 40px;
+            color: var(--text-tertiary);
+        }
+
+        .empty-state-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            opacity: 0.3;
+        }
+
+        .empty-state-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            padding: 12px 20px;
+            background: var(--text);
+            color: white;
+            border-radius: var(--radius-md);
+            font-size: 13px;
+            font-weight: 500;
+            box-shadow: var(--shadow-lg);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Quick edit panel */
+        .quick-edit {
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 400px;
+            height: 100vh;
+            background: var(--surface);
+            box-shadow: var(--shadow-lg);
+            z-index: 200;
+            transform: translateX(100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .quick-edit.open {
+            transform: translateX(0);
+        }
+
+        .quick-edit-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .quick-edit-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .quick-edit-footer {
+            padding: 16px 20px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 8px;
+            justify-content: flex-end;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 6px;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid var(--border-strong);
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            font-size: 13px;
+            outline: none;
+            transition: var(--transition);
+            background: var(--surface);
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-soft);
+        }
+
+        .form-textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.2);
+            z-index: 150;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+
+        .overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-inner {
+                flex-wrap: wrap;
+                padding: 10px 16px;
+            }
+
+            .toolbar {
+                padding: 12px 16px;
+            }
+
+            .main {
+                padding: 0 16px 24px;
+            }
+
+            .quick-edit {
+                width: 100%;
+            }
+
+            .header-stats {
+                gap: 12px;
+            }
+
+            .stat-value {
+                font-size: 15px;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--text-tertiary);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo">
+                <div class="logo-icon">◆</div>
+                <span>Land Flip Enrichment</span>
+            </div>
+            <div class="header-stats">
+                <div class="stat">
+                    <div class="stat-value" id="total-count">0</div>
+                    <div class="stat-label">Leads</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="enriched-count">0</div>
+                    <div class="stat-label">Enriched</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="contacted-count">0</div>
+                    <div class="stat-label">Contacted</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="absentee-count">0</div>
+                    <div class="stat-label">Absentee</div>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-secondary" onclick="importData()">📥 Import JSON</button>
+                <button class="btn btn-primary" onclick="exportData()">💾 Save</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="toolbar">
+        <div class="search-box">
+            <input type="text" id="search" placeholder="Search owner, address, or account..." oninput="render()">
+        </div>
+        <div class="filter-group">
+            <select class="filter-select" id="status-filter" onchange="render()">
+                <option value="">All Statuses</option>
+                <option value="new">New</option>
+                <option value="contacted">Contacted</option>
+                <option value="interested">Interested</option>
+                <option value="not-interested">Not Interested</option>
+                <option value="under-contract">Under Contract</option>
+                <option value="closed">Closed</option>
+            </select>
+            <select class="filter-select" id="zip-filter" onchange="render()">
+                <option value="">All ZIPs</option>
+            </select>
+            <select class="filter-select" id="absentee-filter" onchange="render()">
+                <option value="">All Owners</option>
+                <option value="true">Absentee Only</option>
+                <option value="false">Local Only</option>
+            </select>
+        </div>
+    </div>
+
+    <main class="main">
+        <div class="table-wrap">
+            <div class="table-scroll">
+                <table id="leads-table">
+                    <thead>
+                        <tr>
+                            <th onclick="sort('property_address')">Property Address <span class="sort-indicator">↕</span></th>
+                            <th onclick="sort('owner_name')">Owner <span class="sort-indicator">↕</span></th>
+                            <th onclick="sort('mailing_address')">Mailing Address <span class="sort-indicator">↕</span></th>
+                            <th onclick="sort('land_value')">Land Value <span class="sort-indicator">↕</span></th>
+                            <th onclick="sort('potential_profit')">Profit <span class="sort-indicator">↕</span></th>
+                            <th onclick="sort('lot_size_sqft')">Lot Size <span class="sort-indicator">↕</span></th>
+                            <th onclick="sort('year_built')">Year <span class="sort-indicator">↕</span></th>
+                            <th>Status</th>
+                            <th>Phone</th>
+                            <th>Notes</th>
+                            <th style="width:40px"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                        <!-- Dynamically populated -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Quick Edit Panel -->
+    <div class="overlay" id="overlay" onclick="closeQuickEdit()"></div>
+    <div class="quick-edit" id="quick-edit">
+        <div class="quick-edit-header">
+            <h3 style="font-size:15px;font-weight:600">Edit Lead</h3>
+            <button class="action-btn" onclick="closeQuickEdit()">✕</button>
+        </div>
+        <div class="quick-edit-body" id="quick-edit-body">
+            <!-- Dynamically populated -->
+        </div>
+        <div class="quick-edit-footer">
+            <button class="btn btn-secondary" onclick="closeQuickEdit()">Cancel</button>
+            <button class="btn btn-primary" onclick="saveQuickEdit()">Save Changes</button>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // Data store
+        let leads = [];
+        let enriched = {};
+        let sortCol = 'potential_profit';
+        let sortAsc = false;
+        let editingId = null;
+
+        // Status options
+        const STATUSES = {
+            'new': { label: 'New', class: 'status-new' },
+            'contacted': { label: 'Contacted', class: 'status-contacted' },
+            'interested': { label: 'Interested', class: 'status-interested' },
+            'not-interested': { label: 'Not Interested', class: 'status-not-interested' },
+            'under-contract': { label: 'Under Contract', class: 'status-under-contract' },
+            'closed': { label: 'Closed', class: 'status-closed' }
+        };
+
+        // Format currency
+        function fmt$(n) {
+            if (!n && n !== 0) return '-';
+            return '$' + n.toLocaleString();
+        }
+
+        // Format number
+        function fmtNum(n) {
+            if (!n && n !== 0) return '-';
+            return n.toLocaleString();
+        }
+
+        // Load data
+        async function loadData() {
+            try {
+                const res = await fetch('data/large-lot-dashboard.json');
+                const data = await res.json();
+                leads = data.properties || [];
+
+                // Load enriched data from localStorage
+                const saved = localStorage.getItem('landflip-enriched');
+                if (saved) {
+                    enriched = JSON.parse(saved);
+                }
+
+                populateFilters();
+                updateStats();
+                render();
+                showToast(`Loaded ${leads.length} leads`);
+            } catch (e) {
+                showToast('Error loading data. Please import JSON.', true);
+            }
+        }
+
+        // Populate filter dropdowns
+        function populateFilters() {
+            const zips = [...new Set(leads.map(l => l.zip_code || l.search_zip).filter(Boolean))].sort();
+            const zipFilter = document.getElementById('zip-filter');
+            zipFilter.innerHTML = '<option value="">All ZIPs</option>' +
+                zips.map(z => `<option value="${z}">${z}</option>`).join('');
+        }
+
+        // Update header stats
+        function updateStats() {
+            document.getElementById('total-count').textContent = leads.length;
+            document.getElementById('enriched-count').textContent = Object.keys(enriched).length;
+            document.getElementById('contacted-count').textContent =
+                leads.filter(l => (enriched[l.account_number]?.status || 'new') !== 'new').length;
+            document.getElementById('absentee-count').textContent =
+                leads.filter(l => l.is_absentee_owner).length;
+        }
+
+        // Filter and sort leads
+        function getFilteredLeads() {
+            const search = document.getElementById('search').value.toLowerCase();
+            const statusFilter = document.getElementById('status-filter').value;
+            const zipFilter = document.getElementById('zip-filter').value;
+            const absenteeFilter = document.getElementById('absentee-filter').value;
+
+            let filtered = leads.filter(l => {
+                const e = enriched[l.account_number] || {};
+                const status = e.status || 'new';
+
+                if (search) {
+                    const haystack = [
+                        l.owner_name, l.property_address, l.mailing_address,
+                        l.account_number, e.phone, e.notes
+                    ].join(' ').toLowerCase();
+                    if (!haystack.includes(search)) return false;
+                }
+
+                if (statusFilter && status !== statusFilter) return false;
+                if (zipFilter && (l.zip_code || l.search_zip) !== zipFilter) return false;
+                if (absenteeFilter && String(l.is_absentee_owner) !== absenteeFilter) return false;
+
+                return true;
+            });
+
+            // Sort
+            filtered.sort((a, b) => {
+                let av = a[sortCol];
+                let bv = b[sortCol];
+
+                // Handle enriched fields
+                if (sortCol === 'status') {
+                    av = (enriched[a.account_number]?.status || 'new');
+                    bv = (enriched[b.account_number]?.status || 'new');
+                }
+
+                if (typeof av === 'string') av = av.toLowerCase();
+                if (typeof bv === 'string') bv = bv.toLowerCase();
+
+                if (av < bv) return sortAsc ? -1 : 1;
+                if (av > bv) return sortAsc ? 1 : -1;
+                return 0;
+            });
+
+            return filtered;
+        }
+
+        // Render table
+        function render() {
+            const tbody = document.getElementById('table-body');
+            const filtered = getFilteredLeads();
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = `
+                    <tr><td colspan="11">
+                        <div class="empty-state">
+                            <div class="empty-state-icon">🔍</div>
+                            <div class="empty-state-title">No leads found</div>
+                            <p>Try adjusting your search or filters</p>
+                        </div>
+                    </td></tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = filtered.map(lead => {
+                const e = enriched[lead.account_number] || {};
+                const status = e.status || 'new';
+                const statusInfo = STATUSES[status] || STATUSES['new'];
+                const isEditing = editingId === lead.account_number;
+
+                // Determine row styling
+                let rowClass = '';
+                if (lead.is_absentee_owner) rowClass += ' absentee';
+                if (lead.potential_profit > 100000) rowClass += ' high-profit';
+                if (isEditing) rowClass += ' editing';
+
+                return `
+                    <tr class="${rowClass.trim()}" data-id="${lead.account_number}">
+                        <td>
+                            <div class="cell-address" title="${lead.property_address}">${lead.property_address}</div>
+                            <div style="font-size:11px;color:var(--text-tertiary);margin-top:2px">${lead.zip_code || lead.search_zip || ''}</div>
+                        </td>
+                        <td>
+                            <div class="cell-owner" title="${lead.owner_name}">${lead.owner_name}</div>
+                            ${lead.is_absentee_owner ? '<span style="font-size:10px;color:var(--warning)">✈️ Absentee</span>' : ''}
+                        </td>
+                        <td>
+                            <div class="cell-mailing" title="${lead.mailing_address || ''}">
+                                ${lead.mailing_address || '-'}
+                            </div>
+                            <div style="font-size:10px;color:var(--text-tertiary)">
+                                ${lead.mailing_city || ''} ${lead.mailing_state || ''}
+                            </div>
+                        </td>
+                        <td class="cell-value">${fmt$(lead.land_value)}</td>
+                        <td class="cell-profit ${lead.potential_profit >= 0 ? 'positive' : 'negative'}">
+                            ${fmt$(lead.potential_profit)}
+                        </td>
+                        <td>${fmtNum(lead.lot_size_sqft)} sqft</td>
+                        <td>${lead.year_built || '-'}</td>
+                        <td>
+                            ${isEditing
+                                ? `<select class="edit-input edit-select" id="edit-status-${lead.account_number}">
+                                    ${Object.entries(STATUSES).map(([k, v]) =>
+                                        `<option value="${k}" ${status === k ? 'selected' : ''}>${v.label}</option>`
+                                    ).join('')}
+                                </select>`
+                                : `<span class="status-badge ${statusInfo.class}" onclick="openQuickEdit('${lead.account_number}')">
+                                    <span class="status-dot"></span>${statusInfo.label}
+                                </span>`
+                            }
+                        </td>
+                        <td>
+                            ${isEditing
+                                ? `<input type="tel" class="edit-input" id="edit-phone-${lead.account_number}" value="${e.phone || ''}" placeholder="(555) 123-4567">`
+                                : `<span class="editable" onclick="openQuickEdit('${lead.account_number}')">${e.phone || 'Add phone...'}</span>`
+                            }
+                        </td>
+                        <td>
+                            ${isEditing
+                                ? `<textarea class="edit-input edit-textarea" id="edit-notes-${lead.account_number}" placeholder="Add notes...">${e.notes || ''}</textarea>`
+                                : `<span class="editable" onclick="openQuickEdit('${lead.account_number}')">${e.notes || 'Add notes...'}</span>`
+                            }
+                        </td>
+                        <td>
+                            <div class="actions">
+                                ${isEditing
+                                    ? `<button class="action-btn save" onclick="saveInline('${lead.account_number}')">✓</button>
+                                       <button class="action-btn cancel" onclick="cancelEdit()">✕</button>`
+                                    : `<button class="action-btn" onclick="openQuickEdit('${lead.account_number}')" title="Edit">✏️</button>
+                                       <button class="action-btn" onclick="window.open('${lead.dcad_url}', '_blank')" title="DCAD">🔗</button>`
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+
+            // Update sort indicators
+            document.querySelectorAll('th').forEach(th => {
+                th.classList.remove('sort-asc', 'sort-desc');
+            });
+            const activeTh = document.querySelector(`th[onclick="sort('${sortCol}')"]`);
+            if (activeTh) {
+                activeTh.classList.add(sortAsc ? 'sort-asc' : 'sort-desc');
+            }
+        }
+
+        // Sort handler
+        function sort(col) {
+            if (sortCol === col) {
+                sortAsc = !sortAsc;
+            } else {
+                sortCol = col;
+                sortAsc = true;
+            }
+            render();
+        }
+
+        // Inline edit
+        function startEdit(id) {
+            editingId = id;
+            render();
+        }
+
+        function cancelEdit() {
+            editingId = null;
+            render();
+        }
+
+        function saveInline(id) {
+            const status = document.getElementById(`edit-status-${id}`)?.value || 'new';
+            const phone = document.getElementById(`edit-phone-${id}`)?.value || '';
+            const notes = document.getElementById(`edit-notes-${id}`)?.value || '';
+
+            enriched[id] = { ...enriched[id], status, phone, notes };
+            saveToStorage();
+            editingId = null;
+            updateStats();
+            render();
+            showToast('Saved');
+        }
+
+        // Quick edit panel
+        function openQuickEdit(id) {
+            const lead = leads.find(l => l.account_number === id);
+            if (!lead) return;
+
+            const e = enriched[id] || {};
+            const body = document.getElementById('quick-edit-body');
+
+            body.innerHTML = `
+                <div class="form-group">
+                    <label class="form-label">Property</label>
+                    <div style="padding:8px 0;font-weight:500">${lead.property_address}</div>
+                    <div style="font-size:12px;color:var(--text-secondary)">
+                        ${lead.zip_code || lead.search_zip || ''} · ${fmt$(lead.land_value)} · ${fmtNum(lead.lot_size_sqft)} sqft
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Owner</label>
+                    <input type="text" class="form-input" id="qe-owner" value="${lead.owner_name}" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Mailing Address</label>
+                    <input type="text" class="form-input" value="${lead.mailing_address || ''} ${lead.mailing_city || ''} ${lead.mailing_state || ''} ${lead.mailing_zip || ''}" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Status</label>
+                    <select class="form-select" id="qe-status">
+                        ${Object.entries(STATUSES).map(([k, v]) =>
+                            `<option value="${k}" ${(e.status || 'new') === k ? 'selected' : ''}>${v.label}</option>`
+                        ).join('')}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Phone Number</label>
+                    <input type="tel" class="form-input" id="qe-phone" value="${e.phone || ''}" placeholder="(555) 123-4567">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" id="qe-email" value="${e.email || ''}" placeholder="owner@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Contact Name (if different)</label>
+                    <input type="text" class="form-input" id="qe-contact-name" value="${e.contactName || ''}" placeholder="Property manager, heir, etc.">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Offer Amount</label>
+                    <input type="number" class="form-input" id="qe-offer" value="${e.offer || ''}" placeholder="350000">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Notes</label>
+                    <textarea class="form-textarea" id="qe-notes" placeholder="Conversation notes, objections, next steps...">${e.notes || ''}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Next Follow-up</label>
+                    <input type="date" class="form-input" id="qe-followup" value="${e.followup || ''}">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Priority</label>
+                    <select class="form-select" id="qe-priority">
+                        <option value="">Normal</option>
+                        <option value="high" ${e.priority === 'high' ? 'selected' : ''}>🔥 High</option>
+                        <option value="low" ${e.priority === 'low' ? 'selected' : ''}>Low</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <input type="checkbox" id="qe-absentee" ${lead.is_absentee_owner ? 'checked' : ''} disabled>
+                        Absentee Owner
+                    </label>
+                </div>
+            `;
+
+            document.getElementById('overlay').classList.add('show');
+            document.getElementById('quick-edit').classList.add('open');
+            document.getElementById('quick-edit').dataset.id = id;
+        }
+
+        function closeQuickEdit() {
+            document.getElementById('overlay').classList.remove('show');
+            document.getElementById('quick-edit').classList.remove('open');
+        }
+
+        function saveQuickEdit() {
+            const id = document.getElementById('quick-edit').dataset.id;
+            if (!id) return;
+
+            enriched[id] = {
+                ...enriched[id],
+                status: document.getElementById('qe-status').value,
+                phone: document.getElementById('qe-phone').value,
+                email: document.getElementById('qe-email').value,
+                contactName: document.getElementById('qe-contact-name').value,
+                offer: document.getElementById('qe-offer').value,
+                notes: document.getElementById('qe-notes').value,
+                followup: document.getElementById('qe-followup').value,
+                priority: document.getElementById('qe-priority').value,
+                updatedAt: new Date().toISOString()
+            };
+
+            saveToStorage();
+            updateStats();
+            render();
+            closeQuickEdit();
+            showToast('Lead updated');
+        }
+
+        // Storage
+        function saveToStorage() {
+            localStorage.setItem('landflip-enriched', JSON.stringify(enriched));
+        }
+
+        // Export
+        function exportData() {
+            const exportData = leads.map(l => ({
+                ...l,
+                ...enriched[l.account_number],
+                enrichedAt: enriched[l.account_number]?.updatedAt || null
+            }));
+
+            const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `landflip-enriched-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+
+            showToast('Exported enriched data');
+        }
+
+        // Import
+        function importData() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = async (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                try {
+                    const text = await file.text();
+                    const data = JSON.parse(text);
+
+                    if (data.properties) {
+                        leads = data.properties;
+                    } else if (Array.isArray(data)) {
+                        leads = data;
+                    }
+
+                    populateFilters();
+                    updateStats();
+                    render();
+                    showToast(`Imported ${leads.length} leads`);
+                } catch (err) {
+                    showToast('Error importing file', true);
+                }
+            };
+            input.click();
+        }
+
+        // Toast
+        function showToast(msg, isError = false) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.background = isError ? 'var(--danger)' : 'var(--text)';
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if (editingId) {
+                    cancelEdit();
+                } else {
+                    closeQuickEdit();
+                }
+            }
+        });
+
+        // Initialize
+        loadData();
+    </script>
+</body>
+</html>
