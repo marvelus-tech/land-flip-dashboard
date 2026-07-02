@@ -2159,12 +2159,32 @@
                         }
 
                         /* Style the edit button on cards */
-                        .activity-icon[title="Enrich this listing"] {
-                            color: var(--primary);
+                        .card-edit-icon {
+                            position: absolute;
+                            top: 8px;
+                            right: 8px;
+                            cursor: pointer;
+                            font-size: 14px;
+                            opacity: 0;
+                            transition: opacity 0.15s ease;
+                            z-index: 2;
+                            padding: 4px;
                         }
-                        .activity-icon[title="Enrich this listing"]:hover {
-                            background: var(--primary-soft);
-                            color: var(--primary);
+                        .lot-item:hover .card-edit-icon {
+                            opacity: 0.6;
+                        }
+                        .lot-item:hover .card-edit-icon:hover {
+                            opacity: 1;
+                        }
+
+                        /* Ensure lot-item is positioned for absolute child */
+                        .lot-item {
+                            position: relative;
+                        }
+
+                        /* Also hide the old activity-icon edit style */
+                        .activity-icon[title="Enrich this listing"] {
+                            display: none;
                         }
         .badge-vacant { background: #2C4A3A; color: #F0E4C8; }
         .badge-teardown { background: #8B4513; color: white; }
@@ -4465,6 +4485,7 @@
                             ${p._budget ? '<span class="lot-tag">In Budget</span>' : ''}
                             ${renderEnrichSummary('teardown-' + p.account_number)}
                         </div>
+                        <span class="card-edit-icon" onclick="event.stopPropagation(); openEnrichForTeardown('${p.account_number}')" title="Edit">✏️</span>
                     </div>
                     <div class="lot-meta">
                         <span>${lotSizeAcres} ac</span>
@@ -4474,9 +4495,6 @@
                         <span>${p.zip_code || '—'}</span>
                     </div>
                     <div class="activity-tracker">
-                        <button class="activity-icon" onclick="event.stopPropagation(); openEnrichForTeardown('${p.account_number}')" title="Enrich this listing">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                        </button>
                         <a class="activity-icon" href="${p.dcad_url || '#'}" target="_blank" rel="noopener" title="DCAD Record">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                         </a>
@@ -4795,6 +4813,7 @@
                             ${enrichmentBadge}
                             ${renderEnrichSummary('lot-' + lot.id)}
                         </div>
+                        <span class="card-edit-icon" onclick="event.stopPropagation(); openEnrichForLot(${lot.id})" title="Edit">✏️</span>
                     </div>
                     <div class="lot-meta">
                         <span>${acresStr}</span>
@@ -4803,9 +4822,6 @@
                         <span>${escHtml(lot.city || '—')}${lot.zip ? ', ' + escHtml(lot.zip) : ''}</span>
                     </div>
                     <div class="activity-tracker">
-                        <button class="activity-icon" onclick="event.stopPropagation(); openEnrichForLot(${lot.id})" title="Enrich this listing">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                        </button>
                         <button class="activity-icon ${lot.mailSent ? 'active' : ''}" onclick="event.stopPropagation(); toggleLotActivity(${lot.id}, 'mailSent')" title="Physical mail sent">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
                         </button>
