@@ -3967,8 +3967,13 @@
         // ============================================
         // ACTIVITY TRACKING — Call / Email / Mail
         // ============================================
-        const builderActivity = {};
-        const titleActivity = {};
+        const builderActivity = JSON.parse(localStorage.getItem('builderActivity') || '{}');
+        const titleActivity = JSON.parse(localStorage.getItem('titleActivity') || '{}');
+
+        function saveActivity() {
+            localStorage.setItem('builderActivity', JSON.stringify(builderActivity));
+            localStorage.setItem('titleActivity', JSON.stringify(titleActivity));
+        }
 
         function getBuilderActivity(id) {
             return builderActivity[id] || { call: false, email: false, mail: false };
@@ -3983,6 +3988,7 @@
             const current = getBuilderActivity(id);
             current[type] = !current[type];
             builderActivity[id] = current;
+            saveActivity();
             showToast(`${type.charAt(0).toUpperCase() + type.slice(1)} marked ${current[type] ? 'done' : 'pending'}`, current[type] ? 'success' : 'info');
             renderBuilders();
         }
@@ -3992,6 +3998,7 @@
             const current = getTitleActivity(id);
             current[type] = !current[type];
             titleActivity[id] = current;
+            saveActivity();
             showToast(`${type.charAt(0).toUpperCase() + type.slice(1)} marked ${current[type] ? 'done' : 'pending'}`, current[type] ? 'success' : 'info');
             renderTitles();
         }
