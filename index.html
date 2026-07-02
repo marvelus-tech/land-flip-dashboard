@@ -3258,8 +3258,8 @@
             {id:108,name:'Adams Homes',county:'Nash County',state:'north-carolina',metro:'Rocky Mount',phone:'(252) 769-7009',email:'',website:'https://www.adamshomes.com',buyBox:'Townhomes + single-family',volume:'Active in Joyner Park, Longneedle',status:'research',dateAdded:'2026-07-02',initials:'AD'},
             {id:109,name:'Mitchell Homes',county:'Nash County',state:'north-carolina',metro:'Rocky Mount',phone:'(888) 512-3779',email:'',website:'https://mitchellhomesinc.com',buyBox:'Build on your lot',volume:'BBB A+ rated, NC lic #76127',status:'research',dateAdded:'2026-07-02',initials:'MH'},
             {id:110,name:'Lennar',county:'Nash County',state:'north-carolina',metro:'Rocky Mount',phone:'',email:'',website:'https://www.lennar.com',buyBox:'Production home communities',volume:'National production builder',status:'research',dateAdded:'2026-07-02',initials:'LE'},
-            {id:111,name:'Smithson, Inc',county:'Nash County',state:'north-carolina',metro:'Rocky Mount',phone:'(252) 977-3055',email:'',website:'',buyBox:'General contracting',volume:'NC lic #11513, active local',status:'research',dateAdded:'2026-07-02',initials:'SI'},
-            {id:112,name:'Ingram Construction Co',county:'Nash County',state:'north-carolina',metro:'Rocky Mount',phone:'',email:'',website:'',buyBox:'Custom homes',volume:'5-star rated custom builder',status:'research',dateAdded:'2026-07-02',initials:'IC'},
+            {id:111,name:'Smithson, Inc',county:'Nash County',state:'north-carolina',metro:'Rocky Mount',phone:'(252) 977-3055',email:'',website:'https://smithsonnet.com',buyBox:'General contracting',volume:'Founded 1979, NC lic #51275 (Architect), commercial design-build',status:'research',dateAdded:'2026-07-02',initials:'SI'},
+            {id:112,name:'Ingram Construction Co',county:'Nash County',state:'north-carolina',metro:'Rocky Mount',phone:'(252) 446-7382',email:'',website:'',buyBox:'Custom homes',volume:'BuildZoom 92 (top 32%), active permits, NC licensed',status:'research',dateAdded:'2026-07-02',initials:'IC'},
             {id:113,name:'Ryan Homes',county:'Nash County',state:'north-carolina',metro:'Rocky Mount',phone:'',email:'',website:'https://www.ryanhomes.com',buyBox:'Production communities',volume:'National builder, NC active',status:'research',dateAdded:'2026-07-02',initials:'RH'}
         ];
 
@@ -4008,14 +4008,13 @@
                     </button>
                     <button class="activity-icon ${activity.email ? 'active' : ''}" onclick="${toggleFn}(${id}, 'email', event)" title="${activity.email ? 'Email sent' : 'Mark email done'}">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="2" y="4" width="20" height="16" rx="2"/>
-                            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                            <text x="12" y="18" text-anchor="middle" font-size="16" font-weight="600" fill="currentColor" stroke="none" font-family="system-ui, -apple-system, sans-serif">@</text>
                         </svg>
                     </button>
                     <button class="activity-icon ${activity.mail ? 'active' : ''}" onclick="${toggleFn}(${id}, 'mail', event)" title="${activity.mail ? 'Mail sent' : 'Mark mail done'}">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            <rect x="2" y="4" width="20" height="16" rx="2"/>
+                            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
                         </svg>
                     </button>
                 </div>
@@ -4153,12 +4152,6 @@
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                                             <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                                        </svg>
-                                    </button>
-                                    <button class="icon-btn" onclick="toggleDetails(${builder.id}, event)" title="View details">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
-                                            <circle cx="12" cy="12" r="3"></circle>
-                                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
                                         </svg>
                                     </button>
                                 </div>
