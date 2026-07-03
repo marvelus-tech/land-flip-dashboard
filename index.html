@@ -634,6 +634,300 @@
 
         .builder-row:hover .builder-actions { opacity: 1; }
 
+        /* === EMAIL TEMPLATE CARD === */
+        .email-template-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+
+        .email-template-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--border-strong);
+        }
+
+        .email-template-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .email-template-title {
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-primary);
+        }
+
+        .email-template-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--gold);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+
+        .email-template-icon svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .email-template-body {
+            background: var(--bg-warm);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--text-primary);
+        }
+
+        .email-template-body p {
+            margin-bottom: 10px;
+        }
+
+        .email-template-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        .email-placeholder {
+            color: var(--primary);
+            font-weight: 600;
+            background: var(--gold-muted);
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        .copy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 9px 18px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 999px;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+            outline: none;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary-soft);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(15, 30, 23, 0.15);
+        }
+
+        .copy-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 6px rgba(15, 30, 23, 0.1);
+        }
+
+        .copy-btn:focus-visible {
+            box-shadow: 0 0 0 3px rgba(15, 30, 23, 0.15);
+        }
+
+        .copy-btn.copied {
+            background: var(--success);
+            box-shadow: 0 4px 12px rgba(45, 106, 79, 0.25);
+        }
+
+        .copy-btn.copied:hover {
+            background: #2a7a55;
+        }
+
+        .copy-btn svg {
+            width: 14px;
+            height: 14px;
+        }
+
+
+        /* === EMAIL TEMPLATE CARD === */
+        .email-template-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+
+        .email-template-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--border-strong);
+        }
+
+        .email-template-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .email-template-title {
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-primary);
+        }
+
+        .email-template-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--gold);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+
+        .email-template-icon svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .email-template-body {
+            background: var(--bg-warm);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--text-primary);
+        }
+
+        .email-template-body p {
+            margin-bottom: 10px;
+        }
+
+        .email-template-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        .email-placeholder {
+            color: var(--primary);
+            font-weight: 600;
+            background: var(--gold-muted);
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        .copy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 9px 18px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 999px;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+            outline: none;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary-soft);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(15, 30, 23, 0.15);
+        }
+
+        .copy-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 6px rgba(15, 30, 23, 0.1);
+        }
+
+        .copy-btn:focus-visible {
+            box-shadow: 0 0 0 3px rgba(15, 30, 23, 0.15);
+        }
+
+        .copy-btn.copied {
+            background: var(--success);
+            box-shadow: 0 4px 12px rgba(45, 106, 79, 0.25);
+        }
+
+        .copy-btn.copied:hover {
+            background: #2a7a55;
+        }
+
+        .copy-btn svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        @media (max-width: 860px) {
+            .email-template-card {
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+            .email-template-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .email-template-body {
+                padding: 16px;
+                font-size: 13.5px;
+            }
+            .copy-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 12px;
+                min-height: 44px;
+            }
+        }
+        @media (max-width: 860px) {
+            .email-template-card {
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+            .email-template-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .email-template-body {
+                padding: 16px;
+                font-size: 13.5px;
+            }
+            .copy-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 12px;
+                min-height: 44px;
+            }
+        }
+
         .icon-btn {
             width: 34px;
             height: 34px;
@@ -3001,6 +3295,28 @@
 
         <!-- Builders Content -->
         <div id="builders-content" class="content-section active">
+            <!-- Email Template Card -->
+            <div class="email-template-card">
+                <div class="email-template-header">
+                    <div class="email-template-title">
+                        <div class="email-template-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                        </div>
+                        <span>Email Outreach Template</span>
+                    </div>
+                    <button id="copy-email-btn" class="copy-btn" onclick="copyEmailTemplate()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="copy-icon"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="check-icon" style="display:none"><path d="M20 6 9 17l-5-5"/></svg>
+                        <span class="btn-text">Copy to Clipboard</span>
+                    </button>
+                </div>
+                <div class="email-template-body">
+                    <p>Good afternoon my name is <span class="email-placeholder">____</span></p>
+                    <p>I see that you're building homes in <span class="email-placeholder">____</span></p>
+                    <p>I bring builders like yourself off market deals, and I'm gonna save you money versus paying for them on the market.</p>
+                    <p>Is there anything specific that you're looking for right now and how much you willing to pay?</p>
+                </div>
+            </div>
             <div id="builders-list">
                 <!-- Populated by JS -->
             </div>
@@ -3130,6 +3446,78 @@
     </footer>
 
     <script>
+        // Email Template
+        const EMAIL_TEMPLATE = `Good afternoon my name is ____
+
+I see that you're building homes in ____
+
+I bring builders like yourself off market deals, and I'm gonna save you money versus paying for them on the market.
+
+Is there anything specific that you're looking for right now and how much you willing to pay?`;
+
+        async function copyEmailTemplate() {
+            const btn = document.getElementById('copy-email-btn');
+            const copyIcon = btn.querySelector('.copy-icon');
+            const checkIcon = btn.querySelector('.check-icon');
+            const btnText = btn.querySelector('.btn-text');
+
+            try {
+                await navigator.clipboard.writeText(EMAIL_TEMPLATE);
+                btn.classList.add('copied');
+                copyIcon.style.display = 'none';
+                checkIcon.style.display = 'inline';
+                btnText.textContent = 'Copied';
+
+                showToast('Email template copied to clipboard');
+
+                setTimeout(() => {
+                    btn.classList.remove('copied');
+                    copyIcon.style.display = 'inline';
+                    checkIcon.style.display = 'none';
+                    btnText.textContent = 'Copy to Clipboard';
+                }, 2500);
+            } catch (err) {
+                console.error('Failed to copy:', err);
+                showToast('Failed to copy — try again');
+            }
+        }
+
+        // Email Template
+        const EMAIL_TEMPLATE = `Good afternoon my name is ____
+
+I see that you're building homes in ____
+
+I bring builders like yourself off market deals, and I'm gonna save you money versus paying for them on the market.
+
+Is there anything specific that you're looking for right now and how much you willing to pay?`;
+
+        async function copyEmailTemplate() {
+            const btn = document.getElementById('copy-email-btn');
+            const copyIcon = btn.querySelector('.copy-icon');
+            const checkIcon = btn.querySelector('.check-icon');
+            const btnText = btn.querySelector('.btn-text');
+
+            try {
+                await navigator.clipboard.writeText(EMAIL_TEMPLATE);
+                btn.classList.add('copied');
+                copyIcon.style.display = 'none';
+                checkIcon.style.display = 'inline';
+                btnText.textContent = 'Copied';
+
+                showToast('Email template copied to clipboard');
+
+                setTimeout(() => {
+                    btn.classList.remove('copied');
+                    copyIcon.style.display = 'inline';
+                    checkIcon.style.display = 'none';
+                    btnText.textContent = 'Copy to Clipboard';
+                }, 2500);
+            } catch (err) {
+                console.error('Failed to copy:', err);
+                showToast('Failed to copy — try again');
+            }
+        }
+
         // ============================================
         // EXACT BUILDER DATA — PRESERVED 100%
         // ============================================
