@@ -1919,6 +1919,79 @@
             height: 32px;
         }
     }
+
+    /* === CARD EDIT ICON === */
+    .card-edit-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 6px;
+        color: var(--text-tertiary);
+        cursor: pointer;
+        transition: all 0.15s ease;
+        flex-shrink: 0;
+    }
+
+    .card-edit-icon:hover {
+        background: var(--bg-warm);
+        color: var(--text-primary);
+    }
+
+    .card-edit-icon:active {
+        transform: scale(0.92);
+    }
+
+    @media (max-width: 860px) {
+        .card-edit-icon {
+            width: 32px;
+            height: 32px;
+        }
+    }
+
+    /* === FOOTER === */
+    .app-footer {
+        margin-top: 48px;
+        padding: 32px 0;
+        border-top: 1px solid var(--divider);
+        background: var(--bg);
+    }
+
+    .footer-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        text-align: center;
+    }
+
+    .footer-brand {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--text-primary);
+        letter-spacing: -0.02em;
+    }
+
+    .footer-tagline {
+        font-size: 13px;
+        color: var(--text-secondary);
+        font-weight: 400;
+    }
+
+    .footer-meta {
+        font-size: 12px;
+        color: var(--text-tertiary);
+        margin-top: 4px;
+        letter-spacing: 0.02em;
+    }
+
+    @media (max-width: 860px) {
+        .app-footer {
+            margin-top: 32px;
+            padding: 24px 0;
+        }
+    }
 </style>
 </head>
 <body>
@@ -2033,55 +2106,6 @@
             <div id="lots-list">
                 <!-- Dynamically populated by renderLots() -->
             </div>
-            <section id="teardowns-section" class="teardowns-container">
-            <div class="teardowns-header">
-                <div>
-                    <h2 class="teardowns-header-title">Teardown Candidates</h2>
-                    <p class="teardowns-header-subtitle">Off-market properties from DCAD — pre-1980 builds on 8K+ sq ft lots</p>
-                </div>
-                <div class="teardowns-actions">
-                    <button class="teardown-btn" onclick="loadDCADData()">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
-                        Refresh
-                    </button>
-                    <button class="teardown-btn primary" onclick="exportTeardownCSV()">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                        Export
-                    </button>
-                </div>
-            </div>
-
-            <div class="teardown-filters" id="teardown-filters">
-                <label class="filter-chip active" data-filter="teardown">
-                    <input type="checkbox" id="teardown-only" checked onchange="renderTeardowns()">
-                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    Teardowns
-                </label>
-                <label class="filter-chip" data-filter="vacant">
-                    <input type="checkbox" id="vacant-only" onchange="renderTeardowns()">
-                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    Vacant Lots
-                </label>
-                <label class="filter-chip" data-filter="absentee">
-                    <input type="checkbox" id="absentee-only" onchange="renderTeardowns()">
-                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    Absentee Owners
-                </label>
-                <label class="filter-chip" data-filter="budget">
-                    <input type="checkbox" id="budget-only" onchange="renderTeardowns()">
-                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    In Budget
-                </label>
-                <label class="filter-chip" data-filter="hot">
-                    <input type="checkbox" id="hot-only" onchange="renderTeardowns()">
-                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    Score A/B
-                </label>
-            </div>
-
-            <div class="teardown-count" id="teardown-count"></div>
-            <div class="teardown-grid" id="teardowns-list"></div>
-        </section>
         </div>
 
         <!-- Contracts Content -->
@@ -3345,9 +3369,9 @@
         }
 
         async function loadDCADData() {
-            // If we already have teardown data in memory, just render it
+            // If we already have teardown data in memory, just render lots
             if (teardownData.length > 0) {
-                renderTeardowns();
+                renderLots();
                 return;
             }
             
@@ -3367,12 +3391,12 @@
                 const csv = await response.text();
                 teardownData = parseCSV(csv);
                 saveData(); // Persist to localStorage
-                renderTeardowns();
+                renderLots();
                 showToast(`Loaded ${teardownData.length} teardown candidates`);
             } catch (err) {
                 // Network or parsing error — show cached data if available
                 if (teardownData.length > 0) {
-                    renderTeardowns();
+                    renderLots();
                     showToast('Using cached teardown data');
                 } else {
                     showToast('No DCAD data found — upload CSV to data/ folder');
@@ -3432,156 +3456,94 @@
             return result;
         }
 
-        function renderTeardowns() {
-            const container = document.getElementById('teardowns-list');
-            const texasContainer = document.getElementById('lots-texas-dallas-teardowns');
-            const countEl = document.getElementById('teardown-count');
-            if (!container && !texasContainer) return;
+        function renderTeardownLotItem(p) {
+            const scoreClass = p._score === 'A' ? 'score-a' : p._score === 'B' ? 'score-b' : 'score-c';
+            const scoreLabel = p._score === 'A' ? 'Hot' : p._score === 'B' ? 'Warm' : 'Cold';
+            const lotSizeAcres = (p._lotSize / 43560).toFixed(2);
+            const impValue = parseInt(p.improvement_value) || 0;
+            
+            const zip = p.search_zip || p.zip_code || '';
+            const zipClean = /^\d{5}$/.test(zip) ? zip : '';
+            const zillowUrl = zipClean ? `https://www.zillow.com/homes/${zipClean}_rb/` : 'https://www.zillow.com/homes/Dallas-TX_rb/';
+            
+            const hasPhone = p.owner_phone && p.owner_phone !== 'unknown' && p.owner_phone !== '';
+            const hasEmail = p.owner_email && p.owner_email !== '';
+            const hasMail = p.mailing_address && p.mailing_address !== '';
 
-            const teardownOnly = document.getElementById('teardown-only')?.checked;
-            const vacantOnly = document.getElementById('vacant-only')?.checked;
-            const absenteeOnly = document.getElementById('absentee-only')?.checked;
-            const budgetOnly = document.getElementById('budget-only')?.checked;
-            const hotOnly = document.getElementById('hot-only')?.checked;
-
-            // Update filter chip visual states
-            document.querySelectorAll('#teardown-filters .filter-chip').forEach(chip => {
-                const input = chip.querySelector('input');
-                if (input && input.checked) {
-                    chip.classList.add('active');
-                } else {
-                    chip.classList.remove('active');
-                }
-            });
-
-            let filtered = teardownData;
-
-            if (teardownOnly) {
-                filtered = filtered.filter(p => p._type === 'teardown');
-            }
-            if (vacantOnly) {
-                filtered = filtered.filter(p => p._type === 'vacant');
-            }
-            if (absenteeOnly) {
-                filtered = filtered.filter(p => p._absentee);
-            }
-            if (budgetOnly) {
-                filtered = filtered.filter(p => p._budget);
-            }
-            if (hotOnly) {
-                filtered = filtered.filter(p => p._score === 'A' || p._score === 'B');
-            }
-
-            if (countEl) {
-                const activeFilters = [];
-                if (teardownOnly) activeFilters.push('Teardowns');
-                if (vacantOnly) activeFilters.push('Vacant');
-                if (absenteeOnly) activeFilters.push('Absentee');
-                if (budgetOnly) activeFilters.push('Budget');
-                if (hotOnly) activeFilters.push('A/B Score');
-                
-                const filterText = activeFilters.length > 0 ? activeFilters.join(' · ') : 'All Properties';
-                countEl.textContent = `${filtered.length.toLocaleString()} of ${teardownData.length.toLocaleString()} properties · ${filterText}`;
-            }
-
-            if (filtered.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-market" style="padding: 32px 20px; text-align: center;">
-                        <strong>No properties match</strong><br>
-                        <span style="color: var(--text-tertiary); font-size: 13px;">Try adjusting your filters to see more results</span>
+            const statusTag = p._type === 'vacant' ? 'vacant' : 'teardown';
+            const statusLabel = p._type === 'vacant' ? 'Vacant' : 'Teardown';
+            
+            return `
+            <div class="lot-item" data-teardown="true">
+                <div class="lot-header-row">
+                    <div class="lot-address">${p.property_address || p.account_number}</div>
+                    <div class="lot-enrichment-status">
+                        <span class="lot-tag ${statusTag}">${statusLabel}</span>
+                        <span class="lot-tag ${scoreClass}">${scoreLabel}</span>
+                        ${p._absentee ? '<span class="lot-tag">Absentee</span>' : ''}
+                        ${p._budget ? '<span class="lot-tag">In Budget</span>' : ''}
+                        ${renderEnrichSummary('teardown-' + p.account_number)}
                     </div>
-                `;
-                return;
-            }
-
-            let html = '';
-            filtered.forEach(p => {
-                const scoreClass = p._score === 'A' ? 'score-a' : p._score === 'B' ? 'score-b' : 'score-c';
-                const scoreLabel = p._score === 'A' ? 'Hot' : p._score === 'B' ? 'Warm' : 'Cold';
-                const lotSizeAcres = (p._lotSize / 43560).toFixed(2);
-                const impValue = parseInt(p.improvement_value) || 0;
-                
-                const zip = p.search_zip || p.zip_code || '';
-                const zipClean = /^\d{5}$/.test(zip) ? zip : '';
-                const zillowUrl = zipClean ? `https://www.zillow.com/homes/${zipClean}_rb/` : 'https://www.zillow.com/homes/Dallas-TX_rb/';
-                
-                const hasPhone = p.owner_phone && p.owner_phone !== 'unknown' && p.owner_phone !== '';
-                const hasEmail = p.owner_email && p.owner_email !== '';
-                const hasMail = p.mailing_address && p.mailing_address !== '';
-
-                // Build status tag like lot-tag
-                const statusTag = p._type === 'vacant' ? 'vacant' : 'teardown';
-                const statusLabel = p._type === 'vacant' ? 'Vacant' : 'Teardown';
-                
-                html += `
-                <div class="lot-item" data-teardown="true">
-                    <div class="lot-header-row">
-                        <div class="lot-address">${p.property_address || p.account_number}</div>
-                        <div class="lot-enrichment-status">
-                            <span class="lot-tag ${statusTag}">${statusLabel}</span>
-                            <span class="lot-tag ${scoreClass}">${scoreLabel}</span>
-                            ${p._absentee ? '<span class="lot-tag">Absentee</span>' : ''}
-                            ${p._budget ? '<span class="lot-tag">In Budget</span>' : ''}
-                            ${renderEnrichSummary('teardown-' + p.account_number)}
-                        </div>
-                        <span class="card-edit-icon" onclick="event.stopPropagation(); openEnrichForTeardown('${p.account_number}')" title="Edit">
-                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                        </span>
-                    </div>
-                    <div class="lot-meta">
-                        <span>${lotSizeAcres} ac</span>
-                        <span>Built ${p._yearBuilt || '—'}</span>
-                        <span>Land: $${p._landValue.toLocaleString()}</span>
-                        <span>Imp: $${impValue.toLocaleString()}</span>
-                        <span>${p.zip_code || '—'}</span>
-                    </div>
-                    <div class="activity-tracker">
-                        <a class="activity-icon" href="${p.dcad_url || '#'}" target="_blank" rel="noopener" title="DCAD Record">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                        </a>
-                        <a class="activity-icon" href="${zillowUrl}" target="_blank" rel="noopener" title="Zillow">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                        </a>
-                        ${p.owner_name ? `<button class="activity-icon" onclick="copyToClipboard('${p.owner_name}\n${p.property_address}\n${p.mailing_address || ''}')" title="Copy info">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                        </button>` : ''}
-                    </div>
-                    ${renderEnrichBlock('teardown-' + p.account_number)}
-                    ${hasPhone || hasEmail || hasMail ? `
-                    <div class="lot-owner-section">
-                        <div class="owner-header">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                            <span>Owner Contact</span>
-                        </div>
-                        <div class="owner-details">
-                            ${p.owner_name ? `
-                            <div class="owner-detail-row">
-                                <span class="owner-label">Name</span>
-                                <span class="owner-value">${p.owner_name}</span>
-                            </div>` : ''}
-                            ${hasPhone ? `
-                            <div class="owner-detail-row">
-                                <span class="owner-label">Phone</span>
-                                <a href="tel:${p.owner_phone}" class="owner-value phone">${p.owner_phone}</a>
-                            </div>` : ''}
-                            ${hasEmail ? `
-                            <div class="owner-detail-row">
-                                <span class="owner-label">Email</span>
-                                <a href="mailto:${p.owner_email}" class="owner-value email">${p.owner_email}</a>
-                            </div>` : ''}
-                            ${hasMail ? `
-                            <div class="owner-detail-row">
-                                <span class="owner-label">Mailing</span>
-                                <span class="owner-value">${p.mailing_address}${p.mailing_city ? ', ' + p.mailing_city : ''}${p.mailing_state ? ' ' + p.mailing_state : ''}${p.mailing_zip ? ' ' + p.mailing_zip : ''}</span>
-                            </div>` : ''}
-                        </div>
-                    </div>` : ''}
-                    ${p.score_reasons ? `<div class="lot-notes" style="font-style: italic; color: var(--gold);">${p.score_reasons}</div>` : ''}
+                    <span class="card-edit-icon" onclick="event.stopPropagation(); openEnrichForTeardown('${p.account_number}')" title="Edit">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                    </span>
                 </div>
-                `;
-            });
-            if (container) container.innerHTML = html;
-            if (texasContainer) texasContainer.innerHTML = html;
+                <div class="lot-meta">
+                    <span>${lotSizeAcres} ac</span>
+                    <span>Built ${p._yearBuilt || '—'}</span>
+                    <span>Land: $${p._landValue.toLocaleString()}</span>
+                    <span>Imp: $${impValue.toLocaleString()}</span>
+                    <span>${p.zip_code || '—'}</span>
+                </div>
+                <div class="activity-tracker">
+                    <a class="activity-icon" href="${p.dcad_url || '#'}" target="_blank" rel="noopener" title="DCAD Record">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    </a>
+                    <a class="activity-icon" href="${zillowUrl}" target="_blank" rel="noopener" title="Zillow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    </a>
+                    ${p.owner_name ? `<button class="activity-icon" onclick="copyToClipboard('${p.owner_name}\n${p.property_address}\n${p.mailing_address || ''}')" title="Copy info">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    </button>` : ''}
+                </div>
+                ${renderEnrichBlock('teardown-' + p.account_number)}
+                ${hasPhone || hasEmail || hasMail ? `
+                <div class="lot-owner-section">
+                    <div class="owner-header">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        <span>Owner Contact</span>
+                    </div>
+                    <div class="owner-details">
+                        ${p.owner_name ? `
+                        <div class="owner-detail-row">
+                            <span class="owner-label">Name</span>
+                            <span class="owner-value">${p.owner_name}</span>
+                        </div>` : ''}
+                        ${hasPhone ? `
+                        <div class="owner-detail-row">
+                            <span class="owner-label">Phone</span>
+                            <a href="tel:${p.owner_phone}" class="owner-value phone">${p.owner_phone}</a>
+                        </div>` : ''}
+                        ${hasEmail ? `
+                        <div class="owner-detail-row">
+                            <span class="owner-label">Email</span>
+                            <a href="mailto:${p.owner_email}" class="owner-value email">${p.owner_email}</a>
+                        </div>` : ''}
+                        ${hasMail ? `
+                        <div class="owner-detail-row">
+                            <span class="owner-label">Mailing</span>
+                            <span class="owner-value">${p.mailing_address}${p.mailing_city ? ', ' + p.mailing_city : ''}${p.mailing_state ? ' ' + p.mailing_state : ''}${p.mailing_zip ? ' ' + p.mailing_zip : ''}</span>
+                        </div>` : ''}
+                    </div>
+                </div>` : ''}
+                ${p.score_reasons ? `<div class="lot-notes" style="font-style: italic; color: var(--gold);">${p.score_reasons}</div>` : ''}
+            </div>
+            `;
+        }
+
+        // Legacy renderTeardowns - now handled within renderLots
+        function renderTeardowns() {
+            renderLots();
         }
 
         // Enrichment data store (per-id, persisted to localStorage)
@@ -3660,7 +3622,6 @@
             });
             closeEnrichModal();
             renderLots();
-            renderTeardowns();
             showToast('Saved');
         }
 
@@ -3902,7 +3863,9 @@
                                     <span>Dallas County — Teardowns <span class="count">${texasTeardowns.length} properties</span></span>
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="opacity:0.4"><polyline points="6 9 12 15 18 9"/></svg>
                                 </div>
-                                <div class="lot-list" id="lots-texas-dallas-teardowns"></div>
+                                <div class="lot-list" id="lots-texas-dallas-teardowns">
+                                    ${texasTeardowns.map(p => renderTeardownLotItem(p)).join('')}
+                                </div>
                             </div>`;
                         }
                     }
