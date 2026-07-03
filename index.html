@@ -243,9 +243,8 @@
             display: flex;
             align-items: center;
             gap: 14px;
-            flex: 1;
-            min-width: 0;
             width: 100%;
+            flex-wrap: nowrap;
         }
 
         .search {
@@ -1473,7 +1472,8 @@
             }
             .search { 
                 flex: 1; 
-                min-width: 0; 
+                min-width: 0;
+                max-width: none;
             }
             .search input { 
                 padding: 14px 16px 14px 44px; 
@@ -1490,15 +1490,19 @@
             /* Hide desktop pills, show mobile filter button */
             .state-pills { display: none !important; }
             .mobile-filter-btn { 
-                display: inline-flex; 
+                display: flex; 
                 flex-shrink: 0;
                 height: 48px;
                 padding: 0 18px;
                 align-items: center;
+                width: 100%;
+                justify-content: center;
+                margin-top: 10px;
             }
 
             .toolbar-main-row {
                 width: 100%;
+                margin-bottom: 0;
             }
             .export-btn.mobile-visible {
                 display: inline-flex;
