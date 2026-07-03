@@ -3483,40 +3483,6 @@ Is there anything specific that you're looking for right now and how much you wi
         }
 
         // Email Template
-        const EMAIL_TEMPLATE = `Good afternoon my name is ____
-
-I see that you're building homes in ____
-
-I bring builders like yourself off market deals, and I'm gonna save you money versus paying for them on the market.
-
-Is there anything specific that you're looking for right now and how much you willing to pay?`;
-
-        async function copyEmailTemplate() {
-            const btn = document.getElementById('copy-email-btn');
-            const copyIcon = btn.querySelector('.copy-icon');
-            const checkIcon = btn.querySelector('.check-icon');
-            const btnText = btn.querySelector('.btn-text');
-
-            try {
-                await navigator.clipboard.writeText(EMAIL_TEMPLATE);
-                btn.classList.add('copied');
-                copyIcon.style.display = 'none';
-                checkIcon.style.display = 'inline';
-                btnText.textContent = 'Copied';
-
-                showToast('Email template copied to clipboard');
-
-                setTimeout(() => {
-                    btn.classList.remove('copied');
-                    copyIcon.style.display = 'inline';
-                    checkIcon.style.display = 'none';
-                    btnText.textContent = 'Copy to Clipboard';
-                }, 2500);
-            } catch (err) {
-                console.error('Failed to copy:', err);
-                showToast('Failed to copy — try again');
-            }
-        }
 
         // ============================================
         // EXACT BUILDER DATA — PRESERVED 100%
