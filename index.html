@@ -1950,6 +1950,270 @@
         }
     }
 
+    /* === ENRICHMENT MODAL === */
+    .enrich-modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.35);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        z-index: 2000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+    }
+
+    .enrich-modal-overlay.open {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .enrich-modal {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.96);
+        width: 100%;
+        max-width: 520px;
+        max-height: 90vh;
+        background: var(--surface);
+        border-radius: 20px;
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow-lg), 0 24px 48px rgba(0,0,0,0.12);
+        z-index: 2001;
+        display: flex;
+        flex-direction: column;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.35s cubic-bezier(0.2, 0, 0, 1);
+        overflow: hidden;
+    }
+
+    .enrich-modal.open {
+        opacity: 1;
+        visibility: visible;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    .enrich-modal-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        padding: 24px 28px 0;
+        gap: 16px;
+    }
+
+    .enrich-modal-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--text-primary);
+        letter-spacing: -0.02em;
+        line-height: 1.2;
+    }
+
+    .enrich-modal-subtitle {
+        font-size: 13px;
+        color: var(--text-tertiary);
+        margin-top: 4px;
+        font-weight: 400;
+    }
+
+    .enrich-modal-close {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        background: var(--bg-warm);
+        color: var(--text-secondary);
+        border-radius: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    .enrich-modal-close:hover {
+        background: var(--surface-hover);
+        color: var(--text-primary);
+    }
+
+    .enrich-modal-close:active {
+        transform: scale(0.92);
+    }
+
+    .enrich-modal-body {
+        padding: 20px 28px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        flex: 1;
+    }
+
+    .enrich-field {
+        margin-bottom: 16px;
+    }
+
+    .enrich-field:last-child {
+        margin-bottom: 0;
+    }
+
+    .enrich-field label {
+        display: block;
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--text-secondary);
+        margin-bottom: 6px;
+        letter-spacing: -0.01em;
+    }
+
+    .enrich-field input,
+    .enrich-field select,
+    .enrich-field textarea {
+        width: 100%;
+        padding: 12px 14px;
+        background: var(--bg-warm);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        font-family: inherit;
+        font-size: 14px;
+        font-weight: 400;
+        color: var(--text-primary);
+        outline: none;
+        transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+        -webkit-appearance: none;
+        appearance: none;
+    }
+
+    .enrich-field input:focus,
+    .enrich-field select:focus,
+    .enrich-field textarea:focus {
+        border-color: var(--primary);
+        box-shadow: var(--focus-ring);
+        background: var(--surface);
+    }
+
+    .enrich-field input::placeholder,
+    .enrich-field textarea::placeholder {
+        color: var(--text-quaternary);
+    }
+
+    .enrich-field select {
+        cursor: pointer;
+        background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%236E6E73' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 14px center;
+        padding-right: 36px;
+    }
+
+    .enrich-field textarea {
+        min-height: 80px;
+        resize: vertical;
+        line-height: 1.5;
+    }
+
+    .enrich-modal-footer {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 12px;
+        padding: 16px 28px 24px;
+        border-top: 1px solid var(--divider);
+    }
+
+    .enrich-btn {
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-family: inherit;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+        border: none;
+        outline: none;
+    }
+
+    .enrich-btn:active {
+        transform: scale(0.96);
+    }
+
+    .enrich-btn-primary {
+        background: var(--primary);
+        color: #fff;
+    }
+
+    .enrich-btn-primary:hover {
+        background: var(--primary-soft);
+    }
+
+    .enrich-btn-secondary {
+        background: var(--bg-warm);
+        color: var(--text-secondary);
+        border: 1px solid var(--border);
+    }
+
+    .enrich-btn-secondary:hover {
+        background: var(--surface-hover);
+        color: var(--text-primary);
+        border-color: var(--border-strong);
+    }
+
+    @media (max-width: 640px) {
+        .enrich-modal {
+            max-width: 100%;
+            max-height: 100vh;
+            border-radius: 0;
+            top: auto;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            transform: translateY(100%);
+            box-shadow: 0 -8px 32px rgba(0,0,0,0.12);
+        }
+
+        .enrich-modal.open {
+            transform: translateY(0);
+        }
+
+        .enrich-modal-header {
+            padding: 20px 20px 0;
+        }
+
+        .enrich-modal-body {
+            padding: 16px 20px;
+        }
+
+        .enrich-modal-footer {
+            padding: 12px 20px 24px;
+        }
+
+        .enrich-btn {
+            flex: 1;
+            justify-content: center;
+            padding: 12px 20px;
+        }
+    }
+
+    /* === TOAST === */
+    .toast {
+        position: fixed;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%) translateY(12px);
+        background: var(--primary);
+        color: #fff;
+        padding: 12px 24px;
+        border-radius: 12px;
+        font-size: 14px;
+        font-weight: 500;
+        z-index: 3000;
+        opacity: 0;
+        transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+        pointer-events: none;
+        box-shadow: var(--shadow-md);
+    }
+
     /* === FOOTER === */
     .app-footer {
         margin-top: 48px;
