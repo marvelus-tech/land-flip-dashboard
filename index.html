@@ -233,24 +233,21 @@
         /* === CONTROLS === */
         .controls {
             display: flex;
-            align-items: center;
-            gap: 14px;
+            flex-direction: column;
+            gap: 16px;
             margin-bottom: 24px;
-            flex-wrap: wrap;
         }
 
         .toolbar-main-row {
             display: flex;
             align-items: center;
-            gap: 14px;
-            width: 100%;
-            flex-wrap: nowrap;
+            gap: 12px;
         }
 
         .search {
             flex: 1;
             min-width: 200px;
-            max-width: 320px;
+            max-width: 520px;
             position: relative;
         }
 
@@ -1465,8 +1462,6 @@
 
             /* Controls: More generous sizing */
             .controls {
-                flex-direction: row;
-                align-items: center;
                 gap: 12px;
                 margin-bottom: 24px;
             }
@@ -1497,13 +1492,9 @@
                 align-items: center;
                 width: 100%;
                 justify-content: center;
-                margin-top: 10px;
+                margin-top: 4px;
             }
 
-            .toolbar-main-row {
-                width: 100%;
-                margin-bottom: 0;
-            }
             .export-btn.mobile-visible {
                 display: inline-flex;
                 margin-left: 0;
