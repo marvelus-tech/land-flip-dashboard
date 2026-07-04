@@ -630,14 +630,15 @@
     .detail {
         display: flex;
         flex-direction: column;
-        gap: 2px;
+        gap: 6px;
+        padding: 8px 0;
     }
 
     .detail-label {
-        font-size: 11px;
-        font-weight: 500;
+        font-size: 10px;
+        font-weight: 600;
         color: var(--text-tertiary);
-        letter-spacing: 0.05em;
+        letter-spacing: 0.08em;
         text-transform: uppercase;
     }
 
@@ -646,6 +647,7 @@
         font-weight: 500;
         color: var(--text-primary);
         word-break: break-word;
+        line-height: 1.4;
     }
 
     .detail-value a {
@@ -660,10 +662,10 @@
 
     .notes-textarea {
         width: 100%;
-        min-height: 80px;
-        padding: 12px 16px;
+        min-height: 64px;
+        padding: 10px 14px;
         border: 1px solid var(--border);
-        border-radius: 12px;
+        border-radius: 10px;
         font-family: inherit;
         font-size: 13px;
         line-height: 1.5;
@@ -688,24 +690,44 @@
         align-items: center;
         gap: 8px;
         padding: 8px 16px;
-        border-radius: 8px;
+        border-radius: 999px;
         font-size: 12px;
         font-weight: 600;
         letter-spacing: 0.02em;
-        border: 1px solid var(--border-strong);
+        border: 1px solid var(--border);
         background: var(--bg-warm);
-        color: var(--primary);
+        color: var(--text-secondary);
         cursor: pointer;
         transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
     }
 
-    .status-toggle-btn:hover { background: var(--bg); }
-    .status-toggle-btn:active { transform: scale(0.92); }
+    .status-toggle-btn:hover {
+        background: var(--surface-hover);
+        border-color: var(--border-strong);
+        color: var(--text-primary);
+    }
+
+    .status-toggle-btn:active {
+        transform: scale(0.92);
+    }
 
     .status-toggle-btn.active {
         background: var(--primary);
         color: #fff;
         border-color: var(--primary);
+        box-shadow: 0 2px 8px rgba(26, 26, 26, 0.12);
+    }
+
+    .status-toggle-btn .toggle-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--text-quaternary);
+        transition: background 0.2s ease;
+    }
+
+    .status-toggle-btn.active .toggle-dot {
+        background: var(--success);
     }
 
     /* === TITLE CARDS === */
