@@ -1099,7 +1099,121 @@
     }
 
     /* === CONTRACTS === */
-    .contracts-panel { padding: 4px 0; }
+    .contract-mailer-panel {
+        margin-top: 24px;
+        padding: 24px 28px;
+        background: var(--surface);
+        border-radius: 16px;
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow-sm);
+    }
+    .contract-mailer-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 20px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid var(--divider);
+    }
+    .contract-mailer-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        background: var(--gold-muted);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--gold);
+        flex-shrink: 0;
+    }
+    .contract-mailer-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--text-primary);
+        letter-spacing: -0.02em;
+    }
+    .contract-mailer-subtitle {
+        font-size: 13px;
+        color: var(--text-secondary);
+        margin-top: 2px;
+    }
+    .contract-mailer-section {
+        margin-bottom: 20px;
+    }
+    .contract-mailer-section:last-child {
+        margin-bottom: 0;
+    }
+    .contract-mailer-section h4 {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .contract-mailer-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .contract-mailer-list li {
+        position: relative;
+        padding: 8px 0 8px 28px;
+        font-size: 13px;
+        color: var(--text-secondary);
+        line-height: 1.5;
+        border-bottom: 1px solid var(--divider);
+    }
+    .contract-mailer-list li:last-child {
+        border-bottom: none;
+    }
+    .contract-mailer-list li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 14px;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--gold);
+    }
+    .contract-mailer-note {
+        padding: 12px 16px;
+        background: var(--gold-muted);
+        border-radius: 10px;
+        font-size: 13px;
+        color: var(--text-primary);
+        line-height: 1.5;
+        margin-top: 12px;
+    }
+    .contract-mailer-note strong {
+        color: var(--gold);
+        font-weight: 600;
+    }
+    .contract-adaptation-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 12px;
+    }
+    .contract-adaptation-table th,
+    .contract-adaptation-table td {
+        text-align: left;
+        padding: 10px 12px;
+        font-size: 13px;
+        border-bottom: 1px solid var(--divider);
+    }
+    .contract-adaptation-table th {
+        font-weight: 600;
+        color: var(--text-primary);
+        background: var(--bg-warm);
+    }
+    .contract-adaptation-table td {
+        color: var(--text-secondary);
+    }
+    .contract-adaptation-table tr:last-child td {
+        border-bottom: none;
+    }
 
     .contracts-intro {
         padding: 16px 20px;
@@ -2469,6 +2583,119 @@
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                         Download
                     </a>
+                </div>
+
+                <!-- Contract Mailer Strategy -->
+                <div class="contract-mailer-panel">
+                    <div class="contract-mailer-header">
+                        <div class="contract-mailer-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        </div>
+                        <div>
+                            <div class="contract-mailer-title">What to Send With the Contract</div>
+                            <div class="contract-mailer-subtitle">Jackson's contract mailer strategy from Wiener Bros ($1M/month coaching call)</div>
+                        </div>
+                    </div>
+
+                    <div class="contract-mailer-note">
+                        <strong>Key insight:</strong> Jackson's signing rate doubled when he started sending a 6-7 page professional PDF "welcome packet" alongside the contract. This builds trust and removes friction for sellers who hesitate to sign.
+                    </div>
+
+                    <div class="contract-mailer-section" style="margin-top: 20px;">
+                        <h4>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                            What's in the Welcome Packet
+                        </h4>
+                        <ul class="contract-mailer-list">
+                            <li><strong>Company introduction</strong> — who you are, your story, why you buy land</li>
+                            <li><strong>Past deals</strong> — proof you've done this before (even 1-2 deals)</li>
+                            <li><strong>Community involvement</strong> — charity work, local connections (e.g., Jackson uses Kids Cancer Foundation)</li>
+                            <li><strong>Reviews & testimonials</strong> — social proof from sellers or buyers</li>
+                            <li><strong>How to sign</strong> — DocuSign/HelloSign walkthrough with screenshots</li>
+                            <li><strong>What the contract means</strong> — plain language explanation, not legalese</li>
+                            <li><strong>Post-signing process</strong> — what happens next step-by-step</li>
+                            <li><strong>Title/conveyancing process</strong> — how it works in your state</li>
+                            <li><strong>How they get paid</strong> — bank transfer details, timeline</li>
+                            <li><strong>Timeline</strong> — how long from sign to close (e.g., 30-60 days)</li>
+                            <li><strong>FAQ</strong> — every common seller question answered upfront</li>
+                        </ul>
+                    </div>
+
+                    <div class="contract-mailer-section">
+                        <h4>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                            Format & Delivery Tips
+                        </h4>
+                        <ul class="contract-mailer-list">
+                            <li>Make it a <strong>PDF slide deck</strong> (6-7 pages), not a Word doc — looks more professional</li>
+                            <li>Use <strong>Canva or Google Slides</strong> — clean design, white space, your brand colors</li>
+                            <li>Send it <strong>with the contract</strong>, not after — everything in one package</li>
+                            <li>For older sellers who don't use email: <strong>print and mail it</strong> — Jiren from the call says "I don't think I've ever sent a mail out contract that they haven't signed"</li>
+                            <li>Include a <strong>pre-paid return envelope</strong> if mailing physical copies</li>
+                        </ul>
+                    </div>
+
+                    <div class="contract-mailer-section">
+                        <h4>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            Australian Adaptation Guide
+                        </h4>
+                        <table class="contract-adaptation-table">
+                            <thead>
+                                <tr>
+                                    <th>Element</th>
+                                    <th>Jack's Version (US)</th>
+                                    <th>Your Version (AU)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Company intro</td>
+                                    <td>JW Ligh Homes story</td>
+                                    <td>Your land buying story / why you're buying</td>
+                                </tr>
+                                <tr>
+                                    <td>Social proof</td>
+                                    <td>Past deals + reviews</td>
+                                    <td>Any deals done, builder relationships</td>
+                                </tr>
+                                <tr>
+                                    <td>Community</td>
+                                    <td>Kids Cancer Foundation</td>
+                                    <td>Local community involvement</td>
+                                </tr>
+                                <tr>
+                                    <td>Signing method</td>
+                                    <td>DocuSign</td>
+                                    <td>DocuSign or HelloSign (both work in AU)</td>
+                                </tr>
+                                <tr>
+                                    <td>Contract type</td>
+                                    <td>Purchase agreement</td>
+                                    <td>Option agreement / Assignment</td>
+                                </tr>
+                                <tr>
+                                    <td>Title process</td>
+                                    <td>Title company</td>
+                                    <td>Conveyancer / Solicitor</td>
+                                </tr>
+                                <tr>
+                                    <td>Payment</td>
+                                    <td>Wire transfer</td>
+                                    <td>Bank transfer (BSB + Account)</td>
+                                </tr>
+                                <tr>
+                                    <td>Timeline</td>
+                                    <td>US closing timeline</td>
+                                    <td>30-60 days typical in Australia</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="contract-mailer-note">
+                        <strong>Remember:</strong> The goal is to make the seller feel safe and informed. The contract alone can feel intimidating. The welcome packet answers every question before they ask it, which is why Jackson's signing rate doubled.
+                    </div>
                 </div>
             </div>
         </div>
