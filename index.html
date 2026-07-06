@@ -778,6 +778,7 @@
     /* === CONTENT SECTIONS === */
     .content-section { display: none; }
     .content-section.active { display: block; }
+    .hidden { display: none !important; }
 
     .empty {
         padding: 48px 24px;
@@ -2482,6 +2483,7 @@
                 <button class="segment" onclick="switchTab('lots')" data-tab="lots">Lots</button>
                 <button class="segment" onclick="switchTab('contracts')" data-tab="contracts">Contracts</button>
                 <button class="segment" onclick="switchTab('titles')" data-tab="titles">Titles</button>
+                <button class="segment" onclick="switchTab('reports')" data-tab="reports">Reports</button>
                 </div>
         </div>
 
@@ -2755,6 +2757,189 @@ Questions? Call or text [Your Name] on [Your Phone].
                 </div>
             </div>
         </div>
+        <!-- Reports Content -->
+        <div id="reports-content" class="content-section">
+            <div class="list-panel reports-panel" style="padding: 24px 28px;">
+                <div class="reports-header" style="margin-bottom: 28px;">
+                    <div style="font-size: 12px; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px;">Market Intelligence</div>
+                    <h2 style="font-size: 24px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 4px;">St. Lucie County, FL — Land Market Report</h2>
+                    <p style="font-size: 14px; color: var(--text-secondary);">Fort Pierce · Port St. Lucie · St. Lucie County | July 2026</p>
+                </div>
+
+                <!-- Executive Summary -->
+                <div class="report-section" style="background: var(--surface); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border);">
+                    <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                        Executive Summary
+                    </h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 16px;">
+                        <div style="background: var(--bg-warm); border-radius: 12px; padding: 16px;">
+                            <div style="font-size: 24px; font-weight: 700; color: var(--gold); letter-spacing: -0.03em;">413K</div>
+                            <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">County Population (2026)</div>
+                        </div>
+                        <div style="background: var(--bg-warm); border-radius: 12px; padding: 16px;">
+                            <div style="font-size: 24px; font-weight: 700; color: var(--gold); letter-spacing: -0.03em;">+2.7%</div>
+                            <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Annual Growth Rate</div>
+                        </div>
+                        <div style="background: var(--bg-warm); border-radius: 12px; padding: 16px;">
+                            <div style="font-size: 24px; font-weight: 700; color: var(--gold); letter-spacing: -0.03em;">$395K</div>
+                            <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Median Home Price (PSL)</div>
+                        </div>
+                        <div style="background: var(--bg-warm); border-radius: 12px; padding: 16px;">
+                            <div style="font-size: 24px; font-weight: 700; color: var(--gold); letter-spacing: -0.03em;">85</div>
+                            <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Avg Days on Market</div>
+                        </div>
+                    </div>
+                    <p style="font-size: 14px; line-height: 1.6; color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">St. Lucie County is a high-growth Florida market</strong> with strong population inflows, affordable land prices compared to South Florida, and a shifting market that favors buyers. The county has grown <strong>48.5% since 2010</strong> and remains one of Florida's fastest-growing regions. For land investors, this presents opportunities in vacant lots, infill development, and land banking.
+                    </p>
+                </div>
+
+                <!-- Market Overview -->
+                <div class="report-section" style="background: var(--surface); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border);">
+                    <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                        Land Market Data
+                    </h3>
+                    <div style="overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                            <thead>
+                                <tr style="border-bottom: 1px solid var(--divider-strong);">
+                                    <th style="text-align: left; padding: 10px 12px; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">Metric</th>
+                                    <th style="text-align: left; padding: 10px 12px; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">St. Lucie County</th>
+                                    <th style="text-align: left; padding: 10px 12px; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">Port St. Lucie</th>
+                                    <th style="text-align: left; padding: 10px 12px; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid var(--divider);">
+                                    <td style="padding: 10px 12px; font-weight: 500;">Vacant Land Listings</td>
+                                    <td style="padding: 10px 12px; color: var(--text-secondary);">69 active</td>
+                                    <td style="padding: 10px 12px; color: var(--text-secondary);">193 active</td>
+                                    <td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">Per MLS data</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--divider);">
+                                    <td style="padding: 10px 12px; font-weight: 500;">Median List Price</td>
+                                    <td style="padding: 10px 12px; color: var(--text-secondary);">$425,000</td>
+                                    <td style="padding: 10px 12px; color: var(--text-secondary);">$135K - $995K+</td>
+                                    <td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">Wide range by lot size</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--divider);">
+                                    <td style="padding: 10px 12px; font-weight: 500;">Avg Days on Market</td>
+                                    <td style="padding: 10px 12px; color: var(--text-secondary);">124 days</td>
+                                    <td style="padding: 10px 12px; color: var(--text-secondary);">44-85 days</td>
+                                    <td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">"Hot" lots move faster</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--divider);">
+                                    <td style="padding: 10px 12px; font-weight: 500;">Lot Sizes</td>
+                                    <td style="padding: 10px 12px; color: var(--text-secondary);">0.12 - 20+ ac</td>
+                                    <td style="padding: 10px 12px; color: var(--text-secondary);">0.23 - 0.4 ac typical</td>
+                                    <td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">Standard lots 0.23-0.33ac</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px 12px; font-weight: 500;">Price/Acre</td>
+                                    <td style="padding: 10px 12px; color: var(--text-secondary);">Varies widely</td>
+                                    <td style="padding: 10px 12px; color: var(--text-secondary);">~$500K-$650K/ac</td>
+                                    <td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">Based on recent comps</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Owner Profile -->
+                <div class="report-section" style="background: var(--surface); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border);">
+                    <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        Land Owner Profile & Targeting
+                    </h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+                        <div>
+                            <h4 style="font-size: 13px; font-weight: 600; margin-bottom: 10px; color: var(--text-primary);">Owner Types to Target</h4>
+                            <ul style="list-style: none; padding: 0; margin: 0; font-size: 13px; line-height: 1.9; color: var(--text-secondary);">
+                                <li style="display: flex; gap: 8px;"><span style="color: var(--gold);">●</span> <strong>Out-of-state owners</strong> — non-Florida mailing addresses</li>
+                                <li style="display: flex; gap: 8px;"><span style="color: var(--gold);">●</span> <strong>Inherited/vacant lot holders</strong> — 10+ years, no improvements</li>
+                                <li style="display: flex; gap: 8px;"><span style="color: var(--gold);">●</span> <strong>Retirees/heirs</strong> — aging owners looking to liquidate</li>
+                                <li style="display: flex; gap: 8px;"><span style="color: var(--gold);">●</span> <strong>Corporate/speculative holders</strong> — LLCs with multiple parcels</li>
+                                <li style="display: flex; gap: 8px;"><span style="color: var(--gold);">●</span> <strong>Tax-delinquent owners</strong> — pre-foreclosure opportunities</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 style="font-size: 13px; font-weight: 600; margin-bottom: 10px; color: var(--text-primary);">Data Sources</h4>
+                            <ul style="list-style: none; padding: 0; margin: 0; font-size: 13px; line-height: 1.9; color: var(--text-secondary);">
+                                <li style="display: flex; gap: 8px;"><span style="color: var(--success);">✓</span> <a href="https://www.paslc.gov/property-search/real-estate/owner" target="_blank" style="color: var(--text-primary); text-decoration: none; border-bottom: 1px solid var(--border);">St. Lucie County PA</a></li>
+                                <li style="display: flex; gap: 8px;"><span style="color: var(--success);">✓</span> <a href="https://map.paslc.gov/Search/" target="_blank" style="color: var(--text-primary); text-decoration: none; border-bottom: 1px solid var(--border);">GIS Parcel Maps</a></li>
+                                <li style="display: flex; gap: 8px;"><span style="color: var(--success);">✓</span> City of PSL Vacant Lot Registry</li>
+                                <li style="display: flex; gap: 8px;"><span style="color: var(--success);">✓</span> Zillow/Redfin — active listings, comps</li>
+                                <li style="display: flex; gap: 8px;"><span style="color: var(--success);">✓</span> PropStream/LandGlide — bulk data</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Investment Opportunities -->
+                <div class="report-section" style="background: var(--surface); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border);">
+                    <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+                        Investment Opportunities
+                    </h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;">
+                        <div style="background: var(--bg-warm); border-radius: 12px; padding: 18px; border: 1px solid var(--border);">
+                            <div style="font-size: 12px; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Strategy 1</div>
+                            <div style="font-size: 15px; font-weight: 600; margin-bottom: 6px;">Land Wholesaling</div>
+                            <p style="font-size: 12.5px; line-height: 1.5; color: var(--text-secondary); margin: 0;">Buy at 30-50% below market from motivated sellers. Assign to builders. Target: $100K-$250K lots.</p>
+                        </div>
+                        <div style="background: var(--bg-warm); border-radius: 12px; padding: 18px; border: 1px solid var(--border);">
+                            <div style="font-size: 12px; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Strategy 2</div>
+                            <div style="font-size: 15px; font-weight: 600; margin-bottom: 6px;">Land Banking</div>
+                            <p style="font-size: 12.5px; line-height: 1.5; color: var(--text-secondary); margin: 0;">Hold 3-5 years in growth corridors. County projected to hit 446K by 2029. Buy near planned infrastructure.</p>
+                        </div>
+                        <div style="background: var(--bg-warm); border-radius: 12px; padding: 18px; border: 1px solid var(--border);">
+                            <div style="font-size: 12px; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Strategy 3</div>
+                            <div style="font-size: 15px; font-weight: 600; margin-bottom: 6px;">Teardown / Infill</div>
+                            <p style="font-size: 12.5px; line-height: 1.5; color: var(--text-secondary); margin: 0;">Fort Pierce has older housing stock. Acquire dated homes on large lots, demolish, subdivide or rebuild.</p>
+                        </div>
+                        <div style="background: var(--bg-warm); border-radius: 12px; padding: 18px; border: 1px solid var(--border);">
+                            <div style="font-size: 12px; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Strategy 4</div>
+                            <div style="font-size: 15px; font-weight: 600; margin-bottom: 6px;">Owner Financing</div>
+                            <p style="font-size: 12.5px; line-height: 1.5; color: var(--text-secondary); margin: 0;">Offer owner financing to buyers. Many retirees want passive income. Create notes and sell them.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Contacts -->
+                <div class="report-section" style="background: var(--surface); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border);">
+                    <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        Key Contacts & Resources
+                    </h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; font-size: 13px;">
+                        <div style="padding: 14px; background: var(--bg-warm); border-radius: 10px;">
+                            <strong style="color: var(--text-primary); display: block; margin-bottom: 4px;">St. Lucie County Property Appraiser</strong>
+                            <span style="color: var(--text-secondary);">772-462-1000</span><br>
+                            <a href="https://www.paslc.gov" target="_blank" style="color: var(--gold); text-decoration: none;">paslc.gov</a> · Owner search, GIS maps, tax records
+                        </div>
+                        <div style="padding: 14px; background: var(--bg-warm); border-radius: 10px;">
+                            <strong style="color: var(--text-primary); display: block; margin-bottom: 4px;">St. Lucie County Clerk</strong>
+                            <span style="color: var(--text-secondary);">Deeds, liens, foreclosure records</span><br>
+                            <span style="color: var(--text-tertiary);">Fort Pierce, FL 34982</span>
+                        </div>
+                        <div style="padding: 14px; background: var(--bg-warm); border-radius: 10px;">
+                            <strong style="color: var(--text-primary); display: block; margin-bottom: 4px;">Port St. Lucie Planning Dept</strong>
+                            <span style="color: var(--text-secondary);">Zoning, permits, development</span><br>
+                            <a href="https://www.cityofpsl.com" target="_blank" style="color: var(--gold); text-decoration: none;">cityofpsl.com</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Report Footer -->
+                <div style="text-align: center; padding: 20px; font-size: 12px; color: var(--text-quaternary);">
+                    <p>Report generated July 7, 2026 · Sources: U.S. Census, St. Lucie County PA, Redfin, Zillow, WalletInvestor</p>
+                    <p style="margin-top: 4px;">For informational purposes only. Not financial or investment advice.</p>
+                </div>
+            </div>
+        </div>
+
         <!-- Titles Content -->
         <div id="titles-content" class="content-section">
             <div id="titles-list">
@@ -3681,10 +3866,12 @@ Questions? Call or text [Your Name] on [Your Phone].
             const exportBtn = document.getElementById('export-btn');
             const searchInput = document.getElementById('search-input');
             const mobileFilterBtn = document.getElementById('mobile-filter-btn');
-            const hideFilters = tab === 'contracts';
+            const emailBtn = document.getElementById('email-btn-compact');
+            const hideFilters = tab === 'contracts' || tab === 'reports';
 
             if (searchWrap) searchWrap.classList.toggle('hidden', hideFilters);
             if (pillsWrap) pillsWrap.classList.toggle('hidden', hideFilters);
+            if (emailBtn) emailBtn.classList.toggle('hidden', tab === 'reports');
             if (exportBtn) {
                 exportBtn.classList.toggle('hidden', hideFilters);
                 exportBtn.classList.toggle('gold-accent', tab === 'contracts');
@@ -4626,6 +4813,16 @@ Questions? Call or text [Your Name] on [Your Phone].
                 if (labelEls[1]) labelEls[1].textContent = 'Active';
                 if (labelEls[2]) labelEls[2].textContent = 'In Research';
                 if (labelEls[3]) labelEls[3].textContent = 'Markets';
+            } else if (tab === 'reports') {
+                if (totalEl) totalEl.textContent = '1';
+                if (activeEl) activeEl.textContent = '1';
+                if (researchEl) researchEl.textContent = '—';
+                if (marketsEl) marketsEl.textContent = '3';
+
+                if (labelEls[0]) labelEls[0].textContent = 'Reports';
+                if (labelEls[1]) labelEls[1].textContent = 'Active';
+                if (labelEls[2]) labelEls[2].textContent = 'Archived';
+                if (labelEls[3]) labelEls[3].textContent = 'Markets Covered';
             } else if (tab === 'teardowns') {
                 const totalTeardowns = teardownData.length;
                 const teardownCount = teardownData.filter(p => p._type === 'teardown').length;
@@ -4654,6 +4851,7 @@ Questions? Call or text [Your Name] on [Your Phone].
             document.getElementById('lots-content').classList.toggle('active', tab === 'lots');
             document.getElementById('contracts-content').classList.toggle('active', tab === 'contracts');
             document.getElementById('titles-content').classList.toggle('active', tab === 'titles');
+            document.getElementById('reports-content').classList.toggle('active', tab === 'reports');
 
             updateControlsForTab(tab);
             renderStatePills();
