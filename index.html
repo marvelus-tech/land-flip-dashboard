@@ -2604,6 +2604,68 @@
                     <div class="contract-mailer-section" style="margin-top: 20px;">
                         <h4>
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                            One-Page Welcome Packet Draft (Copy & Paste)
+                        </h4>
+                        <div style="background: var(--bg-warm); border-radius: 12px; padding: 20px; margin-top: 12px; border: 1px solid var(--border);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--divider);">
+                                <span style="font-size: 12px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em;">Copy-paste ready for Canva</span>
+                                <button class="download-btn" onclick="copyMailerDraft()" style="cursor: pointer;">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                    Copy Text
+                                </button>
+                            </div>
+                            <pre id="mailer-draft" style="font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif; font-size: 13px; line-height: 1.6; color: var(--text-primary); white-space: pre-wrap; word-wrap: break-word; margin: 0;">;[YOUR COMPANY NAME] — Land Purchase Welcome Sheet;
+
+Hi [Seller Name],
+
+Thank you for considering our offer on your property at [Property Address]. This one-page sheet explains everything simply.
+
+—
+
+WHO WE ARE
+We buy vacant land across [State]. We've closed [X] deals and work directly with builders and developers. No agents, no middlemen — just a straightforward cash purchase.
+
+—
+
+WHAT THE CONTRACT MEANS
+This gives us the right to buy your land at $[Offer Price] within [30/60] days. You can still sell to someone else if we don't close on time. There's no cost to you to sign.
+
+—
+
+HOW YOU GET PAID
+Bank transfer to your nominated account. Funds clear in 2 business days after settlement. We use [Conveyancer/Solicitor Name] to handle the paperwork.
+
+—
+
+TIMELINE
+• Contract signed: Today
+• Due diligence: [X] days
+• Settlement: [X] days from signing
+
+—
+
+FREQUENTLY ASKED QUESTIONS
+
+Q: Can I change my mind after signing?
+A: In most states you have a cooling-off period. Check your local laws.
+
+Q: What if you don't buy it?
+A: The contract expires. You're free to sell to anyone else. No penalties.
+
+—
+
+READY TO PROCEED?
+Sign the attached contract via [DocuSign/HelloSign] link, or return the signed page in the prepaid envelope provided.
+
+Questions? Call or text [Your Name] on [Your Phone].
+
+</pre>
+                        </div>
+                    </div>
+
+                    <div class="contract-mailer-section" style="margin-top: 20px;">
+                        <h4>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
                             What's in the Welcome Packet
                         </h4>
                         <ul class="contract-mailer-list">
@@ -3859,6 +3921,15 @@
                 document.execCommand('copy');
                 document.body.removeChild(ta);
                 showToast('Copied to clipboard');
+            });
+        }
+
+        function copyMailerDraft() {
+            const draft = document.getElementById('mailer-draft').innerText;
+            navigator.clipboard.writeText(draft).then(() => {
+                showToast('Welcome packet draft copied to clipboard');
+            }).catch(() => {
+                showToast('Copy failed — select and copy manually', 'error');
             });
         }
 
