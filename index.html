@@ -2425,7 +2425,33 @@
             padding: 24px 0;
         }
     }
-</style>
+        /* Report Cards - Master View */
+        .reports-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; margin-bottom: 24px; }
+        .report-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; cursor: pointer; transition: all 0.2s cubic-bezier(0.2, 0, 0, 1); position: relative; overflow: hidden; }
+        .report-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); border-color: var(--gold); }
+        .report-card:active { transform: translateY(0) scale(0.995); }
+        .report-card-badge { display: inline-flex; align-items: center; padding: 4px 12px; background: var(--gold-muted); border-radius: 999px; font-size: 11px; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; }
+        .report-card-title { font-size: 18px; font-weight: 600; letter-spacing: -0.02em; color: var(--text-primary); margin-bottom: 6px; }
+        .report-card-meta { font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; }
+        .report-card-metrics { display: flex; gap: 16px; }
+        .report-card-metric { display: flex; flex-direction: column; }
+        .report-card-metric-value { font-size: 20px; font-weight: 700; color: var(--gold); letter-spacing: -0.03em; }
+        .report-card-metric-label { font-size: 11px; color: var(--text-tertiary); margin-top: 2px; }
+        .report-card-arrow { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: var(--text-quaternary); transition: color 0.2s; }
+        .report-card:hover .report-card-arrow { color: var(--gold); }
+        .report-card-coming-soon { opacity: 0.7; cursor: default; }
+        .report-card-coming-soon:hover { transform: none; box-shadow: var(--shadow-sm); border-color: var(--border); }
+        .report-card-notify-btn { margin-top: 12px; padding: 8px 16px; background: var(--bg-warm); border: 1px solid var(--border); border-radius: 8px; font-size: 12px; font-weight: 600; color: var(--text-secondary); cursor: pointer; transition: all 0.2s; }
+        .report-card-notify-btn:hover { background: var(--gold-muted); border-color: var(--gold); color: var(--primary); }
+        .report-detail { display: none; }
+        .report-detail.active { display: block; }
+        .report-detail-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+        .report-detail-back { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; font-size: 13px; font-weight: 500; color: var(--text-secondary); cursor: pointer; transition: all 0.2s; }
+        .report-detail-back:hover { background: var(--bg-warm); border-color: var(--border-strong); color: var(--text-primary); }
+        .reports-list-view { display: block; }
+        .reports-list-view.hidden { display: none; }
+
+    </style>
 </head>
 <body>
     <div class="site-main">
@@ -2760,11 +2786,63 @@ Questions? Call or text [Your Name] on [Your Phone].
         <!-- Reports Content -->
         <div id="reports-content" class="content-section">
             <div class="list-panel reports-panel" style="padding: 24px 28px;">
-                <div class="reports-header" style="margin-bottom: 28px;">
-                    <div style="font-size: 12px; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px;">Market Intelligence</div>
-                    <h2 style="font-size: 24px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 4px;">St. Lucie County, FL — Land Market Report</h2>
-                    <p style="font-size: 14px; color: var(--text-secondary);">Fort Pierce · Port St. Lucie · St. Lucie County | July 2026</p>
+                
+                <!-- Reports List View (Master) -->
+                <div id="reports-list-view" class="reports-list-view">
+                    <div style="margin-bottom: 28px;">
+                        <div style="font-size: 12px; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px;">Market Intelligence</div>
+                        <h2 style="font-size: 24px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 4px;">Market Reports</h2>
+                        <p style="font-size: 14px; color: var(--text-secondary);">Select a market to view the full land investment report</p>
+                    </div>
+                    
+                    <div class="reports-list">
+                        <div class="report-card" onclick="showReportDetail('st-lucie')">
+                            <div class="report-card-badge">Available Now</div>
+                            <div class="report-card-title">St. Lucie County, FL</div>
+                            <div class="report-card-meta">Fort Pierce · Port St. Lucie · July 2026</div>
+                            <div class="report-card-metrics">
+                                <div class="report-card-metric"><div class="report-card-metric-value">413K</div><div class="report-card-metric-label">Population</div></div>
+                                <div class="report-card-metric"><div class="report-card-metric-value">69</div><div class="report-card-metric-label">Land Listings</div></div>
+                                <div class="report-card-metric"><div class="report-card-metric-value">$395K</div><div class="report-card-metric-label">Median Home</div></div>
+                            </div>
+                            <svg class="report-card-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+                        </div>
+                        
+                        <div class="report-card report-card-coming-soon">
+                            <div class="report-card-badge" style="background: var(--bg-warm); color: var(--text-tertiary);">Coming Soon</div>
+                            <div class="report-card-title">Austin, TX</div>
+                            <div class="report-card-meta">Travis County · August 2026</div>
+                            <div class="report-card-metrics">
+                                <div class="report-card-metric"><div class="report-card-metric-value" style="color: var(--text-tertiary);">—</div><div class="report-card-metric-label">In Research</div></div>
+                            </div>
+                            <button class="report-card-notify-btn" onclick="event.stopPropagation(); alert('We will notify you when the Austin report is ready!')">Notify Me</button>
+                        </div>
+                        
+                        <div class="report-card report-card-coming-soon">
+                            <div class="report-card-badge" style="background: var(--bg-warm); color: var(--text-tertiary);">Coming Soon</div>
+                            <div class="report-card-title">Nashville, TN</div>
+                            <div class="report-card-meta">Davidson / Rutherford · September 2026</div>
+                            <div class="report-card-metrics">
+                                <div class="report-card-metric"><div class="report-card-metric-value" style="color: var(--text-tertiary);">—</div><div class="report-card-metric-label">In Research</div></div>
+                            </div>
+                            <button class="report-card-notify-btn" onclick="event.stopPropagation(); alert('We will notify you when the Nashville report is ready!')">Notify Me</button>
+                        </div>
+                    </div>
                 </div>
+                
+                <!-- Report Detail View (St. Lucie) -->
+                <div id="report-detail-st-lucie" class="report-detail">
+                    <div class="report-detail-header">
+                        <button class="report-detail-back" onclick="showReportsList()">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                            Back to Reports
+                        </button>
+                    </div>
+                    <div class="reports-header" style="margin-bottom: 28px;">
+                        <div style="font-size: 12px; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px;">Market Intelligence</div>
+                        <h2 style="font-size: 24px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 4px;">St. Lucie County, FL — Land Market Report</h2>
+                        <p style="font-size: 14px; color: var(--text-secondary);">Fort Pierce · Port St. Lucie · St. Lucie County | July 2026</p>
+                    </div>
 
                 <!-- Executive Summary -->
                 <div class="report-section" style="background: var(--surface); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border);">
@@ -3076,12 +3154,7 @@ Questions? Call or text [Your Name] on [Your Phone].
                         <h4 style="font-size: 13px; font-weight: 600; margin-bottom: 10px; color: var(--gold); text-transform: uppercase; letter-spacing: 0.05em;">SMS Template — Low Sophistication (Heirs, Out-of-State)</h4>
                         <div style="background: var(--bg-warm); border-radius: 12px; padding: 18px; border: 1px solid var(--border); font-family: monospace; font-size: 13px; line-height: 1.6; color: var(--text-secondary); position: relative;">
                             <button onclick="copySMSTemplate()" style="position: absolute; top: 10px; right: 10px; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 6px 12px; font-size: 11px; font-weight: 600; cursor: pointer; color: var(--text-primary); font-family: inherit;">Copy</button>
-                            <p style="margin: 0 0 8px 0;">Hi [Name], this is [Your Name] 👋</p>
-                            <p style="margin: 0 0 8px 0;">I hope you're doing well. I wanted to reach out because I buy vacant land in St. Lucie County, and I noticed you own property at [Address].</p>
-                            <p style="margin: 0 0 8px 0;">I know owning land from a distance can be a hassle — paying taxes, keeping up with the county, worrying about what to do with it. I've worked with a lot of folks who inherited property or just don't have the time to deal with it anymore.</p>
-                            <p style="margin: 0 0 8px 0;">If you're open to it, I'd love to make you a fair cash offer. No pressure at all — just want to give you an option if you're tired of holding onto it.</p>
-                            <p style="margin: 0 0 8px 0;">Would you be open to a quick conversation? I can explain how it works and give you a number. Takes 5 minutes, and you're free to say no.</p>
-                            <p style="margin: 0;">Just reply here or call me at [Your Number]. Have a great day! 😊</p>
+                            <p style="margin: 0 0 8px 0;">Hi [Name], I'm [Your Name]. I buy vacant land in St. Lucie County — noticed you own [Address]. Quick question: would you consider a fair cash offer? No pressure, just exploring. — [Your Name]</p>
                         </div>
                     </div>
 
@@ -3089,11 +3162,7 @@ Questions? Call or text [Your Name] on [Your Phone].
                         <h4 style="font-size: 13px; font-weight: 600; margin-bottom: 10px; color: var(--gold); text-transform: uppercase; letter-spacing: 0.05em;">SMS Template — Moderate Sophistication (Local Owners)</h4>
                         <div style="background: var(--bg-warm); border-radius: 12px; padding: 18px; border: 1px solid var(--border); font-family: monospace; font-size: 13px; line-height: 1.6; color: var(--text-secondary); position: relative;">
                             <button onclick="copySMSTemplate2()" style="position: absolute; top: 10px; right: 10px; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 6px 12px; font-size: 11px; font-weight: 600; cursor: pointer; color: var(--text-primary); font-family: inherit;">Copy</button>
-                            <p style="margin: 0 0 8px 0;">Hi [Name], [Your Name] here — I'm a local land investor in St. Lucie County.</p>
-                            <p style="margin: 0 0 8px 0;">I specialize in buying vacant lots in [Area/Zip]. I've done [X] deals in the neighborhood and work with a few local builders who are always looking for buildable lots.</p>
-                            <p style="margin: 0 0 8px 0;">I noticed your lot at [Address]. If you're considering selling, I can offer a fair cash price and close quickly — no real estate agent fees, no inspections, no hassle.</p>
-                            <p style="margin: 0 0 8px 0;">I'd be happy to give you a no-obligation offer. Even if you're not ready now, I'd love to stay in touch for when the time is right.</p>
-                            <p style="margin: 0;">Reply here or call me at [Your Number]. Thanks!</p>
+                            <p style="margin: 0 0 8px 0;">Hey [Name], [Your Name] here — I'm a local land investor in [Area/Zip]. Interested in buying your lot at [Address] for cash if you're open to selling. No agents, no fees. Worth a quick chat? — [Your Name]</p>
                         </div>
                     </div>
 
@@ -5318,6 +5387,19 @@ Is there anything specific that you're looking for right now and how much you wi
 
     <div class="toast" id="toast"></div>
 
+
+    <script>
+        function showReportDetail(reportId) {
+            document.getElementById('reports-list-view').classList.add('hidden');
+            document.getElementById('report-detail-' + reportId).classList.add('active');
+        }
+        function showReportsList() {
+            document.getElementById('reports-list-view').classList.remove('hidden');
+            document.querySelectorAll('.report-detail').forEach(function(el) {
+                el.classList.remove('active');
+            });
+        }
+    </script>
 </body>
 </html>
 
