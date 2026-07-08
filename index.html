@@ -2819,6 +2819,18 @@ Questions? Call or text [Your Name] on [Your Phone].
                             </div>
                             <svg class="report-card-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
                         </div>
+
+                        <div class="report-card" onclick="showReportDetail('hawaii')">
+                            <div class="report-card-badge">Available Now</div>
+                            <div class="report-card-title">Hawaii State</div>
+                            <div class="report-card-meta">Honolulu · Maui · Big Island · Kauai | July 2026</div>
+                            <div class="report-card-metrics">
+                                <div class="report-card-metric"><div class="report-card-metric-value">1.4M</div><div class="report-card-metric-label">Population</div></div>
+                                <div class="report-card-metric"><div class="report-card-metric-value">200+</div><div class="report-card-metric-label">Land Listings</div></div>
+                                <div class="report-card-metric"><div class="report-card-metric-value">$850K</div><div class="report-card-metric-label">Median Home</div></div>
+                            </div>
+                            <svg class="report-card-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+                        </div>
                         
                         <div class="report-card report-card-coming-soon">
                             <div class="report-card-badge" style="background: var(--bg-warm); color: var(--text-tertiary);">Coming Soon</div>
@@ -4005,6 +4017,397 @@ Questions? Call or text [Your Name] on [Your Phone].
             <div style="text-align: center; padding: 20px; font-size: 12px; color: var(--text-quaternary);">
                 <p>Report generated July 2026 · Sources: Travis CAD, dashboard lot data, Redfin, Zillow, City of Austin</p>
                 <p style="margin-top: 4px;">For informational purposes only. Not financial or investment advice.</p>
+            </div>
+        </div>
+
+        <!-- Report Detail View (Hawaii) -->
+        <div id="report-detail-hawaii" class="report-detail">
+            <div class="report-detail-header">
+                <button class="report-detail-back" onclick="showReportsList()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                    Back to Reports
+                </button>
+            </div>
+            <div class="reports-header" style="margin-bottom: 28px;">
+                <div style="font-size: 12px; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px;">Market Intelligence</div>
+                <h2 style="font-size: 24px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 4px;">Hawaii — Land Market Report</h2>
+                <p style="font-size: 14px; color: var(--text-secondary);">Honolulu · Maui · Hawaii (Big Island) · Kauai | July 2026</p>
+            </div>
+
+            <!-- Executive Summary -->
+            <div class="report-section" style="background: var(--surface); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border);">
+                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                    Executive Summary
+                </h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 16px;">
+                    <div style="background: var(--bg-warm); border-radius: 12px; padding: 16px;">
+                        <div style="font-size: 24px; font-weight: 700; color: var(--gold); letter-spacing: -0.03em;">1.4M</div>
+                        <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">State Population (2026)</div>
+                    </div>
+                    <div style="background: var(--bg-warm); border-radius: 12px; padding: 16px;">
+                        <div style="font-size: 24px; font-weight: 700; color: var(--gold); letter-spacing: -0.03em;">+0.5%</div>
+                        <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Annual Growth Rate</div>
+                    </div>
+                    <div style="background: var(--bg-warm); border-radius: 12px; padding: 16px;">
+                        <div style="font-size: 24px; font-weight: 700; color: var(--gold); letter-spacing: -0.03em;">$850K</div>
+                        <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Median Home Price</div>
+                    </div>
+                    <div style="background: var(--bg-warm); border-radius: 12px; padding: 16px;">
+                        <div style="font-size: 24px; font-weight: 700; color: var(--gold); letter-spacing: -0.03em;">90</div>
+                        <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Avg Days on Market</div>
+                    </div>
+                </div>
+                <p style="font-size: 14px; line-height: 1.6; color: var(--text-secondary);">
+                    <strong style="color: var(--text-primary);">Hawaii remains the most land-constrained market in the United States</strong>. With only ~1.4M residents spread across eight main islands and extreme geographic limits (ocean, mountains, protected lands, lava zones), developable land is exceptionally scarce. Median home prices hover near $850K with ~90 DOM. Out-of-state ownership, multi-generational ag holdings, and complex title issues (fee simple vs leasehold, ceded lands, Hawaiian Home Lands) create unique opportunities for patient, culturally respectful land investors. High property taxes and maintenance costs on vacant parcels drive motivation among long-term holders.
+                </p>
+            </div>
+
+            <!-- Land Market Data -->
+            <div class="report-section" style="background: var(--surface); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border);">
+                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    Land Market Data
+                </h3>
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                        <thead>
+                            <tr style="border-bottom: 1px solid var(--divider-strong);">
+                                <th style="text-align: left; padding: 10px 12px; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">County / Island</th>
+                                <th style="text-align: left; padding: 10px 12px; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">Key ZIPs</th>
+                                <th style="text-align: left; padding: 10px 12px; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">Land Listings</th>
+                                <th style="text-align: left; padding: 10px 12px; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">Median Land Price</th>
+                                <th style="text-align: left; padding: 10px 12px; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid var(--divider);">
+                                <td style="padding: 10px 12px; font-weight: 500;">Honolulu (Oahu)</td>
+                                <td style="padding: 10px 12px; color: var(--text-secondary);">96815, 96816, 96817</td>
+                                <td style="padding: 10px 12px; color: var(--text-secondary);">~85 active</td>
+                                <td style="padding: 10px 12px; color: var(--text-secondary);">$650K–$1.8M</td>
+                                <td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">Highest demand, tightest supply</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--divider);">
+                                <td style="padding: 10px 12px; font-weight: 500;">Maui</td>
+                                <td style="padding: 10px 12px; color: var(--text-secondary);">96753, 96732</td>
+                                <td style="padding: 10px 12px; color: var(--text-secondary);">~42 active</td>
+                                <td style="padding: 10px 12px; color: var(--text-secondary);">$480K–$1.4M</td>
+                                <td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">Vacation rental strong</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--divider);">
+                                <td style="padding: 10px 12px; font-weight: 500;">Hawaii (Big Island)</td>
+                                <td style="padding: 10px 12px; color: var(--text-secondary);">96740, 96720</td>
+                                <td style="padding: 10px 12px; color: var(--text-secondary);">~48 active</td>
+                                <td style="padding: 10px 12px; color: var(--text-secondary);">$320K–$950K</td>
+                                <td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">Lava zone discounts</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--divider);">
+                                <td style="padding: 10px 12px; font-weight: 500;">Kauai</td>
+                                <td style="padding: 10px 12px; color: var(--text-secondary);">96746, 96756</td>
+                                <td style="padding: 10px 12px; color: var(--text-secondary);">~28 active</td>
+                                <td style="padding: 10px 12px; color: var(--text-secondary);">$390K–$1.1M</td>
+                                <td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">North Shore premium</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px 12px; font-weight: 500;">Kalawao (Molokai)</td>
+                                <td style="padding: 10px 12px; color: var(--text-secondary);">96742</td>
+                                <td style="padding: 10px 12px; color: var(--text-secondary);">Very limited</td>
+                                <td style="padding: 10px 12px; color: var(--text-secondary);">$180K–$450K</td>
+                                <td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">High barriers, cultural sensitivity</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Owner Profile -->
+            <div class="report-section" style="background: var(--surface); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border);">
+                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    Land Owner Profile
+                </h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+                    <div>
+                        <h4 style="font-size: 13px; font-weight: 600; margin-bottom: 10px; color: var(--text-primary);">Typical Owner Characteristics</h4>
+                        <ul style="list-style: none; padding: 0; margin: 0; font-size: 13px; line-height: 1.85; color: var(--text-secondary);">
+                            <li style="display: flex; gap: 8px;"><span style="color: var(--gold);">●</span> <strong>Out-of-state / mainland owners</strong> — 40-60% of vacant land</li>
+                            <li style="display: flex; gap: 8px;"><span style="color: var(--gold);">●</span> <strong>Heirs & family trusts</strong> — multi-generational holdings</li>
+                            <li style="display: flex; gap: 8px;"><span style="color: var(--gold);">●</span> <strong>Agricultural land holders</strong> — 20-40+ year ownership</li>
+                            <li style="display: flex; gap: 8px;"><span style="color: var(--gold);">●</span> <strong>Estate / probate situations</strong> — mainland heirs liquidating</li>
+                            <li style="display: flex; gap: 8px;"><span style="color: var(--gold);">●</span> <strong>Tax-delinquent owners</strong> — high assessments on ag parcels</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="font-size: 13px; font-weight: 600; margin-bottom: 10px; color: var(--text-primary);">Key Signals</h4>
+                        <ul style="list-style: none; padding: 0; margin: 0; font-size: 13px; line-height: 1.85; color: var(--text-secondary);">
+                            <li style="display: flex; gap: 8px;"><span style="color: var(--success);">✓</span> Long-term owners (20+ years) facing rising taxes</li>
+                            <li style="display: flex; gap: 8px;"><span style="color: var(--success);">✓</span> Out-of-state mailing addresses on tax records</li>
+                            <li style="display: flex; gap: 8px;"><span style="color: var(--success);">✓</span> Ag-dedicated parcels with no active farming</li>
+                            <li style="display: flex; gap: 8px;"><span style="color: var(--success);">✓</span> Leasehold vs fee simple confusion</li>
+                            <li style="display: flex; gap: 8px;"><span style="color: var(--success);">✓</span> Multiple heirs in different states</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Investment Opportunities -->
+            <div class="report-section" style="background: var(--surface); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border);">
+                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+                    Investment Opportunities
+                </h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;">
+                    <div style="background: var(--bg-warm); border-radius: 12px; padding: 18px; border: 1px solid var(--border);">
+                        <div style="font-size: 12px; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Strategy 1</div>
+                        <div style="font-size: 15px; font-weight: 600; margin-bottom: 6px;">Ag-to-Residential Conversion</div>
+                        <p style="font-size: 12.5px; line-height: 1.5; color: var(--text-secondary); margin: 0;">Target ag-zoned parcels near growing areas on Maui & Big Island. Navigate ag dedication rules and county approvals for higher-density residential.</p>
+                    </div>
+                    <div style="background: var(--bg-warm); border-radius: 12px; padding: 18px; border: 1px solid var(--border);">
+                        <div style="font-size: 12px; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Strategy 2</div>
+                        <div style="font-size: 15px; font-weight: 600; margin-bottom: 6px;">Vacation Rental / Short-Term</div>
+                        <p style="font-size: 12.5px; line-height: 1.5; color: var(--text-secondary); margin: 0;">Maui & Kauai parcels with STR zoning or potential. High cash-flow potential for builders targeting mainland buyers and investors.</p>
+                    </div>
+                    <div style="background: var(--bg-warm); border-radius: 12px; padding: 18px; border: 1px solid var(--border);">
+                        <div style="font-size: 12px; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Strategy 3</div>
+                        <div style="font-size: 15px; font-weight: 600; margin-bottom: 6px;">Lava Zone Risk/Reward</div>
+                        <p style="font-size: 12.5px; line-height: 1.5; color: var(--text-secondary); margin: 0;">Big Island lava zone 1-3 parcels at steep discounts. Insurance challenges create motivated sellers; long-term appreciation for patient capital.</p>
+                    </div>
+                    <div style="background: var(--bg-warm); border-radius: 12px; padding: 18px; border: 1px solid var(--border);">
+                        <div style="font-size: 12px; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Strategy 4</div>
+                        <div style="font-size: 15px; font-weight: 600; margin-bottom: 6px;">Beachfront Teardowns & Estate Sales</div>
+                        <p style="font-size: 12.5px; line-height: 1.5; color: var(--text-secondary); margin: 0;">Mainland owners liquidating oceanfront or near-ocean legacy properties. High-value, high-regulation plays requiring deep local expertise.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ZIP / Island Breakdown -->
+            <div class="report-section" style="background: var(--surface); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border);">
+                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                    Island & ZIP Code Breakdown
+                </h3>
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 12px;">
+                        <thead>
+                            <tr style="border-bottom: 1px solid var(--divider-strong);">
+                                <th style="text-align: left; padding: 8px; font-weight: 600; color: var(--text-secondary); font-size: 11px;">Island / ZIP</th>
+                                <th style="text-align: left; padding: 8px; font-weight: 600; color: var(--text-secondary); font-size: 11px;">Characteristics</th>
+                                <th style="text-align: left; padding: 8px; font-weight: 600; color: var(--text-secondary); font-size: 11px;">Key Opportunity</th>
+                                <th style="text-align: left; padding: 8px; font-weight: 600; color: var(--text-secondary); font-size: 11px;">Risk Factors</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid var(--divider);"><td style="padding: 8px; font-weight: 600;">Oahu 96815/16/17</td><td style="padding: 8px; color: var(--text-secondary);">Honolulu metro, dense</td><td style="padding: 8px; color: var(--text-secondary);">Infill & teardown</td><td style="padding: 8px; color: var(--text-tertiary); font-size: 12px;">Highest prices, strict zoning</td></tr>
+                            <tr style="border-bottom: 1px solid var(--divider);"><td style="padding: 8px; font-weight: 600;">Maui 96753</td><td style="padding: 8px; color: var(--text-secondary);">Kihei / Wailea</td><td style="padding: 8px; color: var(--text-secondary);;">STR & resort-adjacent</td><td style="padding: 8px; color: var(--text-tertiary); font-size: 12px;">Water restrictions, tourism volatility</td></tr>
+                            <tr style="border-bottom: 1px solid var(--divider);"><td style="padding: 8px; font-weight: 600;">Big Island 96740</td><td style="padding: 8px; color: var(--text-secondary);">Kona coast</td><td style="padding: 8px; color: var(--text-secondary);">Vacation & ag conversion</td><td style="padding: 8px; color: var(--text-tertiary); font-size: 12px;">Lava zones, water access</td></tr>
+                            <tr style="border-bottom: 1px solid var(--divider);"><td style="padding: 8px; font-weight: 600;">Big Island 96720</td><td style="padding: 8px; color: var(--text-secondary);">Hilo area</td><td style="padding: 8px; color: var(--text-secondary);">Affordable ag parcels</td><td style="padding: 8px; color: var(--text-tertiary); font-size: 12px;">Rain, isolation, slower resale</td></tr>
+                            <tr style="border-bottom: 1px solid var(--divider);"><td style="padding: 8px; font-weight: 600;">Kauai 96746/56</td><td style="padding: 8px; color: var(--text-secondary);">North & South Shore</td><td style="padding: 8px; color: var(--text-secondary);">Premium & rural</td><td style="padding: 8px; color: var(--text-tertiary); font-size: 12px;">High cultural sensitivity</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Hawaii-Specific Triggers -->
+            <div class="report-section" style="background: var(--surface); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border);">
+                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                    Hawaii-Specific Triggers
+                </h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px;">
+                    <div style="background: var(--bg-warm); border-radius: 10px; padding: 14px;">
+                        <h4 style="font-size: 13px; font-weight: 600; margin-bottom: 6px;">Title & Ownership Complexity</h4>
+                        <ul style="font-size: 12px; line-height: 1.6; color: var(--text-secondary); margin: 0; padding-left: 14px;">
+                            <li>Fee simple vs leasehold (critical distinction)</li>
+                            <li>Ceded lands claims & quiet title actions</li>
+                            <li>Hawaiian Home Lands (DHHL) restrictions</li>
+                            <li>Probate complexity with mainland heirs</li>
+                        </ul>
+                    </div>
+                    <div style="background: var(--bg-warm); border-radius: 10px; padding: 14px;">
+                        <h4 style="font-size: 13px; font-weight: 600; margin-bottom: 6px;">Land Use & Zoning</h4>
+                        <ul style="font-size: 12px; line-height: 1.6; color: var(--text-secondary); margin: 0; padding-left: 14px;">
+                            <li>Agricultural dedication & rollback taxes</li>
+                            <li>Strict oceanfront & shoreline setbacks</li>
+                            <li>Lava zone insurance & building restrictions</li>
+                            <li>Water rights & meter availability</li>
+                        </ul>
+                    </div>
+                    <div style="background: var(--bg-warm); border-radius: 10px; padding: 14px;">
+                        <h4 style="font-size: 13px; font-weight: 600; margin-bottom: 6px;">Cultural & Regulatory</h4>
+                        <ul style="font-size: 12px; line-height: 1.6; color: var(--text-secondary); margin: 0; padding-left: 14px;">
+                            <li>Archaeological surveys (often required)</li>
+                            <li>Native Hawaiian cultural practitioner input</li>
+                            <li>Out-of-state absentee owner fatigue</li>
+                            <li>High property taxes on unimproved land</li>
+                        </ul>
+                    </div>
+                    <div style="background: var(--bg-warm); border-radius: 10px; padding: 14px;">
+                        <h4 style="font-size: 13px; font-weight: 600; margin-bottom: 6px;">Motivation Drivers</h4>
+                        <ul style="font-size: 12px; line-height: 1.6; color: var(--text-secondary); margin: 0; padding-left: 14px;">
+                            <li>20-40 year owners facing tax increases</li>
+                            <li>Mainland heirs wanting liquidity</li>
+                            <li>Maintenance burden on remote parcels</li>
+                            <li>Estate planning / generational transfer</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cold Call Scripts -->
+            <div class="report-section" style="background: var(--surface); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border);">
+                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    Cold Call Scripts & Objections (Hawaii)
+                </h3>
+                <div style="background: linear-gradient(135deg, rgba(16,185,129,0.1), rgba(59,130,246,0.1)); border-radius: 10px; padding: 14px; margin-bottom: 16px; border: 1px solid rgba(16,185,129,0.2);">
+                    <h4 style="font-size: 13px; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">📞 Hawaii Opener (respect-first)</h4>
+                    <p style="font-size: 13px; line-height: 1.6; color: var(--text-secondary); margin: 0; font-style: italic;">
+                        "Aloha [Name], this is [Your Name] calling from the mainland. I work with families who own land in Hawaii and are thinking about their options. I saw you own property in [Area/ZIP] and wanted to reach out with respect for the 'āina. Would you be open to a short conversation about what the current market looks like for owners like yourself? No pressure at all."
+                    </p>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 10px;">
+                    <div style="background: var(--bg-warm); border-radius: 10px; padding: 12px;">
+                        <div style="font-size: 12px; font-weight: 600; color: var(--danger); margin-bottom: 4px;">❌ "This land has been in our 'ohana for generations."</div>
+                        <p style="font-size: 11.5px; line-height: 1.5; color: var(--text-secondary); margin: 0;"><strong>✅</strong> "I completely understand and respect that connection to the land. Many families I speak with feel the same way. Sometimes the decision is about planning for the next generation or easing the tax burden while still honoring the legacy. I'm happy to share what similar parcels are doing right now if it's helpful for your planning."</p>
+                    </div>
+                    <div style="background: var(--bg-warm); border-radius: 10px; padding: 12px;">
+                        <div style="font-size: 12px; font-weight: 600; color: var(--danger); margin-bottom: 4px;">❌ "We're not from Hawaii — we inherited it."</div>
+                        <p style="font-size: 11.5px; line-height: 1.5; color: var(--text-secondary); margin: 0;"><strong>✅</strong> "That's very common. A lot of mainland families end up with Hawaii land through inheritance. It can be complicated with distance and local rules. I specialize in helping out-of-state owners understand their options cleanly and respectfully."</p>
+                    </div>
+                    <div style="background: var(--bg-warm); border-radius: 10px; padding: 12px;">
+                        <div style="font-size: 12px; font-weight: 600; color: var(--danger); margin-bottom: 4px;">❌ "The taxes are killing us."</div>
+                        <p style="font-size: 11.5px; line-height: 1.5; color: var(--text-secondary); margin: 0;"><strong>✅</strong> "That's one of the biggest pain points I hear. High assessments on vacant or ag land can add up fast. Would it be useful if I pulled the current assessed value and recent comps in your area so you have real numbers for your planning?"</p>
+                    </div>
+                    <div style="background: var(--bg-warm); border-radius: 10px; padding: 12px;">
+                        <div style="font-size: 12px; font-weight: 600; color: var(--success); margin-bottom: 4px;">✅ "Can you close fast and handle everything?"</div>
+                        <p style="font-size: 11.5px; line-height: 1.5; color: var(--text-secondary); margin: 0;"><strong>🎯</strong> "Yes. We coordinate with local title companies familiar with Hawaii transactions, handle surveys, and can close in 21-45 days on clean titles. We know the leasehold vs fee simple issues and work with local attorneys when needed."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Competition Analysis -->
+            <div class="report-section" style="background: var(--surface); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border);">
+                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    Competition Analysis
+                </h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px;">
+                    <div style="background: var(--bg-warm); border-radius: 10px; padding: 14px;">
+                        <h4 style="font-size: 13px; font-weight: 600; margin-bottom: 6px;">🏗️ Major Hawaii Builders</h4>
+                        <ul style="font-size: 12px; line-height: 1.6; color: var(--text-secondary); margin: 0; padding-left: 14px;">
+                            <li>Graham Builders (Oahu)</li>
+                            <li>Armstrong Builders</li>
+                            <li>Ticonderoga</li>
+                            <li>Lotena</li>
+                            <li>Castle & Cooke Homes Hawaii</li>
+                            <li>D.R. Horton Hawaii</li>
+                            <li>Local custom builders (Maui/Kauai)</li>
+                        </ul>
+                    </div>
+                    <div style="background: var(--bg-warm); border-radius: 10px; padding: 14px;">
+                        <h4 style="font-size: 13px; font-weight: 600; margin-bottom: 6px;">🤝 Land & Investor Activity</h4>
+                        <ul style="font-size: 12px; line-height: 1.6; color: var(--text-secondary); margin: 0; padding-left: 14px;">
+                            <li>Mainland institutional buyers (limited)</li>
+                            <li>Local family developers</li>
+                            <li>High-net-worth vacation home buyers</li>
+                            <li>Resort developers (Maui/Kauai)</li>
+                            <li>Strong off-market network required</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Due Diligence Checklist -->
+            <div class="report-section" style="background: var(--surface); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border);">
+                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                    Due Diligence Checklist (Hawaii)
+                </h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
+                    <div style="background: var(--bg-warm); border-radius: 10px; padding: 14px;">
+                        <h4 style="font-size: 13px; font-weight: 600; margin-bottom: 6px;">Title & Ownership</h4>
+                        <ul style="font-size: 12px; line-height: 1.6; color: var(--text-secondary); margin: 0; padding-left: 14px;">
+                            <li>Confirm fee simple vs leasehold</li>
+                            <li>Check for ceded land claims</li>
+                            <li>Review DHHL / Hawaiian Home Lands</li>
+                            <li>Full chain of title & probate status</li>
+                        </ul>
+                    </div>
+                    <div style="background: var(--bg-warm); border-radius: 10px; padding: 14px;">
+                        <h4 style="font-size: 13px; font-weight: 600; margin-bottom: 6px;">Land Use & Environmental</h4>
+                        <ul style="font-size: 12px; line-height: 1.6; color: var(--text-secondary); margin: 0; padding-left: 14px;">
+                            <li>Lava zone designation (Big Island)</li>
+                            <li>Ag dedication status & rollback risk</li>
+                            <li>Water meter / availability</li>
+                            <li>Cesspool conversion requirements</li>
+                        </ul>
+                    </div>
+                    <div style="background: var(--bg-warm); border-radius: 10px; padding: 14px;">
+                        <h4 style="font-size: 13px; font-weight: 600; margin-bottom: 6px;">Regulatory & Cultural</h4>
+                        <ul style="font-size: 12px; line-height: 1.6; color: var(--text-secondary); margin: 0; padding-left: 14px;">
+                            <li>Shoreline / oceanfront setbacks</li>
+                            <li>Archaeological survey needs</li>
+                            <li>Subdivision restrictions</li>
+                            <li>Solar access / renewable rules</li>
+                        </ul>
+                    </div>
+                    <div style="background: var(--bg-warm); border-radius: 10px; padding: 14px;">
+                        <h4 style="font-size: 13px; font-weight: 600; margin-bottom: 6px;">Market & Access</h4>
+                        <ul style="font-size: 12px; line-height: 1.6; color: var(--text-secondary); margin: 0; padding-left: 14px;">
+                            <li>Recent comparable sales (island-specific)</li>
+                            <li>Builder demand in micro-area</li>
+                            <li>Road access & legal frontage</li>
+                            <li>HOA / CC&Rs if applicable</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Contacts -->
+            <div class="report-section" style="background: var(--surface); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border);">
+                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    Key Contacts & Resources
+                </h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; font-size: 13px;">
+                    <div style="padding: 14px; background: var(--bg-warm); border-radius: 10px;">
+                        <strong style="color: var(--text-primary); display: block; margin-bottom: 4px;">Honolulu County Real Property Assessment</strong>
+                        <span style="color: var(--text-secondary);">808-768-3100</span><br>
+                        <a href="https://www.realpropertyhonolulu.com" target="_blank" style="color: var(--gold); text-decoration: none;">realpropertyhonolulu.com</a> · Owner search, tax records
+                    </div>
+                    <div style="padding: 14px; background: var(--bg-warm); border-radius: 10px;">
+                        <strong style="color: var(--text-primary); display: block; margin-bottom: 4px;">Hawaii County Real Property</strong>
+                        <span style="color: var(--text-secondary);">808-961-8351</span><br>
+                        <a href="https://www.hawaiicounty.gov" target="_blank" style="color: var(--gold); text-decoration: none;">hawaiicounty.gov</a> (Big Island)
+                    </div>
+                    <div style="padding: 14px; background: var(--bg-warm); border-radius: 10px;">
+                        <strong style="color: var(--text-primary); display: block; margin-bottom: 4px;">Maui County Real Property</strong>
+                        <span style="color: var(--text-secondary);">808-270-7290</span><br>
+                        <a href="https://www.mauicounty.gov" target="_blank" style="color: var(--gold); text-decoration: none;">mauicounty.gov</a>
+                    </div>
+                    <div style="padding: 14px; background: var(--bg-warm); border-radius: 10px;">
+                        <strong style="color: var(--text-primary); display: block; margin-bottom: 4px;">Kauai County Assessor</strong>
+                        <span style="color: var(--text-secondary);">808-241-4224</span><br>
+                        <a href="https://www.kauai.gov" target="_blank" style="color: var(--gold); text-decoration: none;">kauai.gov</a>
+                    </div>
+                    <div style="padding: 14px; background: var(--bg-warm); border-radius: 10px;">
+                        <strong style="color: var(--text-primary); display: block; margin-bottom: 4px;">DLNR (Dept of Land & Natural Resources)</strong>
+                        <span style="color: var(--text-secondary);">808-587-0400</span><br>
+                        <a href="https://dlnr.hawaii.gov" target="_blank" style="color: var(--gold); text-decoration: none;">dlnr.hawaii.gov</a> · Land use, conservation
+                    </div>
+                    <div style="padding: 14px; background: var(--bg-warm); border-radius: 10px;">
+                        <strong style="color: var(--text-primary); display: block; margin-bottom: 4px;">Dept of Hawaiian Home Lands (DHHL)</strong>
+                        <span style="color: var(--text-secondary);">808-620-9500</span><br>
+                        <a href="https://dhhl.hawaii.gov" target="_blank" style="color: var(--gold); text-decoration: none;">dhhl.hawaii.gov</a> · Homestead lands
+                    </div>
+                </div>
+            </div>
+
+            <!-- Report Footer -->
+            <div style="text-align: center; padding: 20px; font-size: 12px; color: var(--text-quaternary);">
+                <p>Report generated July 2026 · Sources: County Real Property offices, DLNR, DHHL, Hawaii MLS, Redfin, local knowledge</p>
+                <p style="margin-top: 4px;">For informational purposes only. Not financial or investment advice. Respect local culture and regulations.</p>
             </div>
         </div>
 
@@ -6165,6 +6568,7 @@ Is there anything specific that you're looking for right now and how much you wi
         function showReportDetail(reportId) {
             document.getElementById('reports-list-view').classList.add('hidden');
             document.getElementById('report-detail-' + reportId).classList.add('active');
+            // Hawaii report added — uses same dynamic pattern as St. Lucie and Austin
         }
         function showReportsList() {
             document.getElementById('reports-list-view').classList.remove('hidden');
