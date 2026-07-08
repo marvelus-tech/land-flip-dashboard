@@ -2831,7 +2831,19 @@ Questions? Call or text [Your Name] on [Your Phone].
                             </div>
                             <svg class="report-card-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
                         </div>
-                        
+
+                        <div class="report-card" onclick="showReportDetail('raleigh')">
+                            <div class="report-card-badge">Available Now</div>
+                            <div class="report-card-title">Raleigh, NC</div>
+                            <div class="report-card-meta">Research Triangle · Wake / Durham / Johnston | July 2026</div>
+                            <div class="report-card-metrics">
+                                <div class="report-card-metric"><div class="report-card-metric-value">1.2M</div><div class="report-card-metric-label">Population</div></div>
+                                <div class="report-card-metric"><div class="report-card-metric-value">150+</div><div class="report-card-metric-label">Land Listings</div></div>
+                                <div class="report-card-metric"><div class="report-card-metric-value">$475K</div><div class="report-card-metric-label">Median Home</div></div>
+                            </div>
+                            <svg class="report-card-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+                        </div>
+
                         <div class="report-card report-card-coming-soon">
                             <div class="report-card-badge" style="background: var(--bg-warm); color: var(--text-tertiary);">Coming Soon</div>
                             <div class="report-card-title">Nashville, TN</div>
@@ -4410,6 +4422,353 @@ Questions? Call or text [Your Name] on [Your Phone].
                 <p style="margin-top: 4px;">For informational purposes only. Not financial or investment advice. Respect local culture and regulations.</p>
             </div>
         </div>
+
+<!-- === MARKET REPORT: RALEIGH NC (THE TEMPLATE) === -->
+<div id="report-detail-raleigh" class="report-detail">
+    <div class="report-detail-header">
+        <button class="report-detail-back" onclick="showReportsList()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Back to Reports
+        </button>
+    </div>
+    <div class="reports-header" style="margin-bottom: 28px;">
+        <div style="font-size: 12px; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px;">Market Intelligence</div>
+        <h2 style="font-size: 24px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 4px;">Raleigh, NC — Land Market Report</h2>
+        <p style="font-size: 14px; color: var(--text-secondary);">Research Triangle Park | Wake, Durham, Johnston & 8 surrounding counties | July 2026</p>
+    </div>
+
+    <!-- 1. Executive Summary -->
+    <div class="report-section" style="background: var(--surface); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border);">
+        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            Executive Summary
+        </h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 16px;">
+            <div style="background: var(--bg-warm); border-radius: 12px; padding: 16px;">
+                <div style="font-size: 24px; font-weight: 700; color: var(--gold); letter-spacing: -0.03em;">1.2M</div>
+                <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Wake County Population (2026)</div>
+            </div>
+            <div style="background: var(--bg-warm); border-radius: 12px; padding: 16px;">
+                <div style="font-size: 24px; font-weight: 700; color: var(--gold); letter-spacing: -0.03em;">+2.5%</div>
+                <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Annual Growth Rate (fastest in NC)</div>
+            </div>
+            <div style="background: var(--bg-warm); border-radius: 12px; padding: 16px;">
+                <div style="font-size: 24px; font-weight: 700; color: var(--gold); letter-spacing: -0.03em;">$475K</div>
+                <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Median Home (Raleigh) / $520K Cary</div>
+            </div>
+            <div style="background: var(--bg-warm); border-radius: 12px; padding: 16px;">
+                <div style="font-size: 24px; font-weight: 700; color: var(--gold); letter-spacing: -0.03em;">75-90</div>
+                <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Avg Days on Market (Land)</div>
+            </div>
+        </div>
+        <p style="font-size: 14px; line-height: 1.6; color: var(--text-secondary);">
+            <strong style="color: var(--text-primary);">The Research Triangle (Raleigh-Durham-Chapel Hill) is the Southeast's premier tech and education hub.</strong> Home to RTP, NC State, UNC, Duke, and major employers including Cisco, IBM, SAS, Red Hat, Biogen, Apple (new campus), Google, and Microsoft. Explosive population growth (+2.5% annually) driven by transplants from NY, CA, NJ, and FL. Land opportunities in infill lots inside the Beltline, growth corridors in Wake Forest/Fuquay, and ag-to-residential conversion on the edges. Strong builder demand for 0.18–0.40 ac lots.
+        </p>
+    </div>
+
+    <!-- 2. Land Market Data Table -->
+    <div class="report-section" style="background: var(--surface); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border);">
+        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            Land Market Data
+        </h3>
+        <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                <thead>
+                    <tr style="border-bottom: 1px solid var(--divider-strong);">
+                        <th style="text-align: left; padding: 10px 12px; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">Metric</th>
+                        <th style="text-align: left; padding: 10px 12px; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">Wake County</th>
+                        <th style="text-align: left; padding: 10px 12px; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">Cary / Apex / Morrisville</th>
+                        <th style="text-align: left; padding: 10px 12px; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">Outlying (Zebulon, Rolesville)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid var(--divider);">
+                        <td style="padding: 10px 12px; font-weight: 500;">Active Land Listings</td>
+                        <td style="padding: 10px 12px; color: var(--text-secondary);">~150+</td>
+                        <td style="padding: 10px 12px; color: var(--text-secondary);">Tight inventory</td>
+                        <td style="padding: 10px 12px; color: var(--text-secondary);">Higher supply</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--divider);">
+                        <td style="padding: 10px 12px; font-weight: 500;">Median Land Price</td>
+                        <td style="padding: 10px 12px; color: var(--text-secondary);">$380K–$520K</td>
+                        <td style="padding: 10px 12px; color: var(--text-secondary);">$450K–$650K</td>
+                        <td style="padding: 10px 12px; color: var(--text-secondary);">$180K–$350K</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--divider);">
+                        <td style="padding: 10px 12px; font-weight: 500;">Avg Days on Market</td>
+                        <td style="padding: 10px 12px; color: var(--text-secondary);">75-90 days</td>
+                        <td style="padding: 10px 12px; color: var(--text-secondary);">60-80 days</td>
+                        <td style="padding: 10px 12px; color: var(--text-secondary);">90-120 days</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--divider);">
+                        <td style="padding: 10px 12px; font-weight: 500;">Typical Lot Size</td>
+                        <td style="padding: 10px 12px; color: var(--text-secondary);">0.18–0.40 ac</td>
+                        <td style="padding: 10px 12px; color: var(--text-secondary);">0.20–0.35 ac</td>
+                        <td style="padding: 10px 12px; color: var(--text-secondary);">0.5–2+ ac</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px 12px; font-weight: 500;">Price per Acre (Infill)</td>
+                        <td style="padding: 10px 12px; color: var(--text-secondary);">$1.4M–$2.1M</td>
+                        <td style="padding: 10px 12px; color: var(--text-secondary);">$1.6M–$2.4M</td>
+                        <td style="padding: 10px 12px; color: var(--text-secondary);">$350K–$650K</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 3. Owner Profile / Target Seller -->
+    <div class="report-section" style="background: var(--surface); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border);">
+        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Owner Profile & Target Seller
+        </h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+            <div>
+                <h4 style="font-size: 13px; font-weight: 600; margin-bottom: 10px; color: var(--text-primary);">Best Targets</h4>
+                <ul style="list-style: none; padding: 0; margin: 0; font-size: 13px; line-height: 1.9; color: var(--text-secondary);">
+                    <li style="display: flex; gap: 8px;"><span style="color: var(--gold);">●</span> <strong>Long-time NC holders (20+ yrs)</strong> — Triangle natives ready to cash out</li>
+                    <li style="display: flex; gap: 8px;"><span style="color: var(--gold);">●</span> <strong>Out-of-state heirs</strong> — inherited from parents, now in CA/NY/FL</li>
+                    <li style="display: flex; gap: 8px;"><span style="color: var(--gold);">●</span> <strong>IBM / SAS legacy retirees</strong> — moving to FL or downsizing</li>
+                    <li style="display: flex; gap: 8px;"><span style="color: var(--gold);">●</span> <strong>Ag land owners under conversion pressure</strong> — Wake/Johnston edges</li>
+                    <li style="display: flex; gap: 8px;"><span style="color: var(--gold);">●</span> <strong>Estate sales / probate</strong> — NC summary administration for small estates</li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="font-size: 13px; font-weight: 600; margin-bottom: 10px; color: var(--text-primary);">Data Sources</h4>
+                <ul style="list-style: none; padding: 0; margin: 0; font-size: 13px; line-height: 1.9; color: var(--text-secondary);">
+                    <li style="display: flex; gap: 8px;"><span style="color: var(--success);">✓</span> <a href="https://www.wakegov.com/" target="_blank" style="color: var(--text-primary); text-decoration: none; border-bottom: 1px solid var(--border);">Wake County Revenue / iMAPS</a></li>
+                    <li style="display: flex; gap: 8px;"><span style="color: var(--success);">✓</span> Durham County Tax GIS</li>
+                    <li style="display: flex; gap: 8px;"><span style="color: var(--success);">✓</span> Johnston County Tax</li>
+                    <li style="display: flex; gap: 8px;"><span style="color: var(--success);">✓</span> NC State University Extension (soils)</li>
+                    <li style="display: flex; gap: 8px;"><span style="color: var(--success);">✓</span> Zillow / Redfin / TMLS for comps</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. Investment Opportunities -->
+    <div class="report-section" style="background: var(--surface); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border);">
+        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+            Investment Opportunities
+        </h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;">
+            <div style="background: var(--bg-warm); border-radius: 12px; padding: 18px; border: 1px solid var(--border);">
+                <div style="font-size: 12px; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Strategy 1</div>
+                <div style="font-size: 15px; font-weight: 600; margin-bottom: 6px;">RTP Infill Wholesaling</div>
+                <p style="font-size: 12.5px; line-height: 1.5; color: var(--text-secondary); margin: 0;">Target 0.18–0.33 ac lots inside Beltline (27604, 27603, 27609). Assign to Garman, Dixon Kirby, Loyd, Heartwood. Fastest flips.</p>
+            </div>
+            <div style="background: var(--bg-warm); border-radius: 12px; padding: 18px; border: 1px solid var(--border);">
+                <div style="font-size: 12px; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Strategy 2</div>
+                <div style="font-size: 15px; font-weight: 600; margin-bottom: 6px;">Growth Corridor Banking</div>
+                <p style="font-size: 12.5px; line-height: 1.5; color: var(--text-secondary); margin: 0;">Wake Forest (27587), Fuquay-Varina (27526), Zebulon (27597). Hold 3–5 yrs as Apple/Google expansions ripple outward.</p>
+            </div>
+            <div style="background: var(--bg-warm); border-radius: 12px; padding: 18px; border: 1px solid var(--border);">
+                <div style="font-size: 12px; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Strategy 3</div>
+                <div style="font-size: 15px; font-weight: 600; margin-bottom: 6px;">Ag Land Conversion</div>
+                <p style="font-size: 12.5px; line-height: 1.5; color: var(--text-secondary); margin: 0;">Johnston & Harnett edges. Buy raw ag, rezone or package for production builders (D.R. Horton, Ryan, Pulte).</p>
+            </div>
+            <div style="background: var(--bg-warm); border-radius: 12px; padding: 18px; border: 1px solid var(--border);">
+                <div style="font-size: 12px; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Strategy 4</div>
+                <div style="font-size: 15px; font-weight: 600; margin-bottom: 6px;">Retiree Owner Financing</div>
+                <p style="font-size: 12.5px; line-height: 1.5; color: var(--text-secondary); margin: 0;">IBM/SAS legacy owners retiring to FL. Offer owner-finance notes; sell the paper or keep cash flow.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. ZIP Code / Submarket Breakdown -->
+    <div class="report-section" style="background: var(--surface); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border);">
+        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            ZIP Code / Submarket Breakdown
+        </h3>
+        <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px;">Prices vary sharply by proximity to RTP, downtown Raleigh, and new corporate campuses.</p>
+
+        <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 12px;">
+                <thead>
+                    <tr style="border-bottom: 1px solid var(--divider-strong);">
+                        <th style="text-align: left; padding: 8px; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase;">ZIP</th>
+                        <th style="text-align: left; padding: 8px; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase;">Area</th>
+                        <th style="text-align: left; padding: 8px; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase;">Land Price Range</th>
+                        <th style="text-align: left; padding: 8px; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase;">Owner Profile</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid var(--divider);"><td style="padding: 8px; font-weight: 600;">27604</td><td style="padding: 8px; color: var(--text-secondary);">Inside Beltline / Mordecai</td><td style="padding: 8px;">$350K–$520K</td><td style="padding: 8px;"><span style="color: var(--gold);">●</span> Long-time locals, heirs</td></tr>
+                    <tr style="border-bottom: 1px solid var(--divider);"><td style="padding: 8px; font-weight: 600;">27603</td><td style="padding: 8px; color: var(--text-secondary);">Southwest Raleigh</td><td style="padding: 8px;">$280K–$450K</td><td style="padding: 8px;"><span style="color: var(--success);">●</span> Working class + investors</td></tr>
+                    <tr style="border-bottom: 1px solid var(--divider);"><td style="padding: 8px; font-weight: 600;">27513 / 27560</td><td style="padding: 8px; color: var(--text-secondary);">Cary / Morrisville (RTP edge)</td><td style="padding: 8px;">$420K–$650K</td><td style="padding: 8px;"><span style="color: var(--gold);">●</span> Tech transplants, high demand</td></tr>
+                    <tr style="border-bottom: 1px solid var(--divider);"><td style="padding: 8px; font-weight: 600;">27502</td><td style="padding: 8px; color: var(--text-secondary);">Apex</td><td style="padding: 8px;">$380K–$550K</td><td style="padding: 8px;"><span style="color: var(--success);">●</span> Families, good schools</td></tr>
+                    <tr style="border-bottom: 1px solid var(--divider);"><td style="padding: 8px; font-weight: 600;">27587</td><td style="padding: 8px; color: var(--text-secondary);">Wake Forest</td><td style="padding: 8px;">$250K–$420K</td><td style="padding: 8px;"><span style="color: var(--gold);">●</span> Growth corridor, builders active</td></tr>
+                    <tr style="border-bottom: 1px solid var(--divider);"><td style="padding: 8px; font-weight: 600;">27597 / 27571</td><td style="padding: 8px; color: var(--text-secondary);">Zebulon / Rolesville</td><td style="padding: 8px;">$160K–$320K</td><td style="padding: 8px;"><span style="color: var(--success);">●</span> Ag heirs, out-of-state owners</td></tr>
+                    <tr><td style="padding: 8px; font-weight: 600;">27601 / 27612</td><td style="padding: 8px; color: var(--text-secondary);">Downtown / North Hills</td><td style="padding: 8px;">$550K+</td><td style="padding: 8px;"><span style="color: var(--danger);">●</span> Sophisticated / premium</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 6. State/Market-Specific Triggers -->
+    <div class="report-section" style="background: var(--surface); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border);">
+        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><path d="M12 6v6l4 2"/></svg>
+            NC / Triangle-Specific Triggers
+        </h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; font-size: 13px;">
+            <div style="background: var(--bg-warm); border-radius: 10px; padding: 14px; border-left: 3px solid var(--gold);">
+                <strong style="color: var(--text-primary);">Probate & Heirs</strong><br>
+                <span style="color: var(--text-secondary); font-size: 12.5px;">NC has streamlined summary administration for estates under $20K. Many Triangle natives who moved to FL/CA are now inheriting and want out fast.</span>
+            </div>
+            <div style="background: var(--bg-warm); border-radius: 10px; padding: 14px; border-left: 3px solid var(--gold);">
+                <strong style="color: var(--text-primary);">Tax Delinquency Pressure</strong><br>
+                <span style="color: var(--text-secondary); font-size: 12.5px;">Rapid appreciation + rising county taxes. Many long-term owners on fixed incomes are struggling.</span>
+            </div>
+            <div style="background: var(--bg-warm); border-radius: 10px; padding: 14px; border-left: 3px solid var(--gold);">
+                <strong style="color: var(--text-primary);">Corporate Retirements</strong><br>
+                <span style="color: var(--text-secondary); font-size: 12.5px;">IBM, SAS, Cisco legacy employees retiring in waves. Many own vacant lots from the 80s/90s.</span>
+            </div>
+            <div style="background: var(--bg-warm); border-radius: 10px; padding: 14px; border-left: 3px solid var(--gold);">
+                <strong style="color: var(--text-primary);">Military Spillover</strong><br>
+                <span style="color: var(--text-secondary); font-size: 12.5px;">Fort Bragg / Camp Lejeune families relocating to the Triangle for jobs and schools.</span>
+            </div>
+        </div>
+        <div style="margin-top: 14px; padding: 12px; background: var(--bg-warm); border-radius: 10px; font-size: 12.5px;">
+            <strong style="color: var(--text-primary);">Cold Call Angle:</strong> "Tech growth and RTP expansion are pushing values higher every year. Your land is sitting in the path of progress. A lot of folks in your situation are taking a fair cash offer now rather than waiting another tax bill."
+        </div>
+    </div>
+
+    <!-- 7. Cold Call Scripts & Objections -->
+    <div class="report-section" style="background: var(--surface); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border);">
+        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            Cold Call Scripts & Objections
+        </h3>
+
+        <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; margin-bottom: 8px; color: var(--gold); text-transform: uppercase; letter-spacing: 0.05em;">SMS (Low Sophistication / Heirs)</h4>
+            <div style="background: var(--bg-warm); border-radius: 10px; padding: 14px; font-family: monospace; font-size: 13px; line-height: 1.5; color: var(--text-secondary);">
+                Hi [Name], this is [Your Name]. I buy vacant land around Raleigh and noticed you own the lot at [Address]. Would you consider a fair cash offer? No pressure at all.
+            </div>
+        </div>
+
+        <div style="margin-bottom: 16px;">
+            <h4 style="font-size: 13px; font-weight: 600; margin-bottom: 8px; color: var(--gold); text-transform: uppercase; letter-spacing: 0.05em;">Phone Script (RTP Growth Angle)</h4>
+            <div style="background: var(--bg-warm); border-radius: 10px; padding: 14px; font-size: 13px; line-height: 1.6; color: var(--text-secondary);">
+                "Hi [Name], this is [Your Name] with [Company]. I'm reaching out because I work with local builders who are actively looking for lots near RTP and the new Apple campus. I saw you own [Address] and wondered if you've thought about what you might do with it. A lot of families in your situation have taken a clean cash offer rather than another tax season. Would you be open to a quick, no-obligation number?"
+            </div>
+        </div>
+
+        <div>
+            <h4 style="font-size: 13px; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">Common Objections & Responses</h4>
+            <ul style="font-size: 12.5px; line-height: 1.7; color: var(--text-secondary); margin: 0; padding-left: 18px;">
+                <li><strong>"I want to keep it for my kids."</strong> — "Totally understand. A lot of the heirs we work with ended up in California or Florida and are now paying taxes on land they never visit. Happy to run numbers both ways."</li>
+                <li><strong>"The market is too hot, I'll wait."</strong> — "Fair. Just know the builders I'm working with (Garman, Dixon Kirby, Loyd) are paying strong cash today because they have buyers lined up for 2026-27 deliveries."</li>
+                <li><strong>"I don't want to deal with agents."</strong> — "Perfect — that's why we buy direct with our own contract. Close in 10-14 days, no commissions, no showings."</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 8. Competition Analysis -->
+    <div class="report-section" style="background: var(--surface); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border);">
+        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Competition Analysis (Active Buyers)
+        </h3>
+        <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.7;">
+            <strong style="color: var(--text-primary);">Production / Volume:</strong> D.R. Horton Raleigh, Ryan Homes, Pulte, Lennar, Toll Brothers<br>
+            <strong style="color: var(--text-primary);">Custom / Infill (best for small lots):</strong> Garman Homes, Dixon Kirby Custom Homes, Robuck Design Build, Boone Homes, Heartwood Custom Homes, Tonic Design + Build, Brightleaf Builders, Mid City Custom Homes, Loyd Builders<br><br>
+            <strong>Key Insight:</strong> Garman, Dixon Kirby, Loyd, and Heartwood are the most consistent buyers of 0.20–0.35 ac infill lots inside the Beltline and in Cary/Apex. They pay the strongest for clean, buildable parcels with utilities at the street.
+        </div>
+    </div>
+
+    <!-- 9. Due Diligence Checklist -->
+    <div class="report-section" style="background: var(--surface); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border);">
+        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            Due Diligence Checklist
+        </h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
+            <div style="background: var(--bg-warm); border-radius: 10px; padding: 14px;">
+                <h4 style="font-size: 13px; font-weight: 600; margin-bottom: 6px;">Title & Tax</h4>
+                <ul style="font-size: 12px; line-height: 1.6; color: var(--text-secondary); margin: 0; padding-left: 14px;">
+                    <li>Wake County Revenue / iMAPS</li>
+                    <li>Durham & Johnston tax cards</li>
+                    <li>Probate / heir search</li>
+                    <li>Tax status & delinquencies</li>
+                </ul>
+            </div>
+            <div style="background: var(--bg-warm); border-radius: 10px; padding: 14px;">
+                <h4 style="font-size: 13px; font-weight: 600; margin-bottom: 6px;">Physical & Environmental</h4>
+                <ul style="font-size: 12px; line-height: 1.6; color: var(--text-secondary); margin: 0; padding-left: 14px;">
+                    <li>FEMA flood (Matthew/Irene history)</li>
+                    <li>Well & septic (many areas)</li>
+                    <li>NC State soils report</li>
+                    <li>Wetlands / ETJ</li>
+                </ul>
+            </div>
+            <div style="background: var(--bg-warm); border-radius: 10px; padding: 14px;">
+                <h4 style="font-size: 13px; font-weight: 600; margin-bottom: 6px;">Zoning & Entitlements</h4>
+                <ul style="font-size: 12px; line-height: 1.6; color: var(--text-secondary); margin: 0; padding-left: 14px;">
+                    <li>Current zoning (R-1, R-2, R-4, R-6, MX)</li>
+                    <li>Impact fees & greenway requirements</li>
+                    <li>Historic overlays (Oakwood, Boylan)</li>
+                    <li>City/County planning approvals</li>
+                </ul>
+            </div>
+            <div style="background: var(--bg-warm); border-radius: 10px; padding: 14px;">
+                <h4 style="font-size: 13px; font-weight: 600; margin-bottom: 6px;">Market & Builder</h4>
+                <ul style="font-size: 12px; line-height: 1.6; color: var(--text-secondary); margin: 0; padding-left: 14px;">
+                    <li>Recent comps (last 6-12 mo)</li>
+                    <li>Builder interest in exact micro-area</li>
+                    <li>Utilities at street confirmation</li>
+                    <li>HOA / deed restrictions</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 10. Key Contacts & Resources -->
+    <div class="report-section" style="background: var(--surface); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border);">
+        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Key Contacts & Resources
+        </h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; font-size: 13px;">
+            <div style="padding: 14px; background: var(--bg-warm); border-radius: 10px;">
+                <strong style="color: var(--text-primary); display: block; margin-bottom: 4px;">Wake County Revenue / iMAPS</strong>
+                <a href="https://www.wakegov.com/" target="_blank" style="color: var(--gold); text-decoration: none;">wakegov.com</a> · Owner search, GIS, tax
+            </div>
+            <div style="padding: 14px; background: var(--bg-warm); border-radius: 10px;">
+                <strong style="color: var(--text-primary); display: block; margin-bottom: 4px;">Durham County Tax</strong>
+                <span style="color: var(--text-secondary); font-size: 12px;">durhamcountync.gov · Tax & GIS</span>
+            </div>
+            <div style="padding: 14px; background: var(--bg-warm); border-radius: 10px;">
+                <strong style="color: var(--text-primary); display: block; margin-bottom: 4px;">Raleigh Planning</strong>
+                <a href="https://raleighnc.gov/planning" target="_blank" style="color: var(--gold); text-decoration: none;">raleighnc.gov</a>
+            </div>
+            <div style="padding: 14px; background: var(--bg-warm); border-radius: 10px;">
+                <strong style="color: var(--text-primary); display: block; margin-bottom: 4px;">Cary / Apex Planning</strong>
+                <span style="color: var(--text-secondary); font-size: 12px;">townofcary.org / apexnc.org</span>
+            </div>
+            <div style="padding: 14px; background: var(--bg-warm); border-radius: 10px;">
+                <strong style="color: var(--text-primary); display: block; margin-bottom: 4px;">NC Secretary of State</strong>
+                <span style="color: var(--text-secondary); font-size: 12px;">sosnc.gov · Corporate records</span>
+            </div>
+            <div style="padding: 14px; background: var(--bg-warm); border-radius: 10px;">
+                <strong style="color: var(--text-primary); display: block; margin-bottom: 4px;">NC Real Estate Commission</strong>
+                <span style="color: var(--text-secondary); font-size: 12px;">ncrec.gov</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div style="text-align: center; padding: 20px; font-size: 12px; color: var(--text-quaternary);">
+        <p>Report generated July 2026 · Sources: Wake County iMAPS, U.S. Census, Redfin, Zillow, Triangle MLS, NC State Extension</p>
+        <p style="margin-top: 4px;">This report is a TEMPLATE. Copy the structure, replace data, and you have a new market report.</p>
+    </div>
+</div>
+<!-- === END MARKET REPORT: RALEIGH NC (THE TEMPLATE) === -->
 
         <!-- Titles Content -->
         <div id="titles-content" class="content-section">
