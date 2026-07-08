@@ -1,0 +1,61 @@
+======================================================================
+LAND LOT ENTITY AUDIT REPORT
+Generated: 2026-07-08T19:06:37.780999
+======================================================================
+
+TOTAL RECORDS AUDITED: 240
+KEPT (Individual owners):   204
+FLAGGED (Review needed):    5
+REMOVED (Corp/Trust):       31
+
+----------------------------------------------------------------------
+BY ENTITY TYPE:
+  corporate                :  15 (  6.2%)
+  estate                   :   4 (  1.7%)
+  individual               : 204 ( 85.0%)
+  multiple_individuals     :   1 (  0.4%)
+  trust                    :  16 (  6.7%)
+
+----------------------------------------------------------------------
+REMOVED RECORDS (Corporate / Trust / Institutional):
+  8502  GROVELAND DR                            | REED GUTNIKOV FAMILY TRUST          | trust_entity
+  1409  BELLA VISTA DR                          | HOESTEREY REVOCABLE TRUST           | trust_entity
+  1413  BELLA VISTA DR                          | TG&A LIVING TRUST                   | trust_entity
+  1421  BELLA VISTA DR                          | VENABLE LIVING TRUST                | trust_entity
+  9223  PENINSULA DR                            | COTTON CYNTHIA CAFFEY TRUST         | trust_entity
+  9227  PENINSULA DR                            | WHITE ROCK LAKE HOMES LLC           | corporate_entity
+  9231  PENINSULA DR                            | FARLEY INVESTMENTS LP               | corporate_entity
+  9234  PENINSULA DR                            | MOOCK LIVING TRUST THE              | trust_entity
+  10130  EASTWOOD DR                            | ALTO ASSET COMPANY 6 LLC            | corporate_entity
+  10131  EASTWOOD DR                            | ZEI FLIPPING FUN LLC                | corporate_entity
+  1433  SAN RAFAEL DR                           | DIGNAN RICKY D REVOCABLE TRUST      | trust_entity
+  6803  CASA LOMA AVE                           | BROWARD COUNTY CONSULTING LLC       | corporate_entity
+  6820  CASA LOMA AVE                           | MI CASA TRUST &                     | trust_entity
+  3022  FOREST LN                               | G3 PROPERTY MANAGEMENT LLC          | corporate_entity
+  3022  FOREST LN                               | LUTHER J BERNSTEIN LLC              | corporate_entity
+  3022  FOREST LN                               | LUTHER J BERNSTEIN LLC              | corporate_entity
+  3022  FOREST LN                               | NEW VISION TRUST COMPANY            | corporate_entity, trust_entity
+  1813  PARK AVE                                | POTHARAJU QOF INC                   | corporate_entity
+  1103  FERNDALE AVE                            | ARMETTA PROPERTIES LLC              | corporate_entity
+  2931  ROYAL LN                                | JEES TRUST                          | trust_entity
+  9601  WALNUT ST                               | UPTOWN GROUP LLC                    | corporate_entity
+  9909  CRESTLINE AVE                           | CRESTLINE TRUST THE                 | trust_entity
+  12111  CRESTLINE AVE                          | RICHTER LIVING TRUST                | trust_entity
+  6007  DAVENPORT RD                            | ANGEL BLUFF LLC                     | corporate_entity
+  6005  MIMOSA LN                               | MACAN HOMES INC                     | corporate_entity
+  6011  MIMOSA LN                               | HARDIN LIVING TRUST                 | trust_entity
+  6035  MIMOSA LN                               | TOMLIN LIVING TRUST                 | trust_entity
+  6130  STICHTER AVE                            | DSP LIVING TRUST THE &              | trust_entity
+  6230  STICHTER AVE                            | 1555 TRUST                          | trust_entity
+  1  DORSET PL                                  | DAO REVOCABLE TRUST THE             | trust_entity
+  4526  DORSET RD                               | BGI DORSET LLC                      | corporate_entity
+
+----------------------------------------------------------------------
+FLAGGED RECORDS (Estates / Multi-owner / Review):
+  1410  BELLA VISTA DR                          | SHERMAN MARJORY EST OF              | estate_probate
+  3218  INWOOD RD                               | GUTIERREZ OTILA E EST OF            | estate_probate
+  2904  NORTHAVEN RD                            | ESCOBEDO JOSE DE JESUS EST OF       | estate_probate
+  2958  NORTHAVEN RD                            | KUMAR VINAY EST OF & LIANA          | estate_probate
+  6139  STICHTER AVE                            | SEAY FRANK M ET AL                  | multiple_owners
+
+======================================================================
