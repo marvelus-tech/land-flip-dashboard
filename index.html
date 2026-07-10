@@ -2450,6 +2450,10 @@
         .report-detail-back:hover { background: var(--bg-warm); border-color: var(--border-strong); color: var(--text-primary); }
         .reports-list-view { display: block; }
         .reports-list-view.hidden { display: none; }
+        .jv-task-detail { display: none; }
+        .jv-task-detail.active { display: block; }
+        .jv-list-view { display: block; }
+        .jv-list-view.hidden { display: none; }
 
     </style>
 </head>
@@ -2510,6 +2514,7 @@
                 <button class="segment" onclick="switchTab('contracts')" data-tab="contracts">Contracts</button>
                 <button class="segment" onclick="switchTab('titles')" data-tab="titles">Titles</button>
                 <button class="segment" onclick="switchTab('reports')" data-tab="reports">Reports</button>
+                <button class="segment" onclick="switchTab('jv')" data-tab="jv">JV Tasks</button>
                 </div>
         </div>
 
@@ -7900,6 +7905,379 @@ Questions? Call or text [Your Name] on [Your Phone].
 </div>
 <!-- === END MARKET REPORT: RALEIGH NC (THE TEMPLATE) === -->
 
+        <!-- JV Tasks Content -->
+        <div id="jv-content" class="content-section">
+            <div class="list-panel jv-panel" style="padding: 24px 28px;">
+                <div id="jv-list-view" class="jv-list-view">
+                    <div style="margin-bottom: 28px;">
+                        <div style="font-size: 12px; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px;">Joint Venture Opportunities</div>
+                        <h2 style="font-size: 24px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 4px;">JV Tasks</h2>
+                        <p style="font-size: 14px; color: var(--text-secondary);">Active land deals, builder outreach lists, and partnership opportunities</p>
+                    </div>
+
+                    <div class="reports-list">
+                        <div class="report-card" onclick="showJVTaskDetail('burleson')">
+                            <div class="report-card-badge" style="background: rgba(16,185,129,0.1); color: #10b981;">Urgent — Close by July</div>
+                            <div class="report-card-title">Burleson Tallgrass Builder Outreach</div>
+                            <div class="report-card-meta">Johnson County, TX · Tallgrass $1.4B Development · 30 Builder Contacts</div>
+                            <div class="report-card-metrics">
+                                <div class="report-card-metric"><div class="report-card-metric-value">$850K</div><div class="report-card-metric-label">Asking Price</div></div>
+                                <div class="report-card-metric"><div class="report-card-metric-value">$1.3M</div><div class="report-card-metric-label">Comps</div></div>
+                                <div class="report-card-metric"><div class="report-card-metric-value">30</div><div class="report-card-metric-label">Builders</div></div>
+                            </div>
+                            <svg class="report-card-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+                        </div>
+
+                        <div class="report-card report-card-coming-soon">
+                            <div class="report-card-badge" style="background: var(--bg-warm); color: var(--text-tertiary);">Coming Soon</div>
+                            <div class="report-card-title" style="color: var(--text-tertiary);">Next JV Task</div>
+                            <div class="report-card-meta">Placeholder for future joint venture opportunities</div>
+                            <div class="report-card-metrics">
+                                <div class="report-card-metric"><div class="report-card-metric-value" style="color: var(--text-tertiary);">—</div><div class="report-card-metric-label">Price</div></div>
+                                <div class="report-card-metric"><div class="report-card-metric-value" style="color: var(--text-tertiary);">—</div><div class="report-card-metric-label">Comps</div></div>
+                                <div class="report-card-metric"><div class="report-card-metric-value" style="color: var(--text-tertiary);">—</div><div class="report-card-metric-label">Contacts</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- JV Task Detail: Burleson Tallgrass -->
+                <div id="jv-task-detail-burleson" class="jv-task-detail">
+                    <div class="report-detail-header">
+                        <button class="report-detail-back" onclick="showJVTaskList()">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                            Back to JV Tasks
+                        </button>
+                    </div>
+
+                    <div class="reports-header" style="margin-bottom: 28px;">
+                        <div style="font-size: 12px; font-weight: 600; color: #10b981; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px;">Urgent — Close by July 2026</div>
+                        <h2 style="font-size: 24px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 4px;">Burleson Tallgrass Builder Outreach</h2>
+                        <p style="font-size: 14px; color: var(--text-secondary);">Johnson County, TX · Entrance to $1.4B Tallgrass Project · 30 Builder Contacts</p>
+                    </div>
+
+                    <!-- Deal Summary -->
+                    <div class="report-section" style="background: var(--surface); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border);">
+                        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+                            Deal Summary
+                        </h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 16px;">
+                            <div style="background: var(--bg-warm); border-radius: 12px; padding: 16px;">
+                                <div style="font-size: 24px; font-weight: 700; color: #10b981; letter-spacing: -0.03em;">$850K</div>
+                                <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Asking Price</div>
+                            </div>
+                            <div style="background: var(--bg-warm); border-radius: 12px; padding: 16px;">
+                                <div style="font-size: 24px; font-weight: 700; color: var(--gold); letter-spacing: -0.03em;">$1.3M</div>
+                                <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Comps (1 mi away)</div>
+                            </div>
+                            <div style="background: var(--bg-warm); border-radius: 12px; padding: 16px;">
+                                <div style="font-size: 24px; font-weight: 700; color: var(--gold); letter-spacing: -0.03em;">$450K+</div>
+                                <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Est. Spread</div>
+                            </div>
+                            <div style="background: var(--bg-warm); border-radius: 12px; padding: 16px;">
+                                <div style="font-size: 24px; font-weight: 700; color: #10b981; letter-spacing: -0.03em;">50/50</div>
+                                <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">JV Structure</div>
+                            </div>
+                        </div>
+                        <p style="font-size: 14px; line-height: 1.6; color: var(--text-secondary);">
+                            <strong style="color: var(--text-primary);">Raw land parcel at the entrance to the $1.4B Tallgrass development in Burleson, TX.</strong> Outside city limits, no restrictions, road frontage, 2 water meters, 2 septic systems, electricity on site. Suitable for commercial, residential, or light industrial. Contract signed with seller, good until October, but sellers need to close ASAP due to family circumstances. Seeking a cash buyer or JV partner (50/50) to close before end of July.
+                        </p>
+                    </div>
+
+                    <!-- Property Features -->
+                    <div class="report-section" style="background: var(--surface); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border);">
+                        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                            Property Features
+                        </h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;">
+                            <div style="background: var(--bg-warm); border-radius: 10px; padding: 14px;">
+                                <div style="font-size: 12px; font-weight: 600; color: #10b981; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Location</div>
+                                <div style="font-size: 14px; font-weight: 500; color: var(--text-primary);">Outside city limits, Burleson, TX</div>
+                                <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Entrance to $1.4B Tallgrass project</div>
+                            </div>
+                            <div style="background: var(--bg-warm); border-radius: 10px; padding: 14px;">
+                                <div style="font-size: 12px; font-weight: 600; color: #10b981; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Zoning</div>
+                                <div style="font-size: 14px; font-weight: 500; color: var(--text-primary);">No restrictions</div>
+                                <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Commercial / Residential / Light Industrial</div>
+                            </div>
+                            <div style="background: var(--bg-warm); border-radius: 10px; padding: 14px;">
+                                <div style="font-size: 12px; font-weight: 600; color: #10b981; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Utilities</div>
+                                <div style="font-size: 14px; font-weight: 500; color: var(--text-primary);">2 Water Meters · 2 Septic Systems</div>
+                                <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Electricity on site · Road frontage</div>
+                            </div>
+                            <div style="background: var(--bg-warm); border-radius: 10px; padding: 14px;">
+                                <div style="font-size: 12px; font-weight: 600; color: #10b981; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Timeline</div>
+                                <div style="font-size: 14px; font-weight: 500; color: var(--text-primary);">Close by end of July 2026</div>
+                                <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Contract valid through October 2026</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Calling Strategy -->
+                    <div class="report-section" style="background: var(--surface); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border);">
+                        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            Calling Strategy
+                        </h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; font-size: 13px; line-height: 1.6; color: var(--text-secondary);">
+                            <div style="background: var(--bg-warm); border-radius: 10px; padding: 14px;">
+                                <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">1. Lead with the deal</div>
+                                "I have a raw land parcel at the entrance to the Tallgrass development in Burleson. 2 water meters, 2 septics, electricity, no restrictions. Comps at $1.3M. Are you buying land there?"
+                            </div>
+                            <div style="background: var(--bg-warm); border-radius: 10px; padding: 14px;">
+                                <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">2. Ask for land acquisition</div>
+                                Don't waste time with home sales agents. Ask directly for the "land acquisition manager" or "new community development" team.
+                            </div>
+                            <div style="background: var(--bg-warm); border-radius: 10px; padding: 14px;">
+                                <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">3. Emphasize speed for locals</div>
+                                Local builders can move fast. Emphasize utilities already in place and a 30-day close capability.
+                            </div>
+                            <div style="background: var(--bg-warm); border-radius: 10px; padding: 14px;">
+                                <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">4. Best calling times</div>
+                                Tue–Thu, 9am–11am or 2pm–4pm Central Time. Call national builder DFW divisions directly.
+                            </div>
+                            <div style="background: var(--bg-warm); border-radius: 10px; padding: 14px;">
+                                <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">5. Follow-up cadence</div>
+                                Call once, leave voicemail, send email with deal summary. Follow up in 48 hours. These guys are busy but answer when the deal is right.
+                            </div>
+                            <div style="background: var(--bg-warm); border-radius: 10px; padding: 14px;">
+                                <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">6. Copy/paste opener</div>
+                                "I have raw land at the Tallgrass entrance in Burleson. No restrictions, 2 water meters, 2 septics, electricity. Comps at $1.3M. Can we JV or do you want to buy outright?"
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Priority Targets (Tier 1) -->
+                    <div class="report-section" style="background: var(--surface); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border);">
+                        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            Tier 1 — Call These First
+                        </h3>
+                        <div style="overflow-x: auto;">
+                            <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                                <thead>
+                                    <tr style="border-bottom: 1px solid var(--divider-strong);">
+                                        <th style="text-align: left; padding: 10px 12px; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">Builder</th>
+                                        <th style="text-align: left; padding: 10px 12px; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">Phone</th>
+                                        <th style="text-align: left; padding: 10px 12px; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">Email / Web</th>
+                                        <th style="text-align: left; padding: 10px 12px; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">Why Priority</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border-bottom: 1px solid var(--divider);">
+                                        <td style="padding: 10px 12px; font-weight: 500;">TNT Builders</td>
+                                        <td style="padding: 10px 12px; color: var(--text-secondary);">817-447-0767</td>
+                                        <td style="padding: 10px 12px; color: var(--text-secondary);">info@tntbuilders.com</td>
+                                        <td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">Burleson-based, commercial + luxury custom, knows area</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid var(--divider);">
+                                        <td style="padding: 10px 12px; font-weight: 500;">D.R. Horton — DFW West</td>
+                                        <td style="padding: 10px 12px; color: var(--text-secondary);">817-230-0800</td>
+                                        <td style="padding: 10px 12px; color: var(--text-secondary);">drhorton.com/texas/fort-worth</td>
+                                        <td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">America's largest builder, active in Burleson, land acquisition dept</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid var(--divider);">
+                                        <td style="padding: 10px 12px; font-weight: 500;">SWP Custom Homes</td>
+                                        <td style="padding: 10px 12px; color: var(--text-secondary);">817-389-2900</td>
+                                        <td style="padding: 10px 12px; color: var(--text-secondary);">info@swpcustomhomes.com</td>
+                                        <td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">Godley-based, builds in Burleson/Joshua, land development</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid var(--divider);">
+                                        <td style="padding: 10px 12px; font-weight: 500;">J. Lambert Custom Homes</td>
+                                        <td style="padding: 10px 12px; color: var(--text-secondary);">817-992-4983</td>
+                                        <td style="padding: 10px 12px; color: var(--text-secondary);">jlambertcustomhomes.com · 800-853-5540</td>
+                                        <td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">33+ years in Burleson, award-winning luxury, bigger budgets</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid var(--divider);">
+                                        <td style="padding: 10px 12px; font-weight: 500;">Perry Homes</td>
+                                        <td style="padding: 10px 12px; color: var(--text-secondary);">1-800-247-3779</td>
+                                        <td style="padding: 10px 12px; color: var(--text-secondary);">perryhomes.com</td>
+                                        <td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">Texas' largest woman-owned builder, always buying land</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid var(--divider);">
+                                        <td style="padding: 10px 12px; font-weight: 500;">Highland Homes — DFW</td>
+                                        <td style="padding: 10px 12px; color: var(--text-secondary);">972-789-3500</td>
+                                        <td style="padding: 10px 12px; color: var(--text-secondary);">highlandhomes.com/contact</td>
+                                        <td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">Active in Burleson/Joshua, family-owned = fast decisions</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid var(--divider);">
+                                        <td style="padding: 10px 12px; font-weight: 500;">Lennar — Fort Worth</td>
+                                        <td style="padding: 10px 12px; color: var(--text-secondary);">817-745-1010</td>
+                                        <td style="padding: 10px 12px; color: var(--text-secondary);">lenner.com</td>
+                                        <td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">National, land-hungry, Tarrant County branch</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 10px 12px; font-weight: 500;">DFW Custom Homes</td>
+                                        <td style="padding: 10px 12px; color: var(--text-secondary);">817-587-8202</td>
+                                        <td style="padding: 10px 12px; color: var(--text-secondary);">dfwcustomhomes.com</td>
+                                        <td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">Local, growing, takes on new projects, fixed-price contracts</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- National Production Builders -->
+                    <div class="report-section" style="background: var(--surface); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border);">
+                        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                            National Production Builders
+                        </h3>
+                        <div style="overflow-x: auto;">
+                            <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                                <thead>
+                                    <tr style="border-bottom: 1px solid var(--divider-strong);">
+                                        <th style="text-align: left; padding: 10px 12px; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">Builder</th>
+                                        <th style="text-align: left; padding: 10px 12px; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">Phone</th>
+                                        <th style="text-align: left; padding: 10px 12px; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">Website</th>
+                                        <th style="text-align: left; padding: 10px 12px; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">Notes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border-bottom: 1px solid var(--divider);"><td style="padding: 10px 12px; font-weight: 500;">D.R. Horton — DFW West</td><td style="padding: 10px 12px; color: var(--text-secondary);">817-230-0800</td><td style="padding: 10px 12px; color: var(--text-secondary);">drhorton.com/texas/fort-worth</td><td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">America's largest builder. Active in Burleson. Land acquisition dept.</td></tr>
+                                    <tr style="border-bottom: 1px solid var(--divider);"><td style="padding: 10px 12px; font-weight: 500;">D.R. Horton — DFW Central</td><td style="padding: 10px 12px; color: var(--text-secondary);">469-868-2700</td><td style="padding: 10px 12px; color: var(--text-secondary);">drhorton.com/contact-us-page</td><td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">Richardson HQ. Ask for land acquisition / new community dev.</td></tr>
+                                    <tr style="border-bottom: 1px solid var(--divider);"><td style="padding: 10px 12px; font-weight: 500;">Perry Homes</td><td style="padding: 10px 12px; color: var(--text-secondary);">1-800-247-3779</td><td style="padding: 10px 12px; color: var(--text-secondary);">perryhomes.com</td><td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">Texas' largest woman-owned. Ask for Dallas division land team.</td></tr>
+                                    <tr style="border-bottom: 1px solid var(--divider);"><td style="padding: 10px 12px; font-weight: 500;">Highland Homes — DFW</td><td style="padding: 10px 12px; color: var(--text-secondary);">972-789-3500</td><td style="padding: 10px 12px; color: var(--text-secondary);">highlandhomes.com/contact</td><td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">Plano HQ. Active in Burleson/Joshua. Ask for land acquisition.</td></tr>
+                                    <tr style="border-bottom: 1px solid var(--divider);"><td style="padding: 10px 12px; font-weight: 500;">Lennar — Fort Worth</td><td style="padding: 10px 12px; color: var(--text-secondary);">817-745-1010</td><td style="padding: 10px 12px; color: var(--text-secondary);">lenner.com</td><td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">1320 Cattle Crossing Dr. Ask for land acquisition manager.</td></tr>
+                                    <tr><td style="padding: 10px 12px; font-weight: 500;">Lennar — Keller</td><td style="padding: 10px 12px; color: var(--text-secondary);">817-337-1480</td><td style="padding: 10px 12px; color: var(--text-secondary);">lenner.com</td><td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">Tarrant County branch. Alternative DFW contact.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Local Custom / Luxury Builders -->
+                    <div class="report-section" style="background: var(--surface); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border);">
+                        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4 8 4v14M8 21V11a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v10"/></svg>
+                            Local Custom / Luxury Builders
+                        </h3>
+                        <div style="overflow-x: auto;">
+                            <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                                <thead>
+                                    <tr style="border-bottom: 1px solid var(--divider-strong);">
+                                        <th style="text-align: left; padding: 10px 12px; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">Builder</th>
+                                        <th style="text-align: left; padding: 10px 12px; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">Phone</th>
+                                        <th style="text-align: left; padding: 10px 12px; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">Email / Web</th>
+                                        <th style="text-align: left; padding: 10px 12px; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">Notes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border-bottom: 1px solid var(--divider);"><td style="padding: 10px 12px; font-weight: 500;">TNT Builders</td><td style="padding: 10px 12px; color: var(--text-secondary);">817-447-0767</td><td style="padding: 10px 12px; color: var(--text-secondary);">info@tntbuilders.com</td><td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">Burleson-based. Luxury custom + commercial + barndominiums. 100+ homes.</td></tr>
+                                    <tr style="border-bottom: 1px solid var(--divider);"><td style="padding: 10px 12px; font-weight: 500;">SWP Custom Homes</td><td style="padding: 10px 12px; color: var(--text-secondary);">817-389-2900</td><td style="padding: 10px 12px; color: var(--text-secondary);">info@swpcustomhomes.com</td><td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">Godley, TX. Builds Burleson, Joshua, Cleburne. Custom + land dev.</td></tr>
+                                    <tr style="border-bottom: 1px solid var(--divider);"><td style="padding: 10px 12px; font-weight: 500;">J. Lambert Custom Homes</td><td style="padding: 10px 12px; color: var(--text-secondary);">817-992-4983 · 800-853-5540</td><td style="padding: 10px 12px; color: var(--text-secondary);">jlambertcustomhomes.com</td><td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">33+ years in Burleson. Award-winning luxury custom builder.</td></tr>
+                                    <tr style="border-bottom: 1px solid var(--divider);"><td style="padding: 10px 12px; font-weight: 500;">DFW Custom Homes</td><td style="padding: 10px 12px; color: var(--text-secondary);">817-587-8202</td><td style="padding: 10px 12px; color: var(--text-secondary);">dfwcustomhomes.com</td><td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">Family-owned since 2013. Fixed-price contracts. Burleson/Joshua.</td></tr>
+                                    <tr style="border-bottom: 1px solid var(--divider);"><td style="padding: 10px 12px; font-weight: 500;">Rafter P Construction</td><td style="padding: 10px 12px; color: var(--text-secondary);">903-454-8332 · 940-626-9211</td><td style="padding: 10px 12px; color: var(--text-secondary);">rafterpconstruction.com</td><td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">Barndominiums, custom homes, farm/ranch.</td></tr>
+                                    <tr style="border-bottom: 1px solid var(--divider);"><td style="padding: 10px 12px; font-weight: 500;">Heartland Home Builders</td><td style="padding: 10px 12px; color: var(--text-secondary);">—</td><td style="padding: 10px 12px; color: var(--text-secondary);">hhbtx.com</td><td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">Burleson-based. Custom homes $500K–$2.5M+. Ashley & Andrew Milliman.</td></tr>
+                                    <tr style="border-bottom: 1px solid var(--divider);"><td style="padding: 10px 12px; font-weight: 500;">Best Homes</td><td style="padding: 10px 12px; color: var(--text-secondary);">817-447-9505</td><td style="padding: 10px 12px; color: var(--text-secondary);">besthomes6102093.localsearch.com</td><td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">19 years in Burleson. Real estate developer + builder.</td></tr>
+                                    <tr style="border-bottom: 1px solid var(--divider);"><td style="padding: 10px 12px; font-weight: 500;">First Texas General Contracting</td><td style="padding: 10px 12px; color: var(--text-secondary);">817-790-7297</td><td style="padding: 10px 12px; color: var(--text-secondary);">firsttexasgeneralcontracting.localsearch.com</td><td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">Burleson-based developer/contractor.</td></tr>
+                                    <tr style="border-bottom: 1px solid var(--divider);"><td style="padding: 10px 12px; font-weight: 500;">Newsome Construction</td><td style="padding: 10px 12px; color: var(--text-secondary);">817-426-4455</td><td style="padding: 10px 12px; color: var(--text-secondary);">newsomeconstructioninc.localsearch.com</td><td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">29 years. Design/build, commercial, industrial, metal buildings.</td></tr>
+                                    <tr style="border-bottom: 1px solid var(--divider);"><td style="padding: 10px 12px; font-weight: 500;">Texas Sport Builders</td><td style="padding: 10px 12px; color: var(--text-secondary);">817-447-9988</td><td style="padding: 10px 12px; color: var(--text-secondary);">texassportbuilders.localsearch.com</td><td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">Commercial + residential builder. Burleson.</td></tr>
+                                    <tr><td style="padding: 10px 12px; font-weight: 500;">Goldstar Homes</td><td style="padding: 10px 12px; color: var(--text-secondary);">817-447-7778</td><td style="padding: 10px 12px; color: var(--text-secondary);">yellowpages.com/burleson-tx/mip/bransom-homes-inc</td><td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">Home builder/developer. Burleson.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Commercial / Industrial / Multi-Family -->
+                    <div class="report-section" style="background: var(--surface); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border);">
+                        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4 8 4v14M8 21V11a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v10"/></svg>
+                            Commercial / Industrial / Multi-Family
+                        </h3>
+                        <div style="overflow-x: auto;">
+                            <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                                <thead>
+                                    <tr style="border-bottom: 1px solid var(--divider-strong);">
+                                        <th style="text-align: left; padding: 10px 12px; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">Builder</th>
+                                        <th style="text-align: left; padding: 10px 12px; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">Phone</th>
+                                        <th style="text-align: left; padding: 10px 12px; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">Website</th>
+                                        <th style="text-align: left; padding: 10px 12px; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">Notes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border-bottom: 1px solid var(--divider);"><td style="padding: 10px 12px; font-weight: 500;">Specialized Testing & Construction (STC)</td><td style="padding: 10px 12px; color: var(--text-secondary);">682-900-3040</td><td style="padding: 10px 12px; color: var(--text-secondary);">specializedtci.com</td><td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">SBA 8(a) certified. Design-build commercial/industrial. Crowley, TX.</td></tr>
+                                    <tr style="border-bottom: 1px solid var(--divider);"><td style="padding: 10px 12px; font-weight: 500;">The Smart Builder Group</td><td style="padding: 10px 12px; color: var(--text-secondary);">817-912-2121</td><td style="padding: 10px 12px; color: var(--text-secondary);">thesmartbg.com</td><td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">Commercial + residential. DFW area.</td></tr>
+                                    <tr style="border-bottom: 1px solid var(--divider);"><td style="padding: 10px 12px; font-weight: 500;">Mark Flowers Construction</td><td style="padding: 10px 12px; color: var(--text-secondary);">254-485-6092</td><td style="padding: 10px 12px; color: var(--text-secondary);">markflowersconstruction.localsearch.com</td><td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">24 years. Commercial, residential, handyman. Burleson.</td></tr>
+                                    <tr style="border-bottom: 1px solid var(--divider);"><td style="padding: 10px 12px; font-weight: 500;">Gto Masterpiece Construction</td><td style="padding: 10px 12px; color: var(--text-secondary);">817-617-1238</td><td style="padding: 10px 12px; color: var(--text-secondary);">gtomasterpiececonstruction.localsearch.com</td><td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">Commercial, remodeling, home improvements.</td></tr>
+                                    <tr style="border-bottom: 1px solid var(--divider);"><td style="padding: 10px 12px; font-weight: 500;">JEH Construction</td><td style="padding: 10px 12px; color: var(--text-secondary);">—</td><td style="padding: 10px 12px; color: var(--text-secondary);">jehconstruction.com</td><td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">Commercial construction in Burleson.</td></tr>
+                                    <tr><td style="padding: 10px 12px; font-weight: 500;">Maya Stone Construction</td><td style="padding: 10px 12px; color: var(--text-secondary);">817-987-3687</td><td style="padding: 10px 12px; color: var(--text-secondary);">mayastoneconstructiontx.localsearch.com</td><td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">36 years. Concrete, commercial. Fort Worth area.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- DFW Expansion Builders -->
+                    <div class="report-section" style="background: var(--surface); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border);">
+                        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            DFW-Area Builders (May Expand to Burleson)
+                        </h3>
+                        <div style="overflow-x: auto;">
+                            <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                                <thead>
+                                    <tr style="border-bottom: 1px solid var(--divider-strong);">
+                                        <th style="text-align: left; padding: 10px 12px; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">Builder</th>
+                                        <th style="text-align: left; padding: 10px 12px; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">Phone</th>
+                                        <th style="text-align: left; padding: 10px 12px; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">Website</th>
+                                        <th style="text-align: left; padding: 10px 12px; font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">Notes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border-bottom: 1px solid var(--divider);"><td style="padding: 10px 12px; font-weight: 500;">Dunhill Homes</td><td style="padding: 10px 12px; color: var(--text-secondary);">—</td><td style="padding: 10px 12px; color: var(--text-secondary);">dunhillhomes.com</td><td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">Dallas-based. Energy efficient. West Arlington/SW Fort Worth.</td></tr>
+                                    <tr style="border-bottom: 1px solid var(--divider);"><td style="padding: 10px 12px; font-weight: 500;">Toll Brothers</td><td style="padding: 10px 12px; color: var(--text-secondary);">—</td><td style="padding: 10px 12px; color: var(--text-secondary);">tollbrothers.com</td><td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">Luxury national builder. DFW presence.</td></tr>
+                                    <tr style="border-bottom: 1px solid var(--divider);"><td style="padding: 10px 12px; font-weight: 500;">KB Home</td><td style="padding: 10px 12px; color: var(--text-secondary);">—</td><td style="padding: 10px 12px; color: var(--text-secondary);">kbhome.com</td><td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">Production builder. DFW metro.</td></tr>
+                                    <tr style="border-bottom: 1px solid var(--divider);"><td style="padding: 10px 12px; font-weight: 500;">Pulte Homes</td><td style="padding: 10px 12px; color: var(--text-secondary);">—</td><td style="padding: 10px 12px; color: var(--text-secondary);">pulte.com</td><td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">National production builder. DFW area.</td></tr>
+                                    <tr style="border-bottom: 1px solid var(--divider);"><td style="padding: 10px 12px; font-weight: 500;">Ryan Homes</td><td style="padding: 10px 12px; color: var(--text-secondary);">—</td><td style="padding: 10px 12px; color: var(--text-secondary);">ryanhomes.com</td><td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">DFW presence.</td></tr>
+                                    <tr style="border-bottom: 1px solid var(--divider);"><td style="padding: 10px 12px; font-weight: 500;">Taylor Morrison</td><td style="padding: 10px 12px; color: var(--text-secondary);">—</td><td style="padding: 10px 12px; color: var(--text-secondary);">taylormorrison.com</td><td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">Active in DFW.</td></tr>
+                                    <tr><td style="padding: 10px 12px; font-weight: 500;">Britton Homes</td><td style="padding: 10px 12px; color: var(--text-secondary);">—</td><td style="padding: 10px 12px; color: var(--text-secondary);">brittonhomestexas.com</td><td style="padding: 10px 12px; color: var(--text-tertiary); font-size: 12px;">Perry Homes subsidiary. Texas builder.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Email Template -->
+                    <div class="report-section" style="background: var(--surface); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border);">
+                        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                            Copy/Paste Email Template
+                        </h3>
+                        <div style="background: var(--bg-warm); border-radius: 12px; padding: 18px; border: 1px solid var(--border); font-family: monospace; font-size: 13px; line-height: 1.6; color: var(--text-secondary); position: relative;">
+                            <button onclick="copyJVEmail()" style="position: absolute; top: 10px; right: 10px; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 6px 12px; font-size: 11px; font-weight: 600; cursor: pointer; color: var(--text-primary); font-family: inherit;">Copy</button>
+                            <p style="margin: 0 0 12px 0; font-weight: 600; color: var(--text-primary);">Subject: JV Opportunity — Burleson Land at Tallgrass Entrance ($850K / $1.3M comps)</p>
+                            <p style="margin: 0 0 8px 0;">Hi [Name], </p>
+                            <p style="margin: 0 0 8px 0;">I have a raw land parcel under contract at the entrance to the $1.4B Tallgrass development in Burleson, TX. </p>
+                            <p style="margin: 0 0 8px 0;"><strong>Highlights:</strong></p>
+                            <ul style="margin: 0 0 12px 0; padding-left: 20px;">
+                                <li>Outside city limits, no restrictions</li>
+                                <li>2 water meters, 2 septic systems, electricity on site</li>
+                                <li>Road frontage, entrance to Tallgrass project</li>
+                                <li>Commercial / residential / light industrial use</li>
+                                <li>Comps selling at $1.3M (1 mile away, with restrictions, no sewer)</li>
+                            </ul>
+                            <p style="margin: 0 0 8px 0;">Asking $850K. Need to close by end of July. Willing to JV 50/50 or sell outright to a cash buyer.</p>
+                            <p style="margin: 0 0 8px 0;">Are you interested in a quick conversation?</p>
+                            <p style="margin: 0;">[Your Name]<br>[Your Phone]<br>[Your Email]</p>
+                        </div>
+                    </div>
+
+                    <script>
+                    function copyJVEmail() {
+                        const text = `Subject: JV Opportunity — Burleson Land at Tallgrass Entrance ($850K / $1.3M comps)\n\nHi [Name],\n\nI have a raw land parcel under contract at the entrance to the $1.4B Tallgrass development in Burleson, TX.\n\nHighlights:\n• Outside city limits, no restrictions\n• 2 water meters, 2 septic systems, electricity on site\n• Road frontage, entrance to Tallgrass project\n• Commercial / residential / light industrial use\n• Comps selling at $1.3M (1 mile away, with restrictions, no sewer)\n\nAsking $850K. Need to close by end of July. Willing to JV 50/50 or sell outright to a cash buyer.\n\nAre you interested in a quick conversation?\n\n[Your Name]\n[Your Phone]\n[Your Email]`;
+                        navigator.clipboard.writeText(text).then(() => alert('Email template copied!'));
+                    }
+                    </script>
+
+                    <!-- Footer -->
+                    <div style="text-align: center; padding: 20px; font-size: 12px; color: var(--text-quaternary);">
+                        <p>Compiled July 2026 · Phone numbers and contacts from public sources. Ask to be transferred to land acquisition or the owner/principal.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <!-- Titles Content -->
         <div id="titles-content" class="content-section">
             <div id="titles-list">
@@ -8804,7 +9182,7 @@ Questions? Call or text [Your Name] on [Your Phone].
             const searchInput = document.getElementById('search-input');
             const mobileFilterBtn = document.getElementById('mobile-filter-btn');
             const emailBtn = document.getElementById('email-btn-compact');
-            const hideFilters = tab === 'contracts' || tab === 'reports';
+            const hideFilters = tab === 'contracts' || tab === 'reports' || tab === 'jv';
 
             if (searchWrap) searchWrap.classList.toggle('hidden', hideFilters);
             if (pillsWrap) pillsWrap.classList.toggle('hidden', hideFilters);
@@ -9770,6 +10148,16 @@ Questions? Call or text [Your Name] on [Your Phone].
                 if (labelEls[1]) labelEls[1].textContent = 'Active';
                 if (labelEls[2]) labelEls[2].textContent = 'Archived';
                 if (labelEls[3]) labelEls[3].textContent = 'Markets Covered';
+            } else if (tab === 'jv') {
+                if (totalEl) totalEl.textContent = '1';
+                if (activeEl) activeEl.textContent = '1';
+                if (researchEl) researchEl.textContent = '—';
+                if (marketsEl) marketsEl.textContent = '1';
+
+                if (labelEls[0]) labelEls[0].textContent = 'JV Tasks';
+                if (labelEls[1]) labelEls[1].textContent = 'Active';
+                if (labelEls[2]) labelEls[2].textContent = 'Pending';
+                if (labelEls[3]) labelEls[3].textContent = 'Markets';
             } else if (tab === 'teardowns') {
                 const totalTeardowns = teardownData.length;
                 const teardownCount = teardownData.filter(p => p._type === 'teardown').length;
@@ -9799,6 +10187,7 @@ Questions? Call or text [Your Name] on [Your Phone].
             document.getElementById('contracts-content').classList.toggle('active', tab === 'contracts');
             document.getElementById('titles-content').classList.toggle('active', tab === 'titles');
             document.getElementById('reports-content').classList.toggle('active', tab === 'reports');
+            document.getElementById('jv-content').classList.toggle('active', tab === 'jv');
 
             updateControlsForTab(tab);
             renderStatePills();
@@ -10054,6 +10443,16 @@ Is there anything specific that you're looking for right now and how much you wi
 
 
     <script>
+        function showJVTaskDetail(taskId) {
+            document.getElementById('jv-list-view').classList.add('hidden');
+            document.getElementById('jv-task-detail-' + taskId).classList.add('active');
+        }
+        function showJVTaskList() {
+            document.getElementById('jv-list-view').classList.remove('hidden');
+            document.querySelectorAll('.jv-task-detail').forEach(function(el) {
+                el.classList.remove('active');
+            });
+        }
         function showReportDetail(reportId) {
             document.getElementById('reports-list-view').classList.add('hidden');
             document.getElementById('report-detail-' + reportId).classList.add('active');
